@@ -95,6 +95,7 @@ public class CharacterPanel extends JPanel {
 		g.drawImage(new javax.swing.ImageIcon("img/backGround1.png").getImage(), 0, 0, this);
 		g.drawImage(new javax.swing.ImageIcon("img/storeNPC.png").getImage(),750 , 170, 35, 50,this);
 		g.drawImage(new javax.swing.ImageIcon("img/mainNPC.png").getImage(),570 , 190, 35, 50,this);
+		g.drawImage(new javax.swing.ImageIcon("img/pumpkin/Pumpkin.png").getImage(),150 , 150, 20, 20,this);
 		g.drawImage(character, x, y, 30, 50, this);
 
 		this.repaint();
