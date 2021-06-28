@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+    <entry key="registNewMember">
+         INSERT INTO TBL_MEMBER A
+         (
+           A.MEMBER_NO
+         , A.MEMBER_ID
+         , A.MEMBER_PWD
+         , A.MEMBER_NAME
+         , A.GENDER
+         , A.EMAIL
+         , A.PHONE
+         , A.ADDRESS
+         , A.AGE
+         , A.ENROLL_DATE
+          )
+          VALUES
+          (
+          SEQ_MEMBER_NO.NEXTVAL
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ?
+         , ? 
+         ) 
+    </entry>
+    <entry key="selectAllMember">
+	   SELECT * FROM TBL_MEMBER
+    </entry>
+    <entry key="searchMemberById">
+	   	SELECT * 
+	   FROM TBL_MEMBER
+	   WHERE MEMBER_ID = ?
+    </entry>
+    <entry key="searchMemberByGender">
+	   SELECT *
+	   FROM TBL_MEMBER
+	   WHERE GENDER = ?
+    </entry>
+    <entry key="modifyPassword">
+	   UPDATE TBL_MEMBER A
+	   SET A.MEMBER_PWD = ?
+	   WHERE A.MEMBER_ID = ?
+    </entry>
+    <entry key="modifyEmail">
+	   UPDATE TBL_MEMBER A
+	   SET A.EMAIL = ?
+	   WHERE A.MEMBER_ID = ?
+    </entry>
+    <entry key="modifyPhone">
+	   UPDATE TBL_MEMBER A
+	   SET A.PHONE = ?
+	   WHERE A.MEMBER_ID = ?
+    </entry>
+    <entry key="modifyAddress">
+	   UPDATE TBL_MEMBER A
+	   SET A.ADDRESS = ?
+	   WHERE A.MEMBER_ID = ?
+    </entry>
+    <entry key="deleteMember">
+	   DELETE FROM TBL_MEMBER A
+	   WHERE A.MEMBER_ID = ?
+    </entry>
+</properties>
