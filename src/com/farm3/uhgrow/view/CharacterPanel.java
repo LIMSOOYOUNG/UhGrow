@@ -22,7 +22,9 @@ public class CharacterPanel extends JPanel {
 
 		this.setFocusable(true);
 		character = Toolkit.getDefaultToolkit().getImage("img/mainCharacter/mainCharacter_front (1).png");
-
+		
+		
+		
 		addKeyListener(new KeyHandler());
 
 	}
@@ -33,7 +35,7 @@ public class CharacterPanel extends JPanel {
 		Timer timer;
 
 		public KeyHandler() {
-			timer = new Timer(50, new ActionListener() { // 50ms���� �׼� �̺�Ʈ �߻�
+			timer = new Timer(30, new ActionListener() { // 50ms���� �׼� �̺�Ʈ �߻�
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if (!pressedKeys.isEmpty()) {
@@ -43,19 +45,19 @@ public class CharacterPanel extends JPanel {
 							n = i.next();
 							if (n == KeyEvent.VK_UP) {
 								if (y > 0) {
-									y -= 8;
+									y -= 5;
 								}
 							} else if (n == KeyEvent.VK_DOWN) {
 								if (y < 478) {
-									y += 8;
+									y += 5;
 								}
 							} else if (n == KeyEvent.VK_LEFT) {
 								if (x > 0) {
-									x -= 8;
+									x -= 5;
 								}
 							} else if (n == KeyEvent.VK_RIGHT) {
 								if (x < 920) {
-									x += 8;
+									x += 5;
 								}
 							}
 							repaint();
@@ -92,10 +94,11 @@ public class CharacterPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(new javax.swing.ImageIcon("img/backGround1.png").getImage(), 0, 0, this);
-		g.drawImage(new javax.swing.ImageIcon("img/storeNPC.png").getImage(),750 , 170, 35, 50,this);
-		g.drawImage(new javax.swing.ImageIcon("img/mainNPC.png").getImage(),570 , 190, 35, 50,this);
-		g.drawImage(new javax.swing.ImageIcon("img/pumpkin/Pumpkin.png").getImage(),150 , 150, 20, 20,this);
+		g.drawImage(new javax.swing.ImageIcon("img/interface/backGround1.png").getImage(), 0, 0, this);
+		g.drawImage(new javax.swing.ImageIcon("img/interface/storeNPC.png").getImage(),750 , 170, 35, 50,this);
+		g.drawImage(new javax.swing.ImageIcon("img/interface/mainNPC.png").getImage(),570 , 190, 35, 50,this);
+		g.drawImage(new javax.swing.ImageIcon("img/pumpkin/Pumpkin_Stage_3.png").getImage(),120 , 100, 30, 40,this);
+		g.drawImage(new javax.swing.ImageIcon("img/animal/Crow.png").getImage(),755 , 145, 30, 30,this);
 		g.drawImage(character, x, y, 30, 50, this);
 
 		this.repaint();
