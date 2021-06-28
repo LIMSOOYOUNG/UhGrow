@@ -10,37 +10,25 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import java.awt.*;
-import javax.swing.*;
-
-import java.awt.event.*;
-import java.util.*;
-
 public class CharacterPanel extends JPanel {
-	private int x = 100, y = 100;
+	private int x = 150, y = 250;
 	private Image character;
 
 	public CharacterPanel() {
-		
+		this.setBounds(0, 0, 960, 540);
+
 		this.setFocusable(true);
-		character = Toolkit.getDefaultToolkit().getImage("img/mainCharacter/mainCharacter_front (1).png").getScaledInstance(100, 30, 0);
-		
+		character = Toolkit.getDefaultToolkit().getImage("img/mainCharacter/mainCharacter_front (1).png");
+
 		addKeyListener(new KeyHandler());
+
 	}
 
 	public class KeyHandler implements KeyListener {
 
-		/**
-		 * keyPressed()���� �߻��� Ű�ڵ带 �Ʒ��� HashSet�� �����ϸ� Ÿ�̸� �̺�Ʈ �ڵ鷯���� Ű�ڵ带
-		 * Ȯ���Ͽ� ȭ���� �����ϴ� �ڵ带 �����Ѵ� ���⼭ �÷��� �߿��� Set�� ������ ������ Ű�ڵ尡
-		 * �ߺ��Ǿ� �����ϴ� ���� ���� Ű�� �� �� HashSet���� �ش� Ű�ڵ带 �Ѱ��� �������ָ� ���
-		 * �̺�Ʈ ȿ���� ���ŵǹǷ� �̺�Ʈ�� ��� �����ϴ� ȿ���� �� �� �ִ�
-		 */
 		HashSet<Integer> pressedKeys = new HashSet<Integer>();
 		Timer timer;
 
@@ -55,19 +43,19 @@ public class CharacterPanel extends JPanel {
 							n = i.next();
 							if (n == KeyEvent.VK_UP) {
 								if (y > 0) {
-									y -= 10;
+									y -= 8;
 								}
 							} else if (n == KeyEvent.VK_DOWN) {
-								if (y < 491) {
-									y += 10;
+								if (y < 478) {
+									y += 8;
 								}
 							} else if (n == KeyEvent.VK_LEFT) {
 								if (x > 0) {
-									x -= 10;
+									x -= 8;
 								}
 							} else if (n == KeyEvent.VK_RIGHT) {
-								if (x < 910) {
-									x += 10;
+								if (x < 920) {
+									x += 8;
 								}
 							}
 							repaint();
@@ -104,7 +92,11 @@ public class CharacterPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(character, x, y, 40, 40, this);
+		g.drawImage(new javax.swing.ImageIcon("img/backGround1.png").getImage(), 0, 0, this);
+		g.drawImage(new javax.swing.ImageIcon("img/storeNPC.png").getImage(),750 , 170, 35, 50,this);
+		g.drawImage(new javax.swing.ImageIcon("img/mainNPC.png").getImage(),570 , 190, 35, 50,this);
+		g.drawImage(new javax.swing.ImageIcon("img/pumpkin/Pumpkin.png").getImage(),150 , 150, 20, 20,this);
+		g.drawImage(character, x, y, 30, 50, this);
 
 		this.repaint();
 
