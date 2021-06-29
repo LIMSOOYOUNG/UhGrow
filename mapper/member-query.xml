@@ -2,7 +2,36 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment />
-	<entry key="registNewMember">
+	<entry key="signUpMember">
+		INSERT
+		INTO USER_INFO A
+		(
+		  A.USER_NO
+		, A.USER_ID
+		, A.USER_PWD
+		, A.USER_NAME
+		, A.EMAIL
+		, A.AUTHORITY
+		, A.COIN
+		, A.DELETE_YN
+		, A.HAVING_HOUSE_YN
+		, A.FARM_EXP
+		, A.HOUSE_PRICE
+		)
+		VALUES
+		(
+		  SEQ_USER_NO.NEXTVAL
+		, ?
+		, ?
+		, ?
+		, ?
+		, DEFAULT
+		, DEFAULT
+		, DEFAULT
+		, DEFAULT
+		, DEFAULT
+		, DEFAULT
+		)
 	</entry>
 </properties>
 
