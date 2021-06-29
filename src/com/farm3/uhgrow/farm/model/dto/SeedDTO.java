@@ -1,4 +1,4 @@
-package com.farm3.uhgrow;
+package com.farm3.uhgrow.farm.model.dto;
 
 import java.io.Serializable;
 

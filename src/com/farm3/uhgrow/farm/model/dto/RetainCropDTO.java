@@ -1,10 +1,12 @@
-package com.farm3.uhgrow;
+package com.farm3.uhgrow.farm.model.dto;
 
 public class RetainCropDTO {
 	
 	private int userNO;
 	private int cropId;
 	private int cropAmount;
+	
+	public RetainCropDTO() {}
 	
 	public RetainCropDTO(int userNO, int cropId, int cropAmount) {
 		super();
