@@ -12,11 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import com.greedy.section01.view.FrameManager;
-import com.greedy.section01.view.MainPanel;
 
 public class MainFrame extends JFrame {
 	public MainFrame() {
