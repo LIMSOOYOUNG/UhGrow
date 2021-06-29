@@ -18,6 +18,7 @@ public class FrameManager {
 		
 		FrameManager.frame.add(panel);
 		
+		FrameManager.frame.setResizable(false);
 		FrameManager.frame.setVisible(true);
 		FrameManager.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
