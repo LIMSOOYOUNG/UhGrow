@@ -7,40 +7,27 @@ import com.farm3.uhgrow.sellcrops.model.dao.SellCropsDAO;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.getConnection;
-import static com.farm3.uhgrow.common.JDBCTemplate.commit;
-import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
+//import static com.farm3.uhgrow.common.JDBCTemplate.commit;
+//import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
 public class SellCropsService {
 	
 	private SellCropsDAO sellCropsDAO;
-
-//	public List<CropDTO> sellTomato() {
 	
-//		Connection con = getConnection();
-		
-//		List<CropDTO> 
-//		
-//		
-//		return null
-//	}
+	public SellCropsService() {
+		this.sellCropsDAO = new SellCropsDAO();
+	}
 	
-//		return sellCropResult;
-
-	public int sellCorn(CropDTO crop) {
-		
+	public List<CropDTO> userCropList() {
+	
 		Connection con = getConnection();
 		
-		int sellCropResult = sellCropsDAO.sellCorn(con, crop);
+		List<CropDTO> userCropList = sellCropsDAO.userCropList(con);
 		
-		if(sellCropResult > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
 		close(con);
 		
-		return 0;
+		return userCropList;
 	}
 
 

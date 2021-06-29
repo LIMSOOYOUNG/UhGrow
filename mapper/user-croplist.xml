@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+	<entry key="selectAllCategory">
+        SELECT
+        	   UF.USER_NAME
+        	 , CR.CROP_NAME
+        	 , RF.CROP_AMOUNT
+          FROM USER_INFO UF, RETAIN_CROP RF, CROP CR
+         WHERE UF.USER_NO = RF.USER_NO
+           AND CR.CROP_ID = RF.CROP_ID;
+	</entry>
+	
+</properties>
+
+
+
+
+
+
+
