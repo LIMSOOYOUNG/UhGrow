@@ -1,5 +1,7 @@
 package com.farm3.uhgrow.management.model.dao;
 
+import static com.farm3.uhgrow.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,11 +11,9 @@ import java.util.Properties;
 
 import com.farm3.uhgrow.management.model.dto.CropPriceDTO;
 
-import static com.farm3.uhgrow.common.JDBCTemplate.close;
-
 public class GameDataDAO {
 	
-	private static Properties prop;
+	private Properties prop;
 	
 	public GameDataDAO() {
 		this.prop = new Properties();
@@ -25,16 +25,71 @@ public class GameDataDAO {
 		}
 	}
 
-	public static int modifyCropPrice(Connection con, CropPriceDTO cropPrice) {
+	public int modifyTomatoPrice(Connection con, CropPriceDTO cropPrice) {
+		
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = prop.getProperty("modifyCropPrice");
+		String query = prop.getProperty("modifyTomatoPrice");
+		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, cropPrice.getTomatoPrice());
-			pstmt.setInt(2, cropPrice.getCornPrice());
-			pstmt.setInt(3, cropPrice.getGarlicPrice());
-			pstmt.setInt(4, cropPrice.getPumpkinPirce());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int modifyCornPrice(Connection con, CropPriceDTO cropPrice) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("modifyCornPrice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cropPrice.getCornPrice());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	public int modifyGarlicPrice(Connection con, CropPriceDTO cropPrice) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("modifyGarlicPrice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cropPrice.getGarlicPrice());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int modifyPumpkinPrice(Connection con, CropPriceDTO cropPrice) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("modifyPumpkinPrice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cropPrice.getPumpkinPirce());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
