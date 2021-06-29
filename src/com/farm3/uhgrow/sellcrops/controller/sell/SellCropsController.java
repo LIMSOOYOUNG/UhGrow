@@ -1,64 +1,20 @@
 package com.farm3.uhgrow.sellcrops.controller.sell;
 
-import java.util.Map;
+import java.util.List;
 
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
+import com.farm3.uhgrow.sellcrops.model.service.SellCropsService;
 
 public class SellCropsController {
-
+	
 	private CropDTO cropDTO = new CropDTO();
+	private SellCropsService sellCropsService = new SellCropsService();
 	
-	
-	public void sellTomato(Map<Object, Object> sellCrops) {
+	public List<CropDTO> userCropList(CropDTO userCrop) {
 		
-		int money = 0;
+		List<CropDTO> userCropList = sellCropsService.userCropList();
 		
+		return userCropList;
 	}
 
-	public void sellCorns(Map<Object, Object> sellCrops) {
-		
-	}
-
-	public void sellGalic(Map<Object, Object> sellCrops) {
-		
-	}
-
-	public void sellPumpkin(Map<Object, Object> sellCrops) {
-		
-	}
-
-//	private SellCropsService sellCropsService = new SellCropsService();
-//	
-//	private List<CropDTO> userCropList = null;
-//	private CropDTO cropDTO = new CropDTO();
-//	
-//	public void sellTomato() {
-//		
-//		userCropList = new ArrayList<>();
-//		
-//		userCropList.add(cropDTO.set)
-//		
-//	}
-//	
-//	public void sellCorn() {
-//		
-//		crop = new CropDTO();
-//		crop.setCropId();
-//		crop.setCropName();
-//		crop.setCropPrice();
-//		
-//		int sellCornResult = sellCropsService.sellCorn(crop);
-//		
-//		
-//	}
-//	
-//	public void sellGarlic() {
-//		
-//	}
-//	
-//	public void sellPumpkin() {
-//		
-//	}
-//	
-//	
 }

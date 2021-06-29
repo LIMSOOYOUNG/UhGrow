@@ -2,27 +2,27 @@ package com.farm3.uhgrow.sellcrops.model.dto;
 
 public class CropDTO {
 	
-	private String userId;	  // 회원 아이디
+	private int userNo;	  // 회원 아이디
 	private int cropId;       // 농작물아이디
 	private String cropName;  // 농작물이름
 	private int cropPrice;    // 농작물가격
 	
 	public CropDTO() {}
 
-	public CropDTO(String userId, int cropId, String cropName, int cropPrice) {
+	public CropDTO(int userNo, int cropId, String cropName, int cropPrice) {
 		super();
-		this.userId = userId;
+		this.userNo = userNo;
 		this.cropId = cropId;
 		this.cropName = cropName;
 		this.cropPrice = cropPrice;
 	}
 
-	public String getuserId() {
-		return userId;
+	public int getuserNo() {
+		return userNo;
 	}
 
-	public void setuserId(String userId) {
-		this.userId = userId;
+	public void setuserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public int getCropId() {
@@ -51,7 +51,7 @@ public class CropDTO {
 
 	@Override
 	public String toString() {
-		return "CropDTO [userId=" + userId + ", cropId=" + cropId + ", cropName=" + cropName + ", cropPrice="
+		return "CropDTO [userNo=" + userNo + ", cropId=" + cropId + ", cropName=" + cropName + ", cropPrice="
 				+ cropPrice + "]";
 	}
 
