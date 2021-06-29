@@ -15,9 +15,9 @@ public class MemberController {
 	
 		SignUpDTO dto = new SignUpDTO();
 		
-		dto.setUserId(map.get("memberId"));
-		dto.setUserPwd(map.get("MemberPwd"));
-		dto.setUserName(map.get("memberName"));
+		dto.setUserId(map.get("userId"));
+		dto.setUserPwd(map.get("userPwd"));
+		dto.setUserName(map.get("userName"));
 		dto.setEmail(map.get("email"));
 		
 		int signUpResult = memberService.signUpMember(dto);
