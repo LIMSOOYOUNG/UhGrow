@@ -1,15 +1,17 @@
 package com.farm3.uhgrow.member.model.dao;
 
+import static com.farm3.uhgrow.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static com.farm3.uhgrow.common.JDBCTemplate.close;
-
-import com.farm3.uhgrow.member.model.dto.InputMemberDTO;
+import com.farm3.uhgrow.member.model.dto.SignUpDTO;
+import com.farm3.uhgrow.member.model.dto.UserDTO;
 
 public class MemberDAO {
 	
@@ -24,7 +26,7 @@ public class MemberDAO {
 		}
 	}
 
-	public int signUpMember(Connection con, InputMemberDTO dto) {
+	public int signUpMember(Connection con, SignUpDTO dto) {
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
@@ -33,9 +35,9 @@ public class MemberDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, dto.getMemberId());
-			pstmt.setString(2, dto.getMemberPwd());
-			pstmt.setString(3, dto.getMemberName());
+			pstmt.setString(1, dto.getUserId());
+			pstmt.setString(2, dto.getUserPwd());
+			pstmt.setString(3, dto.getUserName());
 			pstmt.setString(4, dto.getEmail());
 			
 			result = pstmt.executeUpdate();
@@ -50,6 +52,45 @@ public class MemberDAO {
 		
 		
 		return result;
+	}
+
+	public UserDTO loginInfo(Connection con, String loginId) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		UserDTO dto = null;
+		
+		String query = prop.getProperty("loginInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, loginId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				dto = new UserDTO();
+				
+				dto.setUserNo(rset.getInt("USER_NO"));
+				dto.setUserId(rset.getString("USER_ID"));
+				dto.setUserPwd(rset.getString("USER_PWD"));
+				dto.setUserName(rset.getString("USER_NAME"));
+				dto.setEmail(rset.getString("EMAIL"));
+				dto.setAuthority(rset.getString("AUTHORITY"));
+				dto.setCoin(rset.getInt("COIN"));
+				dto.setDeleteYn(rset.getString("DELETE_YN").charAt(0));
+				dto.setHavingHouseYn(rset.getString("HAVING_HOUSE_YN").charAt(0));
+				dto.setFarmExp(rset.getInt("FARM_EXP"));
+				dto.setHousePrice(rset.getInt("HOUSE_PRICE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		// 입력한 아이디와 일치할때 유저 정보 넘겨줌
+		return dto;
 	}
 
 }

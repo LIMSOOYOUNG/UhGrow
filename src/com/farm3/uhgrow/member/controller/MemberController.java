@@ -2,7 +2,8 @@ package com.farm3.uhgrow.member.controller;
 
 import java.util.Map;
 
-import com.farm3.uhgrow.member.model.dto.InputMemberDTO;
+import com.farm3.uhgrow.member.model.dto.SignUpDTO;
+import com.farm3.uhgrow.member.model.dto.UserDTO;
 import com.farm3.uhgrow.member.service.MemberService;
 
 public class MemberController {
@@ -12,16 +13,16 @@ public class MemberController {
 
 	public void signUpMember(Map<String, String> map) {
 	
-		InputMemberDTO dto = new InputMemberDTO();
+		SignUpDTO dto = new SignUpDTO();
 		
-		dto.setMemberId(map.get("memberId"));
-		dto.setMemberPwd(map.get("MemberPwd"));
-		dto.setMemberName(map.get("memberName"));
+		dto.setUserId(map.get("memberId"));
+		dto.setUserPwd(map.get("MemberPwd"));
+		dto.setUserName(map.get("memberName"));
 		dto.setEmail(map.get("email"));
 		
-		int resultSignUpResult = memberService.signUpMember(dto);
+		int signUpResult = memberService.signUpMember(dto);
 		
-		if(resultSignUpResult > 0) {
+		if(signUpResult > 0) {
 			// 성공 출력 
 			System.out.println("성공");
 		} else {
@@ -30,7 +31,22 @@ public class MemberController {
 		}
 	}
 	
-	public void loginInfo() {
+	public void loginInfo(Map<String, String> map) {
+	
+		
+		String loginId = map.get("loginId");
+		String loginPwd = map.get("loginPwd");
+		UserDTO loginResult = memberService.loginInfo(loginId);
+	
+		if(loginResult == null) {
+			System.out.println("아이디 없음");
+		} else if(!loginResult.getUserPwd().equals(loginPwd)) {
+			System.out.println("비번 틀림");
+		} else {
+			System.out.println("로그인 성공");// 초기화면 불러오기
+		}
+	
+
 		
 	}
 	

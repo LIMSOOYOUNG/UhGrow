@@ -4,34 +4,50 @@
 	<comment />
 	<entry key="signUpMember">
 		INSERT
-		INTO USER_INFO A
-		(
-		  A.USER_NO
-		, A.USER_ID
-		, A.USER_PWD
-		, A.USER_NAME
-		, A.EMAIL
-		, A.AUTHORITY
-		, A.COIN
-		, A.DELETE_YN
-		, A.HAVING_HOUSE_YN
-		, A.FARM_EXP
-		, A.HOUSE_PRICE
+		  INTO USER_INFO A
+		  (
+		    A.USER_NO
+		  , A.USER_ID
+		  , A.USER_PWD
+		  , A.USER_NAME
+		  , A.EMAIL
+		  , A.AUTHORITY
+		  , A.COIN
+		  , A.DELETE_YN
+		  , A.HAVING_HOUSE_YN
+		  , A.FARM_EXP
+		  , A.HOUSE_PRICE
+		  )
+		  VALUES
+		  (
+		    SEQ_USER_NO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
+		  , DEFAULT
 		)
-		VALUES
-		(
-		  SEQ_USER_NO.NEXTVAL
-		, ?
-		, ?
-		, ?
-		, ?
-		, DEFAULT
-		, DEFAULT
-		, DEFAULT
-		, DEFAULT
-		, DEFAULT
-		, DEFAULT
-		)
+	</entry>
+	<entry key="loginInfo">
+		SELECT
+	 	 	   A.USER_NO
+			 , A.USER_ID
+			 , A.USER_PWD
+			 , A.USER_NAME
+			 , A.EMAIL
+			 , A.AUTHORITY
+			 , A.COIN
+			 , A.DELETE_YN
+			 , A.HAVING_HOUSE_YN
+			 , A.FARM_EXP
+			 , A.HOUSE_PRICE
+		  FROM USER_INFO A
+		 WHERE A.USER_ID = ?
 	</entry>
 	<entry key="selectAllUser">
 	    SELECT
