@@ -33,6 +33,13 @@
 		, DEFAULT
 		)
 	</entry>
+	<entry key="selectAllUser">
+	    SELECT
+	           UI.USER_NO
+	         , UI.USER_ID
+	         , UI.USER_PWD
+	      FROM USER_INFO UI
+	</entry>
 </properties>
 
 
