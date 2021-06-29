@@ -1,6 +1,8 @@
 package com.farm3.uhgrow.farm.model.service;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.getConnection;
+import static com.farm3.uhgrow.common.JDBCTemplate.commit;
+import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
 import java.sql.Connection;
@@ -12,6 +14,9 @@ import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 public class FarmService {
 	
 	private FarmDAO farmDAO;
+	public FarmService() {
+		farmDAO = new FarmDAO();
+	}
 
 	public List<RetainCropDTO> selectAllSeed() {
 		Connection con = getConnection();	
@@ -21,5 +26,24 @@ public class FarmService {
 		
 		return farmSeedList;
 	}
+
+	public int chooseSeed(RetainCropDTO retainCropDTO) {
+		
+		Connection con = getConnection();
+		
+		int result = 0;
+		int chooseResult = farmDAO.chooseSeed(con,retainCropDTO);
+		
+		if(chooseResult>0) {
+			commit(con);
+			result = 1;
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
 
 }

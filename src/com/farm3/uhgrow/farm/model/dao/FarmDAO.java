@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.farm.model.dao;
 
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,7 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
-import com.farm3.uhgrow.farm.model.dto.SeedDTO;
+import static com.farm3.uhgrow.common.JDBCTemplate.close;
+import static com.greedy.common.JDBCTemplate.close;
 
 public class FarmDAO {
 	private Properties prop;
@@ -40,20 +42,46 @@ public class FarmDAO {
 			
 			seedList = new ArrayList<>();
 			while(rset.next()) {
-				SeedDTO seed = new SeedDTO();
-				RetainCropDTO countSeed = new RetainCropDTO();
-				seed.setSeedName(rset.getString("SEED_NAME"));
-				countSeed.setCropAmount(rset.getInt("CROP_AMOUNT"));
+				RetainCropDTO seed = new RetainCropDTO();
+				seed.setCropId(rset.getInt("SEED_ID"));
+				seed.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				
 				seedList.add(seed);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		
 		return seedList;
+	}
+
+	public int chooseSeed(Connection con, RetainCropDTO retainCropDTO) {
+		PreparedStatement pstmt = null;											//	statement 준비된상태로 선언
+
+		int result = 0;															//	수정 성공여부 초기화
+		
+		String query = prop.getProperty("chooseSeed");							//	updateMemberPassword 쿼리문 선언
+		
+		try {
+			pstmt = con.prepareStatement(query);								//	statement에 쿼리문 삽입
+			pstmt.setInt(1, retainCropDTO.getCropId());							//	수정할 pwd값 삽입
+			pstmt.setInt(2, retainCropDTO.getCropAmount());
+			
+			result = pstmt.executeUpdate();										//	결과값을 int로 리턴
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);														//	statement 할당 반납
+		}
+
+		return result;
 	}
 
 }
