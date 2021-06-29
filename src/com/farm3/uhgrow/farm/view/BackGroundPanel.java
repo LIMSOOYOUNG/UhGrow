@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 public class BackGroundPanel extends JPanel {
 
 	public BackGroundPanel() {
