@@ -53,6 +53,7 @@ public class MngView {
 	}
 	
 	public void gameDataMenu() {
+		GameDataController gameDataController = new GameDataController();
 		System.out.println("\n ***** 게임관리 ***** \n");
 		System.out.println("1. 요리 수정");
 		System.out.println("2. 농작물 가격 수정");
@@ -62,7 +63,7 @@ public class MngView {
 		sc.nextLine();
 		switch(inputNo) {
 		case 1: modifyFoodMenu(); break;
-		case 2: GameDataController.modifyCropPrice(inputTomatoPrice(), inputCornPrice(), inputGarlicPrice(), inputPumpkinPrice()); break;
+		case 2: gameDataController.modifyCropPrice(inputTomatoPrice(), inputCornPrice(), inputGarlicPrice(), inputPumpkinPrice()); break;
 		}
 	}
 	

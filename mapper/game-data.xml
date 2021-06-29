@@ -2,24 +2,28 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment />
-	<entry key="modifyCropPrice">
+	<entry key="modifyTomatoPrice">
 	    UPDATE
 	           CROP C
 	       SET C.CROP_PRICE = ?
-	     WHERE C.CROP_ID = '1'
-	    UPDATE
-	           CROP C
-	       SET C.CROP_PRICE = ?
-	     WHERE C.CROP_ID = '2'
-	    UPDATE
-	           CROP C
-	       SET C.CROP_PRICE = ?
-	     WHERE C.CROP_ID = '3'
-	    UPDATE
-	           CROP C
-	       SET C.CROP_PRICE = ?
-	     WHERE C.CROP_ID = '4'
-	     
+	     WHERE C.CROP_NAME = '토마토'
 	</entry>
-
+	<entry key="modifyCornPrice">
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_NAME = '옥수수'
+	</entry>
+	<entry key="modifyGarlicPrice">
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_NAME = '마늘'	
+	</entry>
+	<entry key="modifyPumpkinPrice">
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_NAME = '호박'	
+	</entry>
 </properties>
