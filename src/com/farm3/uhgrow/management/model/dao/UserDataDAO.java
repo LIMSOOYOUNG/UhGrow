@@ -1,5 +1,7 @@
 package com.farm3.uhgrow.management.model.dao;
 
+import static com.farm3.uhgrow.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,13 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.farm3.uhgrow.management.model.dto.UserDTO;
-
-import static com.farm3.uhgrow.common.JDBCTemplate.close;
+import com.farm3.uhgrow.management.model.dto.ModifyUserDTO;
+import com.farm3.uhgrow.management.model.dto.SelectUserDTO;
 
 public class UserDataDAO {
 	
-	private Properties prop;
+	private static Properties prop;
 	
 	public UserDataDAO() {
 		this.prop = new Properties();
@@ -27,10 +28,10 @@ public class UserDataDAO {
 		}
 	}
 
-	public List<UserDTO> selectAllUserData(Connection con) {
+	public List<SelectUserDTO> selectAllUserData(Connection con) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		List<UserDTO> userList = null;
+		List<SelectUserDTO> userList = null;
 		String query = prop.getProperty("selectAllUser");
 		
 		try {
@@ -39,7 +40,7 @@ public class UserDataDAO {
 			userList = new ArrayList<>();
 			
 			while(rset.next()) {
-				UserDTO row = new UserDTO();
+				SelectUserDTO row = new SelectUserDTO();
 				row.setUserNo(rset.getInt("USER_NO"));
 				row.setUserId(rset.getString("USER_ID"));
 				row.setUserPwd(rset.getString("USER_PWD"));
@@ -55,6 +56,27 @@ public class UserDataDAO {
 		}
 		
 		return userList;
+	}
+
+	public static int modifyUserData(Connection con, ModifyUserDTO modifyUserInfo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("modifyIdPwd");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, modifyUserInfo.getNewId());
+			pstmt.setString(2, modifyUserInfo.getNewPwd());
+			pstmt.setString(3, modifyUserInfo.getOldId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

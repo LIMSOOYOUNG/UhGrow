@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment />
+	<entry key="selectAllUser">
+	    SELECT
+	           UI.USER_NO
+	         , UI.USER_ID
+	         , UI.USER_PWD
+	      FROM USER_INFO UI
+	</entry>
+	<entry key="modifyIdPwd">
+	    UPDATE
+	           USER_INFO UI
+	       SET UI.USER_ID = ?
+	         , UI.USER_PWD = ?
+	     WHERE UI.USER_ID = ? 
+	</entry>
+</properties>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment />
+	<entry key="modifyCropPrice">
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_ID = '1'
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_ID = '2'
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_ID = '3'
+	    UPDATE
+	           CROP C
+	       SET C.CROP_PRICE = ?
+	     WHERE C.CROP_ID = '4'
+	     
+	</entry>
+
+</properties>
