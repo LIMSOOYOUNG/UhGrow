@@ -10,9 +10,9 @@ public class UhgrowRun {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				new MainBackGround();
-
-			}
+				}
 		});
+		
 
 	}
 }
