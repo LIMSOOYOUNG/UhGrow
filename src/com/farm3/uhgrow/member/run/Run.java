@@ -6,7 +6,7 @@ public class Run {
 
 	 public static void main(String[] args) {
 		
-		 Member s = new Member();
-		 s.displayMenu();
+		 Member m = new Member();
+		 m.displayMenu();
 	}
 }

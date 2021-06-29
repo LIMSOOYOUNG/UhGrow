@@ -2,6 +2,7 @@ package com.farm3.uhgrow.member.controller;
 
 import java.util.Map;
 
+import com.farm3.uhgrow.farm.view.MainFrame;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 import com.farm3.uhgrow.member.service.MemberService;
@@ -43,7 +44,7 @@ public class MemberController {
 		} else if(!loginResult.getUserPwd().equals(loginPwd)) {
 			System.out.println("비번 틀림");
 		} else {
-			System.out.println("로그인 성공");// 초기화면 불러오기
+			new MainFrame();// 초기화면 불러오기
 		}
 	
 
