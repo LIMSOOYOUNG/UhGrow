@@ -1,8 +1,7 @@
 package com.farm3.uhgrow.farm.view;
 
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -19,8 +18,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
-	private boolean isTrue=false;
-	private boolean isNpcTrue =true;
+	private boolean isTrue = false;
+	private boolean isNpcTrue = true;
+
+	JPanel StoreMainPanel = new JPanel();
+	JPanel backgroundPanel = new JPanel();
+	JPanel conversationPanel = new JPanel();
+	JPanel storePanel = new JPanel();
+	JLabel backGround;
+	JLabel mainNpc;
+	JLabel storeNpc;
+
 	public MainFrame() {
 
 		this.setBounds(300, 200, 960, 565);
@@ -28,135 +36,75 @@ public class MainFrame extends JFrame {
 		this.setLayout(null);
 		playSound("sound/배경음악1.wav");
 
-		JPanel backGroundPanel = new JPanel();
-		JPanel StorePanel = new JPanel();
-		
-		backGroundPanel.setLayout(null);
-		backGroundPanel.setSize(960,540);
-		StorePanel.setLayout(null);
-		StorePanel.setBounds(150,100,800,400);
-		StorePanel.setVisible(isTrue);
-		
-		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
-		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
-		backGroundLabel.setSize(960, 540);
-		
-		
-		
-		Image imgMainNpc = new ImageIcon("img/interface/mainNpc.png").getImage().getScaledInstance(30, 50, 0);
-		ImageIcon imgMainNpcIcon = new ImageIcon(imgMainNpc);
-		JLabel mainNpcLabel = new JLabel(imgMainNpcIcon);
-		mainNpcLabel.setLocation(570, 190);
-		mainNpcLabel.setSize(30, 50);
-		
-
-		Image imgStoreNpc = new ImageIcon("img/interface/storeNpc.png").getImage().getScaledInstance(30, 50, 0);
-		ImageIcon imgStoreNpcIcon = new ImageIcon(imgStoreNpc);
-		JLabel storeNpc = new JLabel(imgStoreNpcIcon);
-		storeNpc.setLocation(750, 150);
-		storeNpc.setSize(30, 50);
-
-		Image pizza = new ImageIcon("img/tomato/Pizza.png").getImage().getScaledInstance(50, 50, 0);
-		ImageIcon pizzaicon = new ImageIcon(pizza);
-		JLabel pizzaLabel = new JLabel(pizzaicon);
-		pizzaLabel.setLocation(100, 100);
-		pizzaLabel.setSize(50,50);
-
-		StorePanel.add(pizzaLabel);
+		storePanel.setLayout(null);
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(800, 400,0);
+		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+		storeBackGroundLabel.setLocation(0, 0);
+		storeBackGroundLabel.setSize(800, 400);
 
 		
-		
-		storeNpc.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				
 
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(isTrue) {
-					isTrue=false;
-					StorePanel.setVisible(isTrue);
-					storeNpc.setVisible(isNpcTrue);
-				}else {
-					isTrue =true;
-					isNpcTrue = false;
-					StorePanel.setVisible(isTrue);
-					storeNpc.setVisible(isNpcTrue);
-				}
-			}
-		});
-		backGroundPanel.add(storeNpc);
-		backGroundPanel.add(mainNpcLabel);
-		backGroundPanel.add(backGroundLabel);
-		
-		this.add(StorePanel);
-		this.add(backGroundPanel);
-		
+		conversationPanel.setLayout(null);
+		conversationPanel.setBounds(110, 400, 758, 120);
+
+		Image imgConversation = new ImageIcon("img/대화창.png").getImage().getScaledInstance(758, 120, 0);
+		JLabel conversationLabel = new JLabel(new ImageIcon(imgConversation));
+		conversationLabel.setSize(758, 120);
+		conversationPanel.setVisible(isTrue);
+		conversationPanel.add(conversationLabel);
+
+		backgroundPanel.setLayout(null);
+		backgroundPanel.setSize(960, 540);
+		backgroundPanel.add(storeNpc());
+		backgroundPanel.add(mainNpc);
+		backgroundPanel.add(conversationPanel);
+		backgroundPanel.add(backGround());
+
+		StoreMainPanel.add(storeBackGroundLabel);
+		StoreMainPanel.setLayout(null);
+		StoreMainPanel.setBounds(150, 100, 800, 400);
+		StoreMainPanel.setVisible(isTrue);
+
+		this.add(StoreMainPanel);
+		this.add(backgroundPanel);
 
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		pizzaLabel.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				StorePanel.setVisible(isNpcTrue);
-				storeNpc.setVisible(isTrue);
-				isNpcTrue=true;
-				isTrue=false;
-			}
-		});
+
 	}
 
-	
+	public JLabel mainNpc() {
+		Image imgMainNpc = new ImageIcon("img/interface/mainNpc.png").getImage().getScaledInstance(30, 50, 0);
+		mainNpc = new JLabel(new ImageIcon(imgMainNpc));
+		mainNpc.setLocation(570, 190);
+		mainNpc.setSize(30, 50);
+		return mainNpc;
+	}
+	public JLabel backGround() {
+		Image imgbackground = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
+		JLabel backGround = new JLabel(new ImageIcon(imgbackground));
+		backGround.setLocation(0, 0);
+		backGround.setSize(960, 540);
+		return backGround;
+	}
+
+	public JLabel storeNpc() {
+		Image imgStoreNpc = new ImageIcon("img/interface/storeNpc.png").getImage().getScaledInstance(30, 50, 0);
+		storeNpc = new JLabel(new ImageIcon(imgStoreNpc));
+		storeNpc.setLocation(750, 150);
+		storeNpc.setSize(30, 50);
+
+		storeNpc.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				isTrue=true;
+				StoreMainPanel.setVisible(isTrue);
+			}
+	});
+		return storeNpc;
+	}
+
 	public static void playSound(String fn) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
