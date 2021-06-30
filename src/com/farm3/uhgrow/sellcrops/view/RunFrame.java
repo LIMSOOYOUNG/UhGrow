@@ -65,8 +65,10 @@ public class RunFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-			}
+				SellCropPanel sellList = new SellCropPanel();
+				sellList.sellCropList();
+			
+			}	
 		});
 		
 		
