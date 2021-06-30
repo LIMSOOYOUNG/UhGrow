@@ -118,12 +118,45 @@ public class MainFrame extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		pizzaLabel.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				StorePanel.setVisible(isNpcTrue);
+				storeNpc.setVisible(isTrue);
+				isNpcTrue=true;
+				isTrue=false;
+			}
+		});
 	}
 
 	
-	public void setPanel() {
-		
-	}
 	public static void playSound(String fn) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
