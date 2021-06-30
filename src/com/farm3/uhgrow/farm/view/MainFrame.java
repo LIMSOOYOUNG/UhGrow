@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.farm.view;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.xml.soap.Text;
 
 public class MainFrame extends JFrame {
 	private boolean isTrue = false;
@@ -23,10 +25,16 @@ public class MainFrame extends JFrame {
 
 	JPanel StoreMainPanel = new JPanel();
 	JPanel backgroundPanel = new JPanel();
-	JPanel conversationPanel = new JPanel();
+	JPanel plantSeedPanel = new JPanel();
 	JLabel backGround;
 	JLabel mainNpc;
 	JLabel storeNpc;
+	JLabel storeBackGroundLabel;
+	JLabel conversationLabel;
+	JLabel fieldLabel;
+	JLabel seedText;
+	JLabel endButton;
+	JLabel seedListLabel;
 
 	public MainFrame() {
 
@@ -35,41 +43,107 @@ public class MainFrame extends JFrame {
 		this.setLayout(null);
 		playSound("sound/배경음악1.wav");
 
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(800, 400,0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(800, 400);
-
-		conversationPanel.setLayout(null);
-		conversationPanel.setBounds(110, 400, 758, 120);
-
-		Image imgConversation = new ImageIcon("img/대화창.png").getImage().getScaledInstance(758, 120, 0);
-		JLabel conversationLabel = new JLabel(new ImageIcon(imgConversation));
-		conversationLabel.setSize(758, 120);
-		conversationPanel.setVisible(isTrue);
-		conversationPanel.add(conversationLabel);
-
-		backgroundPanel.setLayout(null);
-		backgroundPanel.setSize(960, 540);
-		backgroundPanel.add(storeNpc());
-		backgroundPanel.add(mainNpc());
-		backgroundPanel.add(conversationPanel);
-		backgroundPanel.add(backGround());
-
-		StoreMainPanel.add(storeBackGroundLabel);
-		StoreMainPanel.setLayout(null);
-		StoreMainPanel.setBounds(150, 100, 800, 400);
-		StoreMainPanel.setVisible(isTrue);
-
-		this.add(StoreMainPanel);
-		this.add(backgroundPanel);
+		this.add(storePanel());
+		this.add(BackgroundPanel());
 
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
+	
 
+	
+	public JPanel storePanel() {
+		StoreMainPanel.add(store());
+		StoreMainPanel.setLayout(null);
+		StoreMainPanel.setBounds(150, 100, 800, 400);
+		StoreMainPanel.setVisible(isTrue);
+		return StoreMainPanel;
+	}
+	public JPanel PlantSeedPanel() {	
+		plantSeedPanel.setLayout(null);
+		plantSeedPanel.setBounds(110, 400, 758, 120);
+		plantSeedPanel.setVisible(isTrue);
+		plantSeedPanel.add(seedText()); 
+		plantSeedPanel.add(conversation());
+		return plantSeedPanel;
+	}
+	public JPanel BackgroundPanel() {
+		
+		backgroundPanel.setLayout(null);
+		backgroundPanel.setSize(960, 540);
+		backgroundPanel.add(storeNpc());
+		backgroundPanel.add(mainNpc());
+		backgroundPanel.add(PlantSeedPanel());
+		backgroundPanel.add(field());
+		backgroundPanel.add(showSeedList());
+		backgroundPanel.add(backGround());
+		return backgroundPanel;
+	}
+	public JLabel field() {
+		Image imgField = new ImageIcon("img/field.png").getImage().getScaledInstance(35, 30,0);
+		fieldLabel = new JLabel(new ImageIcon(imgField));
+		fieldLabel.setLocation(120, 120);
+		fieldLabel.setSize(35,30);
+		fieldLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				isTrue = true;
+				plantSeedPanel.setVisible(isTrue);
+				seedListLabel.setVisible(isTrue);
+			}
+	});
+		return fieldLabel;
+	}
+	
+	public JLabel store() {
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(800, 400,0);
+		storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+		storeBackGroundLabel.setLocation(0, 0);
+		storeBackGroundLabel.setSize(800, 400);
+		return storeBackGroundLabel;
+	}
+	
+	public JLabel showSeedList() {
+		Image imgSeedList = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(150, 200,0);
+		seedListLabel = new JLabel(new ImageIcon(imgSeedList));
+		seedListLabel.setSize(150, 200);
+		seedListLabel.setLocation(710, 200);
+		seedListLabel.setVisible(isTrue);
+	
+		return seedListLabel;
+	}
+	
+	public JLabel seedText() {
+		seedText = new JLabel();
+		seedText.setLayout(null);
+		seedText.setLocation(20,10);
+		seedText.setSize(700,100);
+		seedText.setText("무슨씨앗을 심으시겠습니까?");
+		Font font = new Font("utf-8", Font.BOLD, 30);
+		seedText.setFont(font);
+		return seedText;
+	}
+	
+	public JLabel endButton() {
+		Image imgEndButton = new ImageIcon("img/대화 화살표.png").getImage().getScaledInstance(45, 30,0);
+		endButton = new JLabel(new ImageIcon(imgEndButton));
+		endButton.setSize(45, 30);
+		endButton.setLocation(700,80);
+		return endButton;
+		
+	}
+	
+	public JLabel conversation() {
+
+		
+		Image imgConversation = new ImageIcon("img/대화창.png").getImage().getScaledInstance(758, 120, 0);
+		JLabel conversationLabel = new JLabel(new ImageIcon(imgConversation));
+		conversationLabel.setSize(758, 120);
+		return conversationLabel; 
+	}
+	
 	public JLabel mainNpc() {
 		Image imgMainNpc = new ImageIcon("img/interface/mainNpc.png").getImage().getScaledInstance(30, 50, 0);
 		mainNpc = new JLabel(new ImageIcon(imgMainNpc));
@@ -77,6 +151,7 @@ public class MainFrame extends JFrame {
 		mainNpc.setSize(30, 50);
 		return mainNpc;
 	}
+	
 	public JLabel backGround() {
 		Image imgbackground = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGround = new JLabel(new ImageIcon(imgbackground));
