@@ -24,7 +24,6 @@ public class MainFrame extends JFrame {
 	JPanel StoreMainPanel = new JPanel();
 	JPanel backgroundPanel = new JPanel();
 	JPanel conversationPanel = new JPanel();
-	JPanel storePanel = new JPanel();
 	JLabel backGround;
 	JLabel mainNpc;
 	JLabel storeNpc;
@@ -36,13 +35,10 @@ public class MainFrame extends JFrame {
 		this.setLayout(null);
 		playSound("sound/배경음악1.wav");
 
-		storePanel.setLayout(null);
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(800, 400,0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(800, 400);
-
-		
 
 		conversationPanel.setLayout(null);
 		conversationPanel.setBounds(110, 400, 758, 120);
