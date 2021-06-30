@@ -101,7 +101,7 @@ public class MainFrame extends JFrame {
 		backGroundPanel.add(storeNpc);
 		backGroundPanel.add(mainNpcLabel);
 		backGroundPanel.add(backGroundLabel);
-
+		backgroundPanel.
 		this.add(backGroundPanel);
 
 		this.setResizable(false);
