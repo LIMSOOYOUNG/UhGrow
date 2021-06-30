@@ -19,7 +19,6 @@ public class subFrame extends JFrame {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		playSound("sound/배경음악1.wav");
-		FrameManager.initPanel(this, new FarmPanel());
 		
 
 	}

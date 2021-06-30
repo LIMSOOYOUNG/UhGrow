@@ -14,7 +14,6 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,11 +55,6 @@ public class MainFrame extends JFrame {
 
 		
 		
-
-		
-
-		
-		
 		storeNpc.addMouseListener(new MouseListener() {
 			
 			@Override
@@ -95,7 +89,7 @@ public class MainFrame extends JFrame {
 				pizzaLabel.setLocation(100, 100);
 				pizzaLabel.setSize(50,50);
 				System.out.println("출력");
-				newPanel.add(pizzaLabel);				
+				newPanel.add(pizzaLabel);	
 			}
 		});
 		backGroundPanel.add(storeNpc);
