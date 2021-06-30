@@ -98,7 +98,6 @@ public class MainFrame extends JFrame {
 				newPanel.add(pizzaLabel);				
 			}
 		});
-		newPanel.add(storeNpc);
 		backGroundPanel.add(storeNpc);
 		backGroundPanel.add(mainNpcLabel);
 		backGroundPanel.add(backGroundLabel);
