@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
+	private boolean isTrue=false;
+	private boolean isNpcTrue =true;
 	public MainFrame() {
 
 		this.setBounds(300, 200, 960, 565);
@@ -27,11 +29,14 @@ public class MainFrame extends JFrame {
 		playSound("sound/배경음악1.wav");
 
 		JPanel backGroundPanel = new JPanel();
-		JPanel newPanel = new JPanel();
+		JPanel StorePanel = new JPanel();
 		
 		backGroundPanel.setLayout(null);
 		backGroundPanel.setSize(960,540);
-		newPanel.setLayout(null);
+		StorePanel.setLayout(null);
+		StorePanel.setBounds(150,100,800,400);
+		StorePanel.setVisible(isTrue);
+		
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
@@ -52,6 +57,13 @@ public class MainFrame extends JFrame {
 		storeNpc.setLocation(750, 150);
 		storeNpc.setSize(30, 50);
 
+		Image pizza = new ImageIcon("img/tomato/Pizza.png").getImage().getScaledInstance(50, 50, 0);
+		ImageIcon pizzaicon = new ImageIcon(pizza);
+		JLabel pizzaLabel = new JLabel(pizzaicon);
+		pizzaLabel.setLocation(100, 100);
+		pizzaLabel.setSize(50,50);
+
+		StorePanel.add(pizzaLabel);
 
 		
 		
@@ -83,26 +95,68 @@ public class MainFrame extends JFrame {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Image pizza = new ImageIcon("img/tomato/Pizza.png").getImage().getScaledInstance(50, 50, 0);
-				ImageIcon pizzaicon = new ImageIcon(pizza);
-				JLabel pizzaLabel = new JLabel(pizzaicon);
-				pizzaLabel.setLocation(100, 100);
-				pizzaLabel.setSize(50,50);
-				System.out.println("출력");
-				newPanel.add(pizzaLabel);	
+				if(isTrue) {
+					isTrue=false;
+					StorePanel.setVisible(isTrue);
+					storeNpc.setVisible(isNpcTrue);
+				}else {
+					isTrue =true;
+					isNpcTrue = false;
+					StorePanel.setVisible(isTrue);
+					storeNpc.setVisible(isNpcTrue);
+				}
 			}
 		});
 		backGroundPanel.add(storeNpc);
 		backGroundPanel.add(mainNpcLabel);
 		backGroundPanel.add(backGroundLabel);
+		
+		this.add(StorePanel);
 		this.add(backGroundPanel);
+		
 
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		pizzaLabel.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				StorePanel.setVisible(isNpcTrue);
+				storeNpc.setVisible(isTrue);
+				isNpcTrue=true;
+				isTrue=false;
+			}
+		});
 	}
 
-
+	
 	public static void playSound(String fn) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
