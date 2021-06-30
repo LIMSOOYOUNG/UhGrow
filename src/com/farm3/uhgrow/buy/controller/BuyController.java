@@ -23,11 +23,9 @@ public class BuyController {
 		int resultbuyHouseResult = buyService.buyNewHouse(dto);
 
 		if(resultbuyHouseResult > 0) {
-			// 성공 출력 
 			System.out.println("성공");
 		} else {
-			// 실패 출력
 			System.out.println("실패");
-		}
+		}  
 	}
 }
