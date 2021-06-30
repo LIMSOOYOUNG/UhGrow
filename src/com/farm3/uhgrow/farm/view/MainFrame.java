@@ -56,7 +56,7 @@ public class MainFrame extends JFrame {
 		backgroundPanel.setLayout(null);
 		backgroundPanel.setSize(960, 540);
 		backgroundPanel.add(storeNpc());
-		backgroundPanel.add(mainNpc);
+		backgroundPanel.add(mainNpc());
 		backgroundPanel.add(conversationPanel);
 		backgroundPanel.add(backGround());
 
