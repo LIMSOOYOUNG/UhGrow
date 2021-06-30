@@ -22,7 +22,7 @@ public class RunFrame {
 		JPanel storePanel = new JPanel();
 		storePanel.setLayout(null);
 		storePanel.setLocation(960, 540);
-		
+	
 		
 		
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(960, 540, 0);
