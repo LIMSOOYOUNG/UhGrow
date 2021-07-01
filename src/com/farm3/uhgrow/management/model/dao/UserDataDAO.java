@@ -79,4 +79,64 @@ public class UserDataDAO {
 		return result;
 	}
 
+	public List<SelectUserDTO> selectDeleteUserData(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SelectUserDTO> userList = null;
+		String query = prop.getProperty("selectAllUser");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			userList = new ArrayList<>();
+			
+			while(rset.next()) {
+				SelectUserDTO row = new SelectUserDTO();
+				row.setUserNo(rset.getInt("USER_NO"));
+				row.setUserId(rset.getString("USER_ID"));
+				row.setUserPwd(rset.getString("USER_PWD"));
+				
+				userList.add(row);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userList;
+	}
+
+	public List<SelectUserDTO> selectRecoverUserData(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		List<SelectUserDTO> userList = null;
+		String query = prop.getProperty("selectDeleteUser");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			userList = new ArrayList<>();
+			
+			while(rset.next()) {
+				SelectUserDTO row = new SelectUserDTO();
+				row.setUserNo(rset.getInt("USER_NO"));
+				row.setUserId(rset.getString("USER_ID"));
+				row.setUserPwd(rset.getString("USER_PWD"));
+				
+				userList.add(row);
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userList;
+	}
+
 }

@@ -8,6 +8,7 @@
 	         , UI.USER_ID
 	         , UI.USER_PWD
 	      FROM USER_INFO UI
+	     WHERE DELETE_YN = 'N'
 	</entry>
 	<entry key="modifyIdPwd">
 	    UPDATE
@@ -15,5 +16,13 @@
 	       SET UI.USER_ID = ?
 	         , UI.USER_PWD = ?
 	     WHERE UI.USER_ID = ? 
+	</entry>
+	<entry key="selectDeleteUser">
+	    SELECT
+	           UI.USER_NO
+	         , UI.USER_ID
+	         , UI.USER_PWD
+	      FROM USER_INFO UI
+	     WHERE DELETE_YN = 'Y' 
 	</entry>
 </properties>

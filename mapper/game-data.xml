@@ -26,4 +26,9 @@
 	       SET C.CROP_PRICE = ?
 	     WHERE C.CROP_NAME = '호박'	
 	</entry>
+	<entry key="modifyHousePrice">
+	    UPDATE
+	           USER_INFO U
+	       SET U.HOUSE_PRICE = ?
+	</entry>
 </properties>
