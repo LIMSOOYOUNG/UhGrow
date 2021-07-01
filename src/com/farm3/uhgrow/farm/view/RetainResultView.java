@@ -14,9 +14,6 @@ public class RetainResultView {
 	}
 
 
-	public void displayDmlResult(String string) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
