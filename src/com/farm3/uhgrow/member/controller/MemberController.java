@@ -12,24 +12,19 @@ public class MemberController {
 	MemberService memberService = new MemberService();
 	
 
-	public void signUpMember(Map<String, String> map) {
+	public int signUpMember(Map<String, String> map) {
 	
 		SignUpDTO dto = new SignUpDTO();
 		
-		dto.setUserId(map.get("userId"));
-		dto.setUserPwd(map.get("userPwd"));
-		dto.setUserName(map.get("userName"));
-		dto.setEmail(map.get("email"));
+		dto.setUserId(map.get("signUpId"));
+		dto.setUserPwd(map.get("signUpPwd"));
+		dto.setUserName(map.get("signUpName"));
+		dto.setEmail(map.get("signUpMail"));
 		
 		int signUpResult = memberService.signUpMember(dto);
 		
-		if(signUpResult > 0) {
-			// 성공 출력 
-			System.out.println("성공");
-		} else {
-			// 실패 출력
-			System.out.println("실패");
-		}
+		return signUpResult;
+		
 	}
 	
 	public UserDTO loginInfo(Map<String, String> map) {
