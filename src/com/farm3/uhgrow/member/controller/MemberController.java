@@ -32,22 +32,15 @@ public class MemberController {
 		}
 	}
 	
-	public void loginInfo(Map<String, String> map) {
+	public UserDTO loginInfo(Map<String, String> map) {
 	
 		
 		String loginId = map.get("loginId");
 		String loginPwd = map.get("loginPwd");
 		UserDTO loginResult = memberService.loginInfo(loginId);
 	
-		if(loginResult == null) {
-			System.out.println("아이디 없음");
-		} else if(!loginResult.getUserPwd().equals(loginPwd)) {
-			System.out.println("비번 틀림");
-		} else {
-			new MainFrame();// 초기화면 불러오기
-		}
-	
 
+		return loginResult;
 		
 	}
 	
