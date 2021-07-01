@@ -61,7 +61,7 @@ public class JDBCTemplate {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}   
 
 	public static void close(ResultSet rset) {
 		try {

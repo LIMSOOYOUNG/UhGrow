@@ -1,10 +1,11 @@
 package com.farm3.uhgrow.farm.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,7 +18,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.xml.soap.Text;
+
+
+import com.farm3.uhgrow.farm.controller.FarmController;
+import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 
 public class MainFrame extends JFrame {
 	private boolean isTrue = false;
@@ -35,8 +39,14 @@ public class MainFrame extends JFrame {
 	JLabel seedText;
 	JLabel endButton;
 	JLabel seedListLabel;
+	List seedList;
+	FarmController farmcontroller = new FarmController(); 
 
+	
+	private RetainCropDTO croplist;
 	public MainFrame() {
+		
+
 
 		this.setBounds(300, 200, 960, 565);
 		this.setTitle("UhGrow");
@@ -77,9 +87,21 @@ public class MainFrame extends JFrame {
 		backgroundPanel.add(mainNpc());
 		backgroundPanel.add(PlantSeedPanel());
 		backgroundPanel.add(field());
-		backgroundPanel.add(showSeedList());
 		backgroundPanel.add(backGround());
+		
+		backgroundPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				super.mouseClicked(e);
+				isTrue = false;
+				plantSeedPanel.setVisible(isTrue);
+				seedListLabel.setVisible(isTrue);
+				seedList.setVisible(isTrue);
+			}
+		});
 		return backgroundPanel;
+		
 	}
 	public JLabel field() {
 		Image imgField = new ImageIcon("img/field.png").getImage().getScaledInstance(35, 30,0);
@@ -89,9 +111,24 @@ public class MainFrame extends JFrame {
 		fieldLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				isTrue = true;
-				plantSeedPanel.setVisible(isTrue);
-				seedListLabel.setVisible(isTrue);
+
+				
+				List seedList = farmcontroller.selectSeed();
+				backgroundPanel.add(seedList(seedList));
+				if(isTrue) {
+
+					isTrue = false;
+					seedList.setVisible(isTrue);
+					plantSeedPanel.setVisible(isTrue);
+				}else {
+					isTrue = true;
+
+					seedList.setVisible(isTrue);
+					plantSeedPanel.setVisible(isTrue);
+				}
+				
+				
+				
 			}
 	});
 		return fieldLabel;
@@ -105,14 +142,11 @@ public class MainFrame extends JFrame {
 		return storeBackGroundLabel;
 	}
 	
-	public JLabel showSeedList() {
-		Image imgSeedList = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(150, 200,0);
-		seedListLabel = new JLabel(new ImageIcon(imgSeedList));
-		seedListLabel.setSize(150, 200);
-		seedListLabel.setLocation(710, 200);
-		seedListLabel.setVisible(isTrue);
-	
-		return seedListLabel;
+	public List seedList(List seedlist) {
+		seedlist.setBounds(710,200,150,200);
+		seedlist.setVisible(true);
+		return seedlist;
+		
 	}
 	
 	public JLabel seedText() {

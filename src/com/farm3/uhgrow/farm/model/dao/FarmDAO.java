@@ -1,6 +1,7 @@
 package com.farm3.uhgrow.farm.model.dao;
 
 
+import java.awt.List;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,46 +9,44 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
-import static com.greedy.common.JDBCTemplate.close;
 
 public class FarmDAO {
 	private Properties prop;
 	
+	
 	public FarmDAO() {
 		this.prop = new Properties();
 		try {
-			prop.loadFromXML(new FileInputStream("mapper/RetainCrop-query.xml"));	//	properties클래스를 사용한 파일을 읽어들어와서 xml파일로 경로 지정
+			prop.loadFromXML(new FileInputStream("mapper/cropList.xml"));	//	properties클래스를 사용한 파일을 읽어들어와서 xml파일로 경로 지정
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public List<RetainCropDTO> selectAllSeed(Connection con) {
+	public List selectAllSeed(Connection con) {
 		
 		PreparedStatement pstmt = null;											//	쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null;													//	결과값 저장을위한 ResultSet선언
 
-		List<RetainCropDTO> seedList = null;	
+		List seedList = null;	
 		
-		String query = prop.getProperty("selectAllCrop");
-		
+		String query = prop.getProperty("selectAllCategory1");
+		System.out.println(query);
 		try {
 			pstmt = con.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			
-			seedList = new ArrayList<>();
+			seedList = new List();
 			while(rset.next()) {
 				RetainCropDTO seed = new RetainCropDTO();
-				seed.setCropId(rset.getInt("SEED_ID"));
-				seed.setCropAmount(rset.getInt("CROP_AMOUNT"));
-				
-				seedList.add(seed);
+				seed.setCropName(rset.getString("CROP_NAME"));
+				seedList.add(seed.getCropName());
 			}
+			System.out.println(seedList);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,8 +67,7 @@ public class FarmDAO {
 		String query = prop.getProperty("chooseSeed");							//	updateMemberPassword 쿼리문 선언
 		
 		try {
-			pstmt = con.prepareStatement(query);								//	statement에 쿼리문 삽입
-			pstmt.setInt(1, retainCropDTO.getCropId());							//	수정할 pwd값 삽입
+			pstmt = con.prepareStatement(query);									//	수정할 pwd값 삽입
 			pstmt.setInt(2, retainCropDTO.getCropAmount());
 			
 			result = pstmt.executeUpdate();										//	결과값을 int로 리턴

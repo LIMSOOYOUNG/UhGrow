@@ -1,41 +1,61 @@
 package com.farm3.uhgrow.farm.model.dto;
 
-public class RetainCropDTO {
-	
-	private int userNO;
-	private int cropId;
+import java.awt.List;
+import java.io.Serializable;
+
+public class RetainCropDTO implements Serializable{
+	private String userName;
+	private String cropName;
 	private int cropAmount;
+	private List retainCropList;
+
 	
 	public RetainCropDTO() {}
-	
-	public RetainCropDTO(int userNO, int cropId, int cropAmount) {
-		super();
-		this.userNO = userNO;
-		this.cropId = cropId;
-		this.cropAmount = cropAmount;
+
+
+	public String getUserName() {
+		return userName;
 	}
-	public int getUserNO() {
-		return userNO;
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public void setUserNO(int userNO) {
-		this.userNO = userNO;
+
+
+	public String getCropName() {
+		return cropName;
 	}
-	public int getCropId() {
-		return cropId;
+
+
+	public void setCropName(String cropName) {
+		this.cropName = cropName;
 	}
-	public void setCropId(int cropId) {
-		this.cropId = cropId;
-	}
+
+
 	public int getCropAmount() {
 		return cropAmount;
 	}
+
+
 	public void setCropAmount(int cropAmount) {
 		this.cropAmount = cropAmount;
 	}
-	@Override
-	public String toString() {
-		return "RetainCropDTO [userNO=" + userNO + ", cropId=" + cropId + ", cropAmount=" + cropAmount + "]";
+
+
+	public List getRetainCropList() {
+		return retainCropList;
 	}
+
+
+	public void setRetainCropList(List retainCropList) {
+		this.retainCropList = retainCropList;
+	}
+	
+	
+	
+	
+	
 	
 	
 }
