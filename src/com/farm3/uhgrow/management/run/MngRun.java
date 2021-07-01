@@ -10,6 +10,8 @@ public class MngRun {
 		MngView mng = new MngView();
 //		mng.mngMenu();
 		new MngMoniterView();
+		
+//		new MngMainFrame();
 
 
 	}
