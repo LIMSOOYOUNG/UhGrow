@@ -50,4 +50,16 @@ public class GameDataService {
 		return result;
 	}
 
+	public int modifyHousePrice(int inputHousePrice) {
+		
+		Connection con = getConnection();
+		
+		int result = gameDataDAO.modifyHousePrice(con, inputHousePrice);
+		
+		close(con);
+		
+		return result;
+		
+	}
+
 }

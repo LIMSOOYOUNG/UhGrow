@@ -7,7 +7,7 @@ public class MngRun {
 
 	public static void main(String[] args) {
 		
-		MngView mng = new MngView();
+//		MngView mng = new MngView();
 //		mng.mngMenu();
 		new MngMoniterView();
 		

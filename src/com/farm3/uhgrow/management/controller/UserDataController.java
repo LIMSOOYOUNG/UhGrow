@@ -35,6 +35,14 @@ public class UserDataController {
 		
 		
 	}
+	public List<SelectUserDTO> selectDeleteUserData() {
+		List<SelectUserDTO> userList = UserDataService.selectDeleteUserData();
+		return userList;
+	}
+	public List<SelectUserDTO> selectRecoverUserData() {
+		List<SelectUserDTO> userList = UserDataService.selectRecoverUserData();
+		return userList;
+	}
 	
 
 

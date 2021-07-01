@@ -32,4 +32,19 @@ public class UserDataService {
 		return result;
 	}
 
+	public static List<SelectUserDTO> selectDeleteUserData() {
+		Connection con = getConnection();
+		List<SelectUserDTO> userList = userDataDAO.selectDeleteUserData(con);
+		close(con);
+		return userList;
+		
+	}
+
+	public static List<SelectUserDTO> selectRecoverUserData() {
+		Connection con = getConnection();
+		List<SelectUserDTO> userList = userDataDAO.selectRecoverUserData(con);
+		close(con);
+		return userList;
+	}
+
 }

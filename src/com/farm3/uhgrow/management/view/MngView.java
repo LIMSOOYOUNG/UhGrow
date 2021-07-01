@@ -64,6 +64,7 @@ public class MngView {
 		switch(inputNo) {
 		case 1: modifyFoodMenu(); break;
 		case 2: gameDataController.modifyCropPrice(inputTomatoPrice(), inputCornPrice(), inputGarlicPrice(), inputPumpkinPrice()); break;
+		case 3: gameDataController.modifyHousePrice(inputHousePrice()); break;
 		}
 	}
 	
@@ -103,6 +104,11 @@ public class MngView {
 	
 	public int inputPumpkinPrice() {
 		System.out.print("호박 변경 가격 : ");
+		return sc.nextInt();
+	}
+	
+	public int inputHousePrice() {
+		System.out.print("변경 집 가격 : ");
 		return sc.nextInt();
 	}
 }

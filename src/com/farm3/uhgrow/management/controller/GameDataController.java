@@ -31,4 +31,15 @@ public class GameDataController {
 		
 	}
 
+
+	public void modifyHousePrice(int inputHousePrice) {
+		
+		int result = gameDataService.modifyHousePrice(inputHousePrice);
+		
+		if(result > 0) {
+			MngResultView.mngResult("modifySuccess");
+		}
+		
+	}
+
 }
