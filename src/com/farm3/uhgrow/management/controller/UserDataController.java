@@ -14,9 +14,10 @@ public class UserDataController {
 	}
 	private UserDataService userDataService = new UserDataService();
 	
-	public void selectAllUserData() {
+	public List<SelectUserDTO> selectAllUserData() {
 		List<SelectUserDTO> userList = UserDataService.selectAllUserData();
-		MngResultView.listResult(userList);
+//		MngResultView.listResult(userList)
+		return userList;
 	}
 	public void modifyUserData(String inputUserId, String inputNewId, String inputNewPwd) {
 		ModifyUserDTO modifyUserInfo = new ModifyUserDTO();

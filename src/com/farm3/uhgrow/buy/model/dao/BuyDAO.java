@@ -38,7 +38,12 @@ public class BuyDAO {
 
 			buyHouseResult = pstmt.executeUpdate();
 
+//			int result = 0 //집을 살수 없음
+//			if(buy.getCoin() > 100 && buy.getHavingHouseYn()=="n") { //가진 재화가 필요 요건을 충족하고, 집을 보유하고 있지 않을경우
+//					result = 1;                                      //집을 구매 할 수 있음. 아닐 경우 구매 불가
 
+//			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
