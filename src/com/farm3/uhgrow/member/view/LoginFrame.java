@@ -82,19 +82,19 @@ public class LoginFrame extends JFrame {
 
 
 		// 로그인창 
-		Image loginBackground = new ImageIcon("img/loginInterface/login1.png").getImage().getScaledInstance(540, 36, 0);
+		Image loginBackground = new ImageIcon("img/loginInterface/login.png").getImage().getScaledInstance(540, 36, 0);
 		JButton loginButton = new JButton(new ImageIcon(loginBackground));
 		loginButton.setLayout(null);
 		loginButton.setBounds(210,340,540,36);
 
 		// 회원가입창
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp1.png").getImage().getScaledInstance(245, 35, 0);
+		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
 		signUpButton.setLayout(null);
 		signUpButton.setBounds(210,385,245,35);
 
 		// id pwd찾기 창
-		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd1.png").getImage().getScaledInstance(245, 40, 0);
+		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 40, 0);
 		JButton findIdPwdButton = new JButton(new ImageIcon(findIdPwdBackground));
 		findIdPwdButton.setLayout(null);
 		findIdPwdButton.setBounds(505,385,245,35);
@@ -182,16 +182,16 @@ public class LoginFrame extends JFrame {
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
 
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(230, 72, 0);
+		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
 		signUpButton.setLayout(null);
-		signUpButton.setBounds(240,370,230,72);
+		signUpButton.setBounds(210,385,245,35);
 
 
-		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(230, 72, 0);
+		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
 		JButton backButton = new JButton(new ImageIcon(backButtonBackground));
 		backButton.setLayout(null);
-		backButton.setBounds(490,370,230,72);
+		backButton.setBounds(505,385,245,35);
 
 		JLabel idLabel = new JLabel("아 이 디  : ");
 		idLabel.setLayout(null);
