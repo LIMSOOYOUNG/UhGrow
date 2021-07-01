@@ -35,67 +35,72 @@ public class LoginFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
-	public void loginPanel() {
-		Font font = new Font("고딕체", Font.BOLD, 30);
-
+	public JPanel loginPanel() {
+		Font font = new Font("맑은 고딕", Font.BOLD, 25);
+		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		// 패널 생성 
-		JPanel backGroundPanel = new JPanel();
 		JPanel loginPanel = new JPanel();
 
-
-		// backGroundPanel위치 지정 후  BackGrountLabel(이미지) 삽입
 		loginPanel.setLayout(null);
 		loginPanel.setSize(960,540);
+
+		// backGroundLabel에 배경이미지 크기 지정
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
 		loginPanel.setVisible(true);
-
+		
+		// Uh Grow! 타이틀 
+		JLabel titleLabel = new JLabel("Uh   Grow!");
+		titleLabel.setLayout(null);
+		titleLabel.setBounds(330, 50, 600, 150);
+		titleLabel.setFont(titleFont);
 
 
 		// id, pwd 입력창
 		JLabel idLabel = new JLabel("I   D   : ");
 		idLabel.setLayout(null);
-		idLabel.setBounds(300, 90, 100, 50);
+		idLabel.setBounds(300, 200, 100, 50);
 		idLabel.setFont(font);
 
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
-		idField.setBounds(400, 90, 300, 50);
+		idField.setBounds(400, 200, 300, 50);
 		idField.setFont(font);
 
 		JLabel pwdLabel = new JLabel("P  W  D  :  ");
 		pwdLabel.setLayout(null);
-		pwdLabel.setBounds(259, 170, 200, 50);
+		pwdLabel.setBounds(259, 270, 200, 50);
 		pwdLabel.setFont(font);
 
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
-		pwdField.setBounds(400, 170, 300, 50);
+		pwdField.setBounds(400, 270, 300, 50);
 		pwdField.setFont(font);
 
 
 		// 로그인창 
-		Image loginBackground = new ImageIcon("img/loginInterface/login.png").getImage().getScaledInstance(480, 98, 0);
+		Image loginBackground = new ImageIcon("img/loginInterface/login1.png").getImage().getScaledInstance(540, 36, 0);
 		JButton loginButton = new JButton(new ImageIcon(loginBackground));
 		loginButton.setLayout(null);
-		loginButton.setBounds(240,250,480,98);
+		loginButton.setBounds(210,340,540,36);
 
 		// 회원가입창
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(230, 72, 0);
+		Image signUpBackground = new ImageIcon("img/loginInterface/signUp1.png").getImage().getScaledInstance(245, 35, 0);
 		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
 		signUpButton.setLayout(null);
-		signUpButton.setBounds(240,370,230,72);
+		signUpButton.setBounds(210,385,245,35);
 
 		// id pwd찾기 창
-		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(230, 72, 0);
+		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd1.png").getImage().getScaledInstance(245, 40, 0);
 		JButton findIdPwdButton = new JButton(new ImageIcon(findIdPwdBackground));
 		findIdPwdButton.setLayout(null);
-		findIdPwdButton.setBounds(490,370,230,72);
+		findIdPwdButton.setBounds(505,385,245,35);
 
 
+		loginPanel.add(titleLabel);
 		loginPanel.add(idLabel);
 		loginPanel.add(idField);
 		loginPanel.add(pwdLabel);
@@ -162,9 +167,10 @@ public class LoginFrame extends JFrame {
 
 			}
 		});
+		return loginPanel;
 	}
 
-	public void signUpPanel() {
+	public JPanel signUpPanel() {
 
 		JPanel signUpPanel = new JPanel();
 		Font font = new Font("고딕체", Font.BOLD, 25);
@@ -356,6 +362,7 @@ public class LoginFrame extends JFrame {
 				loginPanel();
 			}
 		});
+		return signUpPanel;
 
 
 	}
