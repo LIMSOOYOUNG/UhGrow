@@ -2,9 +2,11 @@ package com.farm3.uhgrow.management.view;
 
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import com.farm3.uhgrow.management.model.dto.SelectUserDTO;
 
-public class MngResultView {
+public class MngResultView extends JFrame {
 	
 	public static void mngResult(String code) {
 		
@@ -22,6 +24,8 @@ public class MngResultView {
 		for(SelectUserDTO u : list) {
 			System.out.println(u);
 		}
+		
+		
 	}
 
 }
