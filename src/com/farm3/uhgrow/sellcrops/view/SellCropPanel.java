@@ -12,25 +12,53 @@ import javax.swing.JPanel;
 
 public class SellCropPanel extends JFrame{
 	
-	JPanel sellCropList = new JPanel();
-	JPanel mainImagePanel = new JPanel();
-	JPanel storePanel = new JPanel();
-	JLabel storeBackGroundLabel;
-	JLabel imageBackGroundLabel;
-	JButton buyButton;
-	JButton sellButton;
-	JButton quitButton;
+	public JPanel sellCropList = new JPanel();
+	public JPanel mainImagePanel = new JPanel();
+	public JPanel storePanel = new JPanel();
 	
-	JButton tomatoButton;
-	JButton cornButton;
-	JButton galicButton;
-	JButton pumpkinButton;
+	public JLabel storeBackGroundLabel;
+	public JLabel imageBackGroundLabel;
+	public JLabel sellList;
+	
+	public JButton buyButton;
+	public JButton sellButton;
+	public JButton quitButton;
+	
+	public JButton sellSeedButton;
+	public JButton sellTomatoSeedButton;
+	public JButton sellCornSeedButton;
+	public JButton sellGalicSeedButton;
+	public JButton sellPumpkinButton;
+	
+	public JButton sellCropButton;
+	public JButton tomatoButton;
+	public JButton cornButton;
+	public JButton galicButton;
+	public JButton pumpkinButton; 
+	 
+	public JButton sellToolButton;
+	public JButton sellPickaxeButton;
+	public JButton sellShovelButton;
+	public JButton sellHoeButton;
+	public JButton sellWateringCanButton;
+	
+	public JButton sellFoodButton;
+	public JButton sellTomatoPizzaButton;
+	public JButton sellCornTortillaButton;
+	public JButton sellGarlicJuiceButton;
+	public JButton sellPumpkinSoup;
+	
 	Image imageBackGround;
 	Image storeBackGround;
 	Image buyImage;
 	Image sellImage;
 	Image quitImage;
 	Image mainPageImage;
+	
+	Image sellSeedImage;
+	Image sellCropImage;
+	Image sellToolImage;
+	
 	
 	
 	
@@ -41,6 +69,7 @@ public class SellCropPanel extends JFrame{
 		this.setLayout(null);
 		this.add(sellBuyPanel());
 		this.add(mainBackGround());
+//		this.add(sellCropList());
 		
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,9 +78,9 @@ public class SellCropPanel extends JFrame{
 	}
 	
 	public JPanel sellBuyPanel() {
-		storePanel.add(buyCropsButton());
-		storePanel.add(sellCropsButton());
-		storePanel.add(quitCropsButton());
+		storePanel.add(buyButton());
+		storePanel.add(sellButton());
+		storePanel.add(quitButton());
 		
 		storePanel.setLayout(null);
 		storePanel.setBounds(50, 40, 860, 400);
@@ -85,7 +114,25 @@ public class SellCropPanel extends JFrame{
 		return storeBackGroundLabel;
 	}
 	
-	public JButton buyCropsButton() {
+	/*씨앗판매 버튼*/
+	public JButton sellSeedButton() {
+		sellSeedImage = new ImageIcon("img/store/sellSeedImage.png").getImage().getScaledInstance(200, 200, 0);
+		sellSeedButton = new JButton(new ImageIcon(sellSeedImage));
+	
+		
+		return sellSeedButton;
+	}
+	
+	/*작물 판매 버튼*/
+	public JButton sellCropButton() {
+		sellCropImage = new ImageIcon("img/store/sellCropImage.png").getImage().getScaledInstance(200, 200, 0);
+		sellCropButton = new JButton(new ImageIcon(sellCropImage));
+		
+		return sellCropButton;
+	}
+	
+	/*구매하기 버튼*/
+	public JButton buyButton() {
 		buyImage = new ImageIcon("img/store/buyButton.png").getImage().getScaledInstance(200, 50, 0);
 		buyButton = new JButton(new ImageIcon(buyImage));
 		buyButton.setLocation(50, 43);
@@ -94,7 +141,8 @@ public class SellCropPanel extends JFrame{
 		return buyButton;
 	}
 	
-	public JButton sellCropsButton() {
+	/*판매하기 버튼*/
+	public JButton sellButton() {
 		sellImage = new ImageIcon("img/store/sellButton.png").getImage().getScaledInstance(200, 50, 0);
 		sellButton = new JButton(new ImageIcon(sellImage));
 		sellButton.setLocation(276, 43);
@@ -104,21 +152,25 @@ public class SellCropPanel extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				JButton tomatoButton;
-//				JButton cornButton;
-//				JButton galicButton;
-//				JButton pumpkinButton;
 				
-				tomatoButton = new JButton("토마토");
+//				sellCropButton = new JButton();
+//				sellSeedButton = new JButton();
+//				
+//				sellCropButton.setLocation(292, 128);
+//				sellCropButton.setSize(13,13);
+//				
+//				sellSeedButton.setLocation(295, 222);
+//				sellSeedButton.setSize(13,13);
 				
-				cornButton = new JButton("옥수수");
+				
 			}
 		});
 		
 		return sellButton;
 	}
 	
-	public JButton quitCropsButton() {
+	/*나가기 버튼*/
+	public JButton quitButton() {
 		quitImage = new ImageIcon("img/store/quitButton.png").getImage().getScaledInstance(200, 50, 0);
 		quitButton = new JButton(new ImageIcon(quitImage));
 		quitButton.setLocation(505,43);
@@ -145,6 +197,18 @@ public class SellCropPanel extends JFrame{
 	
 	
 	
+	
+
+//	public JPanel sellCropList() {
+//		
+//		sellCropList.setLayout(null);
+//		sellCropList.setSize(960, 540);
+//		sellCropList.add(sellButton());
+//		
+////		I
+//		return sellCropList;
+//		
+//	}
 	
 	
 //	public JPanel sellBuyPanel() {
