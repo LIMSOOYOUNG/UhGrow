@@ -20,7 +20,6 @@ public class FarmController {
 		if(retainCropList!=null) {
 			
 		}else {
-			retainResultView.displayDmlResult("selectFailed");
 		}
 		return retaincroplist;
 	}
