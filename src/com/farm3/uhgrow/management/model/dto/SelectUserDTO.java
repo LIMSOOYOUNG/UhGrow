@@ -1,6 +1,6 @@
 package com.farm3.uhgrow.management.model.dto;
 
-public class SelectUserDTO {
+public class SelectUserDTO implements java.io.Serializable {
 	
 	private int userNo;
 	private String userId;

@@ -2,50 +2,33 @@ package com.farm3.uhgrow.management.model.service;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 import static com.farm3.uhgrow.common.JDBCTemplate.commit;
-import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 import static com.farm3.uhgrow.common.JDBCTemplate.getConnection;
+import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.farm3.uhgrow.management.model.dao.GameDataDAO;
 import com.farm3.uhgrow.management.model.dto.CropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.ModifyCropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.SelectCropPriceDTO;
 
 public class GameDataService {
 	
-	private GameDataDAO gameDataDAO;
+	private static GameDataDAO gameDataDAO;
 	
 	public GameDataService() {
 		this.gameDataDAO = new GameDataDAO();
 	}
 
-	public int modifyCropPrice(CropPriceDTO cropPrice) {
+	public int modifyCropPrice(ModifyCropPriceDTO modifyPriceList) {
 		Connection con = getConnection();
-		int result1 = gameDataDAO.modifyTomatoPrice(con, cropPrice);
-		if(result1 > 0) {
+		int result = gameDataDAO.modifyCropPrice(con, modifyPriceList);
+		if(result > 0) {
 			commit(con);
 		} else {
 			rollback(con);
 		}
-        int result2 = gameDataDAO.modifyCornPrice(con, cropPrice);
-        if(result2 > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		int result3 = gameDataDAO.modifyGarlicPrice(con, cropPrice);
-		if(result3 > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		int result4 = gameDataDAO.modifyPumpkinPrice(con, cropPrice);
-		if(result4 > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
-		
-		int result = result1 + result2 + result3 + result4;
 		close(con);
 		return result;
 	}
@@ -55,11 +38,23 @@ public class GameDataService {
 		Connection con = getConnection();
 		
 		int result = gameDataDAO.modifyHousePrice(con, inputHousePrice);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		
 		close(con);
 		
 		return result;
 		
+	}
+
+	public static List<SelectCropPriceDTO> selectCropPriceData() {
+		Connection con = getConnection();
+		List<SelectCropPriceDTO> userList = gameDataDAO.selectCropPrice(con);
+		close(con);
+		return userList;
 	}
 
 }

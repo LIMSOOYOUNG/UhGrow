@@ -19,7 +19,7 @@ public class UserDataController {
 //		MngResultView.listResult(userList)
 		return userList;
 	}
-	public void modifyUserData(String inputUserId, String inputNewId, String inputNewPwd) {
+	public int modifyUserData(String inputUserId, String inputNewId, String inputNewPwd) {
 		ModifyUserDTO modifyUserInfo = new ModifyUserDTO();
 		modifyUserInfo.setOldId(inputUserId);
 		modifyUserInfo.setNewId(inputNewId);
@@ -27,11 +27,7 @@ public class UserDataController {
 		
 		int result = UserDataService.modifyUserData(modifyUserInfo);
 		
-		if(result > 0) {
-			MngResultView.mngResult("modifySuccess");
-		} else {
-			MngResultView.mngResult("modifyFailed");
-		}
+		return result;
 		
 		
 	}
