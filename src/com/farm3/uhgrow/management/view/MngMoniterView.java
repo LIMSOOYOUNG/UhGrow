@@ -19,7 +19,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
+import com.farm3.uhgrow.farm.view.FrameManager;
 import com.farm3.uhgrow.management.controller.UserDataController;
 import com.farm3.uhgrow.management.model.dto.SelectUserDTO;
 
@@ -474,6 +476,7 @@ public class MngMoniterView extends JFrame {
 				
 			}
 		});
+		
 		
 		backToMainButton.addMouseListener(new MouseAdapter() {
 			@Override
