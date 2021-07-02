@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
+import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
+import com.farm3.uhgrow.member.store.MainStorePanel;
 
 public class LoginPanel extends JPanel {
 
@@ -138,6 +140,14 @@ public class LoginPanel extends JPanel {
 					//					new MainFrame();// 초기화면 불러오기
 //					FarmPanel farmPanel = new FarmPanel();
 //					FrameManager.changePanel(loginPanel, farmPanel);
+					
+					JPanel mainStorePanel = new MainStorePanel();
+					JPanel hac = new BuyHouseAndCookPanel();
+					
+
+					System.out.println(loginResult);
+					FrameManager.changePanel(loginPanel, hac);
+		
 				}
 
 			}
@@ -187,33 +197,6 @@ public class LoginPanel extends JPanel {
 	}
 
 
-	public void actionListener() {
-		btnBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				removeAll();
-			}
-		});
-
-		btnInsertUser.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				removeAll();
-
-				//				sp.signUpPanel;
-				//this.removeAll();
-				//this.setVisible(false);
-				//sp.signUpPanel();
-
-			}
-		});
-
-		btnSignUp.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-
-			}
-		});
-	}
+	
 
 }

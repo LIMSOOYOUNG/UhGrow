@@ -81,6 +81,7 @@ public class MemberDAO {
 				dto.setHavingHouseYn(rset.getString("HAVING_HOUSE_YN").charAt(0));
 				dto.setFarmExp(rset.getInt("FARM_EXP"));
 				dto.setHousePrice(rset.getInt("HOUSE_PRICE"));
+				dto.setContinueYn(rset.getString("CONTINUE_YN").charAt(0));
 			}
 			
 		} catch (SQLException e) {

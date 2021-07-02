@@ -10,6 +10,7 @@ public class BuyRun {
 		
 		new BuyStoreFrame();
 		
+		
 	}
 
 }

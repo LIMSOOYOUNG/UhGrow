@@ -1,3 +1,4 @@
+
 package com.farm3.uhgrow.member.view;
 
 import java.awt.Font;
@@ -26,6 +27,20 @@ import javax.swing.JTextField;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 
+	
+	
+
+
+
+				
+
+				
+		
+
+package com.farm3.uhgrow.member.view;
+
+import javax.swing.JFrame;
+
 public class LoginFrame extends JFrame {
 
 	public LoginFrame() {
@@ -42,12 +57,8 @@ public class LoginFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
-	
-	public JPanel loginPanel() {
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
+  
 		// 패널 생성 
 		JPanel loginPanel = new JPanel();
 
@@ -60,7 +71,7 @@ public class LoginFrame extends JFrame {
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
 		loginPanel.setVisible(true);
-		
+
 		// Uh Grow! 타이틀 
 		JLabel titleLabel = new JLabel("Uh   Grow!");
 		titleLabel.setLayout(null);
@@ -118,9 +129,8 @@ public class LoginFrame extends JFrame {
 		loginPanel.add(signUpButton);
 		loginPanel.add(findIdPwdButton);
 
-
 		loginPanel.add(backGroundLabel);
-		
+
 
 
 
@@ -136,7 +146,7 @@ public class LoginFrame extends JFrame {
 				map.put("loginPwd", loginPwd);
 				MemberController memberController = new MemberController();
 				UserDTO loginResult = memberController.loginInfo(map);
-				
+
 
 				// 로그인 결과 리턴 받아서 가입된 정보 확인
 				if(loginId.isEmpty()) {
@@ -269,7 +279,7 @@ public class LoginFrame extends JFrame {
 		signUpPanel.add(backGroundLabel);
 
 		this.add(signUpPanel);
-
+    
 		signUpButton.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -279,15 +289,15 @@ public class LoginFrame extends JFrame {
 				String pwd2 = pwdField2.getText();
 				String name = nameField.getText();
 				String mail = mailField.getText().toLowerCase();
-				
+
 				Map<String, String> map = new HashMap<>();
-				
+
 				map.put("signUpId", id);
 				map.put("signUpPwd", pwd);
 				map.put("signUpName", name);
 				map.put("signUpMail", mail);
-				
-				
+
+
 				/* 이름의 유니코드가 한글의 범위인지 확인 후 한글 범위 밖이면 nameResult에 1을 저장*/
 				int nameResult = 0;
 				for(int i = 0; i < name.length(); i++) {
@@ -296,7 +306,7 @@ public class LoginFrame extends JFrame {
 						System.out.println(nameResult);
 					}
 				}
-				
+
 
 				/* ---------------------- 가입시 입력한 값 공석일때 ------------------------*/
 				if(id.isEmpty()){
@@ -321,7 +331,7 @@ public class LoginFrame extends JFrame {
 					JOptionPane.showMessageDialog(null, "이름이 너무 길어요!", "회원가입 오류!", 1);
 				} else if (mail.getBytes().length > 30) {
 					JOptionPane.showMessageDialog(null, "메일이 너무 길어요!", "회원가입 오류!", 1);
-					
+
 					/*----------------------위에서 name을 한글인지 비교해서 한글이 아닐때 nameResult에 1을 저장 -----------------*/
 				} else if (nameResult == 1) {
 					JOptionPane.showMessageDialog(null, "이름은 한글만 입력 가능합니다!", "회원가입 오류!", 1);
@@ -336,13 +346,13 @@ public class LoginFrame extends JFrame {
 					JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인 불일치!!", "회원가입 오류!", 1);
 					// 입력한 값에 오류가 없을때 !! 회원가입이 가능! 
 				} else {
-					
+
 					/* 위 모든 조건을 만족하지 않을 시 회원가입이 가능한 정보이기 때문에 입력받은 값 map에 담아서 전달*/
-					
+
 					MemberController memberController = new MemberController();
-					
+
 					int signUpResult = memberController.signUpMember(map);
-					
+
 					if(signUpResult == 1) {
 						// 성공 출력 
 						JOptionPane.showMessageDialog(null, "가입 성공!", "회원가입 오류!", 1);
@@ -350,17 +360,17 @@ public class LoginFrame extends JFrame {
 						signUpPanel.removeAll();
 						signUpPanel.setVisible(false);
 						loginPanel();
-						
+
 					} else {
 						// 실패 출력
 						JOptionPane.showMessageDialog(null, "회원가입 실패! \n아이디 혹은 이메일 중복입니다.", "회원가입 오류!", 1);
 					}
-					
-					
+
+
 				}
 			}
 		});
-
+    
 		// 되돌아가기 버튼 클릭시 기존 패널 제거해주고 loginPanel 불러오기
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -375,7 +385,8 @@ public class LoginFrame extends JFrame {
 
 
 	}
-
+}    
+    
 	public static void playSound(String fn) {
 		try {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
@@ -393,5 +404,4 @@ public class LoginFrame extends JFrame {
 		}
 	}
 }
-
 
