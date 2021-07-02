@@ -136,7 +136,6 @@ public class LoginPanel extends JPanel {
 					
 					JPanel mainStorePanel = new MainStorePanel();
 					JPanel hac = new BuyHouseAndCookPanel();
-					JPanel st = new StartGamePanel();
 					
 
 					System.out.println(loginResult);
