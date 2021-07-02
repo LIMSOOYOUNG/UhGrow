@@ -99,7 +99,7 @@ public class SellCropPanel extends JFrame{
 	
 	
 	public JLabel imageBackGround() {
-		imageBackGround = new ImageIcon("img/store/mainPageTest.png").getImage().getScaledInstance(960, 540, 0);
+		imageBackGround = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		imageBackGroundLabel = new JLabel(new ImageIcon(imageBackGround));
 		imageBackGroundLabel.setLocation(0, 0);
 		imageBackGroundLabel.setSize(960, 565);
@@ -108,10 +108,10 @@ public class SellCropPanel extends JFrame{
 	
 	
 	public JLabel storeBackGround() {
-		storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
+		storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
 		storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(20, 20);
-		storeBackGroundLabel.setSize(860, 400);
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
 		return storeBackGroundLabel;
 	}
 	
@@ -133,10 +133,10 @@ public class SellCropPanel extends JFrame{
 	}
 	
 	public JButton sellCropsButton() {
-		sellImage = new ImageIcon("img/store/sellButton.png").getImage().getScaledInstance(200, 50, 0);
+		sellImage = new ImageIcon("img/store/sellButton1.png").getImage().getScaledInstance(232, 60, 0);
 		sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(276, 43);
-		sellButton.setSize(200, 50);	
+		sellButton.setLocation(364, 95);
+		sellButton.setSize(232, 60);	
 		
 		sellButton.addActionListener(new ActionListener() {
 			
@@ -153,10 +153,10 @@ public class SellCropPanel extends JFrame{
 	}	
 	
 	public JButton quitCropsButton() {
-		quitImage = new ImageIcon("img/store/quitButton.png").getImage().getScaledInstance(200, 50, 0);
+		quitImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(200, 50, 0);
 		quitButton = new JButton(new ImageIcon(quitImage));
-		quitButton.setLocation(505,43);
-		quitButton.setSize(200,50);
+		quitButton.setLocation(596, 95);
+		quitButton.setSize(232, 60);
 		
 		quitButton.addActionListener(new ActionListener() {
 			
