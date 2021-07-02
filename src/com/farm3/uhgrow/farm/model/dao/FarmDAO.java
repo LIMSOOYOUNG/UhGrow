@@ -1,6 +1,7 @@
 package com.farm3.uhgrow.farm.model.dao;
 
 
+import java.awt.List;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
@@ -27,12 +27,12 @@ public class FarmDAO {
 		}
 	}
 
-	public List<RetainCropDTO> selectAllSeed(Connection con) {
+	public List selectAllSeed(Connection con) {
 		
 		PreparedStatement pstmt = null;											//	쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null;													//	결과값 저장을위한 ResultSet선언
 
-		List<RetainCropDTO> seedList = null;	
+		List seedList = null;	
 		
 		String query = prop.getProperty("selectAllCategory1");
 		System.out.println(query);
@@ -40,12 +40,11 @@ public class FarmDAO {
 			pstmt = con.prepareStatement(query);
 			rset = pstmt.executeQuery();
 			
-			seedList = new ArrayList<>();
+			seedList = new List();
 			while(rset.next()) {
 				RetainCropDTO seed = new RetainCropDTO();
 				seed.setCropName(rset.getString("CROP_NAME"));
-				seed.setCropAmount(rset.getInt("CROP_AMOUNT"));
-				seedList.add(seed);
+				seedList.add(seed.getCropName());
 			}
 			System.out.println(seedList);
 		} catch (SQLException e) {

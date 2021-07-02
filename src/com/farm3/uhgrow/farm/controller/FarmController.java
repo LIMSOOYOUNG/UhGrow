@@ -1,30 +1,27 @@
 package com.farm3.uhgrow.farm.controller;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JList;
+import java.awt.List;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.service.FarmService;
 import com.farm3.uhgrow.farm.view.RetainResultView;
 
 public class FarmController {
-	private List<RetainCropDTO> retainCropList;
+	private RetainCropDTO croplist;
+	private List retainCropList;
 	private RetainResultView retainResultView = new RetainResultView();
 	private FarmService farmService = new FarmService();
 
 	public FarmController() {}
 	
-	public List<RetainCropDTO> selectSeed() {
-		retainCropList = farmService.selectAllSeed();
-		System.out.println(retainCropList);
-//		if(retainCropList!=null) {
-//			
-//		}else {
-//		}
-		return retainCropList;
+	public List selectSeed() {
+		List retaincroplist = farmService.selectAllSeed();
+		if(retainCropList!=null) {
+			
+		}else {
+		}
+		return retaincroplist;
 	}
 	
 	public void chooseSeed(int cropId) {

@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
@@ -134,12 +133,6 @@ public class LoginPanel extends JPanel {
 				} else if(!loginResult.getUserPwd().equals(loginPwd)) {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "로그인 오류!", 1);
 				} else {
-					/* 로그인 시도 후 성공시 UserDTO 전달받음 
-					 * 전달 받은 후에 만약 arthority가 관리자인 경우 관리자 프레임 불러오고, 사용자인 경우 새로하기 or 이어하기 패널로 이동*/
-					//					dispose();
-					//					new MainFrame();// 초기화면 불러오기
-//					FarmPanel farmPanel = new FarmPanel();
-//					FrameManager.changePanel(loginPanel, farmPanel);
 					
 					JPanel mainStorePanel = new MainStorePanel();
 					JPanel hac = new BuyHouseAndCookPanel();

@@ -13,20 +13,6 @@ public class FrameManager {
 		frame.repaint();
 		frame.revalidate();
 	}
-	
-	public static void addPanel(JPanel oldPanel,JPanel newPanel) {
-		frame.removeAll();
-		frame.add(newPanel);
-		frame.add(oldPanel);
-		frame.repaint();
-		frame.revalidate();
-	}
-	
-	public static void removePanel(JPanel oldPanel) {
-		frame.remove(oldPanel);
-		frame.repaint();
-		frame.revalidate();
-	}
 
 	public static void refresh() {
 		frame.repaint();
@@ -36,7 +22,6 @@ public class FrameManager {
 	public static JFrame getInstance() {
 		return frame;
 	}
-	
 }
 
 
