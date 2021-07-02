@@ -14,31 +14,27 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 
-public class LoginFrame extends JFrame {
+public class LoginFrameSmall extends JFrame {
 
-	private LoginPanel loginPanel = new LoginPanel();
-	private SignUpPanel signUpPanel = new SignUpPanel();
 
-	public LoginFrame() {
+	public LoginFrameSmall() {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
-		this.setBounds(300, 200, 960, 565);
+		this.setBounds(300, 200, 700, 565);
 		
-		this.add(loginPanel.loginPanel());
+		loginPanel();
 		
 		
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
-	
-	
 	public JPanel loginPanel() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
@@ -47,41 +43,41 @@ public class LoginFrame extends JFrame {
 		JPanel loginPanel = new JPanel();
 
 		loginPanel.setLayout(null);
-		loginPanel.setSize(960,540);
+		loginPanel.setSize(700,565);
 
 		// backGroundLabel에 배경이미지 크기 지정
-		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
+		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 565, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
-		backGroundLabel.setSize(960, 540);
+		backGroundLabel.setSize(700, 565);
 		loginPanel.setVisible(true);
 		
 		// Uh Grow! 타이틀 
 		JLabel titleLabel = new JLabel("Uh   Grow!");
 		titleLabel.setLayout(null);
-		titleLabel.setBounds(330, 50, 600, 150);
+		titleLabel.setBounds(210, 50, 400, 150);
 		titleLabel.setFont(titleFont);
 
 
 		// id, pwd 입력창
 		JLabel idLabel = new JLabel("I   D   : ");
 		idLabel.setLayout(null);
-		idLabel.setBounds(300, 200, 100, 50);
+		idLabel.setBounds(160, 200, 100, 50);
 		idLabel.setFont(font);
 
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
-		idField.setBounds(400, 200, 300, 50);
+		idField.setBounds(260, 200, 300, 50);
 		idField.setFont(font);
-
+// x축 좌로 150씩 이동시키자
 		JLabel pwdLabel = new JLabel("P  W  D  :  ");
 		pwdLabel.setLayout(null);
-		pwdLabel.setBounds(259, 270, 200, 50);
+		pwdLabel.setBounds(128, 270, 200, 50);
 		pwdLabel.setFont(font);
 
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
-		pwdField.setBounds(400, 270, 300, 50);
+		pwdField.setBounds(260, 270, 300, 50);
 		pwdField.setFont(font);
 
 
@@ -89,19 +85,20 @@ public class LoginFrame extends JFrame {
 		Image loginBackground = new ImageIcon("img/loginInterface/login.png").getImage().getScaledInstance(540, 36, 0);
 		JButton loginButton = new JButton(new ImageIcon(loginBackground));
 		loginButton.setLayout(null);
-		loginButton.setBounds(210,340,540,36);
+		loginButton.setBounds(80,340,540,36);
 
 		// 회원가입창
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
 		signUpButton.setLayout(null);
-		signUpButton.setBounds(210,385,245,35);
+		signUpButton.setBounds(80,385,245,35);
 
 		// id pwd찾기 창
 		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 40, 0);
 		JButton findIdPwdButton = new JButton(new ImageIcon(findIdPwdBackground));
 		findIdPwdButton.setLayout(null);
-		findIdPwdButton.setBounds(505,385,245,35);
+		findIdPwdButton.setBounds(375,385,245,35);
+		
 
 
 		loginPanel.add(titleLabel);
@@ -112,8 +109,6 @@ public class LoginFrame extends JFrame {
 		loginPanel.add(loginButton);
 		loginPanel.add(signUpButton);
 		loginPanel.add(findIdPwdButton);
-
-
 		loginPanel.add(backGroundLabel);
 		
 
@@ -143,6 +138,8 @@ public class LoginFrame extends JFrame {
 				} else if(!loginResult.getUserPwd().equals(loginPwd)) {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "로그인 오류!", 1);
 				} else {
+					dispose();
+					new StoreFrame();
 					/* 로그인 시도 후 성공시 UserDTO 전달받음 
 					 * 전달 받은 후에 만약 arthority가 관리자인 경우 관리자 프레임 불러오고, 사용자인 경우 새로하기 or 이어하기 패널로 이동*/
 //					dispose();
@@ -179,73 +176,74 @@ public class LoginFrame extends JFrame {
 		JPanel signUpPanel = new JPanel();
 		Font font = new Font("고딕체", Font.BOLD, 25);
 
+		JLabel idLabel = new JLabel("아 이 디  : ");
+		idLabel.setLayout(null);
+		idLabel.setBounds(200, 60, 200, 25);
+		idLabel.setFont(font);
+
+		JTextField idField = new JTextField();
+		idField.setLayout(null);
+		idField.setBounds(200, 90, 300, 25);
+		idField.setFont(font);
+
+		JLabel pwdLabel = new JLabel("비밀번호:  ");
+		pwdLabel.setLayout(null);
+		pwdLabel.setBounds(200, 120, 200, 25);
+		pwdLabel.setFont(font);
+
+		JPasswordField pwdField = new JPasswordField();
+		pwdField.setLayout(null);
+		pwdField.setBounds(200, 150, 300, 25);
+		pwdField.setFont(font);
+
+		JLabel pwdLabel2 = new JLabel("비번 재확인  :  ");
+		pwdLabel2.setLayout(null);
+		pwdLabel2.setBounds(200, 180, 200, 25);
+		pwdLabel2.setFont(font);
+
+		JPasswordField pwdField2 = new JPasswordField();
+		pwdField2.setLayout(null);
+		pwdField2.setBounds(200, 210, 300, 25);
+		pwdField2.setFont(font);
+
+		JLabel nameLabel = new JLabel("이  름 : ");
+		nameLabel.setLayout(null);
+		nameLabel.setBounds(200, 240, 200, 25);
+		nameLabel.setFont(font);
+
+		JTextField nameField = new JTextField();
+		nameField.setLayout(null);
+		nameField.setBounds(200, 270, 300, 25);
+		nameField.setFont(font);
+
+		JLabel mailLabel = new JLabel("이메일: ");
+		mailLabel.setLayout(null);
+		mailLabel.setBounds(200, 300, 200, 25);
+		mailLabel.setFont(font);
+
+		JTextField mailField = new JTextField();
+		mailField.setLayout(null);
+		mailField.setBounds(200, 330, 300, 25);
+		mailField.setFont(font);
+		
 		signUpPanel.setLayout(null);
-		signUpPanel.setSize(960,540);
-		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
+		signUpPanel.setSize(700,565);
+		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960,565, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
-		backGroundLabel.setSize(960, 540);
+		backGroundLabel.setSize(700,565);
 
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
 		signUpButton.setLayout(null);
-		signUpButton.setBounds(210,385,245,35);
+		signUpButton.setBounds(80,385,245,35);
 
 
 		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
 		JButton backButton = new JButton(new ImageIcon(backButtonBackground));
 		backButton.setLayout(null);
-		backButton.setBounds(505,385,245,35);
+		backButton.setBounds(375,385,245,35);
 
-		JLabel idLabel = new JLabel("아 이 디  : ");
-		idLabel.setLayout(null);
-		idLabel.setBounds(350, 60, 200, 25);
-		idLabel.setFont(font);
-
-		JTextField idField = new JTextField();
-		idField.setLayout(null);
-		idField.setBounds(350, 90, 300, 25);
-		idField.setFont(font);
-
-		JLabel pwdLabel = new JLabel("비밀번호:  ");
-		pwdLabel.setLayout(null);
-		pwdLabel.setBounds(350, 120, 200, 25);
-		pwdLabel.setFont(font);
-
-		JPasswordField pwdField = new JPasswordField();
-		pwdField.setLayout(null);
-		pwdField.setBounds(350, 150, 300, 25);
-		pwdField.setFont(font);
-
-		JLabel pwdLabel2 = new JLabel("비번 재확인  :  ");
-		pwdLabel2.setLayout(null);
-		pwdLabel2.setBounds(350, 180, 200, 25);
-		pwdLabel2.setFont(font);
-
-		JPasswordField pwdField2 = new JPasswordField();
-		pwdField2.setLayout(null);
-		pwdField2.setBounds(350, 210, 300, 25);
-		pwdField2.setFont(font);
-
-		JLabel nameLabel = new JLabel("이  름 : ");
-		nameLabel.setLayout(null);
-		nameLabel.setBounds(350, 240, 200, 25);
-		nameLabel.setFont(font);
-
-		JTextField nameField = new JTextField();
-		nameField.setLayout(null);
-		nameField.setBounds(350, 270, 300, 25);
-		nameField.setFont(font);
-
-		JLabel mailLabel = new JLabel("이메일: ");
-		mailLabel.setLayout(null);
-		mailLabel.setBounds(350, 300, 200, 25);
-		mailLabel.setFont(font);
-
-		JTextField mailField = new JTextField();
-		mailField.setLayout(null);
-		mailField.setBounds(350, 330, 300, 25);
-		mailField.setFont(font);
 
 		signUpPanel.add(idLabel);
 		signUpPanel.add(idField);
