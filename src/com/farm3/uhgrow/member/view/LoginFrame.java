@@ -4,9 +4,16 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,9 +32,11 @@ public class LoginFrame extends JFrame {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
+		playSound("sound/배경음악1.wav");
 		
 		this.add(new LoginPanel());
 		
+
 		
 		this.setResizable(false);
 		this.setVisible(true);
@@ -365,6 +374,23 @@ public class LoginFrame extends JFrame {
 		return signUpPanel;
 
 
+	}
+
+	public static void playSound(String fn) {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
+			Clip clip = AudioSystem.getClip();
+			clip.stop();
+			clip.open(ais);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (UnsupportedAudioFileException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

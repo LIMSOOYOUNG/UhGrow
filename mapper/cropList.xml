@@ -5,6 +5,7 @@
 	<entry key="selectAllCategory1">
 		SELECT
 			   CR.CROP_NAME
+			 , RF.CROP_AMOUNT
 		  FROM USER_INFO UF, RETAIN_CROP RF,CROP CR
 		 WHERE UF.USER_NO = RF.USER_NO
 		   AND CR.CROP_ID = RF.CROP_ID

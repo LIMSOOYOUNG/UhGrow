@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.farm.view.MainFrame;
+import com.farm3.uhgrow.farm.view.FarmPanel;
 
 public class BuyStoreFrame extends JFrame{
 	
@@ -102,7 +102,7 @@ public class BuyStoreFrame extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				buyPanel.removeAll();
 				buyPanel.setVisible(false);
-				new MainFrame();
+				new FarmPanel();
 			}
 		});
 		
