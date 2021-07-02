@@ -7,85 +7,7 @@ public class RunFrame {
 		
 		SellCropPanel sellCropPanel = new SellCropPanel();
 		
-<<<<<<< HEAD
-		JPanel storePanel = new JPanel();
-		storePanel.setLayout(null);
-		storePanel.setLocation(960, 540);
-	
-		
-		
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(960, 540, 0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
-		
-		Image buyImage = new ImageIcon("img/store/buybutton.png").getImage().getScaledInstance(200, 50, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(46, 43);
-		buyButton.setSize(200, 50);
-		
-		Image sellImage = new ImageIcon("img/store/sellButton.png").getImage().getScaledInstance(200, 50, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(276, 43);
-		sellButton.setSize(200, 50);
-		
-		Image quitImage = new ImageIcon("img/store/quitButton.png").getImage().getScaledInstance(200, 50, 0);
-		JButton quitButton = new JButton(new ImageIcon(quitImage));
-		quitButton.setLocation(505, 43);
-		quitButton.setSize(200, 50);
-		
-
-		storePanel.add(buyButton);
-		storePanel.add(sellButton);
-		storePanel.add(quitButton);
-		storePanel.add(storeBackGroundLabel);
-
-		
-		buyButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("구매창 이동");
-			}
-		});
-		
-		
-		sellButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				SellCropPanel sellList = new SellCropPanel();
-				sellList.sellCropList();
-			
-			}	
-		});
-		
-		
-		
-		quitButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				buyButton.setVisible(false);
-				sellButton.setVisible(false);
-				quitButton.setVisible(false);
-				
-				Image mainPageImage = new ImageIcon("img/store/mainPageTest.png").getImage().getScaledInstance(960, 540, 0);
-				storeBackGroundLabel.setIcon(new ImageIcon(mainPageImage));
-				
-				
-			}
-		});
-		
-		jf.add(storePanel);
-		jf.setVisible(true);
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-=======
 		sellCropPanel.sellBuyFrame();
->>>>>>> branch 'master' of https://github.com/LIMSOOYOUNG/UhGrow.git
 	}
 
 }
@@ -95,7 +17,7 @@ public class RunFrame {
 //
 //JPanel storePanel = new JPanel();
 //storePanel.setLayout(null);
-//storePanel.setLocation(960, 540);
+//storePanel.setLocation(960, 540);7
 //
 //
 //
