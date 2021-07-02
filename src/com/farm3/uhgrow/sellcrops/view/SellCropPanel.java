@@ -116,10 +116,10 @@ public class SellCropPanel extends JFrame{
 	}
 	
 	public JButton buyCropsButton() {
-		buyImage = new ImageIcon("img/store/buyButton.png").getImage().getScaledInstance(200, 50, 0);
+		buyImage = new ImageIcon("img/store/buyButton.png").getImage().getScaledInstance(232, 60, 0);
 		buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(50, 43);
-		buyButton.setSize(200, 50);
+		buyButton.setLocation(132, 95);
+		buyButton.setSize(232, 60);
 		
 		return buyButton;
 	}
