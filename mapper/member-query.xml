@@ -17,6 +17,7 @@
 		  , A.HAVING_HOUSE_YN
 		  , A.FARM_EXP
 		  , A.HOUSE_PRICE
+		  , A.CONTINUE_YN
 		  )
 		  VALUES
 		  (
@@ -25,6 +26,7 @@
 		  , ?
 		  , ?
 		  , ?
+		  , DEFAULT
 		  , DEFAULT
 		  , DEFAULT
 		  , DEFAULT
@@ -46,6 +48,7 @@
 			 , A.HAVING_HOUSE_YN
 			 , A.FARM_EXP
 			 , A.HOUSE_PRICE
+			 , A.CONTINUE_YN
 		  FROM USER_INFO A
 		 WHERE A.USER_ID = ?
 	</entry>

@@ -101,7 +101,6 @@ public class StoreFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				buyPanel.removeAll();
 				buyPanel.setVisible(false);
-				
 			}
 		});
 		
