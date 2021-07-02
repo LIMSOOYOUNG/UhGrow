@@ -1,6 +1,5 @@
 package com.farm3.uhgrow.buy.view;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -20,12 +19,12 @@ import javax.swing.JPanel;
 
 public class BuyFrameView extends JFrame {
 
-
 	public BuyFrameView() {
 
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
+		
 		playSound("sound/배경음악1.wav");
 
 		BuyListPanel();
