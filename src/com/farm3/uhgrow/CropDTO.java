@@ -6,6 +6,7 @@ public class CropDTO {
 	private String cropName;  // 농작물이름
 	private int cropPrice;    // 농작물가격
 	
+	
 	public CropDTO() {}
 
 	public CropDTO(int cropId, String cropName, int cropPrice) {
