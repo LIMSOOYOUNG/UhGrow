@@ -13,12 +13,13 @@ public class UserDTO {
 	private char havingHouseYn;				// 집보유여부
 	private int farmExp;					// 농부기본경험치 (재배시 기본 능력치)
 	private int housePrice;					// 집 가격
+	private char continueYn;				// 저장된 데이터 유무 
 	
 	
 	public UserDTO() {}
 	
 	public UserDTO(int userNo, String userId, String userPwd, String userName, String email, String authority, int coin,
-			char deleteYn, char havingHouseYn, int farmExp, int housePrice) {
+			char deleteYn, char havingHouseYn, int farmExp, int housePrice, char continueYn) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -31,84 +32,117 @@ public class UserDTO {
 		this.havingHouseYn = havingHouseYn;
 		this.farmExp = farmExp;
 		this.housePrice = housePrice;
+		this.continueYn = continueYn;
 	}
 	public UserDTO(String userId, String userPwd) {
 		this.userId = userId;
 		this.userPwd = userPwd;
 	}
-	
-	
+
 	public int getUserNo() {
 		return userNo;
 	}
+
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	public String getUserPwd() {
 		return userPwd;
 	}
+
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public String getAuthority() {
 		return authority;
 	}
+
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+
 	public int getCoin() {
 		return coin;
 	}
+
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}
+
 	public char getDeleteYn() {
 		return deleteYn;
 	}
+
 	public void setDeleteYn(char deleteYn) {
 		this.deleteYn = deleteYn;
 	}
+
 	public char getHavingHouseYn() {
 		return havingHouseYn;
 	}
+
 	public void setHavingHouseYn(char havingHouseYn) {
 		this.havingHouseYn = havingHouseYn;
 	}
+
 	public int getFarmExp() {
 		return farmExp;
 	}
+
 	public void setFarmExp(int farmExp) {
 		this.farmExp = farmExp;
 	}
+
 	public int getHousePrice() {
 		return housePrice;
 	}
+
 	public void setHousePrice(int housePrice) {
 		this.housePrice = housePrice;
 	}
+
+	public char getContinueYn() {
+		return continueYn;
+	}
+
+	public void setContinueYn(char continueYn) {
+		this.continueYn = continueYn;
+	}
+
 	@Override
 	public String toString() {
 		return "UserDTO [userNo=" + userNo + ", userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName
 				+ ", email=" + email + ", authority=" + authority + ", coin=" + coin + ", deleteYn=" + deleteYn
-				+ ", havingHouseYn=" + havingHouseYn + ", farmExp=" + farmExp + ", housePrice=" + housePrice + "]";
+				+ ", havingHouseYn=" + havingHouseYn + ", farmExp=" + farmExp + ", housePrice=" + housePrice
+				+ ", continueYn=" + continueYn + "]";
 	}
+	
+
 	
 }
