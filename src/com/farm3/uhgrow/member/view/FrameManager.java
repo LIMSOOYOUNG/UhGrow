@@ -1,9 +1,7 @@
-package com.farm3.uhgrow.member;
+package com.farm3.uhgrow.member.view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import com.farm3.uhgrow.member.view.LoginFrame;
 
 public class FrameManager {
 
@@ -20,7 +18,10 @@ public class FrameManager {
 		frame.repaint();
 		frame.revalidate();
 	}
-
+	
+	public static JFrame getInstance() {
+		return frame;
+	}
 }
 
 

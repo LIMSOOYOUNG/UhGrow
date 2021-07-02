@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.farm3.uhgrow.member.controller.MemberController;
@@ -22,15 +21,12 @@ import com.farm3.uhgrow.member.model.dto.UserDTO;
 
 public class LoginFrame extends JFrame {
 
-	private LoginPanel loginPanel = new LoginPanel();
-	private SignUpPanel signUpPanel = new SignUpPanel();
-
 	public LoginFrame() {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
 		
-		this.add(loginPanel.loginPanel());
+		this.add(new LoginPanel());
 		
 		
 		this.setResizable(false);
