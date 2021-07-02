@@ -2,7 +2,7 @@ package com.farm3.uhgrow.member.controller;
 
 import java.util.Map;
 
-import com.farm3.uhgrow.farm.view.MainFrame;
+import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 import com.farm3.uhgrow.member.service.MemberService;

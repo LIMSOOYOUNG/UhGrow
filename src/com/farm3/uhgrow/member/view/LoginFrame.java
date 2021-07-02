@@ -1,3 +1,42 @@
+
+package com.farm3.uhgrow.member.view;
+
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import com.farm3.uhgrow.member.controller.MemberController;
+import com.farm3.uhgrow.member.model.dto.UserDTO;
+
+	
+	
+
+
+
+				
+
+				
+		
+
 package com.farm3.uhgrow.member.view;
 
 import javax.swing.JFrame;
@@ -8,21 +47,18 @@ public class LoginFrame extends JFrame {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
-
+		playSound("sound/배경음악1.wav");
+		
 		this.add(new LoginPanel());
+		
 
-
+		
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
   
-
-	public JPanel loginPanel() {
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-
 		// 패널 생성 
 		JPanel loginPanel = new JPanel();
 
@@ -93,7 +129,6 @@ public class LoginFrame extends JFrame {
 		loginPanel.add(signUpButton);
 		loginPanel.add(findIdPwdButton);
 
-
 		loginPanel.add(backGroundLabel);
 
 
@@ -125,8 +160,8 @@ public class LoginFrame extends JFrame {
 				} else {
 					/* 로그인 시도 후 성공시 UserDTO 전달받음 
 					 * 전달 받은 후에 만약 arthority가 관리자인 경우 관리자 프레임 불러오고, 사용자인 경우 새로하기 or 이어하기 패널로 이동*/
-					//					dispose();
-					//					new MainFrame();// 초기화면 불러오기
+//					dispose();
+//					new MainFrame();// 초기화면 불러오기
 				}
 
 			}
@@ -244,7 +279,7 @@ public class LoginFrame extends JFrame {
 		signUpPanel.add(backGroundLabel);
 
 		this.add(signUpPanel);
-
+    
 		signUpButton.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -335,7 +370,7 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
-
+    
 		// 되돌아가기 버튼 클릭시 기존 패널 제거해주고 loginPanel 불러오기
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -350,6 +385,23 @@ public class LoginFrame extends JFrame {
 
 
 	}
+}    
+    
+	public static void playSound(String fn) {
+		try {
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(fn));
+			Clip clip = AudioSystem.getClip();
+			clip.stop();
+			clip.open(ais);
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.start();
+		} catch (UnsupportedAudioFileException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
-
 

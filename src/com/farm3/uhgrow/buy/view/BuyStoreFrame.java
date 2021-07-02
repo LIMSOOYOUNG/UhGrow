@@ -106,6 +106,7 @@ public class BuyStoreFrame extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+
 				JPanel blp = new BuyListPanel();
 
 				FrameManager.changePanel(buyPanel, blp);
