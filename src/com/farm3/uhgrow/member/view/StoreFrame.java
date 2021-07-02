@@ -18,14 +18,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.farm.view.MainFrame;
-
 public class StoreFrame extends JFrame {
 	public StoreFrame() { 
 
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
+		
+		playSound("sound/배경음악1.wav");
 		
 		buyPanel();
 		
@@ -101,7 +101,7 @@ public class StoreFrame extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				buyPanel.removeAll();
 				buyPanel.setVisible(false);
-				new MainFrame();
+				
 			}
 		});
 		
@@ -110,6 +110,148 @@ public class StoreFrame extends JFrame {
 		return buyPanel;
 		
 	}
+	
+	public void buySeedList() {
+	
+			Font font = new Font("고딕체", Font.BOLD, 25);
+	
+			JPanel storeBackGroundPanel = new JPanel();
+			JPanel storeButtonPanel = new JPanel();
+			JPanel storeBuyTextPanel = new JPanel();
+			JPanel tomatoSeedPanel = new JPanel();
+			JPanel cornSeedPanel = new JPanel();
+			JPanel garlicSeedPanel = new JPanel();
+			JPanel pumpkinSeedPanel = new JPanel();
+	
+			storeBackGroundPanel.setBounds(50, 40, 860, 400);
+			storeButtonPanel.setLayout(null);
+			storeButtonPanel.setBounds(100, 100, 590, 40);
+			storeButtonPanel.setVisible(true);
+			storeBuyTextPanel.setBounds(350, 150, 100, 40);
+			tomatoSeedPanel.setVisible(true);
+			tomatoSeedPanel.setBounds(100, 200, 100, 40);
+			cornSeedPanel.setVisible(true);
+			cornSeedPanel.setBounds(100, 250, 100, 40);
+			garlicSeedPanel.setVisible(true);
+			garlicSeedPanel.setBounds(100, 300, 100, 40);
+			pumpkinSeedPanel.setVisible(true);
+			pumpkinSeedPanel.setBounds(100, 350, 100, 40);
+	
+			Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
+			JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+			storeBackGroundLabel.setLocation(0, 0);
+			storeBackGroundLabel.setSize(960, 540);
+	
+			Image buyImage = new ImageIcon("img/store/buybutton.png").getImage().getScaledInstance(200, 50, 0);
+			JLabel buyButtonLabel = new JLabel(new ImageIcon(buyImage));
+			buyButtonLabel.setLocation(1, 1);
+			buyButtonLabel.setSize(200, 50);
+	
+			Image sellImage = new ImageIcon("img/store/sellButton.png").getImage().getScaledInstance(200, 50, 0);
+			JLabel sellButtonLabel = new JLabel(new ImageIcon(sellImage));
+			sellButtonLabel.setLocation(200, 1);
+			sellButtonLabel.setSize(200, 50);
+	
+			Image quitImage = new ImageIcon("img/store/quitButton.png").getImage().getScaledInstance(200, 50, 0);
+			JButton quitButton = new JButton(new ImageIcon(quitImage));
+			quitButton.setLocation(395, 1);
+			quitButton.setSize(200, 50);
+	
+			JLabel buyLabel = new JLabel("<씨앗 구매>");
+			buyLabel.setLayout(null);
+			buyLabel.setBounds(1, 1, 25, 25);
+			buyLabel.setFont(font);
+	
+			JButton tomatoButton = new JButton("토마토");
+			tomatoButton.setLocation(100, 500);
+			tomatoButton.setSize(300, 50);
+	
+			JButton cornButton = new JButton("옥수수");
+			cornButton.setLocation(100, 500);
+			cornButton.setSize(300, 50);
+	
+			JButton garlicButton = new JButton("마늘");
+			garlicButton.setLocation(100, 500);
+			garlicButton.setSize(300, 50);
+	
+			JButton pumpkinButton = new JButton("호박");
+			pumpkinButton.setLocation(100, 500);
+			pumpkinButton.setSize(300, 50);
+	
+			storeButtonPanel.add(buyButtonLabel);
+			storeButtonPanel.add(sellButtonLabel);
+			storeButtonPanel.add(quitButton);
+			tomatoSeedPanel.add(tomatoButton);
+			cornSeedPanel.add(cornButton);
+			garlicSeedPanel.add(garlicButton);
+			pumpkinSeedPanel.add(pumpkinButton);
+	
+			storeBuyTextPanel.add(buyLabel);
+	
+			storeBackGroundPanel.add(storeBackGroundLabel);
+	
+			this.add(pumpkinSeedPanel);
+			this.add(garlicSeedPanel);
+			this.add(cornSeedPanel);
+			this.add(tomatoSeedPanel);
+			this.add(storeBuyTextPanel);
+			this.add(storeButtonPanel);
+			this.add(storeBackGroundPanel);
+	
+			quitButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					pumpkinSeedPanel.setVisible(false);
+					pumpkinSeedPanel.removeAll();
+					garlicSeedPanel.setVisible(false);
+					garlicSeedPanel.removeAll();
+					cornSeedPanel.setVisible(false);
+					cornSeedPanel.removeAll();
+					tomatoSeedPanel.setVisible(false);
+					tomatoSeedPanel.removeAll();
+					storeBuyTextPanel.setVisible(false);
+					storeBuyTextPanel.removeAll();
+					storeButtonPanel.setVisible(false);
+					storeButtonPanel.removeAll();
+					storeBackGroundPanel.setVisible(false);
+					storeBackGroundPanel.removeAll();
+				}
+	
+			});
+			
+			tomatoButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+//					buySeedCount();
+				}
+	
+			});
+			
+			cornButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+//					buySeedCount();
+				}
+	
+			});
+			
+			garlicButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+//					buySeedCount();
+				}
+	
+			});
+			
+			pumpkinButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+//					buySeedCount();
+				}
+	
+			});
+	
+		}
 	
 	
 	public static void playSound(String fn) {
