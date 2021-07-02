@@ -28,7 +28,18 @@ public class FrameManager {
 		frame.revalidate();
 	}
 	
-	public static void refresh() {
+	public static void add(JPanel newPanel) {
+		frame.add(newPanel);
+		frame.repaint();
+		frame.revalidate();
+	}
+	public static void remove(JPanel oldPanel) {
+		frame.remove(oldPanel);
+		frame.repaint();
+		frame.revalidate();
+	}
+	
+	public static void refresh() { 
 		frame.repaint();
 		frame.revalidate();
 	}

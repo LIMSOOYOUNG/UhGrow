@@ -67,7 +67,7 @@ public class MainFrame extends JFrame {
 		
 		plantSeedPanel.setLayout(null);
 		plantSeedPanel.setBounds(110, 400, 758, 120);
-		plantSeedPanel.setVisible(isTrue);
+		plantSeedPanel.setVisible(true);
 		plantSeedPanel.add(askText());
 		plantSeedPanel.add(conversation());
 
@@ -81,7 +81,6 @@ public class MainFrame extends JFrame {
 		backgroundPanel.setSize(960, 540);
 		backgroundPanel.add(storeNpc());
 		backgroundPanel.add(mainNpc());
-		backgroundPanel.add(PlantSeedPanel());
 		for (int i = 0; i < 10; i++) {
 			backgroundPanel.add(fieldButton[i]);
 		}
@@ -91,8 +90,8 @@ public class MainFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
-				isTrue = false;
-				plantSeedPanel.setVisible(isTrue);
+//				isTrue = false;
+//				plantSeedPanel.setVisible(isTrue);
 			}
 		});
 		return backgroundPanel;
@@ -126,10 +125,7 @@ public class MainFrame extends JFrame {
 						
 		
 					}else {
-						isTrue = true;
-						plantSeedPanel.setVisible(isTrue);
 						plantSeedPanel.add(seedList(seedlist));
-						seedList(seedlist).setVisible(true);
 					}
 					
 					
