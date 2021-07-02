@@ -12,42 +12,26 @@ import javax.swing.JPanel;
 
 public class SellCropPanel extends JFrame{
 	
-	public JPanel sellCropList = new JPanel();
-	public JPanel mainImagePanel = new JPanel();
-	public JPanel storePanel = new JPanel();
+	JPanel mainPanel = new JPanel();
 	
-	public JLabel storeBackGroundLabel;
-	public JLabel imageBackGroundLabel;
-	public JLabel sellList;
+	JPanel sellListPanel = new JPanel();
+	JPanel mainImagePanel = new JPanel();
+	JPanel storePanel = new JPanel();
+	JLabel storeBackGroundLabel;
+	JLabel imageBackGroundLabel;
+	JButton buyButton;
+	JButton sellButton;
+	JButton quitButton;
 	
-	public JButton buyButton;
-	public JButton sellButton;
-	public JButton quitButton;
+	JButton sellSeedButton;
+	JButton sellCropButton;
+	JButton sellToolBUtton;
+	JButton sellFoodButton;
 	
-	public JButton sellSeedButton;
-	public JButton sellTomatoSeedButton;
-	public JButton sellCornSeedButton;
-	public JButton sellGalicSeedButton;
-	public JButton sellPumpkinButton;
-	
-	public JButton sellCropButton;
-	public JButton tomatoButton;
-	public JButton cornButton;
-	public JButton galicButton;
-	public JButton pumpkinButton; 
-	 
-	public JButton sellToolButton;
-	public JButton sellPickaxeButton;
-	public JButton sellShovelButton;
-	public JButton sellHoeButton;
-	public JButton sellWateringCanButton;
-	
-	public JButton sellFoodButton;
-	public JButton sellTomatoPizzaButton;
-	public JButton sellCornTortillaButton;
-	public JButton sellGarlicJuiceButton;
-	public JButton sellPumpkinSoup;
-	
+	JButton tomatoButton;
+	JButton cornButton;
+	JButton galicButton;
+	JButton pumpkinButton;
 	Image imageBackGround;
 	Image storeBackGround;
 	Image buyImage;
@@ -55,36 +39,53 @@ public class SellCropPanel extends JFrame{
 	Image quitImage;
 	Image mainPageImage;
 	
-	Image sellSeedImage;
-	Image sellCropImage;
-	Image sellToolImage;
-	
-	
-	
 	
 	public void sellBuyFrame() {
 		
 		
 		this.setBounds(300, 200 ,960, 565);
 		this.setLayout(null);
-		this.add(sellBuyPanel());
-		this.add(mainBackGround());
-//		this.add(sellCropList());
 		
+		
+		this.add(mainPanel());
+		this.add(sellBuyPanel());
+//		this.add(SellPanel());
+//		this.add(mainBackGround());
+	
+//		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 	}
 	
-	public JPanel sellBuyPanel() {
-		storePanel.add(buyButton());
-		storePanel.add(sellButton());
-		storePanel.add(quitButton());
+	public JPanel mainPanel() {
 		
-		storePanel.setLayout(null);
-		storePanel.setBounds(50, 40, 860, 400);
-		return storePanel;
+		mainPanel.add(buyCropsButton());
+		mainPanel.add(sellCropsButton());
+		mainPanel.add(quitCropsButton());
+		mainPanel.add(storeBackGround());
+		mainPanel.add(imageBackGround());
+		
+		mainPanel.setLayout(null);
+		mainPanel.setBounds(0, 0 ,960, 565);
+		
+		
+		return mainPanel;
+		
+	}
+	
+	
+	public JPanel sellBuyPanel() {
+		
+		sellListPanel.add(sellCropsButton());
+		sellListPanel.add(storeBackGround());
+		sellListPanel.add(imageBackGround());
+		
+		sellListPanel.setLayout(null);
+		sellListPanel.setBounds(0, 0, 960, 565);
+	
+		return sellListPanel;
 	}
 	
 	public JPanel mainBackGround() {
@@ -101,7 +102,7 @@ public class SellCropPanel extends JFrame{
 		imageBackGround = new ImageIcon("img/store/mainPageTest.png").getImage().getScaledInstance(960, 540, 0);
 		imageBackGroundLabel = new JLabel(new ImageIcon(imageBackGround));
 		imageBackGroundLabel.setLocation(0, 0);
-		imageBackGroundLabel.setSize(960, 540);
+		imageBackGroundLabel.setSize(960, 565);
 		return imageBackGroundLabel;
 	}
 	
@@ -109,30 +110,12 @@ public class SellCropPanel extends JFrame{
 	public JLabel storeBackGround() {
 		storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
 		storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
+		storeBackGroundLabel.setLocation(20, 20);
 		storeBackGroundLabel.setSize(860, 400);
 		return storeBackGroundLabel;
 	}
 	
-	/*씨앗판매 버튼*/
-	public JButton sellSeedButton() {
-		sellSeedImage = new ImageIcon("img/store/sellSeedImage.png").getImage().getScaledInstance(200, 200, 0);
-		sellSeedButton = new JButton(new ImageIcon(sellSeedImage));
-	
-		
-		return sellSeedButton;
-	}
-	
-	/*작물 판매 버튼*/
-	public JButton sellCropButton() {
-		sellCropImage = new ImageIcon("img/store/sellCropImage.png").getImage().getScaledInstance(200, 200, 0);
-		sellCropButton = new JButton(new ImageIcon(sellCropImage));
-		
-		return sellCropButton;
-	}
-	
-	/*구매하기 버튼*/
-	public JButton buyButton() {
+	public JButton buyCropsButton() {
 		buyImage = new ImageIcon("img/store/buyButton.png").getImage().getScaledInstance(200, 50, 0);
 		buyButton = new JButton(new ImageIcon(buyImage));
 		buyButton.setLocation(50, 43);
@@ -141,36 +124,35 @@ public class SellCropPanel extends JFrame{
 		return buyButton;
 	}
 	
-	/*판매하기 버튼*/
-	public JButton sellButton() {
+	public JButton sellSeedButton() {
+		sellSeedButton = new JButton("씨앗");
+		sellSeedButton.setLocation(0, 0);
+		sellSeedButton.setSize(20, 20);
+		
+		return sellSeedButton;
+	}
+	
+	public JButton sellCropsButton() {
 		sellImage = new ImageIcon("img/store/sellButton.png").getImage().getScaledInstance(200, 50, 0);
 		sellButton = new JButton(new ImageIcon(sellImage));
 		sellButton.setLocation(276, 43);
-		sellButton.setSize(200, 50);
+		sellButton.setSize(200, 50);	
 		
 		sellButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				sellCropButton = new JButton();
-//				sellSeedButton = new JButton();
-//				
-//				sellCropButton.setLocation(292, 128);
-//				sellCropButton.setSize(13,13);
-//				
-//				sellSeedButton.setLocation(295, 222);
-//				sellSeedButton.setSize(13,13);
-				
+				mainPanel.setVisible(false);
+				sellListPanel.setVisible(true);
 				
 			}
 		});
 		
 		return sellButton;
-	}
+	}	
 	
-	/*나가기 버튼*/
-	public JButton quitButton() {
+	public JButton quitCropsButton() {
 		quitImage = new ImageIcon("img/store/quitButton.png").getImage().getScaledInstance(200, 50, 0);
 		quitButton = new JButton(new ImageIcon(quitImage));
 		quitButton.setLocation(505,43);
@@ -184,6 +166,7 @@ public class SellCropPanel extends JFrame{
 				buyButton.setVisible(false);
 				sellButton.setVisible(false);
 				quitButton.setVisible(false);
+				storeBackGroundLabel.setVisible(false);
 				
 				mainPageImage = new ImageIcon("img/store/mainPageTest.png").getImage().getScaledInstance(960, 540, 0);
 				imageBackGroundLabel.setIcon(new ImageIcon(mainPageImage));
@@ -194,21 +177,68 @@ public class SellCropPanel extends JFrame{
 		return quitButton;
 		
 	}
+		
+//		public void actionListener( ) {
+//			sellButton.addMouseListener(new MouseAdapter() {
+//				@Override
+//				public void mouseClicked(MouseEvent e) {
+//					
+//					removeAll();
+//				}
+//				
+//				
+//			});
+//		}
 	
-	
-	
-	
+		
 
-//	public JPanel sellCropList() {
-//		
-//		sellCropList.setLayout(null);
-//		sellCropList.setSize(960, 540);
-//		sellCropList.add(sellButton());
-//		
-////		I
-//		return sellCropList;
-//		
-//	}
+		
+		
+//		public void actionListener() {
+//		      btnBack.addMouseListener(new MouseAdapter() {
+//		         @Override
+//		         public void mouseClicked(MouseEvent e) {
+//
+//		            removeAll();
+//		         }
+//		      });
+//		      
+//		      btnInsertUser.addMouseListener(new MouseAdapter() {
+//		         @Override
+//		         public void mouseClicked(MouseEvent e) {
+//		            // TODO Auto-generated method stub
+//		            removeAll();
+//		            
+////		            sp.signUpPanel;
+//		            //this.removeAll();
+//		            //this.setVisible(false);
+//		            //sp.signUpPanel();
+//
+//		         }
+//		      });
+//		   }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 //	public JPanel sellBuyPanel() {
