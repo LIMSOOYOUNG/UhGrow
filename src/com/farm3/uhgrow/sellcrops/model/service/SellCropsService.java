@@ -19,16 +19,28 @@ public class SellCropsService {
 		this.sellCropsDAO = new SellCropsDAO();
 	}
 	
+//	public List<CropDTO> userCropList() {
+//	
+//		Connection con = getConnection();
+//		
+//		List<CropDTO> userCropList = sellCropsDAO.userCropList(con);
+//		
+//		close(con);
+//		
+//		return userCropList;
+//	}
+
+
 	public List<CropDTO> userCropList() {
-	
+		
 		Connection con = getConnection();
 		
 		List<CropDTO> userCropList = sellCropsDAO.userCropList(con);
 		
-		close(con);
-		
 		return userCropList;
 	}
+
+	
 
 
 }

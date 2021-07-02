@@ -2,6 +2,8 @@ package com.farm3.uhgrow.management.view;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -13,24 +15,31 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.farm3.uhgrow.management.controller.GameDataController;
 import com.farm3.uhgrow.management.controller.UserDataController;
+import com.farm3.uhgrow.management.model.dto.SelectCropPriceDTO;
 import com.farm3.uhgrow.management.model.dto.SelectUserDTO;
 
 public class MngMoniterView extends JFrame {
-	UserDataController userDataController = new UserDataController();
-	GameDataController gameDataController = new GameDataController();
+	UserDataController userDataController;
+	GameDataController gameDataController;
 	
+	private int i;
+
 	public MngMoniterView() {
+		
+		this.gameDataController = new GameDataController();
+		this.userDataController = new UserDataController();
 
 		this.setBounds(300, 200, 960, 565);
 		this.setTitle("UhGrow");
@@ -176,13 +185,13 @@ public class MngMoniterView extends JFrame {
 		sauPwdLabel.setLocation(408, 36);
 		sauPwdLabel.setSize(58, 20);
 		
+		Font f1 = new Font("Times", Font.BOLD, 24);
 		
-		JTextArea jt = new JTextArea();
-		Font f1 = new Font("Times", Font.BOLD, 30);
-		jt.setOpaque(false);
-		jt.setLocation(250, 90);
-		jt.setSize(240, 200);
-		jt.setFont(f1);
+		DefaultListModel model = new DefaultListModel(); // 데이터를 담을 빈 모델 선언
+		JList userAllList = new JList(model); // 데이터가 담긴 JLsit 선언과 동시에 할당 및 대입
+		userAllList.setLocation(230, 90);
+		userAllList.setSize(180, 200);
+		userAllList.setFont(f1);
 		
 		Image backToMng = new ImageIcon("img/mngInterface/backButton.png").getImage().getScaledInstance(200, 50, 0);
 		JButton backToMngButton = new JButton(new ImageIcon(backToMng));
@@ -194,7 +203,7 @@ public class MngMoniterView extends JFrame {
 		selectAndUpdateMainPanel.add(sauNoLabel);
 		selectAndUpdateMainPanel.add(sauIdLabel);
 		selectAndUpdateMainPanel.add(sauPwdLabel);
-		selectAndUpdateMainPanel.add(jt);
+		selectAndUpdateMainPanel.add(userAllList);
 		selectAndUpdateMainPanel.add(backToMngButton);
 		selectAndUpdateMainPanel.add(selectAndUpdateMainLabel);
 		
@@ -241,12 +250,12 @@ public class MngMoniterView extends JFrame {
 		JLabel deletePwdLabel = new JLabel(new ImageIcon(deletePwd));
 		deletePwdLabel.setLocation(408, 36);
 		deletePwdLabel.setSize(58, 20);
-		
-		JTextArea deleteList = new JTextArea();
-		deleteList.setOpaque(false);
-		deleteList.setLocation(250, 90);
-		deleteList.setSize(240, 200);
-		deleteList.setFont(f1);
+				
+		DefaultListModel deleteModel = new DefaultListModel();
+		JList userDeleteList = new JList(deleteModel);
+		userDeleteList.setLocation(230, 90);
+		userDeleteList.setSize(180, 200);
+		userDeleteList.setFont(f1);
 		
 		
 		deleteMainPanel.add(focusInDeleteLabel);
@@ -254,7 +263,7 @@ public class MngMoniterView extends JFrame {
 		deleteMainPanel.add(backToMngFromDeleteButton);	
 		deleteMainPanel.add(deleteNoLabel);	
 		deleteMainPanel.add(deleteIdLabel);
-		deleteMainPanel.add(deleteList);
+		deleteMainPanel.add(userDeleteList);
 		deleteMainPanel.add(deletePwdLabel);	
 		deleteMainPanel.add(deleteMainLabel);
 		
@@ -301,19 +310,19 @@ public class MngMoniterView extends JFrame {
 		JLabel recoverPwdLabel = new JLabel(new ImageIcon(recoverPwd));
 		recoverPwdLabel.setLocation(408, 36);
 		recoverPwdLabel.setSize(58, 20);
-		
-		JTextArea recoverList = new JTextArea();
-		recoverList.setOpaque(false);
-		recoverList.setLocation(250, 90);
-		recoverList.setSize(240, 200);
-		recoverList.setFont(f1);
+			
+		DefaultListModel recoverModel = new DefaultListModel();
+		JList userRecoverList = new JList(recoverModel);
+		userRecoverList.setLocation(230, 90);
+		userRecoverList.setSize(180, 200);
+		userRecoverList.setFont(f1);
 		
 		recoverMainPanel.add(focusInRecoverLabel);
 		recoverMainPanel.add(recoverTextLabel);
 		recoverMainPanel.add(backToMngFromRecoverButton);
 		recoverMainPanel.add(recoverNoLabel);
 		recoverMainPanel.add(recoverIdLabel);
-		recoverMainPanel.add(recoverList);
+		recoverMainPanel.add(userRecoverList);
 		recoverMainPanel.add(recoverPwdLabel);
 		recoverMainPanel.add(recoverMainLabel);
 		
@@ -434,6 +443,75 @@ public class MngMoniterView extends JFrame {
 		houseMainPanel.add(housePrice);
 		houseMainPanel.add(houseMngMainLabel);
 		
+//		-------------------------------------------------------------------------------------------------------------------------------------
+		
+		/* 농작물 가격 수정 */
+		
+		JPanel cropMainPanel = new JPanel();
+		cropMainPanel.setLayout(null);
+		cropMainPanel.setBounds(230, 90, 500, 420);
+		cropMainPanel.setVisible(false);
+		
+		Image cropMngMain = new ImageIcon("img/mngInterface/userMngMain.png").getImage().getScaledInstance(500, 450, 0);
+		JLabel cropMngMainLabel = new JLabel(new ImageIcon(cropMngMain));
+		cropMngMainLabel.setLocation(0, 0);
+		cropMngMainLabel.setSize(500, 450);
+		
+		Image mainGameMngC = new ImageIcon("img/mngInterface/gameMngButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton gameMngMainCButton = new JButton(new ImageIcon(mainGameMngC));
+		gameMngMainCButton.setLocation(33, 20);
+		gameMngMainCButton.setSize(200, 50);
+
+		Image backToMainC = new ImageIcon("img/mngInterface/backButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton backToMainCButton = new JButton(new ImageIcon(backToMainC));
+		backToMainCButton.setLocation(266, 20);
+		backToMainCButton.setSize(200, 50);
+		
+		Image modifyScsC = new ImageIcon("img/mngInterface/modifyScs.png").getImage().getScaledInstance(215, 54, 0);
+		JButton modifyScsCButton = new JButton(new ImageIcon(modifyScsC));
+		modifyScsCButton.setLocation(150, 330);
+		modifyScsCButton.setSize(215, 54);
+		
+		Image tomato = new ImageIcon("img/mngInterface/tomato.png").getImage().getScaledInstance(75, 27, 0);
+		JLabel tomatoLabel = new JLabel(new ImageIcon(tomato));
+		tomatoLabel.setLocation(33, 120);
+		tomatoLabel.setSize(75, 27);
+		
+		Image corn = new ImageIcon("img/mngInterface/corn.png").getImage().getScaledInstance(75, 27, 0);
+		JLabel cornLabel = new JLabel(new ImageIcon(corn));
+		cornLabel.setLocation(33, 160);
+		cornLabel.setSize(75, 27);
+		
+		Image garlic = new ImageIcon("img/mngInterface/garlic.png").getImage().getScaledInstance(49, 27, 0);
+		JLabel garlicLabel = new JLabel(new ImageIcon(garlic));
+		garlicLabel.setLocation(33, 200);
+		garlicLabel.setSize(49, 27);
+		
+		Image pumpkin = new ImageIcon("img/mngInterface/pumpkin.png").getImage().getScaledInstance(50, 27, 0);
+		JLabel pumpkinLabel = new JLabel(new ImageIcon(pumpkin));
+		pumpkinLabel.setLocation(33, 240);
+		pumpkinLabel.setSize(50, 27);
+		
+		Font f3 = new Font("times", Font.BOLD, 27);
+		DefaultListModel cropPriceModel = new DefaultListModel();
+		JList cropPriceList = new JList(cropPriceModel);
+		cropPriceList.setLocation(230, 120);
+		cropPriceList.setSize(180, 150);
+		cropPriceList.setFont(f3);
+		
+		
+		
+		
+		
+		cropMainPanel.add(cropPriceList);
+		cropMainPanel.add(modifyScsCButton);
+		cropMainPanel.add(backToMainCButton);
+		cropMainPanel.add(gameMngMainCButton);
+		cropMainPanel.add(pumpkinLabel);
+		cropMainPanel.add(garlicLabel);
+		cropMainPanel.add(cornLabel);
+		cropMainPanel.add(tomatoLabel);
+		cropMainPanel.add(cropMngMainLabel);
 		
 		
 		
@@ -443,13 +521,7 @@ public class MngMoniterView extends JFrame {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
+		this.add(cropMainPanel);
 		this.add(houseMainPanel);
 		this.add(gameMngMainPanel);
 		this.add(recoverMainPanel);
@@ -468,7 +540,7 @@ public class MngMoniterView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mngModePanel.setVisible(false);
-				userMngMainPanel.setVisible(true);		
+				userMngMainPanel.setVisible(true);	// 패널 교체
 			}
 
 		});
@@ -477,13 +549,41 @@ public class MngMoniterView extends JFrame {
 		selectAndUpdateButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<SelectUserDTO> list = userDataController.selectAllUserData();
-
-				for(int i = 0; i < list.size() ; i++) {
-					jt.append((i + 1) + "   " + list.get(i).getUserId() + "    " + "****" + "\n");
-				}
 				userMngMainPanel.setVisible(false);
-				selectAndUpdateMainPanel.setVisible(true);				
+				selectAndUpdateMainPanel.setVisible(true); // 패널 교체
+				
+				List<SelectUserDTO> list = userDataController.selectAllUserData(); // 모든 유저 정보 조회 메소드 호출 후 리턴값을 리스트에 대입
+				JButton[] selectButtons = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 100; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				for(i = 0; i < list.size() ; i++) {
+					model.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****"); // 빈 모델 리스트에 값 대입
+					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButtons[i].setLocation(x, y);
+					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
+					selectAndUpdateMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
+					
+					selectButtons[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
+							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
+							int result = userDataController.modifyUserData(list.get(index).getUserId(), inputNewId, inputNewPwd); 
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
+				}
 			}
 		});
 		
@@ -511,10 +611,10 @@ public class MngMoniterView extends JFrame {
 		
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<SelectUserDTO> list = userDataController.selectDeleteUserData();
+				List<SelectUserDTO> list = userDataController.selectDeleteUserData(); // 삭제할 정보 조회 메소드 호출 후 리턴값 리스트에 대입
 
 				for(int i = 0; i < list.size() ; i++) {
-					deleteList.append((i + 1) + "   " + list.get(i).getUserId() + "    " + "****" + "\n");
+					deleteModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****");
 				}
 				userMngMainPanel.setVisible(false);
 				deleteMainPanel.setVisible(true);
@@ -537,7 +637,7 @@ public class MngMoniterView extends JFrame {
 				List<SelectUserDTO> list = userDataController.selectRecoverUserData();
 
 				for(int i = 0; i < list.size() ; i++) {
-					recoverList.append((i + 1) + "   " + list.get(i).getUserId() + "    " + "****" + "\n");
+					recoverModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****");
 				}
 				userMngMainPanel.setVisible(false);
 				recoverMainPanel.setVisible(true);
@@ -577,10 +677,53 @@ public class MngMoniterView extends JFrame {
 				System.out.println("111");
 			}
 		});
+		
+		backToMainCButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cropMainPanel.setVisible(false);
+				gameMngMainPanel.setVisible(true);
+			}
+		});
+		
 		cropPriceUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("111");
+				gameMngMainPanel.setVisible(false);
+				cropMainPanel.setVisible(true);
+				
+				List<SelectCropPriceDTO> list = gameDataController.selectCropPriceData(); // 모든 농작물의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
+				JButton[] selectButton = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 130; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				for(i = 0; i < list.size() ; i++) {
+					cropPriceModel.addElement(list.get(i).getCropPrice()); // 빈 모델 리스트에 값 대입
+					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButton[i].setLocation(x, y);
+					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
+					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
+					cropMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
+					
+					selectButton[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							int inputNewCropPrice = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
+							int result = gameDataController.modifyCropPrice(index, inputNewCropPrice);
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "가격이 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
+				}
+				
 			}
 		});
 		housePriceUdtBtn.addMouseListener(new MouseAdapter() {
@@ -602,9 +745,9 @@ public class MngMoniterView extends JFrame {
 		modifyScsHButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int intHPrice = Integer.parseInt(inputHPrice.getText());
-				gameDataController.modifyHousePrice(intHPrice);
-				JOptionPane.showMessageDialog(null, "집 가격이 수정되었습니다!", "닫기", 1);
+				int intHPrice = Integer.parseInt(inputHPrice.getText()); // 입력받은  String 값을 Integer 형변환 후 int 타입의 변수에 대입
+				gameDataController.modifyHousePrice(intHPrice); // 집 가격 수정 메소드 호출
+				JOptionPane.showMessageDialog(null, "집 가격이 수정되었습니다!", "닫기", 1); // 수정에 성공해서 팝업창 출력
 				houseMainPanel.setVisible(false);
 				gameMngMainPanel.setVisible(true);
 			}

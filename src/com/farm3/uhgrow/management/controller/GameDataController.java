@@ -1,34 +1,32 @@
 package com.farm3.uhgrow.management.controller;
 
-import com.farm3.uhgrow.management.model.dto.CropPriceDTO;
+import java.util.List;
+
+import com.farm3.uhgrow.management.model.dto.ModifyCropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.SelectCropPriceDTO;
 import com.farm3.uhgrow.management.model.service.GameDataService;
 import com.farm3.uhgrow.management.view.MngResultView;
 
 public class GameDataController {
 	
-	private GameDataService gameDataService;
+	
 
 	public GameDataController() {
 		this.gameDataService = new GameDataService();
 	}
 	
+	private GameDataService gameDataService = new GameDataService();
+	
 
-	public void modifyCropPrice(int inputTomatoPrice, int inputCornPrice, int inputGarlicPrice,
-			int inputPumpkinPrice) {
+	public int modifyCropPrice(int i, int inputCornPrice) {
 		
-		CropPriceDTO cropPrice = new CropPriceDTO();
-		cropPrice.setTomatoPrice(inputTomatoPrice);
-		cropPrice.setCornPrice(inputCornPrice);
-		cropPrice.setGarlicPrice(inputGarlicPrice);
-		cropPrice.setPumpkinPirce(inputPumpkinPrice);
-		int result = gameDataService.modifyCropPrice(cropPrice);
+		ModifyCropPriceDTO modifyPriceList = new ModifyCropPriceDTO();
+		modifyPriceList.setCropId(i);
+		modifyPriceList.setNewCropPrice(inputCornPrice);
 		
-		if(result > 3) {
-			MngResultView.mngResult("modifySuccess");
-		} else {
-			MngResultView.mngResult("modifyFailed");
-		}
+		int result = gameDataService.modifyCropPrice(modifyPriceList);
 		
+		return result;
 	}
 
 
@@ -40,6 +38,14 @@ public class GameDataController {
 			MngResultView.mngResult("modifySuccess");
 		}
 		
+	}
+
+	
+
+
+	public List<SelectCropPriceDTO> selectCropPriceData() {
+		List<SelectCropPriceDTO> userList = GameDataService.selectCropPriceData();
+		return userList;
 	}
 
 }

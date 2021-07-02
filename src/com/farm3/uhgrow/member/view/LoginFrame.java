@@ -1,23 +1,6 @@
 package com.farm3.uhgrow.member.view;
 
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import com.farm3.uhgrow.member.controller.MemberController;
-import com.farm3.uhgrow.member.model.dto.UserDTO;
 
 public class LoginFrame extends JFrame {
 
@@ -34,6 +17,7 @@ public class LoginFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+  
 
 	public JPanel loginPanel() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
