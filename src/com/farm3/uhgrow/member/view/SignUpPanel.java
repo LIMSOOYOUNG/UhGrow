@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,31 +20,40 @@ import com.farm3.uhgrow.member.controller.MemberController;
 public class SignUpPanel extends JPanel {
 
 	
-	LoginPanel lp = new LoginPanel();
+	private JPanel signUpPanel;
+	private JButton btnBack;
 	
-	public JPanel signUpPanel () {
+	public SignUpPanel () {
+		JButton btnInsert;
 
+		signUpPanel = this;
+	
 
 		Font font = new Font("고딕체", Font.BOLD, 25);
 
 		this.setLayout(null);
 		this.setSize(960,540);
+		
+		/* ----------- backGroundLabel 에 배경 이미지 추가 --------------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
 
+		/* ------------회원가입 창에 회원가입 버튼 --------------*/
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
-		JButton signUpButton = new JButton(new ImageIcon(signUpBackground));
-		signUpButton.setLayout(null);
-		signUpButton.setBounds(210,385,245,35);
+		btnInsert = new JButton(new ImageIcon(signUpBackground));
+		btnInsert.setLayout(null);
+		btnInsert.setBounds(210,385,245,35);
 
 
 		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
-		JButton backButton = new JButton(new ImageIcon(backButtonBackground));
-		backButton.setLayout(null);
-		backButton.setBounds(505,385,245,35);
+		btnBack = new JButton(new ImageIcon(backButtonBackground));
+		btnBack.setLayout(null);
+		btnBack.setBounds(505,385,245,35);
 
+		
+		
 		JLabel idLabel = new JLabel("아 이 디  : ");
 		idLabel.setLayout(null);
 		idLabel.setBounds(350, 60, 200, 25);
@@ -96,6 +104,8 @@ public class SignUpPanel extends JPanel {
 		mailField.setBounds(350, 330, 300, 25);
 		mailField.setFont(font);
 
+		
+		// signUpPanel에 위에 생성한 버튼, 텍스트필드, 배경 추가
 		this.add(idLabel);
 		this.add(idField);
 		this.add(pwdLabel);
@@ -108,12 +118,12 @@ public class SignUpPanel extends JPanel {
 		this.add(mailField);
 
 
-		this.add(backButton);
-		this.add(signUpButton);
+		this.add(btnBack);
+		this.add(btnInsert);
 		this.add(backGroundLabel);
 
 
-		signUpButton.addMouseListener(new MouseAdapter() {
+		btnInsert.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -190,7 +200,6 @@ public class SignUpPanel extends JPanel {
 						// 성공 출력 
 						JOptionPane.showMessageDialog(null, "가입 성공!", "회원가입 오류!", 1);
 
-						removeAll();
 						
 					} else {
 						// 실패 출력
@@ -204,15 +213,17 @@ public class SignUpPanel extends JPanel {
 		});
 
 		// 되돌아가기 버튼 클릭시 기존 패널 제거해주고 loginPanel 불러오기
-		backButton.addMouseListener(new MouseAdapter() {
+		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				removeAll();
-				lp.loginPanel();
+				JPanel loginPanel = new LoginPanel();
+				
+				FrameManager.changePanel(signUpPanel, loginPanel);
+				
 			}
 		});
-		return this;
+		
 
 
 	}
