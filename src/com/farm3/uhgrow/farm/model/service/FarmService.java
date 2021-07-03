@@ -26,22 +26,21 @@ public class FarmService {
 		return farmSeedList;
 	}
 
-	public int chooseSeed(RetainCropDTO retainCropDTO) {
-		
+
+	public int chooseInputSeed(RetainCropDTO cropDTO) {						//씨앗 고르기
 		Connection con = getConnection();
 		
-		int result = 0;
-		int chooseResult = farmDAO.chooseSeed(con,retainCropDTO);
+		int chooseResult = farmDAO.chooseInputSeed(con,cropDTO);
 		
 		if(chooseResult>0) {
 			commit(con);
-			result = 1;
 		}else {
 			rollback(con);
 		}
 		close(con);
 		
-		return result;
+		
+		return chooseResult;
 	}
 
 

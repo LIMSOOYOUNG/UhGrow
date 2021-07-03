@@ -17,7 +17,6 @@ import static com.farm3.uhgrow.common.JDBCTemplate.close;
 public class FarmDAO {
 	private Properties prop;
 	
-	
 	public FarmDAO() {
 		this.prop = new Properties();
 		try {
@@ -34,7 +33,7 @@ public class FarmDAO {
 
 		List<RetainCropDTO> seedList = null;	
 		
-		String query = prop.getProperty("selectAllCategory1");
+		String query = prop.getProperty("selectAllCategory");
 		System.out.println(query);
 		try {
 			pstmt = con.prepareStatement(query);
@@ -43,6 +42,7 @@ public class FarmDAO {
 			seedList = new ArrayList<>();
 			while(rset.next()) {
 				RetainCropDTO seed = new RetainCropDTO();
+				seed.setCropId(rset.getInt("CROP_ID"));
 				seed.setCropName(rset.getString("CROP_NAME"));
 				seed.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				seedList.add(seed);
@@ -60,26 +60,26 @@ public class FarmDAO {
 		return seedList;
 	}
 
-	public int chooseSeed(Connection con, RetainCropDTO retainCropDTO) {
-		PreparedStatement pstmt = null;											//	statement 준비된상태로 선언
 
+	public int chooseInputSeed(Connection con, RetainCropDTO cropDTO) {
+		PreparedStatement pstmt = null;		
+		
 		int result = 0;															//	수정 성공여부 초기화
-		
-		String query = prop.getProperty("chooseSeed");							//	updateMemberPassword 쿼리문 선언
-		
+
+		String query = prop.getProperty("chooseInputSeed");							//	updateMemberPassword 쿼리문 선언
+
 		try {
-			pstmt = con.prepareStatement(query);									//	수정할 pwd값 삽입
-			pstmt.setInt(2, retainCropDTO.getCropAmount());
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, cropDTO.getCropId());
 			
-			result = pstmt.executeUpdate();										//	결과값을 int로 리턴
-			
+			result= pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);														//	statement 할당 반납
 		}
-
+		
 		return result;
 	}
 
