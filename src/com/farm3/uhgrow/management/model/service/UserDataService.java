@@ -47,4 +47,18 @@ public class UserDataService {
 		return userList;
 	}
 
+	public static int deleteUserData(String userId) {
+		Connection con = getConnection();
+		int result = userDataDAO.deleteUserData(con, userId);
+		close(con);
+		return result;
+	}
+
+	public static int recoverUserData(String userId) {
+		Connection con = getConnection();
+		int result = userDataDAO.recoverUserData(con, userId);
+		close(con);
+		return result;
+	}
+
 }

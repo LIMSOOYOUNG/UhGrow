@@ -25,4 +25,16 @@
 	      FROM USER_INFO UI
 	     WHERE DELETE_YN = 'Y' 
 	</entry>
+	<entry key="deleteUser">
+	    UPDATE
+	           USER_INFO
+	       SET DELETE_YN = 'Y'
+	     WHERE USER_ID = ?
+	</entry>
+	<entry key="recoverUser">
+	    UPDATE
+	           USER_INFO
+	       SET DELETE_YN = 'N'
+	     WHERE USER_ID = ?
+	</entry>
 </properties>

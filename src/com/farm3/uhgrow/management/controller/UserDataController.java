@@ -39,6 +39,14 @@ public class UserDataController {
 		List<SelectUserDTO> userList = UserDataService.selectRecoverUserData();
 		return userList;
 	}
+	public int deleteUserData(String userId) {
+		int result = UserDataService.deleteUserData(userId);
+		return result;
+	}
+	public int recoverUserData(String userId) {
+		int result = UserDataService.recoverUserData(userId);
+		return result;
+	}
 	
 
 

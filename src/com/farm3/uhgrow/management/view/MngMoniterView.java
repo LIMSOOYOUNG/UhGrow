@@ -44,7 +44,7 @@ public class MngMoniterView extends JFrame {
 		this.setBounds(300, 200, 960, 565);
 		this.setTitle("UhGrow");
 		this.setLayout(null);
-		playSound("sound/배경음악1.wav");
+//		playSound("sound/배경음악1.wav");
 
 		JPanel backGroundPanel = new JPanel();
 		JPanel mngModePanel = new JPanel();
@@ -558,6 +558,7 @@ public class MngMoniterView extends JFrame {
 				int y = 100; // 버튼의 좌표 지정
 				
 				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				model.removeAllElements();
 				for(i = 0; i < list.size() ; i++) {
 					model.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****"); // 빈 모델 리스트에 값 대입
 					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
@@ -612,9 +613,37 @@ public class MngMoniterView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				List<SelectUserDTO> list = userDataController.selectDeleteUserData(); // 삭제할 정보 조회 메소드 호출 후 리턴값 리스트에 대입
-
-				for(int i = 0; i < list.size() ; i++) {
-					deleteModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****");
+				JButton[] selectButtons = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 100; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				deleteModel.removeAllElements();
+				for(i = 0; i < list.size() ; i++) {
+					deleteModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****"); // 빈 모델 리스트에 값 대입
+					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButtons[i].setLocation(x, y);
+					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
+					deleteMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
+					
+					selectButtons[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+//							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
+//							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
+							int result = userDataController.deleteUserData(list.get(index).getUserId()); 
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
 				}
 				userMngMainPanel.setVisible(false);
 				deleteMainPanel.setVisible(true);
@@ -634,11 +663,40 @@ public class MngMoniterView extends JFrame {
 		recoverButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<SelectUserDTO> list = userDataController.selectRecoverUserData();
-
-				for(int i = 0; i < list.size() ; i++) {
-					recoverModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****");
+				List<SelectUserDTO> list = userDataController.selectRecoverUserData(); // 삭제할 정보 조회 메소드 호출 후 리턴값 리스트에 대입
+				JButton[] selectButtons = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 100; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				recoverModel.removeAllElements();
+				for(i = 0; i < list.size() ; i++) {
+					recoverModel.addElement((i + 1) + "  " + list.get(i).getUserId() + "  " + "****"); // 빈 모델 리스트에 값 대입
+					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButtons[i].setLocation(x, y);
+					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
+					recoverMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
+					
+					selectButtons[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+//							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
+//							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
+							int result = userDataController.recoverUserData(list.get(index).getUserId()); 
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
 				}
+				userRecoverList.repaint();
 				userMngMainPanel.setVisible(false);
 				recoverMainPanel.setVisible(true);
 				
@@ -698,6 +756,7 @@ public class MngMoniterView extends JFrame {
 				int y = 130; // 버튼의 좌표 지정
 				
 				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				cropPriceModel.removeAllElements();
 				for(i = 0; i < list.size() ; i++) {
 					cropPriceModel.addElement(list.get(i).getCropPrice()); // 빈 모델 리스트에 값 대입
 					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
