@@ -9,6 +9,5 @@ public class UhgrowRun {
 
 		new FrameManager();
 
-		
 	}
 }

@@ -8,8 +8,8 @@ import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.farm3.uhgrow.member.model.dao.MemberDAO;
+import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
-import com.farm3.uhgrow.member.model.dto.UserDTO;
 
 public class MemberService {
 
@@ -36,13 +36,24 @@ public class MemberService {
 		return result;
 	}
 
-	public UserDTO loginInfo(String loginId) {
+	public LoginDTO loginInfo(String loginId) {
 		Connection con = getConnection();
 		
-		UserDTO dto = memberDAO.loginInfo(con, loginId);
+		LoginDTO dto = memberDAO.loginInfo(con, loginId);
 		
 		
 		return dto;
 	}
+
+	public String StartGameContinueYn(int userNo) {
+		
+		Connection con = getConnection();
+		
+		String continueYn = memberDAO.StartGameContinueYn(con, userNo);
+		
+		close(con);
+		return continueYn;
+	}
+
 
 }
