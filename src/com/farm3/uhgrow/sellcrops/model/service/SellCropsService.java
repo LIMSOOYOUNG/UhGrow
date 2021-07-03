@@ -19,16 +19,6 @@ public class SellCropsService {
 		this.sellCropsDAO = new SellCropsDAO();
 	}
 	
-//	public List<CropDTO> userCropList() {
-//	
-//		Connection con = getConnection();
-//		
-//		List<CropDTO> userCropList = sellCropsDAO.userCropList(con);
-//		
-//		close(con);
-//		
-//		return userCropList;
-//	}
 
 
 	public List<CropDTO> userCropList() {
@@ -39,6 +29,28 @@ public class SellCropsService {
 		
 		return userCropList;
 	}
+
+
+
+	public int cropPrice(int cropAmount) {
+
+		Connection con = getConnection();
+		
+		CropDTO getCropPrice = sellCropsDAO.getCropPrice(con);
+		
+		int cropPrice = 0;
+		int totalGetPrice = 0;
+		
+		cropPrice = getCropPrice.getCropPrice();
+		
+		totalGetPrice = ((cropPrice * cropAmount) / 10);
+		
+		close(con);
+		
+		return totalGetPrice;
+	}
+
+
 
 	
 

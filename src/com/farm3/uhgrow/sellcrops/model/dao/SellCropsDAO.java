@@ -35,7 +35,7 @@ public class SellCropsDAO {
 		
 		List<CropDTO> userCropList = null;
 		
-		String query = prop.getProperty("userCropList");
+		String query = prop.getProperty("user-croplist");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -46,80 +46,54 @@ public class SellCropsDAO {
 			
 			while(rset.next()) {
 				CropDTO userCrop = new CropDTO();
-				userCrop.setuserNo(rset.getInt("USER_NO"));
+				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
-//				userCrop.setCropAmout(rset.getInt("CROP_AMOUNT"));  DTO 필드에 cropAmount 추가예정
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCoin(rset.getInt("COIN"));
 				
 				userCropList.add(userCrop);
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 		    close(rset);
-		}   close(pstmt);
-		
+		    close(pstmt);
+		}
 		
 		return userCropList;
 	}
 
 
+	public CropDTO getCropPrice(Connection con) {
+
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		CropDTO getCropPrice = null;
+		
+		String query = prop.getProperty("cropPrice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				getCropPrice = new CropDTO();
+				
+				getCropPrice.setCropPrice(rset.getInt("CROP_PRICE"));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return getCropPrice;
+	}
 	
-	
-//	public int sellTomato(Connection con, CropDTO crop) {
-//		
-//		PreparedStatement pstmt = null;
-//		
-//		int sellCropResult = 0;
-//		
-//		String query = prop.getProperty("sellTomato");
-//		
-//		try {
-//			pstmt = con.prepareStatement(query);
-////			pstmt.setString(1, crop.getCropName());						// 농작물을 가지고 회원의 정보를 알아야되는데 CropDTO에 userId를 추가해야될거 같애서 주석 처리 해놨습니다.
-////			pstmt.setInt(2, crop.getCropId());							// 각 농작물마다 dto를 만들어줘야될거 같습니다.
-////			pstmt.setInt(3, crop.getCropPrice());						// 위랑 동일
-//			
-//			sellCropResult = pstmt.executeUpdate();
-//			
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		
-//		return sellCropResult;
-//	}
-//
-//	public int sellCorn(Connection con, CropDTO crop) {
-//		
-//		PreparedStatement pstmt = null;
-//		
-//		int sellCropResult = 0;
-//		
-//		String query = prop.getProperty("sellCorn");
-//		
-//		try {
-//			pstmt = con.prepareStatement(query);
-//			
-////			pstmt.setString(1, crop.getCropName());						// 토마토 판매랑 동일한 이유로 
-////			pstmt.setInt(2, crop.getCropId());
-////			pstmt.setInt(3, crop.getCropPrice());
-//			
-//			sellCropResult = pstmt.executeUpdate();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(pstmt);
-//		}
-//		
-//		return sellCropResult;
-//	}
-//
-//	
-//	
-//	
-//	
 }
