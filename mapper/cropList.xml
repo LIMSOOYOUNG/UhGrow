@@ -15,7 +15,7 @@
 	
 	<entry key="chooseInputSeed">
 		UPDATE RETAIN_CROP
-		   SET CROP_AMOUNT = CROP_AMOUNT - 1	 
+		   SET CROP_AMOUNT = CROP_AMOUNT - 1
 		 WHERE CROP_ID = ?
 	</entry>
 	

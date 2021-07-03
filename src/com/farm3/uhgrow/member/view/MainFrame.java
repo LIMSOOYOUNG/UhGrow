@@ -11,6 +11,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
+
 public class MainFrame extends JFrame {
 
 	public MainFrame() {
