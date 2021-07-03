@@ -109,7 +109,7 @@ public class SellMainPanel extends JPanel {
 				if(sellAmount > 0 && sellAmount <= userCropAmount && userCropAmount != 0) {
 					
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트*/
-					updateUserCropAmount = sellController.updateUserCropAmount(sellAmount);
+//					updateUserCropAmount = sellController.updateUserCropAmount(sellAmount);
 			
 					/* 농작물 판매해서 유저가 받아오는 총 금액*/
 					totalGetPrice = sellController.totalGetCoin(sellAmount); 

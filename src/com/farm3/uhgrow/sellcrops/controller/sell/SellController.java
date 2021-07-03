@@ -27,9 +27,9 @@ public class SellController {
 	}
 
 
-	public int updateUserCropAmount(int sellAmount) {
-		
-		return 0;
-	}
+//	public int updateUserCropAmount(int sellAmount) {
+//		
+//		return 0;
+//	}
 
 }
