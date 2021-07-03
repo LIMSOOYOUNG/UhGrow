@@ -95,5 +95,37 @@ public class SellCropsDAO {
 		
 		return getCropPrice;
 	}
+
+
+	public CropDTO updateCropAmount(Connection con, int sellAmount) {
+
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		CropDTO updateCropAmount = null;
+		
+		String query = prop.getProperty("updateCropAmount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sellAmount);
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				updateCropAmount = new CropDTO();
+				
+				updateCropAmount.setCropAmount(rset.getInt("CROP_AMONT"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return updateCropAmount;
+	}
 	
 }

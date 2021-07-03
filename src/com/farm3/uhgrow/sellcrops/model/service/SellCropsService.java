@@ -26,13 +26,15 @@ public class SellCropsService {
 		Connection con = getConnection();
 		
 		List<CropDTO> userCropList = sellCropsDAO.userCropList(con);
+
+		close(con);
 		
 		return userCropList;
 	}
 
 
 
-	public int cropPrice(int cropAmount) {
+	public int cropPrice(int sellAmount) {
 
 		Connection con = getConnection();
 		
@@ -43,11 +45,26 @@ public class SellCropsService {
 		
 		cropPrice = getCropPrice.getCropPrice();
 		
-		totalGetPrice = ((cropPrice * cropAmount) / 10);
+		totalGetPrice = ((cropPrice * sellAmount) / 10);
 		
 		close(con);
 		
 		return totalGetPrice;
+	}
+
+
+
+	public int updateUserCropAmount(int sellAmount) {
+		
+		Connection con = getConnection();
+		
+		CropDTO updateCropAmount = sellCropsDAO.updateCropAmount(con, sellAmount);
+		
+		int userCropAmount = updateCropAmount.getCropAmount(); 
+		
+		close(con);
+		
+		return userCropAmount;
 	}
 
 
