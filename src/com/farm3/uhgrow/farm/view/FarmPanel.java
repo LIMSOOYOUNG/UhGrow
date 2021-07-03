@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -23,17 +21,16 @@ import com.farm3.uhgrow.member.view.FrameManager;
 
 public class FarmPanel extends JPanel {
 	private boolean isTrue = false;
-	private boolean isNpcTrue = true;
-	
+
 	private int fieldNo;
 	private JLabel seedText;
 	private JLabel conversationLabel;
 	private JLabel endButton;
 	private JPanel farmPanel;
 	private int i;
-	private int fieldIndex;
 	private RetainCropDTO cropDTO = new RetainCropDTO();
 	private JButton[] selectButtons;
+	private int fieldIndex;
 	JLabel backGround;
 	JLabel mainNpc;
 	JLabel storeNpc;
@@ -82,21 +79,11 @@ public class FarmPanel extends JPanel {
 				x += 34;
 			}
 			this.add(fieldButton[fieldIndex]);
-			
-			
-		}
-		fieldIndex=0;
-		actionListener();
 
-	}
-	public void actionListener() {
-		for(int k = 0; k <10; k++) {
-			fieldNo=k;
-			fieldButton[fieldNo].addActionListener(new ActionListener() {
-				
+			fieldButton[0].addActionListener(new ActionListener() {
+
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
 					seedText.setVisible(true);
 					conversationLabel.setVisible(true);
 					jSeedList.setVisible(true);
@@ -105,54 +92,57 @@ public class FarmPanel extends JPanel {
 					seedList = farmcontroller.selectSeed();
 					if (seedList.size() > 0) {
 						selectButtons = new JButton[seedList.size()];
-						Image selectSeed = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(20, 20, 0);
+						Image selectSeed = new ImageIcon("img/mngInterface/triangleButton.png").getImage()
+								.getScaledInstance(25, 25, 0);
 
 						defaultSeedList.removeAllElements();
 						for (i = 0; i < seedList.size(); i++) {
 							defaultSeedList.addElement(seedList.get(i).getCropName() + "씨앗	 "+ seedList.get(i).getCropAmount() + "개" + " " + ">");// 빈 모델
-							
+
 							selectButtons[i] = new JButton(new ImageIcon(selectSeed)); // 생성된 버튼에 이미지 삽입
 							selectButtons[i].setLocation(x, y);
-							selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
-							y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
+							selectButtons[i].setSize(20,20); // 좌표와 크기 지정
+							y += 25; // 버튼 세로 정렬을 위해 y축 값 증가
+							selectButtons[i].setVisible(true);
 							farmPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
-
+							FrameManager.refresh();
 							selectButtons[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
 								private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
 								{
 									this.index = i; // 자체 인덱스에 for문의 시작값 대입
-									
+
 								}
+
 								@Override
 								public void actionPerformed(ActionEvent e) {
-									
+
 									cropDTO.setCropId(seedList.get(index).getCropId());
-									
+
 									int result = farmcontroller.chooseInputSeed(cropDTO);
-									System.out.println(result);
 									if (result > 0) {
 										switch (seedList.get(index).getCropId()) {
 										case 1:
-											JOptionPane.showMessageDialog(null,seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
-											
-											Image imgField = new ImageIcon("img/tomato/Tomato_Stage_1.png").getImage().getScaledInstance(35, 30, 0);
-											fieldButton[fieldNo].setIcon(new ImageIcon(imgField));
-											fieldButton[fieldNo].setContentAreaFilled(false);
-											seedText.setVisible(false);
-											conversationLabel.setVisible(false);
-											jSeedList.setVisible(false);
-											FrameManager.refresh();
-										
-								
-											
+											JOptionPane.showMessageDialog(null,
+													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(0,"img/tomato/Tomato_Stage_1.png");
+
 											break;
 										case 2:
+											JOptionPane.showMessageDialog(null,
+													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(0,"img/corn/Corn_Stage.png");
 
 											break;
 										case 3:
+											JOptionPane.showMessageDialog(null,
+													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(0,"img/garlic/Garlic_Stage_1.png");
 
 											break;
 										case 4:
+											JOptionPane.showMessageDialog(null,
+													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(0,"img/pumpkin/Pumpkin_Stage_1.png");
 
 											break;
 
@@ -163,8 +153,9 @@ public class FarmPanel extends JPanel {
 									} else {
 										JOptionPane.showMessageDialog(null, "씨앗심기를 실패하였습니다.", "씨앗 심음 알림", 1);
 									}
-
+									
 								}
+								
 							});
 						}
 					} else {
@@ -253,7 +244,25 @@ public class FarmPanel extends JPanel {
 		endButton.setSize(45, 30);
 		endButton.setLocation(700, 80);
 		return endButton;
+}
+public void setIcon(int index,String src) {
+	
 
-	}
-
+	Image imgField = new ImageIcon(src).getImage()
+			.getScaledInstance(30, 30, 0);
+	
+		fieldButton[index].setIcon(new ImageIcon(imgField));
+		fieldButton[index].setContentAreaFilled(false);
+		
+		seedText.setVisible(false);
+		conversationLabel.setVisible(false);
+		jSeedList.setVisible(false);
+		
+		selectButtons[0].setVisible(false);
+		selectButtons[1].setVisible(false);
+		selectButtons[2].setVisible(false);
+		selectButtons[3].setVisible(false);
+		
+		FrameManager.refresh();
+}
 }
