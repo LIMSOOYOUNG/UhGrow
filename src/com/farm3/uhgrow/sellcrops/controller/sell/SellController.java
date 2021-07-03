@@ -10,19 +10,26 @@ public class SellController {
 	private CropDTO cropDTO = new CropDTO();
 	private SellCropsService sellCropsService = new SellCropsService();
 	
-//	public List<CropDTO> userCropList(CropDTO userCrop) {
-//		
-//		List<CropDTO> userCropList = sellCropsService.userCropList();
-//		
-//		return userCropList;
-//	}
-
 
 	public List<CropDTO> userCropList() {
 		
 		List<CropDTO> userCropList = sellCropsService.userCropList();
 		
 		return userCropList;
+	}
+
+
+	public int totalGetCoin(int sellAmount) {
+		
+		int totalGetPrice = sellCropsService.cropPrice(sellAmount);
+		
+		return totalGetPrice;
+	}
+
+
+	public int updateUserCropAmount(int sellAmount) {
+		
+		return 0;
 	}
 
 }

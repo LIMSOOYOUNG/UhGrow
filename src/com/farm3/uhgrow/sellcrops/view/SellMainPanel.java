@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,13 +62,13 @@ public class SellMainPanel extends JPanel {
 		JLabel storeNPC = new JLabel(new ImageIcon(imgStoreNPC));
 		storeNPC.setBounds(130, 410, 750, 100);
 		
-		Font font = new Font("맑은고딕", Font.BOLD, 35);
-		JLabel textLabel = new JLabel("빨리 빨리 골라 뭐하러 왔는데? 어 ? ");
-		textLabel.setBounds(130, 410, 750, 100);
-		textLabel.setFont(font);
+//		Font font = new Font("맑은고딕", Font.BOLD, 35);
+//		JLabel textLabel = new JLabel("빨리 빨리 골라 뭐하러 왔는데? 어 ? ");
+//		textLabel.setBounds(130, 410, 750, 100);
+//		textLabel.setFont(font);
 		
 		
-		this.add(textLabel);
+//		this.add(textLabel);
 		this.add(storeNPC);
 		this.add(buyButton);
 		this.add(sellButton);
@@ -85,8 +86,44 @@ public class SellMainPanel extends JPanel {
 				FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
 				
 				SellController sellController = new SellController();
+				
+				int userCropAmount = 0;
+				int updateUserCropAmount = 0;
+				int userCoin = 0;
+				int getCoin = 0;
+				int totalGetPrice = 0;
+				
+				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회*/
+				List<CropDTO> userCropList = sellController.userCropList(); 
+				for(CropDTO cropList : userCropList) {
+					System.out.println(cropList.getUserNo() + cropList.getCropId() + cropList.getCropAmount());
+					userCropAmount = cropList.getCropAmount();
+					userCoin = cropList.getCoin();
+					userCropAmount = cropList.getCropAmount();
+				}
+					
+				Scanner sc = new Scanner(System.in);
+				System.out.print("판매 수량 입력");
+				int sellAmount = sc.nextInt();
+				
+				if(sellAmount > 0 && sellAmount <= userCropAmount && userCropAmount != 0) {
+					
+					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트*/
+					updateUserCropAmount = sellController.updateUserCropAmount(sellAmount);
+			
+					/* 농작물 판매해서 유저가 받아오는 총 금액*/
+					totalGetPrice = sellController.totalGetCoin(sellAmount); 
+					
+					System.out.println(totalGetPrice);
 
-//				List<CropDTO> userCropList = sellController.userCropList(); 
+					userCoin += totalGetPrice;
+					
+					System.out.println(userCoin);
+					System.out.println("판매완료");
+				} else {
+					System.out.println("판매할 수량이 부족합니다");
+				}
+				
 				
 				
 				
