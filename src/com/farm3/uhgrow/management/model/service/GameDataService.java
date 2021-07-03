@@ -11,7 +11,11 @@ import java.util.List;
 import com.farm3.uhgrow.management.model.dao.GameDataDAO;
 import com.farm3.uhgrow.management.model.dto.CropPriceDTO;
 import com.farm3.uhgrow.management.model.dto.ModifyCropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.ModifyFoodPriceDTO;
+import com.farm3.uhgrow.management.model.dto.ModifyFoodRecipeDTO;
 import com.farm3.uhgrow.management.model.dto.SelectCropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.SelectFoodPriceDTO;
+import com.farm3.uhgrow.management.model.dto.SelectFoodRecipeDTO;
 
 public class GameDataService {
 	
@@ -55,6 +59,44 @@ public class GameDataService {
 		List<SelectCropPriceDTO> userList = gameDataDAO.selectCropPrice(con);
 		close(con);
 		return userList;
+	}
+
+	public static List<SelectFoodPriceDTO> selectFoodPriceData() {
+		Connection con = getConnection();
+		List<SelectFoodPriceDTO> userList = gameDataDAO.selectFoodPrice(con);
+		close(con);
+		return userList;
+	}
+
+	public int modifyFoodPrice(ModifyFoodPriceDTO modifyPriceList) {
+		Connection con = getConnection();
+		int result = gameDataDAO.modifyFoodPrice(con, modifyPriceList);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
+	public static List<ModifyFoodRecipeDTO> selectFoodRecipeData() {
+		Connection con = getConnection();
+		List<ModifyFoodRecipeDTO> userList = gameDataDAO.selectFoodRecipe(con);
+		close(con);
+		return userList;
+	}
+
+	public int modifyFoodRecipe(ModifyFoodRecipeDTO modifyRecipeList) {
+		Connection con = getConnection();
+		int result = gameDataDAO.modifyFoodRecipe(con, modifyRecipeList);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		return result;
 	}
 
 }

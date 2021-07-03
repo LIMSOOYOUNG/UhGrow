@@ -27,7 +27,9 @@ import javax.swing.JTextField;
 
 import com.farm3.uhgrow.management.controller.GameDataController;
 import com.farm3.uhgrow.management.controller.UserDataController;
+import com.farm3.uhgrow.management.model.dto.ModifyFoodRecipeDTO;
 import com.farm3.uhgrow.management.model.dto.SelectCropPriceDTO;
+import com.farm3.uhgrow.management.model.dto.SelectFoodPriceDTO;
 import com.farm3.uhgrow.management.model.dto.SelectUserDTO;
 
 public class MngMoniterView extends JFrame {
@@ -391,6 +393,61 @@ public class MngMoniterView extends JFrame {
 		gameMngMainPanel.add(gameMngMainLabel);
 		
 //		--------------------------------------------------------------------------------------------------------------------------
+		/* 요리 수정 메인 */
+		
+		JPanel foodMngMainPanel = new JPanel();
+		foodMngMainPanel.setLayout(null);
+		foodMngMainPanel.setBounds(230, 90, 500, 420);
+		foodMngMainPanel.setVisible(false);
+		
+		Image foodMngMain = new ImageIcon("img/mngInterface/userMngMain.png").getImage().getScaledInstance(500, 450, 0);
+		JLabel foodMngMainLabel = new JLabel(new ImageIcon(foodMngMain));
+		foodMngMainLabel.setLocation(0, 0);
+		foodMngMainLabel.setSize(500, 450);
+		
+		Image mainGameMngF = new ImageIcon("img/mngInterface/gameMngButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton gameMngMainFButton = new JButton(new ImageIcon(mainGameMngF));
+		gameMngMainFButton.setLocation(33, 20);
+		gameMngMainFButton.setSize(200, 50);
+
+		Image backToMainF = new ImageIcon("img/mngInterface/backButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton backToMainFButton = new JButton(new ImageIcon(backToMainF));
+		backToMainFButton.setLocation(266, 20);
+		backToMainFButton.setSize(200, 50);
+		
+		Image foodPriceUdt = new ImageIcon("img/mngInterface/foodPriceUDT.png").getImage().getScaledInstance(164, 27, 0);
+		JLabel foodPriceUdtLabel = new JLabel(new ImageIcon(foodPriceUdt));
+		foodPriceUdtLabel.setLocation(33, 130);
+		foodPriceUdtLabel.setSize(164, 27);
+
+		Image foodRecipeUdt = new ImageIcon("img/mngInterface/foodUDT.png").getImage().getScaledInstance(190, 27, 0);
+		JLabel foodRecipeUdtLabel = new JLabel(new ImageIcon(foodRecipeUdt));
+		foodRecipeUdtLabel.setLocation(33, 200);
+		foodRecipeUdtLabel.setSize(190, 27);
+		
+		Image foodPriceBtn = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(36, 40, 0);
+		JLabel foodPriceUdtBtn = new JLabel(new ImageIcon(foodPriceBtn));
+		foodPriceUdtBtn.setLocation(410, 130);
+		foodPriceUdtBtn.setSize(36, 40);
+		
+		Image foodRecipeBtn = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(36, 40, 0);
+		JLabel foodRecipeUdtBtn = new JLabel(new ImageIcon(foodRecipeBtn));
+		foodRecipeUdtBtn.setLocation(410, 200);
+		foodRecipeUdtBtn.setSize(36, 40);
+		
+		
+		foodMngMainPanel.add(foodRecipeUdtBtn);
+		foodMngMainPanel.add(foodPriceUdtBtn);
+		foodMngMainPanel.add(foodRecipeUdtLabel);
+		foodMngMainPanel.add(foodPriceUdtLabel);
+		foodMngMainPanel.add(backToMainFButton);
+		foodMngMainPanel.add(gameMngMainFButton);
+		foodMngMainPanel.add(foodMngMainLabel);
+	
+		
+		
+		
+//		--------------------------------------------------------------------------------------------------------------------------
 		
 		/* 집 가격 수정 */
 		
@@ -430,7 +487,7 @@ public class MngMoniterView extends JFrame {
 		housePrice.setSize(100, 50);
 		housePrice.setFont(f2);
 		
-		JTextField inputHPrice = new JTextField(30);
+		JTextField inputHPrice = new JTextField(30); // 수정할 집 가격을 입력받는 TextField 생성
 		inputHPrice.setLocation(200, 210);
 		inputHPrice.setSize(200, 23);
 		
@@ -513,6 +570,136 @@ public class MngMoniterView extends JFrame {
 		cropMainPanel.add(tomatoLabel);
 		cropMainPanel.add(cropMngMainLabel);
 		
+//		----------------------------------------------------------------------------------------------------------------------------------------------
+		
+		/* 요리 가격 수정 */
+		
+		JPanel foodPMainPanel = new JPanel();
+		foodPMainPanel.setLayout(null);
+		foodPMainPanel.setBounds(230, 90, 500, 420);
+		foodPMainPanel.setVisible(false);
+		
+		Image foodPMngMain = new ImageIcon("img/mngInterface/userMngMain.png").getImage().getScaledInstance(500, 450, 0);
+		JLabel foodMngPMainLabel = new JLabel(new ImageIcon(foodPMngMain));
+		foodMngPMainLabel.setLocation(0, 0);
+		foodMngPMainLabel.setSize(500, 450);
+		
+		Image mainGameMngFP = new ImageIcon("img/mngInterface/gameMngButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton gameMngMainFPButton = new JButton(new ImageIcon(mainGameMngFP));
+		gameMngMainFPButton.setLocation(33, 20);
+		gameMngMainFPButton.setSize(200, 50);
+
+		Image backToMainFP = new ImageIcon("img/mngInterface/backButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton backToMainFPButton = new JButton(new ImageIcon(backToMainFP));
+		backToMainFPButton.setLocation(266, 20);
+		backToMainFPButton.setSize(200, 50);
+		
+		Image modifyScsFP = new ImageIcon("img/mngInterface/modifyScs.png").getImage().getScaledInstance(215, 54, 0);
+		JButton modifyScsFPButton = new JButton(new ImageIcon(modifyScsFP));
+		modifyScsFPButton.setLocation(150, 330);
+		modifyScsFPButton.setSize(215, 54);
+		
+		Image tomatoPizza = new ImageIcon("img/mngInterface/tomatoPizza.png").getImage().getScaledInstance(127, 27, 0);
+		JLabel tomatoPizzaLabel = new JLabel(new ImageIcon(tomatoPizza));
+		tomatoPizzaLabel.setLocation(33, 120);
+		tomatoPizzaLabel.setSize(127, 27);
+		
+		Image cornTortilla = new ImageIcon("img/mngInterface/cornTortilla.png").getImage().getScaledInstance(153, 27, 0);
+		JLabel cornTortillaLabel = new JLabel(new ImageIcon(cornTortilla));
+		cornTortillaLabel.setLocation(33, 160);
+		cornTortillaLabel.setSize(153, 27);
+		
+		Image garlicJuice = new ImageIcon("img/mngInterface/garlicJuice.png").getImage().getScaledInstance(74, 27, 0);
+		JLabel garlicJuiceLabel = new JLabel(new ImageIcon(garlicJuice));
+		garlicJuiceLabel.setLocation(33, 200);
+		garlicJuiceLabel.setSize(74, 27);
+		
+		Image pumpkinSoup = new ImageIcon("img/mngInterface/pumpkinSoup.png").getImage().getScaledInstance(75, 27, 0);
+		JLabel pumpkinSoupLabel = new JLabel(new ImageIcon(pumpkinSoup));
+		pumpkinSoupLabel.setLocation(33, 240);
+		pumpkinSoupLabel.setSize(75, 27);
+		
+		DefaultListModel foodPriceModel = new DefaultListModel();
+		JList foodPriceList = new JList(foodPriceModel);
+		foodPriceList.setLocation(230, 120);
+		foodPriceList.setSize(180, 150);
+		foodPriceList.setFont(f3);
+		
+		
+		foodPMainPanel.add(cornTortillaLabel);
+		foodPMainPanel.add(foodPriceList);
+		foodPMainPanel.add(modifyScsFPButton);
+		foodPMainPanel.add(backToMainFPButton);
+		foodPMainPanel.add(gameMngMainFPButton);
+		foodPMainPanel.add(pumpkinSoupLabel);
+		foodPMainPanel.add(garlicJuiceLabel);
+		foodPMainPanel.add(tomatoPizzaLabel);
+		foodPMainPanel.add(foodMngPMainLabel);
+		
+//		-------------------------------------------------------------------------------------------------------------------------------
+		
+		/* 요리 레시피 수정 */
+		
+		JPanel foodRMainPanel = new JPanel();
+		foodRMainPanel.setLayout(null);
+		foodRMainPanel.setBounds(230, 90, 500, 420);
+		foodRMainPanel.setVisible(false);
+		
+		Image foodRMngMain = new ImageIcon("img/mngInterface/userMngMain.png").getImage().getScaledInstance(500, 450, 0);
+		JLabel foodMngRMainLabel = new JLabel(new ImageIcon(foodRMngMain));
+		foodMngRMainLabel.setLocation(0, 0);
+		foodMngRMainLabel.setSize(500, 450);
+		
+		Image mainGameMngFR = new ImageIcon("img/mngInterface/gameMngButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton gameMngMainFRButton = new JButton(new ImageIcon(mainGameMngFR));
+		gameMngMainFRButton.setLocation(33, 20);
+		gameMngMainFRButton.setSize(200, 50);
+
+		Image backToMainFR = new ImageIcon("img/mngInterface/backButton.png").getImage().getScaledInstance(200, 50, 0);
+		JButton backToMainFRButton = new JButton(new ImageIcon(backToMainFR));
+		backToMainFRButton.setLocation(266, 20);
+		backToMainFRButton.setSize(200, 50);
+		
+		Image modifyScsFR = new ImageIcon("img/mngInterface/modifyScs.png").getImage().getScaledInstance(215, 54, 0);
+		JButton modifyScsFRButton = new JButton(new ImageIcon(modifyScsFR));
+		modifyScsFRButton.setLocation(150, 330);
+		modifyScsFRButton.setSize(215, 54);
+		
+		Image tomatoPizzaR = new ImageIcon("img/mngInterface/tomatoPizza.png").getImage().getScaledInstance(127, 27, 0);
+		JLabel tomatoPizzaRLabel = new JLabel(new ImageIcon(tomatoPizzaR));
+		tomatoPizzaRLabel.setLocation(33, 120);
+		tomatoPizzaRLabel.setSize(127, 27);
+		
+		Image cornTortillaR = new ImageIcon("img/mngInterface/cornTortilla.png").getImage().getScaledInstance(153, 27, 0);
+		JLabel cornTortillaRLabel = new JLabel(new ImageIcon(cornTortillaR));
+		cornTortillaRLabel.setLocation(33, 160);
+		cornTortillaRLabel.setSize(153, 27);
+		
+		Image garlicJuiceR = new ImageIcon("img/mngInterface/garlicJuice.png").getImage().getScaledInstance(74, 27, 0);
+		JLabel garlicJuiceRLabel = new JLabel(new ImageIcon(garlicJuiceR));
+		garlicJuiceRLabel.setLocation(33, 200);
+		garlicJuiceRLabel.setSize(74, 27);
+		
+		Image pumpkinSoupR = new ImageIcon("img/mngInterface/pumpkinSoup.png").getImage().getScaledInstance(75, 27, 0);
+		JLabel pumpkinSoupRLabel = new JLabel(new ImageIcon(pumpkinSoupR));
+		pumpkinSoupRLabel.setLocation(33, 240);
+		pumpkinSoupRLabel.setSize(75, 27);
+		
+		DefaultListModel foodRecipeModel = new DefaultListModel();
+		JList foodRecipeList = new JList(foodRecipeModel);
+		foodRecipeList.setLocation(230, 120);
+		foodRecipeList.setSize(180, 150);
+		foodRecipeList.setFont(f3);
+		
+		
+		foodRMainPanel.add(foodRecipeList);
+		foodRMainPanel.add(pumpkinSoupRLabel);
+		foodRMainPanel.add(garlicJuiceRLabel);
+		foodRMainPanel.add(cornTortillaRLabel);
+		foodRMainPanel.add(tomatoPizzaRLabel);
+		foodRMainPanel.add(backToMainFRButton);
+		foodRMainPanel.add(gameMngMainFRButton);
+		foodRMainPanel.add(foodMngRMainLabel);
 		
 		
 		
@@ -520,7 +707,9 @@ public class MngMoniterView extends JFrame {
 		
 		
 		
-		
+		this.add(foodMngMainPanel);
+		this.add(foodRMainPanel);
+		this.add(foodPMainPanel);
 		this.add(cropMainPanel);
 		this.add(houseMainPanel);
 		this.add(gameMngMainPanel);
@@ -564,6 +753,8 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButtons[i].setContentAreaFilled(false);
+					selectButtons[i].setFocusPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					selectAndUpdateMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -603,9 +794,8 @@ public class MngMoniterView extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				selectAndUpdateMainPanel.setVisible(false);
-				userMngMainPanel.setVisible(true);
-			}
-			
+				userMngMainPanel.setVisible(true);			
+				}
 		});
 		
 		deleteButton.addMouseListener(new MouseAdapter() {
@@ -624,6 +814,9 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButtons[i].setContentAreaFilled(false); // 영역 채우기 안함
+//					selectButtons[i].setFocusPainted(false); // 선택 테두리 지우기
+					selectButtons[i].setBorderPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					deleteMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -675,6 +868,8 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButtons[i].setContentAreaFilled(false);
+					selectButtons[i].setFocusPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					recoverMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -732,7 +927,16 @@ public class MngMoniterView extends JFrame {
 		foodUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("111");
+				gameMngMainPanel.setVisible(false);
+				foodMngMainPanel.setVisible(true);
+			}
+		});
+		
+		backToMainFButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gameMngMainPanel.setVisible(true);
+				foodMngMainPanel.setVisible(false);
 			}
 		});
 		
@@ -762,6 +966,8 @@ public class MngMoniterView extends JFrame {
 					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
 					selectButton[i].setLocation(x, y);
 					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButton[i].setContentAreaFilled(false);
+					selectButton[i].setFocusPainted(false);
 					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
 					cropMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
 					
@@ -785,11 +991,66 @@ public class MngMoniterView extends JFrame {
 				
 			}
 		});
+		
+		foodPriceUdtBtn.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodMngMainPanel.setVisible(false);
+				foodPMainPanel.setVisible(true);
+				
+				List<SelectFoodPriceDTO> list = gameDataController.selectFoodPriceData(); // 모든 농작물의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
+				JButton[] selectButton = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 130; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				foodPriceModel.removeAllElements();
+				for(i = 0; i < list.size() ; i++) {
+					foodPriceModel.addElement(list.get(i).getFoodPrice()); // 빈 모델 리스트에 값 대입
+					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButton[i].setLocation(x, y);
+					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButton[i].setContentAreaFilled(false);
+					selectButton[i].setFocusPainted(false);
+					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
+					foodPMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
+					
+					selectButton[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							int inputNewFoodPrice = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
+							int result = gameDataController.modifyFoodPrice(index, inputNewFoodPrice);
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "가격이 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
+				}
+				
+			}
+		});
+		
+
 		housePriceUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				gameMngMainPanel.setVisible(false);
 				houseMainPanel.setVisible(true);
+			}
+		});
+		
+		backToMainFPButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodPMainPanel.setVisible(false);
+				foodMngMainPanel.setVisible(true);
 			}
 		});
 		
@@ -812,7 +1073,62 @@ public class MngMoniterView extends JFrame {
 			}
 		
 		});
+		
+		backToMainFRButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodRMainPanel.setVisible(false);
+				foodMngMainPanel.setVisible(true);
+			}
+		});
+		
+		foodRecipeUdtBtn.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodMngMainPanel.setVisible(false);
+				foodRMainPanel.setVisible(true);
+				
+				List<ModifyFoodRecipeDTO> list = gameDataController.selectFoodRecipeData(); // 모든 농작물의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
+				JButton[] selectButton = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
+				int x = 450;
+				int y = 130; // 버튼의 좌표 지정
+				
+				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
+				foodRecipeModel.removeAllElements();
+				for(i = 0; i < list.size() ; i++) {
+					foodRecipeModel.addElement(list.get(i).getCropRqAmount()); // 빈 모델 리스트에 값 대입
+					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
+					selectButton[i].setLocation(x, y);
+					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
+					selectButton[i].setContentAreaFilled(false);
+					selectButton[i].setFocusPainted(false);
+					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
+					foodRMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
+					
+					selectButton[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+						private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+						{
+							this.index = i; // 자체 인덱스에 for문의 시작값 대입
+						}
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							int inputNewFoodRecipe = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
+							int result = gameDataController.modifyFoodRecipe(index, inputNewFoodRecipe);
+							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+							
+							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "레시피가 수정되었습니다!", "닫기", 1);
+							}
+						}
+					});
+				}
+				
+			}
+		});
 	}
+	
+	
 
 	
 	public static void playSound(String fn) {
