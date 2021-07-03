@@ -144,10 +144,11 @@ public class LoginPanel extends JPanel {
 					JPanel mainStorePanel = new MainStorePanel();
 					JPanel hac = new BuyHouseAndCookPanel();
 					
+					FarmPanel farm = new FarmPanel();
 
 					System.out.println(loginResult);
-					FrameManager.changePanel(loginPanel, hac);
-		
+					FrameManager.changePanel(loginPanel, farm);
+					
 				}
 
 			}

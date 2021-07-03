@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.UserDTO;
 
@@ -34,14 +35,13 @@ public class LoginFrame extends JFrame {
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
 		playSound("sound/배경음악1.wav");
-		
-		this.add(new LoginPanel());
-		
 
-		
+		this.add(new LoginPanel());
+
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
 	public JPanel loginPanel() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
@@ -146,6 +146,7 @@ public class LoginFrame extends JFrame {
 					 */
 //					dispose();
 //					new MainFrame();// 초기화면 불러오기
+					
 				}
 
 			}
