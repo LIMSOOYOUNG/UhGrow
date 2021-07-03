@@ -44,7 +44,7 @@ public class MngMoniterView extends JFrame {
 		this.setBounds(300, 200, 960, 565);
 		this.setTitle("UhGrow");
 		this.setLayout(null);
-		playSound("sound/배경음악1.wav");
+//		playSound("sound/배경음악1.wav");
 
 		JPanel backGroundPanel = new JPanel();
 		JPanel mngModePanel = new JPanel();
