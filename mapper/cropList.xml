@@ -2,15 +2,23 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment/>
-	<entry key="selectAllCategory1">
+	<entry key="selectAllCategory">
 		SELECT
-			   CR.CROP_NAME
-			 , RF.CROP_AMOUNT
-		  FROM USER_INFO UF, RETAIN_CROP RF,CROP CR
-		 WHERE UF.USER_NO = RF.USER_NO
-		   AND CR.CROP_ID = RF.CROP_ID
+			   CR.CROP_ID
+			 , CR.CROP_NAME
+			 , RC.CROP_AMOUNT
+		  FROM USER_INFO UF, RETAIN_CROP RC,CROP CR
+		 WHERE UF.USER_NO = RC.USER_NO
+		   AND CR.CROP_ID = RC.CROP_ID
 		   AND UF.USER_NO = 1
 	</entry>
+	
+	<entry key="chooseInputSeed">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - 1	 
+		 WHERE CROP_ID = ?
+	</entry>
+	
 	
 </properties>
 
