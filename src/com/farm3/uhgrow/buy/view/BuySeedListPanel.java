@@ -2,29 +2,22 @@ package com.farm3.uhgrow.buy.view;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BuyListPanel extends JPanel{
+public class BuySeedListPanel extends JPanel{
 
-	private JPanel buyListPanel;
-	private JButton sellButton;
-	private JButton buyButton;
-	private JButton backButton;
-	private JButton seedListButton;
-	private JButton toolListButton;
+	private JPanel buySeedListPanel;
 
-	public BuyListPanel() {
+	public BuySeedListPanel() {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
-		buyListPanel = this;
+		buySeedListPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -58,47 +51,42 @@ public class BuyListPanel extends JPanel{
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
 
-		/* -------- 판매 목록 버튼 ---------- */
-		JButton seedListButton = new JButton("씨앗 구매");
-		seedListButton.setLocation(70, 200);
-		seedListButton.setSize(100, 25);
+		/* -------- 씨앗 리스트 버튼 ---------- */
+		JButton tomatoSeedButton = new JButton("토마토");
+		tomatoSeedButton.setLocation(70, 200);
+		tomatoSeedButton.setSize(100, 25);
 
-		JButton toolListButton = new JButton("농기구 구매");
-		toolListButton.setLocation(70, 250);
-		toolListButton.setSize(100, 25);
+		JButton cornSeedButton = new JButton("옥수수");
+		cornSeedButton.setLocation(70, 250);
+		cornSeedButton.setSize(100, 25);
 
+		JButton garlicSeedButton = new JButton("마늘");
+		garlicSeedButton.setLocation(70, 300);
+		garlicSeedButton.setSize(100, 25);
+
+		JButton pumpkinSeedButton = new JButton("호박");
+		pumpkinSeedButton.setLocation(70, 350);
+		pumpkinSeedButton.setSize(100, 25);
+
+		/*-------------- 씨앗구매 텍스트 ---------------*/
+		
+		JLabel seedBuyLabel = new JLabel("<씨앗 구매>");
+		seedBuyLabel.setLocation(410, 180);
+		seedBuyLabel.setSize(200, 25);
+		seedBuyLabel.setFont(font);
+		
+		this.add(seedBuyLabel);
 		this.add(buyButton);
 		this.add(sellButton);
 		this.add(backButton);
-		this.add(seedListButton);
-		this.add(toolListButton);
+		this.add(tomatoSeedButton);
+		this.add(cornSeedButton);
+		this.add(garlicSeedButton);
+		this.add(pumpkinSeedButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		seedListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel buySeedListPanel = new BuySeedListPanel();
-
-				FrameManager.changePanel(buyListPanel, buySeedListPanel);
-
-			}
-		});
-		
-		toolListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel buyToolListPanel = new BuyToolListPanel();
-
-				FrameManager.changePanel(buyListPanel, buyToolListPanel);
-
-			}
-		});
-
-
-
 	}
-
 
 
 }

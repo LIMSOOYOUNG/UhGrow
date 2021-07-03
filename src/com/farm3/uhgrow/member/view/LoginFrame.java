@@ -42,6 +42,7 @@ public class LoginFrame extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
 
 	public JPanel loginPanel() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
