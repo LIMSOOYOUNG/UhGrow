@@ -45,6 +45,12 @@ public class MemberController {
 		return continueYn;
 	}
 
+	public void startNewGameDataReset(int userNo) {
+		memberService.startNewGameDataReset(userNo);
+		
+		
+	}
+
 
 	
 }

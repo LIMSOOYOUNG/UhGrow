@@ -59,6 +59,35 @@
 		  FROM USER_INFO A
 		 WHERE A.USER_NO = ? 
 	</entry>
+		<entry key="startNewGameDataReset">
+	    UPDATE
+		      (
+		       SELECT
+		              *
+		         FROM FOOD F, RETAIN_FOOD RF , RECIPE R, USER_INFO UI, CROP C, SEED S, NEED_EXP NE, FARM_CROP FC
+		            , RETAIN_TOOL RT, TOOL T, HOUSE H, RETAIN_CROP RC
+		        WHERE F.FOOD_ID = RF.FOOD_ID
+		          AND RF.FOOD_ID = R.FOOD_ID
+		          AND RF.USER_NO = UI.USER_NO
+		          AND R.CROP_ID = C.CROP_ID
+		          AND C.CROP_ID = S.CROP_ID
+		          AND S.CROP_ID = NE.CROP_ID
+		          AND UI.USER_NO = FC.USER_NO
+		          AND UI.USER_NO = RT.USER_NO
+		          AND RT.TOOL_ID = T.TOOL_ID
+		          AND H.USER_NO = UI.USER_NO
+		          AND UI.USER_NO = RC.USER_NO
+		          )
+		   SET
+		      UI.COIN = DEFAULT
+    	    , UI.CONTINUE_YN = DEFAULT
+     	    , S.SEED_AMOUNT = DEFAULT
+	        , FC.ACCUMULATE_EXP = DEFAULT
+	        , FC.CROP_STATUS = DEFAULT
+	        , RC.CROP_AMOUNT = DEFAULT
+	        , RF.FOOD_AMOUNT = DEFAULT
+	     WHERE UI.USER_NO = ?
+	</entry>
 
 </properties>
 
