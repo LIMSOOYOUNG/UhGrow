@@ -20,7 +20,7 @@ public class BuyHouseAndCookPanel extends JPanel {
 		this.setSize(960,540);
 		
 		/* ---------- 배경화면 라벨  ------------*/
-		Image background = new ImageIcon("img/interfa1ce/backGround1.png").getImage().getScaledInstance(960, 540, 0);
+		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);

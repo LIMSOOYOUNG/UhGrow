@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class FrameManager {
 
-	private static JFrame frame = new LoginFrame();
+	private static JFrame frame = new MainFrame();
 
 	public static void changePanel(JPanel oldPanel, JPanel newPanel) {
 		frame.remove(oldPanel);

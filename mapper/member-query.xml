@@ -35,7 +35,7 @@
 		  , DEFAULT
 		)
 	</entry>
-	<entry key="loginInfo">
+	<entry key="tryRogin">
 		SELECT
 	 	 	   A.USER_NO
 			 , A.USER_ID
@@ -47,18 +47,19 @@
 			 , A.DELETE_YN
 			 , A.HAVING_HOUSE_YN
 			 , A.FARM_EXP
-			 , A.HOUSE_PRICE
+			 , HOUSE_PRICE
 			 , A.CONTINUE_YN
 		  FROM USER_INFO A
-		 WHERE A.USER_ID = ?
+		 WHERE A.USER_ID = ? 
 	</entry>
-	<entry key="selectAllUser">
-	    SELECT
-	           UI.USER_NO
-	         , UI.USER_ID
-	         , UI.USER_PWD
-	      FROM USER_INFO UI
+	
+	<entry key="continueYn">
+		SELECT
+			  A.CONTINUE_YN
+		  FROM USER_INFO A
+		 WHERE A.USER_NO = ? 
 	</entry>
+
 </properties>
 
 

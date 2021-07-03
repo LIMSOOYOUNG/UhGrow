@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,7 +15,7 @@ import javax.swing.JTextField;
 
 import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
-import com.farm3.uhgrow.member.model.dto.UserDTO;
+import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
 import com.farm3.uhgrow.member.store.MainStorePanel;
 
@@ -30,11 +28,11 @@ public class LoginPanel extends JPanel {
 	private JButton btnInsertUser;
 	private JPanel loginPanel;
 
-// 로그인창 패널 
+	// 로그인창 패널 
 	public LoginPanel() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-		
+
 		// loginPanel 필드에 선언 후 this로 패널의 인스턴스를 지정해줌 -> 아래의 changePanel에서 쓰일 예정 (oldPanel부분)
 		loginPanel = this;
 
@@ -102,7 +100,7 @@ public class LoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				// 패널 변경해주는 부분 signUpPanel 인스턴스 생성 후 아래 changePanel 부분에 newPanel에 인스턴스를 넣어줘서 새로운 패널로 채워줌 changePanel 따라가보면 remove, add, repaint, revalidate 해주는거 확인 가능
 				JPanel signUpPanel = new SignUpPanel();
-				
+
 				FrameManager.changePanel(loginPanel, signUpPanel);
 
 			}
@@ -115,13 +113,11 @@ public class LoginPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String loginId = idField.getText().toString();
 				String loginPwd = pwdField.getText().toString();
-				Map<String, String> map = new HashMap<>();
 
 				// field에 작성한 id, pwd를 map에 담아서 Controller로 전달 
-				map.put("loginId", loginId);
-				map.put("loginPwd", loginPwd);
+			
 				MemberController memberController = new MemberController();
-				UserDTO loginResult = memberController.loginInfo(map);
+				LoginDTO loginResult = memberController.loginInfo(loginId);
 
 
 				// 로그인 결과 리턴 받아서 가입된 정보 확인
@@ -133,31 +129,25 @@ public class LoginPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "입력하신 ID는 없는 ID입니다..", "로그인 오류!", 1);
 				} else if(!loginResult.getUserPwd().equals(loginPwd)) {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "로그인 오류!", 1);
+				} else if(loginResult.getDeleteYn() == 'Y'){
+					JOptionPane.showMessageDialog(null, "정지된 계정입니다.", "로그인 오류!", 1);
+
 				} else {
-					/* 로그인 시도 후 성공시 UserDTO 전달받음 
-					 * 전달 받은 후에 만약 arthority가 관리자인 경우 관리자 프레임 불러오고, 사용자인 경우 새로하기 or 이어하기 패널로 이동*/
-					//					dispose();
-					//					new MainFrame();// 초기화면 불러오기
-//					FarmPanel farmPanel = new FarmPanel();
-//					FrameManager.changePanel(loginPanel, farmPanel);
-					
+
 					JPanel mainStorePanel = new MainStorePanel();
 					JPanel hac = new BuyHouseAndCookPanel();
-					
+					JPanel NewGameOrContinueGamePanel = new NewGameOrContinueGamePanel(loginResult.getUserNo());
+
 					FarmPanel farm = new FarmPanel();
 
 					System.out.println(loginResult);
-					FrameManager.changePanel(loginPanel, farm);
-					
+					FrameManager.changePanel(loginPanel, NewGameOrContinueGamePanel);
 				}
 
 			}
 		});
 
 	}
-
-	
-
 
 	/*---------로그인창 버튼 ------------------*/
 	public JButton btnLogIn() {
@@ -198,6 +188,6 @@ public class LoginPanel extends JPanel {
 	}
 
 
-	
+
 
 }

@@ -2,16 +2,28 @@ package com.farm3.uhgrow.member.model.dto;
 
 public class LoginDTO {
 
-	
+	private int userNo;
 	private String userPwd;					// 유저비밀번호
-	private String userName;				// 유저아이디
-	
+	private String userId;
+	private char deleteYn;		
+
 	public LoginDTO() {}
-	
-	public LoginDTO(String userPwd, String userName) {
+
+	public LoginDTO(int userNo, String userPwd, String userId, char deleteYn) {
 		super();
+		this.userNo = userNo;
 		this.userPwd = userPwd;
-		this.userName = userName;
+		this.userId = userId;
+		this.deleteYn = deleteYn;
+	}
+
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 	public String getUserPwd() {
@@ -22,18 +34,27 @@ public class LoginDTO {
 		this.userPwd = userPwd;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
+	public char getDeleteYn() {
+		return deleteYn;
+	}
+
+	public void setDeleteYn(char deleteYn) {
+		this.deleteYn = deleteYn;
+	}
+
 
 	@Override
 	public String toString() {
-		return "LoginDTO [userPwd=" + userPwd + ", userName=" + userName + "]";
+		return "LoginDTO [userNo=" + userNo + ", userPwd=" + userPwd + ", userId=" + userId + ", deleteYn=" + deleteYn
+				+ "]";
 	}
-	
-	
+
 }
