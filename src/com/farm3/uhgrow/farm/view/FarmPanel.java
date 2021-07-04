@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import com.farm3.uhgrow.farm.controller.FarmController;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.SeedDTO;
 import com.farm3.uhgrow.member.view.FrameManager;
 
 public class FarmPanel extends JPanel {
@@ -28,15 +29,16 @@ public class FarmPanel extends JPanel {
 	private JLabel endButton;
 	private JPanel farmPanel;
 	private int i;
-	private RetainCropDTO cropDTO = new RetainCropDTO();
+	private SeedDTO seedDTO = new SeedDTO();
 	private JButton[] selectButtons;
 	private int fieldIndex;
+	private int[] farmArray;
 	JLabel backGround;
 	JLabel mainNpc;
 	JLabel storeNpc;
 	JLabel storeBackGroundLabel;
 	DefaultListModel defaultSeedList;
-	List<RetainCropDTO> seedList;
+	List<SeedDTO> seedList;
 	JList jSeedList;
 	JLabel seedListLabel;
 	JButton[] fieldButton = new JButton[10];
@@ -84,6 +86,9 @@ public class FarmPanel extends JPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					/*--------------버튼 값이 있을경우-------------*/
+//					if()
+					
 					seedText.setVisible(true);
 					conversationLabel.setVisible(true);
 					jSeedList.setVisible(true);
@@ -116,32 +121,32 @@ public class FarmPanel extends JPanel {
 								@Override
 								public void actionPerformed(ActionEvent e) {
 
-									cropDTO.setCropId(seedList.get(index).getCropId());
+									seedDTO.setCropId(seedList.get(index).getCropId());
 
 									int result = farmcontroller.chooseInputSeed(cropDTO);
 									if (result > 0) {
 										switch (seedList.get(index).getCropId()) {
 										case 1:
 											JOptionPane.showMessageDialog(null,
-													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+													seedList.get(index).getSeedName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(0,"img/tomato/Tomato_Stage_1.png");
 
 											break;
 										case 2:
 											JOptionPane.showMessageDialog(null,
-													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+													seedList.get(index).getSeedName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(0,"img/corn/Corn_Stage.png");
 
 											break;
 										case 3:
 											JOptionPane.showMessageDialog(null,
-													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+													seedList.get(index).getSeedName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(0,"img/garlic/Garlic_Stage_1.png");
 
 											break;
 										case 4:
 											JOptionPane.showMessageDialog(null,
-													seedList.get(index).getCropName() + "씨앗을 심었습니다", "씨앗 심음 알림", 1);
+													seedList.get(index).getSeedName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(0,"img/pumpkin/Pumpkin_Stage_1.png");
 
 											break;

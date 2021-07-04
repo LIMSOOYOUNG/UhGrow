@@ -5,19 +5,20 @@ import java.util.List;
 
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.SeedDTO;
 import com.farm3.uhgrow.farm.model.service.FarmService;
 
 public class FarmController {
-	private List<RetainCropDTO> retainCropList;
+	private List<RetainCropDTO> retainSeedList;
 	private FarmService farmService = new FarmService();
 
 	public FarmController() {}
 	
-	public List<RetainCropDTO> selectSeed() {
-		retainCropList = farmService.selectAllSeed();
-		System.out.println(retainCropList);
+	public List<SeedDTO> selectSeed() {
+		retainSeedList = farmService.selectAllSeed();
+		System.out.println(retainSeedList);
 		
-		return retainCropList;
+		return retainSeedList;
 	}
 	
 	public int chooseInputSeed(RetainCropDTO cropDTO) {
