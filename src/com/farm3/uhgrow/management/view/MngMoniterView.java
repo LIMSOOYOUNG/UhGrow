@@ -961,7 +961,7 @@ public class MngMoniterView extends JFrame {
 				
 				Image select = new ImageIcon("img/mngInterface/triangleButton.png").getImage().getScaledInstance(24, 22, 0); // 버튼 이미지 생성
 				cropPriceModel.removeAllElements();
-				for(i = 0; i < list.size() ; i++) {
+				for(i = 0; i < (list.size() / 2) ; i++) {
 					cropPriceModel.addElement(list.get(i).getCropPrice()); // 빈 모델 리스트에 값 대입
 					selectButton[i] = new JButton(new ImageIcon(select)); // 생성된 버튼에 이미지 삽입
 					selectButton[i].setLocation(x, y);
@@ -1113,7 +1113,7 @@ public class MngMoniterView extends JFrame {
 						}
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							int inputNewFoodRecipe = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
+							int inputNewFoodRecipe = Integer.parseInt(JOptionPane.showInputDialog("갯수를 입력해주세요"));
 							int result = gameDataController.modifyFoodRecipe(index, inputNewFoodRecipe);
 							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
 							
