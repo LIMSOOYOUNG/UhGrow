@@ -83,7 +83,6 @@ public class SellMainPanel extends JPanel {
 				
 				JPanel sellCategoryPanel = new SellCategoryPanel();
 				
-				FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
 				
 				SellController sellController = new SellController();
 				
@@ -109,10 +108,12 @@ public class SellMainPanel extends JPanel {
 				if(sellAmount > 0 && sellAmount <= userCropAmount && userCropAmount != 0) {
 					
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트*/
-//					updateUserCropAmount = sellController.updateUserCropAmount(sellAmount);
-			
+					updateUserCropAmount = sellController.updateUserCropAmount(sellAmount);
+					
 					/* 농작물 판매해서 유저가 받아오는 총 금액*/
 					totalGetPrice = sellController.totalGetCoin(sellAmount); 
+					
+					System.out.println(updateUserCropAmount);
 					
 					System.out.println(totalGetPrice);
 
@@ -120,16 +121,12 @@ public class SellMainPanel extends JPanel {
 					
 					System.out.println(userCoin);
 					System.out.println("판매완료");
+					
+					FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
+
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
 				}
-				
-				
-				
-				
-				
-				
-				
 				
 			}
 			

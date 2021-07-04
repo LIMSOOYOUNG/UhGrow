@@ -19,7 +19,12 @@
 		  FROM CROP
 		 WHERE CROP_ID = 1
 	</entry>
+	<entry key= "updateCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 1
 	
+	</entry>
 </properties>
 
 
