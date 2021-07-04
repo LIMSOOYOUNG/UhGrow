@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.SeedDTO;
+
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
 public class FarmDAO {
@@ -26,12 +28,12 @@ public class FarmDAO {
 		}
 	}
 
-	public List<RetainCropDTO> selectAllSeed(Connection con) {
+	public List<SeedDTO> selectAllSeed(Connection con) {
 		
 		PreparedStatement pstmt = null;											//	쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null;													//	결과값 저장을위한 ResultSet선언
 
-		List<RetainCropDTO> seedList = null;	
+		List<SeedDTO> seedList = null;	
 		
 		String query = prop.getProperty("selectAllCategory");
 		System.out.println(query);
@@ -61,7 +63,7 @@ public class FarmDAO {
 	}
 
 
-	public int chooseInputSeed(Connection con, RetainCropDTO cropDTO) {
+	public int chooseInputSeed(Connection con, SeedDTO seedDTO) {
 		PreparedStatement pstmt = null;		
 		
 		int result = 0;															//	수정 성공여부 초기화
@@ -70,7 +72,7 @@ public class FarmDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, cropDTO.getCropId());
+			pstmt.setInt(1, seedDTO.getCropId());
 			
 			result= pstmt.executeUpdate();
 		} catch (SQLException e) {

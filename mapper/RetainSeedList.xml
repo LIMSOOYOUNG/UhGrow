@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+	<entry key="selectAllCategory">
+		SELECT
+			   FC.CROP_ID
+			 , SD.SEED_NAME
+			 , SD.SEED_AMOUNT
+		  FROM FARM_CROP FC,SEED SD
+		 WHERE FC.CROP_ID = SD.CROP_ID
+		   AND FC.CROP_ID = 1
+	</entry>
+	
+	<entry key="chooseInputSeed">
+		UPDATE SEED
+		   SET SEED_AMOUNT = SEED_AMOUNT - 1
+		 WHERE SEED_ID = ?
+	</entry>
+	
+	
+</properties>
+
+
+
+
+
+
+

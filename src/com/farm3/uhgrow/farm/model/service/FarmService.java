@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.farm3.uhgrow.farm.model.dao.FarmDAO;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.SeedDTO;
 
 public class FarmService {
 	
@@ -18,12 +19,12 @@ public class FarmService {
 		farmDAO = new FarmDAO();
 	}
 
-	public List<RetainCropDTO> selectAllSeed() {
+	public List<SeedDTO> selectAllSeed() {
 		Connection con = getConnection();	
-		List<RetainCropDTO> farmSeedList = farmDAO.selectAllSeed(con);			//	리턴할 리스트 선언후 connection을 
+		List<SeedDTO> retainSeedList = farmDAO.selectAllSeed(con);			//	리턴할 리스트 선언후 connection을 
 		close(con);
 		
-		return farmSeedList;
+		return retainSeedList;
 	}
 
 
