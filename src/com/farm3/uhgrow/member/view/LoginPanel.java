@@ -24,9 +24,9 @@ public class LoginPanel extends JPanel {
 	private JButton btnLogin;
 	private JButton btnSignUp;
 	private JButton btnFindIdPwd;
-	private JButton btnBack;
 	private JButton btnInsertUser;
 	private JPanel loginPanel;
+	private int userNo;
 
 	// 로그인창 패널 
 	public LoginPanel() {
@@ -91,6 +91,7 @@ public class LoginPanel extends JPanel {
 		this.add(pwdField);
 		this.add(btnLogIn());
 		this.add(btnSignUp());
+		this.add(btnFindIdPwd());
 
 
 		this.add(backGroundLabel);
@@ -115,9 +116,11 @@ public class LoginPanel extends JPanel {
 				String loginPwd = pwdField.getText().toString();
 
 				// field에 작성한 id, pwd를 map에 담아서 Controller로 전달 
-			
+
 				MemberController memberController = new MemberController();
 				LoginDTO loginResult = memberController.loginInfo(loginId);
+
+
 
 
 				// 로그인 결과 리턴 받아서 가입된 정보 확인
@@ -133,17 +136,20 @@ public class LoginPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "정지된 계정입니다.", "로그인 오류!", 1);
 
 				} else {
+					userNo = loginResult.getUserNo();
+					NewGameOrContinueGamePanel NewGameOrContinueGamePanel = new NewGameOrContinueGamePanel(userNo);
 
-					JPanel mainStorePanel = new MainStorePanel();
-					JPanel hac = new BuyHouseAndCookPanel();
-					JPanel NewGameOrContinueGamePanel = new NewGameOrContinueGamePanel(loginResult.getUserNo());
 
-					FarmPanel farm = new FarmPanel();
-
-					System.out.println(loginResult);
 					FrameManager.changePanel(loginPanel, NewGameOrContinueGamePanel);
 				}
 
+			}
+		});
+		btnFindIdPwd.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FindIdPwdPanel FindIdPwdPanel = new FindIdPwdPanel(userNo);
+
+				FrameManager.changePanel(loginPanel, FindIdPwdPanel);
 			}
 		});
 
@@ -168,16 +174,16 @@ public class LoginPanel extends JPanel {
 		return btnSignUp;
 	}
 
-	/*------------회원가입창 버튼---------------*/
-	public JButton btnBack() {
-		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
-		btnBack = new JButton(new ImageIcon(backButtonBackground));
-		btnBack.setLayout(null);
-		btnBack.setBounds(505,385,245,35);
+	/*------------아이디 찾기, 비밀번호 찾기 버튼 ---------------*/
+	public JButton btnFindIdPwd() {
+		Image btnFindIdPwdBackGround = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 35, 0);
+		btnFindIdPwd = new JButton(new ImageIcon(btnFindIdPwdBackGround));
+		btnFindIdPwd.setLayout(null);
+		btnFindIdPwd.setBounds(505,385,245,35);
 
-		return btnBack;
+		return btnFindIdPwd;
 	}
-
+	/* -------------- 회원가입 버튼 -------------*/
 	public JButton btnInsertUser() {
 
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);

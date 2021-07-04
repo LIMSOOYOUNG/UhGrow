@@ -13,6 +13,8 @@ import java.util.Properties;
 import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
 
+import oracle.net.aso.c;
+
 public class MemberDAO {
 
 	Properties prop;
@@ -111,29 +113,69 @@ public class MemberDAO {
 	}
 
 	public int startNewGameDataReset(Connection con, int userNo) {
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt5 = null;
 
 		int result = 0;
 
-		String query = prop.getProperty("startNewGameDataReset");
-
+		String query1 = prop.getProperty("resetUserInfo");
+		String query2 = prop.getProperty("deleteToolList");
+		String query3 = prop.getProperty("deleteFarmCrop");
+		String query4 = prop.getProperty("resetCropAmount");
+		String query5 = prop.getProperty("resetFoodAmount");
+				
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, userNo);
-
-			result = pstmt.executeUpdate();
-
-
+			pstmt1 = con.prepareStatement(query1);
+			pstmt1.setInt(1, userNo);
+			result += pstmt1.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			pstmt2 = con.prepareStatement(query2);
+			pstmt2.setInt(1, userNo);
+			result += pstmt2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(pstmt);
-
+			close(pstmt2);
 		}
-
-
-		return result;
 		
+		try {
+			pstmt3 = con.prepareStatement(query3);
+			pstmt3.setInt(1, userNo);
+			result += pstmt3.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt3);
+		}
+		
+		try {
+			pstmt4 = con.prepareStatement(query4);
+			pstmt4.setInt(1, userNo);
+			result += pstmt4.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt4);
+			
+		}
+		try {
+			pstmt5 = con.prepareStatement(query5);
+			pstmt5.setInt(1, userNo);
+			result += pstmt5.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt5);
+		}
+	
+		return result;
 	}
 
 

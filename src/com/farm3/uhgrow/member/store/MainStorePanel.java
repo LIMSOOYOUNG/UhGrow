@@ -76,5 +76,7 @@ public class MainStorePanel extends JPanel {
 		this.add(backGroundLabel);
 		
 		
+		// 구매한다, 판매한다, 그만두기 버튼 클릭시 체인지 패널 만들어줘야한다.
+		
 	}
 }

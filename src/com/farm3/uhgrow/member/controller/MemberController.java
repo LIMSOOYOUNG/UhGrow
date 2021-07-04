@@ -45,10 +45,10 @@ public class MemberController {
 		return continueYn;
 	}
 
-	public void startNewGameDataReset(int userNo) {
-		memberService.startNewGameDataReset(userNo);
+	public int startNewGameDataReset(int userNo) {
+		int result = memberService.startNewGameDataReset(userNo);
 		
-		
+		return result;
 	}
 
 
