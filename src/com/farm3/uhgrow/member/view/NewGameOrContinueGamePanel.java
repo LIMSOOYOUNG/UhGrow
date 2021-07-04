@@ -79,7 +79,7 @@ public class NewGameOrContinueGamePanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				StartNewGameCheckPanel startNewGameCheckPanel = new StartNewGameCheckPanel();
+				StartNewGameCheckPanel startNewGameCheckPanel = new StartNewGameCheckPanel(userNo);
 				
 				FrameManager.changePanel(NewGameOrContinueGamePanel, startNewGameCheckPanel);
 			}

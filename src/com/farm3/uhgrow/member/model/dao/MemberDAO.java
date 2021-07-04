@@ -110,5 +110,31 @@ public class MemberDAO {
 		return continueYn;
 	}
 
+	public int startNewGameDataReset(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+
+		int result = 0;
+
+		String query = prop.getProperty("startNewGameDataReset");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
+			result = pstmt.executeUpdate();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+
+		}
+
+
+		return result;
+		
+	}
+
 
 }

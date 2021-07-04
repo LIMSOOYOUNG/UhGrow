@@ -40,6 +40,7 @@ public class MemberService {
 		Connection con = getConnection();
 		
 		LoginDTO dto = memberDAO.loginInfo(con, loginId);
+		close(con);
 		
 		
 		return dto;
@@ -53,6 +54,19 @@ public class MemberService {
 		
 		close(con);
 		return continueYn;
+	}
+
+	public void startNewGameDataReset(int userNo) {
+		Connection con = getConnection();
+		int result = memberDAO.startNewGameDataReset(con, userNo);
+		
+		if (result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+		System.out.println(result);
 	}
 
 
