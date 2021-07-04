@@ -20,4 +20,28 @@
 	         , CROP_PRICE
 	      FROM CROP
 	</entry>
+	<entry key="selectFoodPrice">
+	    SELECT
+	           FOOD_NAME
+	         , FOOD_PRICE
+	      FROM FOOD
+	</entry>
+	<entry key="modifyFoodPrice">
+	    UPDATE
+	           FOOD F
+	       SET F.FOOD_PRICE = ?
+	     WHERE F.FOOD_ID = ?
+	</entry>
+	<entry key="selectFoodRecipe">
+	    SELECT
+	           FOOD_ID
+	         , CROP_RQ_AMOUNT
+	      FROM RECIPE
+	</entry>
+	<entry key="modifyFoodRecipe">
+	    UPDATE
+	           RECIPE R
+	       SET R.CROP_RQ_AMOUNT = ?
+	     WHERE R.FOOD_ID = ?
+	</entry>
 </properties>
