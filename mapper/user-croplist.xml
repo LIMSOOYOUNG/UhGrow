@@ -3,27 +3,68 @@
 <properties>
 <comment/>
 	<entry key="user-croplist">
-        SELECT
-        	   UF.USER_NO
-        	 , CR.CROP_NAME
-        	 , RF.CROP_AMOUNT
-        	 , UF.COIN
-          FROM USER_INFO UF, RETAIN_CROP RF, CROP CR
-         WHERE UF.USER_NO = RF.USER_NO
-           AND CR.CROP_ID = RF.CROP_ID
-           
+       SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 1
+    </entry>
+
+    <entry key = "user-cornList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 2
 	</entry>
-	<entry key= "cropPrice">
-		SELECT
-			   CROP_PRICE
-		  FROM CROP
-		 WHERE CROP_ID = 1
+	
+	<entry key = "user-garlicList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 3	
 	</entry>
-	<entry key= "updateCropAmount">
+	<entry key = "user-pumpkinList">
+	  SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 4	
+	</entry>
+	<entry key= "updateTomatoCropAmount">
 		UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 1
+		   AND USER_NO = 1
 	
+	</entry>
+	<entry key= "sellTomatoGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((13000 * ?) * 0.1)
+		 WHERE USER_NO = 1   
 	</entry>
 </properties>
 

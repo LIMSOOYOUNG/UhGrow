@@ -50,6 +50,7 @@ public class SellCropsDAO {
 				userCrop.setCropName(rset.getString("CROP_NAME"));
 				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
 				userCrop.setCoin(rset.getInt("COIN"));
+				userCrop.setCropPrice(rset.getInt("CROP_PRICE"));
 				
 				userCropList.add(userCrop);
 			}
@@ -64,68 +65,165 @@ public class SellCropsDAO {
 		return userCropList;
 	}
 
-
-	public CropDTO getCropPrice(Connection con) {
-
-		PreparedStatement pstmt = null;
+	public List<CropDTO> userCornList(Connection con) {
 		
+		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		CropDTO getCropPrice = null;
+		List<CropDTO> userCornList = null;
 		
-		String query = prop.getProperty("cropPrice");
+		String query = prop.getProperty("user-cornList");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
 			rset = pstmt.executeQuery();
+			
+			userCornList = new ArrayList<>();
+			
 			while(rset.next()) {
-				getCropPrice = new CropDTO();
+				CropDTO userCrop = new CropDTO();
+				userCrop.setUserNo(rset.getInt("USER_NO"));
+				userCrop.setCropName(rset.getString("CROP_NAME"));
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCoin(rset.getInt("COIN"));
 				
-				getCropPrice.setCropPrice(rset.getInt("CROP_PRICE"));
-				
+				userCornList.add(userCrop);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
-			close(pstmt);
+		    close(rset);
+		    close(pstmt);
 		}
 		
-		return getCropPrice;
+		return userCornList;
 	}
-
-
-	public CropDTO updateCropAmount(Connection con, int sellAmount) {
-
+	
+	public List<CropDTO> userGarlicList(Connection con) {
 		PreparedStatement pstmt = null;
-		
 		ResultSet rset = null;
 		
-		CropDTO updateCropAmount = null;
+		List<CropDTO> userGarlicList = null;
 		
-		String query = prop.getProperty("updateCropAmount");
+		String query = prop.getProperty("user-garlicList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			userGarlicList = new ArrayList<>();
+			
+			while(rset.next()) {
+				CropDTO userCrop = new CropDTO();
+				userCrop.setUserNo(rset.getInt("USER_NO"));
+				userCrop.setCropName(rset.getString("CROP_NAME"));
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCoin(rset.getInt("COIN"));
+				
+				userGarlicList.add(userCrop);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		    close(rset);
+		    close(pstmt);
+		}
+		
+		return userGarlicList;	
+	}
+	
+	public List<CropDTO> userPumpkinList(Connection con) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<CropDTO> userPumpkinList = null;
+		
+		String query = prop.getProperty("user-pumpkinList");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			userPumpkinList = new ArrayList<>();
+			
+			while(rset.next()) {
+				CropDTO userCrop = new CropDTO();
+				userCrop.setUserNo(rset.getInt("USER_NO"));
+				userCrop.setCropName(rset.getString("CROP_NAME"));
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCoin(rset.getInt("COIN"));
+				
+				userPumpkinList.add(userCrop);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+		    close(rset);
+		    close(pstmt);
+		}
+		
+		return userPumpkinList;	
+	}
+	
+	/* 토마토 갯수 업데이트*/
+	public int updateTomatoCropAmount(Connection con, int sellAmount) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateTomatoCropAmount");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
-			rset = pstmt.executeQuery();
 			
-			while (rset.next()) {
-				updateCropAmount = new CropDTO();
-				
-				updateCropAmount.setCropAmount(rset.getInt("CROP_AMONT"));
-			}
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		
-		return updateCropAmount;
+		return result;
 	}
+		
+	/* 토마토 팔고 난 금액 업데이트*/
+	public int sellTomatoGetCoin(Connection con, int sellAmount) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("sellTomatoGetCoin");
+			
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sellAmount);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+
+
+
+
 	
 }
