@@ -73,5 +73,6 @@ public class BuyHouseAndCookPanel extends JPanel {
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 		
+		// 집 구매, 요리하기, 그만두기 클릭시 체인지 패널 userNo 전달인자로 넘겨주면서 받아줘야한다.
 	}
 }

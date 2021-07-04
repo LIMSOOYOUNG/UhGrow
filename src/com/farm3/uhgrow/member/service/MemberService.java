@@ -56,18 +56,17 @@ public class MemberService {
 		return continueYn;
 	}
 
-	public void startNewGameDataReset(int userNo) {
+	public int startNewGameDataReset(int userNo) {
 		Connection con = getConnection();
 		int result = memberDAO.startNewGameDataReset(con, userNo);
-		
-		if (result > 0) {
-			commit(con);
-		} else {
-			rollback(con);
-		}
+
 		close(con);
 		System.out.println(result);
+		return result;
 	}
+	
+	
+	
 
 
 }
