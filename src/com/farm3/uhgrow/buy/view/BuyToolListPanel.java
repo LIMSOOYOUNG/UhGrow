@@ -2,29 +2,22 @@ package com.farm3.uhgrow.buy.view;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BuyListPanel extends JPanel{
+public class BuyToolListPanel extends JPanel{
 
-	private JPanel buyListPanel;
-	private JButton sellButton;
-	private JButton buyButton;
-	private JButton backButton;
-	private JButton seedListButton;
-	private JButton toolListButton;
+	private JPanel buyToolListPanel;
 
-	public BuyListPanel() {
+	public BuyToolListPanel() {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
-		buyListPanel = this;
+		buyToolListPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -58,47 +51,41 @@ public class BuyListPanel extends JPanel{
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
 
-		/* -------- 판매 목록 버튼 ---------- */
-		JButton seedListButton = new JButton("씨앗 구매");
-		seedListButton.setLocation(70, 200);
-		seedListButton.setSize(100, 25);
+		/* -------- 농기구 리스트 버튼 ---------- */
+		JButton pickaxeToolButton = new JButton("곡괭이");
+		pickaxeToolButton.setLocation(70, 200);
+		pickaxeToolButton.setSize(100, 25);
 
-		JButton toolListButton = new JButton("농기구 구매");
-		toolListButton.setLocation(70, 250);
-		toolListButton.setSize(100, 25);
+		JButton shovelToolButton = new JButton("삽");
+		shovelToolButton.setLocation(70, 250);
+		shovelToolButton.setSize(100, 25);
 
-		this.add(buyButton);
+		JButton hoeToolButton = new JButton("호미");
+		hoeToolButton.setLocation(70, 300);
+		hoeToolButton.setSize(100, 25);
+
+		JButton wateringCanToolButton = new JButton("물뿌리개");
+		wateringCanToolButton.setLocation(70, 350);
+		wateringCanToolButton.setSize(100, 25);
+
+		/*-------------- 농기구 구매 텍스트 ---------------*/
+
+		JLabel seedBuyLabel = new JLabel("<농기구 구매>");
+		seedBuyLabel.setLocation(390, 180);
+		seedBuyLabel.setSize(200, 25);
+		seedBuyLabel.setFont(font);
+		
+		this.add(seedBuyLabel);
+		this.add(buyButton); 
 		this.add(sellButton);
 		this.add(backButton);
-		this.add(seedListButton);
-		this.add(toolListButton);
+		this.add(pickaxeToolButton);
+		this.add(shovelToolButton);
+		this.add(hoeToolButton);
+		this.add(wateringCanToolButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		seedListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel buySeedListPanel = new BuySeedListPanel();
-
-				FrameManager.changePanel(buyListPanel, buySeedListPanel);
-
-			}
-		});
-		
-		toolListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel buyToolListPanel = new BuyToolListPanel();
-
-				FrameManager.changePanel(buyListPanel, buyToolListPanel);
-
-			}
-		});
-
-
-
 	}
-
-
 
 }
