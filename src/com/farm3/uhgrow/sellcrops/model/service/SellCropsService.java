@@ -32,40 +32,80 @@ public class SellCropsService {
 		return userCropList;
 	}
 
-
-
-	public int cropPrice(int sellAmount) {
-
-		Connection con = getConnection();
-		
-		CropDTO getCropPrice = sellCropsDAO.getCropPrice(con);
-		
-		int cropPrice = 0;
-		int totalGetPrice = 0;
-		
-		cropPrice = getCropPrice.getCropPrice();
-		
-		totalGetPrice = ((cropPrice * sellAmount) / 10);
-		
-		close(con);
-		
-		return totalGetPrice;
-	}
-
-
-
-	public int updateUserCropAmount(int sellAmount) {
+	
+	public List<CropDTO> userCornList() {
 		
 		Connection con = getConnection();
 		
-		CropDTO updateCropAmount = sellCropsDAO.updateCropAmount(con, sellAmount);
+		List<CropDTO> userCornList = sellCropsDAO.userCornList(con);
+
+		close(con);
 		
-		int userCropAmount = updateCropAmount.getCropAmount(); 
+		return userCornList;
+	}
+
+	
+	public List<CropDTO> userGarlicList() {
+		
+		Connection con = getConnection();
+		
+		List<CropDTO> userGarlicList = sellCropsDAO.userGarlicList(con);
+
+		close(con);
+		
+		return userGarlicList;
+	}
+
+	public List<CropDTO> userPumpkinList() {
+		
+		Connection con = getConnection();
+		
+		List<CropDTO> userPumpkinList = sellCropsDAO.userPumpkinList(con);
+
+		close(con);
+		
+		return userPumpkinList;
+	}
+	
+	/*토마토 판매 수량 업데이트*/
+	public int updateUserTomatoAmount(int sellAmount) {
+		
+		Connection con = getConnection();
+		
+		int updateTomatoAmount = sellCropsDAO.updateTomatoCropAmount(con, sellAmount);
 		
 		close(con);
 		
-		return userCropAmount;
+		return updateTomatoAmount;
 	}
+
+
+	/* 토마토 팔고 난 후 금액 받기*/
+	public int sellTomatoGetCoin(int sellAmount) {
+		
+		Connection con = getConnection();
+		
+		int result = sellCropsDAO.sellTomatoGetCoin(con, sellAmount);
+		
+		close(con);
+		
+		return result;
+	}
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

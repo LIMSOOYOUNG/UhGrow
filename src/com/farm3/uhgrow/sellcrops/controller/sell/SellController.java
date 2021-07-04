@@ -10,7 +10,7 @@ public class SellController {
 	private CropDTO cropDTO = new CropDTO();
 	private SellCropsService sellCropsService = new SellCropsService();
 	
-
+	/* 유저, 유저의 재화, 유저가 가지고 있는 농작물 , 농작물 갯수*/
 	public List<CropDTO> userCropList() {
 		
 		List<CropDTO> userCropList = sellCropsService.userCropList();
@@ -18,20 +18,51 @@ public class SellController {
 		return userCropList;
 	}
 
+	public List<CropDTO> userCornList() {
 
-	public int totalGetCoin(int sellAmount) {
+
+		List<CropDTO> userCornList = sellCropsService.userCornList();
 		
-		int totalGetPrice = sellCropsService.cropPrice(sellAmount);
+		return userCornList;
+	}
 		
-		return totalGetPrice;
+	
+	public List<CropDTO> userGarlicList() {
+
+		List<CropDTO> userGarlicList = sellCropsService.userGarlicList();
+		
+		return userGarlicList;
+	}	
+	
+	public List<CropDTO> userPumpkinList() {
+
+		List<CropDTO> userPumpkinList = sellCropsService.userPumpkinList();
+		
+		return userPumpkinList;
+	}	
+
+	/* 토마토 수량 업데이트*/
+	public int updateUserToamtoAmount(int sellAmount) {
+		
+		int result = sellCropsService.updateUserTomatoAmount(sellAmount);
+		
+		return result;
 	}
 
-
-	public int updateUserCropAmount(int sellAmount) {
+	/* 토마토 금액 업데이트*/
+	public int sellTomatoGetCoin(int sellAmount) {
 		
-		int updateUserCropAmount = sellCropsService.updateUserCropAmount(sellAmount);
+		int result = sellCropsService.sellTomatoGetCoin(sellAmount);
 		
-		return updateUserCropAmount;
+		return result;
 	}
+	
+
+
+
+
+
+
+
 
 }
