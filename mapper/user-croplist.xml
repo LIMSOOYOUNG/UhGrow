@@ -61,10 +61,10 @@
 	
 	</entry>
 	<entry key= "sellTomatoGetCoin">
-		UPDATE
-			   USER_INFO 
-		   SET COIN = COIN + ((13000 * ?) * 0.1)
-		 WHERE USER_NO = 1   
+<!-- 		UPDATE -->
+<!-- 			   USER_INFO  -->
+<!-- 		   SET COIN = COIN + ((13000 * ?) * 0.1) -->
+<!-- 		 WHERE USER_NO = 1    -->
 	</entry>
 </properties>
 
