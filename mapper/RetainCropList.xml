@@ -1,107 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-<comment/>
+	<comment />
 	<entry key="selectAllCategory">
-		SELECT
-			   DISTINCT RC.CROP_ID
-			 , CR.CROP_NAME
-			 , RC.CROP_AMOUNT
-		  FROM CROP CR, FARM_CROP FC, RETAIN_CROP RC
-		 WHERE CR.CROP_ID = RC.CROP_ID
-		   AND FC.USER_NO = RC.USER_NO
-		   AND FC.USER_NO = '1'
-           AND RC.CROP_ID > 4
-        ORDER BY CROP_ID
+		select
+		rc.crop_id
+		, cr.crop_name
+		, rc.crop_amount
+		from crop cr, retain_crop rc
+		where cr.crop_id = rc.crop_id
+		and rc.user_no = '1'
+		and rc.crop_id>4
+		order by cr.crop_id
 	</entry>
-	
+
 	<entry key="chooseInputSeed">
 		UPDATE RETAIN_CROP
-		   SET CROP_AMOUNT = CROP_AMOUNT - 1
-		 WHERE CROP_ID = ?
+		SET CROP_AMOUNT = CROP_AMOUNT - 1
+		WHERE CROP_ID = ?
 	</entry>
-	
+
 	<entry key="fieldInputSeed">
 		INSERT
-		  INTO FARM_CROP
+		INTO FARM_CROP
 		VALUES (?,1,?,?)
 	</entry>
-	
+
 	<entry key="selectFarmExp">
 		SELECT
-			  FARM_EXP
-		  FROM USER_INFO
-		 where USER_NO = ?
+		FARM_EXP
+		FROM USER_INFO
+		where USER_NO = ?
 	</entry>
-	
+
 	<entry key="deleteFarmList">
 		DELETE
-		  FROM FARM_CROP
-		 where USER_NO = 1
-		   AND FARM_LIST = ?
+		FROM FARM_CROP
+		where USER_NO = 1
+		AND FARM_LIST = ?
 	</entry>
-	
+
 	<entry key="harvestCrop">
 		UPDATE RETAIN_CROP
-		   SET CROP_AMOUNT = CROP_AMOUNT +1
-		 WHERE CROP_ID = ?
-		   AND USER_NO = 1
+		SET CROP_AMOUNT = CROP_AMOUNT +1
+		WHERE CROP_ID = ?
+		AND USER_NO = 1
 	</entry>
-	
+
 	<entry key="inventoryCrop">
 		SELECT
-               RC.CROP_ID
-			 , RC.CROP_AMOUNT
-		  FROM RETAIN_CROP RC
-		 WHERE RC.USER_NO = ?
-         ORDER BY CROP_ID
+		RC.CROP_ID
+		, RC.CROP_AMOUNT
+		FROM RETAIN_CROP RC
+		WHERE RC.USER_NO = ?
+		ORDER BY CROP_ID
 	</entry>
 	<entry key="createCrop1">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 1 , 0) 
+		RETAIN_CROP
+		VALUES (?, 1 , 0)
 	</entry>
-	
+
 	<entry key="createCrop2">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 2 , 0) 
+		RETAIN_CROP
+		VALUES (?, 2 , 0)
 	</entry>
-	
+
 	<entry key="createCrop3">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 3 , 0) 
+		RETAIN_CROP
+		VALUES (?, 3 , 0)
 	</entry>
-	
+
 	<entry key="createCrop4">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 4 , 0) 
+		RETAIN_CROP
+		VALUES (?, 4 , 0)
 	</entry>
-	
+
 	<entry key="createCrop5">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 5 , 0) 
+		RETAIN_CROP
+		VALUES (?, 5 , 0)
 	</entry>
-	
+
 	<entry key="createCrop6">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 6 , 0) 
+		RETAIN_CROP
+		VALUES (?, 6 , 0)
 	</entry>
-	
+
 	<entry key="createCrop7">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 7 , 0) 
+		RETAIN_CROP
+		VALUES (?, 7 , 0)
 	</entry>
-	
+
 	<entry key="createCrop8">
 		INSERT INTO
-			   RETAIN_CROP
-		VALUES (?, 8 , 0) 
+		RETAIN_CROP
+		VALUES (?, 8 , 0)
 	</entry>
 </properties>
 

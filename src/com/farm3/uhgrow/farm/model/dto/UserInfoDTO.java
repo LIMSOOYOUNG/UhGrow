@@ -1,6 +1,8 @@
 package com.farm3.uhgrow.farm.model.dto;
 
-public class UserInfoDTO {
+import java.io.Serializable;
+
+public class UserInfoDTO implements Serializable {
 	private int userNo;
 	private int farmExp;
 	

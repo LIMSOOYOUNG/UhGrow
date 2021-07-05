@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import org.w3c.dom.events.MouseEvent;
+
 import com.farm3.uhgrow.farm.controller.FarmController;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.dto.UserInfoDTO;
 import com.farm3.uhgrow.farm.model.dto.CropDTO;
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
 import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.sellcrops.view.SellMainPanel;
 
 public class FarmPanel extends JPanel {
 	private boolean isTrue = false;
@@ -40,6 +44,7 @@ public class FarmPanel extends JPanel {
 	private RetainCropDTO retainCropDTO = new RetainCropDTO();
 	private FarmCropDTO farmCropDTO = new FarmCropDTO();
 	private FarmController farmcontroller = new FarmController();
+	private SellMainPanel sellMainPanel = new SellMainPanel();
 	private JButton[] selectButtons;
 	private int[] fieldArr = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	private int fieldIndex;
@@ -102,6 +107,12 @@ public class FarmPanel extends JPanel {
 		this.setVisible(true);
 
 		this.add(backGroundLabel());
+		
+		storeNpc().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				FrameManager.changePanel(farmPanel, sellMainPanel);
+				}
+			});
 
 	}
 	
@@ -270,7 +281,6 @@ public void toolLabel() {
 		int x = 120;
 		int y = 115;
 		for (fieldIndex = 0; fieldIndex < fieldButton.length; fieldIndex++) {
-
 			Image imgField = new ImageIcon("img/field.png").getImage().getScaledInstance(35, 30, 0);
 			fieldButton[fieldIndex] = new JButton(new ImageIcon(imgField));
 			fieldButton[fieldIndex].setSize(34, 30);
@@ -394,51 +404,61 @@ public void toolLabel() {
 									System.out.println(retainCropList.get(index).getCropId());
 									int result = farmcontroller.chooseInputSeed(retainCropDTO);
 									int imgindex = 0;
+									FarmController farmController = new FarmController();
+									FarmCropDTO farmCropDTO = new FarmCropDTO();
 									if (result > 0) {
 										switch (retainCropList.get(index).getCropId()) {
 										case 5:
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/tomato/Tomato_Stage_1.png");
-											farmCropDTO.setFarmList(imgindex + 1);
+											farmCropDTO.setFarmList(1);
 											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
 											farmCropDTO.setAccumulate(200);
+											farmController.fieldInputSeed(farmCropDTO);
 											fieldArr[imgindex] = 5;
 											tomatoSumExp[imgindex] = 0;
-
+										
 											break;
 										case 6:
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/corn/Corn_Stage.png");
-											farmCropDTO.setFarmList(imgindex + 1);
+											farmCropDTO.setFarmList(1);
 											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
 											farmCropDTO.setAccumulate(300);
+											farmController.fieldInputSeed(farmCropDTO);
+											
 											fieldArr[imgindex] = 6;
-											cornSumExp[imgindex] = 0;
-
+											tomatoSumExp[imgindex] = 0;
+											
 											break;
 										case 7:
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/garlic/Garlic_Stage_1.png");
-											farmCropDTO.setFarmList(imgindex + 1);
+											farmCropDTO.setFarmList(1);
 											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
 											farmCropDTO.setAccumulate(400);
+											farmController.fieldInputSeed(farmCropDTO);
+										
 											fieldArr[imgindex] = 7;
-											garlicSumExp[imgindex] = 0;
+											tomatoSumExp[imgindex] = 0;
+											
 
 											break;
 										case 8:
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/pumpkin/Pumpkin_Stage_1.png");
-											farmCropDTO.setFarmList(imgindex + 1);
+											farmCropDTO.setFarmList(1);
 											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
 											farmCropDTO.setAccumulate(500);
+											farmController.fieldInputSeed(farmCropDTO);
+							
 											fieldArr[imgindex] = 8;
-											pumpkinSumExp[imgindex] = 0;
-
+											tomatoSumExp[imgindex] = 0;
+		
 											break;
 
 										default:
@@ -463,11 +483,197 @@ public void toolLabel() {
 			}
 		});
 		
-		
+		fieldButton[1].addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				FrameManager.panelRefresh(farmPanel);
+				/*--------------버튼 값이 있을경우-------------*/
+				int fieldArrIndex = 1; // 누른 배열의 인덱스 값
+				switch (fieldArr[fieldArrIndex]) {
+				case 5:
+					tomatoSumExp[fieldArrIndex] += farmExp;
+					if ((double) tomatoSumExp[fieldArrIndex]  / farmCropDTO.getAccumulate() < 0.25) {
+						setIcon(fieldArrIndex, "img/tomato/Tomato_Stage_1.png");
+					} else if ((double) tomatoSumExp[fieldArrIndex]  / farmCropDTO.getAccumulate() < 0.5) {
+						setIcon(fieldArrIndex, "img/tomato/Tomato_Stage_2.png");
+					} else if ((double) tomatoSumExp[fieldArrIndex]  / farmCropDTO.getAccumulate() < 0.75) {
+						setIcon(fieldArrIndex, "img/tomato/Tomato_Stage_3.png");
+					} else if ((double) tomatoSumExp[fieldArrIndex]  / farmCropDTO.getAccumulate() < 1) {
+						setIcon(fieldArrIndex, "img/tomato/Tomato_Stage_4.png");
+					} else if ((double) tomatoSumExp[fieldArrIndex]  / farmCropDTO.getAccumulate() < 1.1) {
+						setIcon(fieldArrIndex, "img/tomato/Tomato.png");
+					} else {
+						deleteHarvestCrop(fieldArrIndex,1);
+					}
+					break;
+				case 6:
+					cornSumExp[fieldArrIndex] += farmExp;
+					if ((double) cornSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.25) {
+						setIcon(fieldArrIndex, "img/corn/Corn_Stage.png");
+					} else if ((double) cornSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.5) {
+						setIcon(fieldArrIndex, "img/corn/Corn_Stage_2.png");
+					} else if ((double) cornSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.75) {
+						setIcon(fieldArrIndex, "img/corn/Corn_Stage_3.png");
+					} else if ((double) cornSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1) {
+						setIcon(fieldArrIndex, "img/corn/Corn_Stage_4.png");
+					} else if ((double) cornSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1.1) {
+						setIcon(fieldArrIndex, "img/corn/Corn.png");
+					} else {
+						deleteHarvestCrop(fieldArrIndex,2);
+					}
+					break;
+				case 7:
+					garlicSumExp[fieldArrIndex] += farmExp;
+					if ((double) garlicSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.25) {
+						setIcon(fieldArrIndex, "img/garlic/Garlic_Stage_1.png");
+					} else if ((double) garlicSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.5) {
+						setIcon(fieldArrIndex, "img/garlic/Garlic_Stage_2.png");
+					} else if ((double) garlicSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.75) {
+						setIcon(fieldArrIndex, "img/garlic/Garlic_Stage_3.png");
+					} else if ((double) garlicSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1) {
+						setIcon(fieldArrIndex, "img/garlic/Garlic_Stage_4.png");
+					} else if ((double) garlicSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1.1) {
+						setIcon(fieldArrIndex, "img/garlic/garlic.png");
+					} else {
+						deleteHarvestCrop(fieldArrIndex,3);
+					}
+					break;
+				case 8:
+					pumpkinSumExp[fieldArrIndex] += farmExp;
+					if ((double) pumpkinSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.25) {
+						setIcon(fieldArrIndex, "img/pumpkin/Pumpkin_Stage_1.png");
+					} else if ((double) pumpkinSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.5) {
+						setIcon(fieldArrIndex, "img/pumpkin/Pumpkin_Stage_2.png");
+					} else if ((double) pumpkinSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 0.75) {
+						setIcon(fieldArrIndex, "img/pumpkin/Pumpkin_Stage_3.png");
+					} else if ((double) pumpkinSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1) {
+						setIcon(fieldArrIndex, "img/pumpkin/Pumpkin_Stage_4.png");
+					} else if ((double) pumpkinSumExp[fieldArrIndex] / farmCropDTO.getAccumulate() < 1.1) {
+						setIcon(fieldArrIndex, "img/pumpkin/Pumpkin.png");
+					} else {
+						deleteHarvestCrop(fieldArrIndex,4);
+					}
+					break;
+				case 0:
+					seedText.setVisible(true);
+					conversationLabel.setVisible(true);
+					jSeedList.setVisible(true);
+					int x = 860;
+					int y = 300;
+					retainCropList = farmcontroller.selectSeed();
+					if (retainCropList != null) {
+						selectButtons = new JButton[retainCropList.size()];
+						Image selectSeed = new ImageIcon("img/mngInterface/triangleButton.png").getImage()
+								.getScaledInstance(25, 25, 0);
+
+						defaultSeedList.removeAllElements();
+						for (i = 0; i < retainCropList.size(); i++) {
+							defaultSeedList.addElement(retainCropList.get(i).getCropName() + ""
+									+ retainCropList.get(i).getCropAmount() + "개" + " " + ">");// 빈 모델
+
+							selectButtons[i] = new JButton(new ImageIcon(selectSeed)); // 생성된 버튼에 이미지 삽입
+							selectButtons[i].setLocation(x, y);
+							selectButtons[i].setSize(20, 20); // 좌표와 크기 지정
+							y += 25; // 버튼 세로 정렬을 위해 y축 값 증가
+							selectButtons[i].setVisible(true);
+							farmPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
+							FrameManager.refresh();
+							selectButtons[i].addActionListener(new ActionListener() { // 버튼에 이벤트 추가
+								private int index; // 버튼의 자체 인덱스를 저장하기 위해 변수 선언
+								{
+									this.index = i; // 자체 인덱스에 for문의 시작값 대입
+								}
+								@Override
+								public void actionPerformed(ActionEvent e) {
+									retainCropDTO.setCropId(retainCropList.get(index).getCropId());
+									System.out.println(retainCropList.get(index).getCropId());
+									int result = farmcontroller.chooseInputSeed(retainCropDTO);
+									int imgindex = 1;
+									FarmController farmController = new FarmController();
+									FarmCropDTO farmCropDTO = new FarmCropDTO();
+									if (result > 0) {
+										switch (retainCropList.get(index).getCropId()) {
+										case 5:
+											JOptionPane.showMessageDialog(farmPanel,
+													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(imgindex, "img/tomato/Tomato_Stage_1.png");
+											farmCropDTO.setFarmList(2);
+											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
+											farmCropDTO.setAccumulate(200);
+											farmController.fieldInputSeed(farmCropDTO);
+											fieldArr[imgindex] = 5;
+											tomatoSumExp[imgindex] = 0;
+										
+											break;
+										case 6:
+											JOptionPane.showMessageDialog(farmPanel,
+													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(imgindex, "img/corn/Corn_Stage.png");
+											farmCropDTO.setFarmList(2);
+											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
+											farmCropDTO.setAccumulate(300);
+											farmController.fieldInputSeed(farmCropDTO);
+											
+											fieldArr[imgindex] = 6;
+											tomatoSumExp[imgindex] = 0;
+											
+											break;
+										case 7:
+											JOptionPane.showMessageDialog(farmPanel,
+													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(imgindex, "img/garlic/Garlic_Stage_1.png");
+											farmCropDTO.setFarmList(2);
+											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
+											farmCropDTO.setAccumulate(400);
+											farmController.fieldInputSeed(farmCropDTO);
+										
+											fieldArr[imgindex] = 7;
+											tomatoSumExp[imgindex] = 0;
+											
+
+											break;
+										case 8:
+											JOptionPane.showMessageDialog(farmPanel,
+													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
+											setIcon(imgindex, "img/pumpkin/Pumpkin_Stage_1.png");
+											farmCropDTO.setFarmList(2);
+											farmCropDTO.setCropId(retainCropList.get(index).getCropId());
+											farmCropDTO.setAccumulate(500);
+											farmController.fieldInputSeed(farmCropDTO);
+							
+											fieldArr[imgindex] = 8;
+											tomatoSumExp[imgindex] = 0;
+		
+											break;
+
+										default:
+											break;
+										}
+									} else {
+										JOptionPane.showMessageDialog(farmPanel, "씨앗심기를 실패하였습니다.", "씨앗 심음 알림", 1);
+									}
+								}
+							});
+						}
+					} else {
+						seedText.setVisible(false);
+						conversationLabel.setVisible(false);
+						jSeedList.setVisible(false);
+
+						JOptionPane.showMessageDialog(null, "보유중인 씨앗이 없습니다.", "씨앗보유 여부", 0);
+					}
+					break;
+				}
+
+			}
+		});
+				
 	}
 
 	public void deleteHarvestCrop(int fieldArrIndex, int cropId) {
+		
 		setIcon(fieldArrIndex, "img/field.png");
 		fieldArr[fieldArrIndex] = 0; // 필드arr에 있는값을 0 으로 초기화
 		int delete = 0;
@@ -521,6 +727,8 @@ public void toolLabel() {
 		storeNpc = new JLabel(new ImageIcon(imgStoreNpc));
 		storeNpc.setLocation(750, 150);
 		storeNpc.setSize(30, 50);
+		
+	
 
 		return storeNpc;
 	}

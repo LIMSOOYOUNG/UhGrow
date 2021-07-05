@@ -1,6 +1,8 @@
 package com.farm3.uhgrow.farm.model.dto;
 
-public class RetainToolDTO {
+import java.io.Serializable;
+
+public class RetainToolDTO implements Serializable {
 	private int tool_id;
 
 	public RetainToolDTO() {}
