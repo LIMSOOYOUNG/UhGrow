@@ -86,6 +86,38 @@
 		   SET RF.FOOD_AMOUNT = DEFAULT
 	 	 WHERE RF.USER_NO = ?
 	</entry>
+	<entry key="nameAndMailForFindId">
+		SELECT
+			   UI.USER_ID
+		  FROM USER_INFO UI
+		 WHERE UI.USER_NAME = ?
+		   AND UI.EMAIL = ?
+	</entry>
+	<entry key="IdAndNameAndMailForFindPwd">
+		SELECT
+			   UI.USER_PWD
+		  FROM USER_INFO UI
+		 WHERE USER_ID = ?
+		   AND USER_NAME = ?
+		   AND EMAIL = ?
+	</entry>
+	<entry key="checkPwd">
+		SELECT
+			   UI.USER_PWD
+		  FROM USER_INFO UI
+		 WHERE USER_ID = ?
+		   AND USER_NAME = ?
+		   AND EMAIL = ?
+		  
+	</entry>
+	<entry key="changePwd">
+		UPDATE
+			   USER_INFO UI
+		   SET UI.USER_PWD = ?
+		 WHERE USER_ID = ?
+		   AND USER_NAME = ?
+		   AND EMAIL = ?
+		</entry>
 
 </properties>
 

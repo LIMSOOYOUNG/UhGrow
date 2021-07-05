@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.member.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -22,6 +23,7 @@ public class SignUpPanel extends JPanel {
 	
 	private JPanel signUpPanel;
 	private JButton btnBack;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	
 	public SignUpPanel () {
 		JButton btnInsert;
@@ -29,7 +31,7 @@ public class SignUpPanel extends JPanel {
 		signUpPanel = this;
 	
 
-		Font font = new Font("고딕체", Font.BOLD, 25);
+		
 
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -42,15 +44,22 @@ public class SignUpPanel extends JPanel {
 
 		/* ------------회원가입 창에 회원가입 버튼 --------------*/
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
-		btnInsert = new JButton(new ImageIcon(signUpBackground));
+		btnInsert = new JButton("회 원 가 입");
 		btnInsert.setLayout(null);
 		btnInsert.setBounds(210,385,245,35);
+		btnInsert.setFont(font);
+		btnInsert.setForeground(Color.white);
+		btnInsert.setBackground(Color.ORANGE);
+		
 
 
 		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
-		btnBack = new JButton(new ImageIcon(backButtonBackground));
+		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setLayout(null);
 		btnBack.setBounds(505,385,245,35);
+		btnBack.setFont(font);
+		btnBack.setForeground(Color.white);
+		btnBack.setBackground(Color.ORANGE);
 
 		
 		
@@ -58,6 +67,8 @@ public class SignUpPanel extends JPanel {
 		idLabel.setLayout(null);
 		idLabel.setBounds(350, 60, 200, 25);
 		idLabel.setFont(font);
+		idLabel.setForeground(Color.white);
+
 
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
@@ -68,6 +79,8 @@ public class SignUpPanel extends JPanel {
 		pwdLabel.setLayout(null);
 		pwdLabel.setBounds(350, 120, 200, 25);
 		pwdLabel.setFont(font);
+		pwdLabel.setForeground(Color.white);
+
 
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
@@ -78,6 +91,8 @@ public class SignUpPanel extends JPanel {
 		pwdLabel2.setLayout(null);
 		pwdLabel2.setBounds(350, 180, 200, 25);
 		pwdLabel2.setFont(font);
+		pwdLabel2.setForeground(Color.white);
+
 
 		JPasswordField pwdField2 = new JPasswordField();
 		pwdField2.setLayout(null);
@@ -88,6 +103,8 @@ public class SignUpPanel extends JPanel {
 		nameLabel.setLayout(null);
 		nameLabel.setBounds(350, 240, 200, 25);
 		nameLabel.setFont(font);
+		nameLabel.setForeground(Color.white);
+
 
 		JTextField nameField = new JTextField();
 		nameField.setLayout(null);
@@ -98,11 +115,16 @@ public class SignUpPanel extends JPanel {
 		mailLabel.setLayout(null);
 		mailLabel.setBounds(350, 300, 200, 25);
 		mailLabel.setFont(font);
+		mailLabel.setForeground(Color.white);
+
 
 		JTextField mailField = new JTextField();
 		mailField.setLayout(null);
 		mailField.setBounds(350, 330, 300, 25);
 		mailField.setFont(font);
+		mailField.setForeground(Color.white);
+
+		
 
 		
 		// signUpPanel에 위에 생성한 버튼, 텍스트필드, 배경 추가
