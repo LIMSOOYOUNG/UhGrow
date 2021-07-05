@@ -869,7 +869,7 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButtons[i].setContentAreaFilled(false);
-					selectButtons[i].setFocusPainted(false);
+//					selectButtons[i].setFocusPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					recoverMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -1037,7 +1037,6 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
-
 		housePriceUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1127,9 +1126,6 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 	}
-	
-	
-
 	
 	public static void playSound(String fn) {
 		try {
