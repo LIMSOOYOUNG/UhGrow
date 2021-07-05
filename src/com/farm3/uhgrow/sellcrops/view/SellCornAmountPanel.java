@@ -13,30 +13,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
-public class SellTomatoAmountPanel extends JPanel{
+public class SellCornAmountPanel extends JPanel {
 
-	private JPanel sellTomatoAmountPanel;
+	private JPanel sellCornAmountPanel;
 	private SellController sellController;
-	
-	public SellTomatoAmountPanel() {
-		
+
+	public SellCornAmountPanel() {
+
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
-		sellTomatoAmountPanel = this;
+		sellCornAmountPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
-
+		
 		this.sellController = new SellController();
 		int havingCoin = sellController.selectCoin();
 		String transCoin = "";
-		transCoin = String.valueOf(havingCoin);		
-		
+		transCoin = String.valueOf(havingCoin);
+
 		/* ---------- 배경화면 라벨 ------------ */
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
@@ -96,7 +95,7 @@ public class SellTomatoAmountPanel extends JPanel{
 		JButton confirmButton = new JButton("판매확정");
 		confirmButton.setLocation(670, 250);
 		confirmButton.setSize(100, 25);
-
+		
 		/* 재화 라벨*/
 		
 		/* ---------- 재화 보유 라벨 ------------*/
@@ -107,9 +106,8 @@ public class SellTomatoAmountPanel extends JPanel{
 		userCoin.setOpaque(false);
 		userCoin.setFont(f1);
 		userCoin.setEditable(false);
-
 		
-		this.add(userCoin);		
+		this.add(userCoin);
 		this.add(confirmButton);
 		this.add(inputAmountText);
 		this.add(inputAmountLabel);
@@ -127,52 +125,47 @@ public class SellTomatoAmountPanel extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
+				int cornAmount = 0;
+				int userCoin = 0;
+				int cornPrice = 0;
+				int updateUserCornAmount = 0;
+				int getPrice = 0;
+				int totalCornAmonut = 0;
+				int totalGetPrice = 0;
+				
+				/* 텍스트 필드에서 입력한 판매 수량*/
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int tomatoSeedAmount = 0;
-				int userCoin = 0;
-				int tomatoSeedPrice = 0;
-				int updateUserTomatoSeedAmount = 0;
-				int getPrice = 0;
-				int totalTomatoSeedAmonut = 0;
-				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userTomatoSeed = sellController.userTomatoList();
+				List<CropDTO> userCornList = sellController.userCornList();
 				
-				for (CropDTO seedList : userTomatoSeed) {
-					tomatoSeedAmount = seedList.getCropAmount();
-					userCoin = seedList.getCoin();
-					tomatoSeedPrice = seedList.getCropPrice();
+				for (CropDTO cropList : userCornList) {
+					cornAmount = cropList.getCropAmount();
+					userCoin = cropList.getCoin();
+					cornPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
-				
-				if (sellAmount> 0 && sellAmount <= tomatoSeedAmount && tomatoSeedAmount != 0) {
+				if (sellAmount > 0 && sellAmount <= cornAmount && cornAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount);
-					
-					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice);
+					updateUserCornAmount = sellController.updateUserCornAmount(sellAmount);
+					/* 유저가 옥수수를 팔고 난 후의 총 코인 업데이트*/
+					getPrice = sellController.sellCornGetCoin(sellAmount, cornPrice);
 
-					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
-						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
-						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
-						
-						JPanel sellComplete = new SellComplete();
-						
-							FrameManager.changePanel(sellTomatoAmountPanel, sellComplete);
-					
+					if(updateUserCornAmount > 0 && getPrice > 0) {
+						totalCornAmonut = cornAmount - sellAmount;
+						totalGetPrice = userCoin + ((cornPrice * sellAmount) / 10);					
+						System.out.println(totalGetPrice);
 					}
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
 				}
 
-				
 			}
-		
 		
 		});
 	}

@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.sellcrops.view;
+package com.farm3.uhgrow.sellcrops.view.sellseed;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -13,29 +13,30 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
-public class SellTomatoAmountPanel extends JPanel{
+public class SellCornSeedPanel extends JPanel{
 
-	private JPanel sellTomatoAmountPanel;
+	private JPanel sellCornSeedPanel;
 	private SellController sellController;
 	
-	public SellTomatoAmountPanel() {
+	public SellCornSeedPanel() {
+		
+		this.sellController = new SellController();
+		
+		sellCornSeedPanel = this;
 		
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-
-		sellTomatoAmountPanel = this;
-
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
-
+		
 		this.sellController = new SellController();
 		int havingCoin = sellController.selectCoin();
 		String transCoin = "";
-		transCoin = String.valueOf(havingCoin);		
+		transCoin = String.valueOf(havingCoin);
 		
 		/* ---------- 배경화면 라벨 ------------ */
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
@@ -93,6 +94,11 @@ public class SellTomatoAmountPanel extends JPanel{
 		inputAmountText.setLayout(null);
 		inputAmountText.setFont(font);
 		
+		JLabel sellSeedLabel = new JLabel("<씨앗 판매>");
+		sellSeedLabel.setBounds(410, 180, 200, 25);
+		
+		sellSeedLabel.setFont(font);
+		
 		JButton confirmButton = new JButton("판매확정");
 		confirmButton.setLocation(670, 250);
 		confirmButton.setSize(100, 25);
@@ -106,10 +112,10 @@ public class SellTomatoAmountPanel extends JPanel{
 		userCoin.setSize(200, 28);
 		userCoin.setOpaque(false);
 		userCoin.setFont(f1);
-		userCoin.setEditable(false);
-
+		userCoin.setEditable(false);		
 		
 		this.add(userCoin);		
+		this.add(sellSeedLabel);
 		this.add(confirmButton);
 		this.add(inputAmountText);
 		this.add(inputAmountLabel);
@@ -130,41 +136,39 @@ public class SellTomatoAmountPanel extends JPanel{
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int tomatoSeedAmount = 0;
+				/* 유저의 옥수수씨앗 수량, 현재 가지고 있는 코인 조회 */
+				int cornSeedAmount = 0;
 				int userCoin = 0;
-				int tomatoSeedPrice = 0;
-				int updateUserTomatoSeedAmount = 0;
+				int cornSeedPrice = 0;
+				int updateUserCornSeedAmount = 0;
 				int getPrice = 0;
-				int totalTomatoSeedAmonut = 0;
+				int totalCornSeedAmonut = 0;
 				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userTomatoSeed = sellController.userTomatoList();
+				List<CropDTO> userCropList = sellController.userCornSeed();
 				
-				for (CropDTO seedList : userTomatoSeed) {
-					tomatoSeedAmount = seedList.getCropAmount();
-					userCoin = seedList.getCoin();
-					tomatoSeedPrice = seedList.getCropPrice();
+				for (CropDTO cropList : userCropList) {
+					cornSeedAmount = cropList.getCropAmount();
+					userCoin = cropList.getCoin();
+					cornSeedPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 				
-				if (sellAmount> 0 && sellAmount <= tomatoSeedAmount && tomatoSeedAmount != 0) {
+				if (sellAmount> 0 && sellAmount <= cornSeedAmount && cornSeedAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount);
+					updateUserCornSeedAmount = sellController.updateUserCornSeed(sellAmount);
 					
-					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice);
+					getPrice = sellController.sellCornSeedGetCoin(sellAmount, cornSeedPrice);
 
-					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
-						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
-						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
+					if(updateUserCornSeedAmount > 0 && getPrice > 0) {
+						totalCornSeedAmonut = cornSeedAmount - sellAmount;
 						
-						JPanel sellComplete = new SellComplete();
+						totalGetPrice = userCoin + ((cornSeedPrice * sellAmount) / 10);					
 						
-							FrameManager.changePanel(sellTomatoAmountPanel, sellComplete);
-					
+						System.out.println(totalGetPrice);
 					}
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
@@ -175,5 +179,7 @@ public class SellTomatoAmountPanel extends JPanel{
 		
 		
 		});
+		
 	}
-}
+	
+}	
