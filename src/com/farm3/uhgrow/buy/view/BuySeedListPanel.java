@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class BuySeedListPanel extends JPanel{
 
@@ -15,7 +16,6 @@ public class BuySeedListPanel extends JPanel{
 	public BuySeedListPanel() {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		buySeedListPanel = this;
 
@@ -69,12 +69,29 @@ public class BuySeedListPanel extends JPanel{
 		pumpkinSeedButton.setSize(100, 25);
 
 		/*-------------- 씨앗구매 텍스트 ---------------*/
-		
+
 		JLabel seedBuyLabel = new JLabel("<씨앗 구매>");
-		seedBuyLabel.setLocation(410, 180);
-		seedBuyLabel.setSize(200, 25);
+		seedBuyLabel.setBounds(350, 180, 200, 25);
 		seedBuyLabel.setFont(font);
-		
+
+		/*------------------- 구매확정 --------------------*/
+
+		JLabel seedInPutLabel = new JLabel("<갯수 입력>");
+		seedInPutLabel.setBounds(650, 180, 200, 25);
+		seedInPutLabel.setFont(font);
+
+		JTextField seedInputField = new JTextField();
+		seedInputField.setBounds(650, 215, 140, 25);
+		seedInputField.setLayout(null);
+		seedInputField.setFont(font);
+
+		JButton buySeedButton = new JButton("구매확정");
+		buySeedButton.setLocation(670, 250);
+		buySeedButton.setSize(100, 25);
+
+		this.add(buySeedButton);
+		this.add(seedInputField);
+		this.add(seedInPutLabel);
 		this.add(seedBuyLabel);
 		this.add(buyButton);
 		this.add(sellButton);

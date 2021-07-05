@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class BuyToolListPanel extends JPanel{
 
@@ -15,7 +16,6 @@ public class BuyToolListPanel extends JPanel{
 	public BuyToolListPanel() {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		buyToolListPanel = this;
 
@@ -70,12 +70,29 @@ public class BuyToolListPanel extends JPanel{
 
 		/*-------------- 농기구 구매 텍스트 ---------------*/
 
-		JLabel seedBuyLabel = new JLabel("<농기구 구매>");
-		seedBuyLabel.setLocation(390, 180);
-		seedBuyLabel.setSize(200, 25);
-		seedBuyLabel.setFont(font);
-		
-		this.add(seedBuyLabel);
+		JLabel toolBuyLabel = new JLabel("<농기구 구매>");
+		toolBuyLabel.setBounds(350, 180, 200, 25);
+		toolBuyLabel.setFont(font);
+
+		/*------------------- 구매확정 --------------------*/
+
+		JLabel toolInPutLabel = new JLabel("<갯수 입력>");
+		toolInPutLabel.setBounds(650, 180, 200, 25);
+		toolInPutLabel.setFont(font);
+
+		JTextField toolInputField = new JTextField();
+		toolInputField.setBounds(650, 215, 140, 25);
+		toolInputField.setLayout(null);
+		toolInputField.setFont(font);
+
+		JButton buyToolButton = new JButton("구매확정");
+		buyToolButton.setLocation(670, 250);
+		buyToolButton.setSize(100, 25);
+
+		this.add(buyToolButton);
+		this.add(toolInputField);
+		this.add(toolInPutLabel);
+		this.add(toolBuyLabel);
 		this.add(buyButton); 
 		this.add(sellButton);
 		this.add(backButton);

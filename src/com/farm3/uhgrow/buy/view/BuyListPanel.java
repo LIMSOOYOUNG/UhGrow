@@ -21,8 +21,6 @@ public class BuyListPanel extends JPanel{
 
 	public BuyListPanel() {
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		buyListPanel = this;
 
@@ -84,7 +82,7 @@ public class BuyListPanel extends JPanel{
 
 			}
 		});
-		
+
 		toolListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
