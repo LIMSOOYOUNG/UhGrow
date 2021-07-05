@@ -33,6 +33,10 @@ public class FrameManager {
 		frame.revalidate();
 	}
 	
+	public static void panelRefresh(JPanel panel) {
+		panel.repaint();
+		panel.revalidate();
+	}
 	public static JFrame getInstance() {
 		return frame;
 	}

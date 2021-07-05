@@ -4,34 +4,31 @@ import java.io.Serializable;
 import java.util.List;
 
 public class RetainCropDTO implements Serializable{
-	private String userId;
+	private int userNo;
 	private int cropId;
 	private String cropName;
 	private int cropAmount;
-	private List retainCropList;
 
 	
 	public RetainCropDTO() {}
 
 
-	
-	public RetainCropDTO(String userId, int cropId, String cropName, int cropAmount, List retainCropList) {
+	public RetainCropDTO(int userNo, int cropId, String cropName, int cropAmount) {
 		super();
-		this.userId = userId;
+		this.userNo = userNo;
 		this.cropId = cropId;
 		this.cropName = cropName;
 		this.cropAmount = cropAmount;
-		this.retainCropList = retainCropList;
 	}
 
 
-	public String getUserId() {
-		return userId;
+	public int getUserNo() {
+		return userNo;
 	}
 
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 
@@ -65,29 +62,10 @@ public class RetainCropDTO implements Serializable{
 	}
 
 
-	public List getRetainCropList() {
-		return retainCropList;
-	}
-
-
-	public void setRetainCropList(List retainCropList) {
-		this.retainCropList = retainCropList;
-	}
-
-
-
 	@Override
 	public String toString() {
-		return "RetainCropDTO [userId=" + userId + ", cropId=" + cropId + ", cropName=" + cropName + ", cropAmount="
-				+ cropAmount + ", retainCropList=" + retainCropList + "]";
+		return "RetainCropDTO [userNo=" + userNo + ", cropId=" + cropId + ", cropName=" + cropName + ", cropAmount="
+				+ cropAmount + "]";
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
 }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+	<entry key="selectAllCategory">
+		SELECT
+			   DISTINCT RC.CROP_ID
+			 , CR.CROP_NAME
+			 , RC.CROP_AMOUNT
+		  FROM CROP CR, FARM_CROP FC, RETAIN_CROP RC
+		 WHERE CR.CROP_ID = RC.CROP_ID
+		   AND FC.USER_NO = RC.USER_NO
+		   AND FC.USER_NO = '1'
+           AND RC.CROP_ID > 4
+        ORDER BY CROP_ID
+	</entry>
+	
+	<entry key="chooseInputSeed">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - 1
+		 WHERE CROP_ID = ?
+	</entry>
+	
+	<entry key="fieldInputSeed">
+		INSERT
+		  INTO FARM_CROP
+		VALUES (?,1,?,?)
+	</entry>
+	
+	<entry key="selectFarmExp">
+		SELECT
+			  FARM_EXP
+		  FROM USER_INFO
+		 where USER_NO = ?
+	</entry>
+	
+	<entry key="deleteFarmList">
+		DELETE
+		  FROM FARM_CROP
+		 where USER_NO = 1
+		   AND FARM_LIST = ?
+	</entry>
+	
+	<entry key="harvestCrop">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT +1
+		 WHERE CROP_ID = ?
+		   AND USER_NO = 1
+	</entry>
+	
+	<entry key="inventoryCrop">
+		SELECT
+               RC.CROP_ID
+			 , RC.CROP_AMOUNT
+		  FROM RETAIN_CROP RC
+		 WHERE RC.USER_NO = ?
+         ORDER BY CROP_ID
+	</entry>
+</properties>
+
+
+
+
+
+
+
