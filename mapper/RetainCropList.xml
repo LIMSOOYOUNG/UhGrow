@@ -56,6 +56,53 @@
 		 WHERE RC.USER_NO = ?
          ORDER BY CROP_ID
 	</entry>
+	<entry key="createCrop1">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 1 , 0) 
+	</entry>
+	
+	<entry key="createCrop2">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 2 , 0) 
+	</entry>
+	
+	<entry key="createCrop3">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 3 , 0) 
+	</entry>
+	
+	<entry key="createCrop4">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 4 , 0) 
+	</entry>
+	
+	<entry key="createCrop5">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 5 , 0) 
+	</entry>
+	
+	<entry key="createCrop6">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 6 , 0) 
+	</entry>
+	
+	<entry key="createCrop7">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 7 , 0) 
+	</entry>
+	
+	<entry key="createCrop8">
+		INSERT INTO
+			   RETAIN_CROP
+		VALUES (?, 8 , 0) 
+	</entry>
 </properties>
 
 

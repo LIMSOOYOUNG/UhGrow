@@ -29,13 +29,13 @@ public class FrameManager {
 	}
 
 	public static void refresh() {
-		frame.repaint();
 		frame.revalidate();
+		frame.repaint();
 	}
 	
 	public static void panelRefresh(JPanel panel) {
-		panel.repaint();
 		panel.revalidate();
+		panel.repaint();
 	}
 	public static JFrame getInstance() {
 		return frame;

@@ -59,4 +59,10 @@ public class FarmController {
 		return inventoryCrop;
 	}
 
+	public int createCrop(int CropId) {
+		int createCrop = farmService.createCrop(CropId);
+
+		return createCrop;
+	}
+
 }

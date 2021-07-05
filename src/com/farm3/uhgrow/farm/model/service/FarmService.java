@@ -121,4 +121,19 @@ public class FarmService {
 		return inventoryCrop;
 	}
 
+	public int createCrop(int cropId) {
+		Connection con = getConnection();
+
+		int createCrop = farmDAO.createCrop(con, cropId);
+
+		if (createCrop > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+
+		return createCrop;
+	}
+
 }
