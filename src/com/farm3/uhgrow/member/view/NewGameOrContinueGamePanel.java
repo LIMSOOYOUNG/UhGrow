@@ -18,8 +18,10 @@ import com.farm3.uhgrow.member.model.dto.StartGameDTO;
 public class NewGameOrContinueGamePanel extends JPanel {
 
 	private JPanel NewGameOrContinueGamePanel;
+	private int userNo;
 
 	public NewGameOrContinueGamePanel(int userNo) {
+		this.userNo = userNo;
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		NewGameOrContinueGamePanel = this;
@@ -68,8 +70,8 @@ public class NewGameOrContinueGamePanel extends JPanel {
 
 				} else {
 					// 이어하기 완료 ~ 패널 변경, 패널 변경시마다 userNo 매개변수로 전달해주면서 패널체인지 해줘야할듯
-					FarmPanel farmPanel = new FarmPanel();
-					FrameManager.changePanel(NewGameOrContinueGamePanel, farmPanel);
+//					FarmPanel farmPanel = new FarmPanel(userNo);
+//					FrameManager.changePanel(NewGameOrContinueGamePanel, farmPanel);
 				}
 			}
 		});
