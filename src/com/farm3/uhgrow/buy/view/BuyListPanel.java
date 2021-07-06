@@ -24,6 +24,7 @@ public class BuyListPanel extends JPanel{
 	
 	public BuyListPanel(int userNo) {
 
+
 		this.userNo = userNo;
 		
 
@@ -81,9 +82,9 @@ public class BuyListPanel extends JPanel{
 		seedListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buySeedListPanel = new BuySeedListPanel();
+				JPanel buyTomatoSeedPanel = new BuyTomatoSeedPanel();
 
-				FrameManager.changePanel(buyListPanel, buySeedListPanel);
+				FrameManager.changePanel(buyListPanel, buyTomatoSeedPanel);
 
 			}
 		});

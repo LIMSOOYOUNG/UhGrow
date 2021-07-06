@@ -19,7 +19,7 @@ public class MainFrame extends JFrame {
 		this.setBounds(300, 200, 960, 565);
 //		playSound("sound/배경음악1.wav");
 
-		this.add(new BuyListPanel());
+		this.add(new BuyMainPanel());
 
 		this.setResizable(false);
 		this.setVisible(true);

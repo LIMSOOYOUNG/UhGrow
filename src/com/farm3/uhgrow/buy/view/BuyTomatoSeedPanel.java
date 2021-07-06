@@ -15,15 +15,15 @@ import javax.swing.JTextField;
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 
-public class BuySeedListPanel extends JPanel{
+public class BuyTomatoSeedPanel extends JPanel{
+	
+	private JPanel buyTomatoSeedPanel;
 
-	private JPanel buySeedListPanel;
-
-	public BuySeedListPanel() {
+	public BuyTomatoSeedPanel() {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
-		buySeedListPanel = this;
+		buyTomatoSeedPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -95,9 +95,9 @@ public class BuySeedListPanel extends JPanel{
 		buySeedButton.setLocation(670, 250);
 		buySeedButton.setSize(100, 25);
 
-		this.add(buySeedButton);
-		this.add(seedInputField);
-		this.add(seedInPutLabel);
+//		this.add(buySeedButton);
+//		this.add(seedInputField);
+//		this.add(seedInPutLabel);
 		this.add(seedBuyLabel);
 		this.add(buyButton);
 		this.add(sellButton);
@@ -109,52 +109,63 @@ public class BuySeedListPanel extends JPanel{
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		buySeedButton.addMouseListener(new MouseAdapter() {
+//		buySeedButton.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//
+//				String inputAmount = seedInputField.getText().toString();
+//				int buyAmount = Integer.parseInt(inputAmount);
+//
+//				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
+//				BuyController buyController = new BuyController();
+//				int totalTomatoAmonut = 0;
+//				int tomatoAmount = 0;
+//				int tomatoPrice = 0;
+//				int updateUserTomatoAmount = 0;
+//				int userCoin = 0;
+//				int getPrice = 0;
+//				int totalGetPrice = 0;
+//
+//
+//				List<BuyDTO> userTomatoList = buyController.userTomatoList();
+//
+//				for (BuyDTO tomatoList : userTomatoList) {
+//					tomatoAmount = tomatoList.getCropAmount();
+//					userCoin = tomatoList.getCoin();
+//					tomatoPrice = tomatoList.getCropPrice();
+//				}
+//
+//				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
+//
+//				if (buyAmount> 0 && buyAmount <= tomatoAmount && tomatoAmount != 0) {
+//					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
+//					updateUserTomatoAmount = buyController.updateUserToamtoAmount(buyAmount);
+//
+//					getPrice = buyController.buyTomatoGetCoin(buyAmount, tomatoPrice);
+//
+//					if(updateUserTomatoAmount > 0 && getPrice > 0) {
+//						totalTomatoAmonut = tomatoAmount + buyAmount;
+//						totalGetPrice = userCoin - ((tomatoPrice * buyAmount));					
+//					}
+//				} else {
+//					System.out.println("구매할 수 있는 재화가 부족합니다");
+//
+//				}
+//
+//
+//			}
+//
+//		});
+		
+		tomatoSeedButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				JPanel tomatoResultPanel = new TomatoResultPanel();
 
-				String inputAmount = seedInputField.getText().toString();
-				int buyAmount = Integer.parseInt(inputAmount);
-
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				BuyController buyController = new BuyController();
-				int totalTomatoAmonut = 0;
-				int tomatoAmount = 0;
-				int tomatoPrice = 0;
-				int updateUserTomatoAmount = 0;
-				int userCoin = 0;
-				int getPrice = 0;
-				int totalGetPrice = 0;
-
-
-				List<BuyDTO> userTomatoList = buyController.userTomatoList();
-
-				for (BuyDTO tomatoList : userTomatoList) {
-					tomatoAmount = tomatoList.getCropAmount();
-					userCoin = tomatoList.getCoin();
-					tomatoPrice = tomatoList.getCropPrice();
-				}
-
-				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
-
-				if (buyAmount> 0 && buyAmount <= tomatoAmount && tomatoAmount != 0) {
-					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoAmount = buyController.updateUserToamtoAmount(buyAmount);
-
-					getPrice = buyController.buyTomatoGetCoin(buyAmount, tomatoPrice);
-
-					if(updateUserTomatoAmount > 0 && getPrice > 0) {
-						totalTomatoAmonut = tomatoAmount + buyAmount;
-						totalGetPrice = userCoin - ((tomatoPrice * buyAmount));					
-					}
-				} else {
-					System.out.println("구매할 수 있는 재화가 부족합니다");
-
-				}
-
+				FrameManager.changePanel(buyTomatoSeedPanel, tomatoResultPanel);
 
 			}
-
 		});
 	}
+
 }
