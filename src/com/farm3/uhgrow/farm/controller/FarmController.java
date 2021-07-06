@@ -8,13 +8,20 @@ import com.farm3.uhgrow.farm.model.service.FarmService;
 
 public class FarmController {
 	private List<RetainCropDTO> retainCropList;
+	private List<RetainCropDTO> retainAllList;
 	private FarmService farmService = new FarmService();
 
 	public FarmController() {
 	}
 
-	public List<RetainCropDTO> selectSeed() {
-		retainCropList = farmService.selectAllSeed();
+	public List<RetainCropDTO> selectAllCrop(FarmCropDTO farmCropDTO) {
+		retainAllList = farmService.selectAllCrop(farmCropDTO);
+		System.out.println(retainAllList);
+
+		return retainAllList;
+	}
+	public List<RetainCropDTO> selectSeed(FarmCropDTO farmCropDTO) {
+		retainCropList = farmService.selectAllSeed(farmCropDTO);
 		System.out.println(retainCropList);
 
 		return retainCropList;
@@ -40,14 +47,14 @@ public class FarmController {
 		return farmExp;
 	}
 
-	public int deleteFarmList(int farmList) {
-		int deleteResult = farmService.deleteFarmList(farmList);
+	public int deleteFarmList(FarmCropDTO farmCropDTO, int farmListNo) {
+		int deleteResult = farmService.deleteFarmList(farmCropDTO,farmListNo);
 
 		return deleteResult;
 	}
 
-	public int harvestCrop(int CropId) {
-		int harvestCrop = farmService.harvestCrop(CropId);
+	public int harvestCrop(FarmCropDTO farmCropDTO) {
+		int harvestCrop = farmService.harvestCrop(farmCropDTO);
 
 		return harvestCrop;
 	}
@@ -63,5 +70,13 @@ public class FarmController {
 
 		return createCrop;
 	}
+
+	public int resetFarmList(int userNo) {
+		int resetResult = farmService.resetFarmList(userNo);
+
+		return resetResult;
+		
+	}
+
 
 }
