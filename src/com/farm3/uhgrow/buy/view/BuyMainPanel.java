@@ -1,6 +1,5 @@
 package com.farm3.uhgrow.buy.view;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,14 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BuyListPanel extends JPanel{
+public class BuyMainPanel extends JPanel{
 
-	private JPanel buyListPanel;
+	private JPanel buymainPanel;
+	
+	public BuyMainPanel() {
 
-	public BuyListPanel() {
 
-
-		buyListPanel = this;
+		buymainPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -51,47 +50,27 @@ public class BuyListPanel extends JPanel{
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
 
-		/* -------- 판매 목록 버튼 ---------- */
-		JButton seedListButton = new JButton("씨앗 구매");
-		seedListButton.setLocation(70, 200);
-		seedListButton.setSize(100, 25);
-
-		JButton toolListButton = new JButton("농기구 구매");
-		toolListButton.setLocation(70, 250);
-		toolListButton.setSize(100, 25);
 
 		this.add(buyButton);
 		this.add(sellButton);
 		this.add(backButton);
-		this.add(seedListButton);
-		this.add(toolListButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		seedListButton.addMouseListener(new MouseAdapter() {
+		buyButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buyTomatoSeedPanel = new BuyTomatoSeedPanel();
+				JPanel buyListPanel = new BuyListPanel();
 
-				FrameManager.changePanel(buyListPanel, buyTomatoSeedPanel);
+				FrameManager.changePanel(buymainPanel, buyListPanel);
 
 			}
 		});
 
-		toolListButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				JPanel buyToolListPanel = new BuyToolListPanel();
-
-				FrameManager.changePanel(buyListPanel, buyToolListPanel);
-
-			}
-		});
+		
 
 
 
 	}
-
-
-
+	
 }
