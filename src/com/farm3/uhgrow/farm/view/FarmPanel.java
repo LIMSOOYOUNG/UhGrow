@@ -31,7 +31,6 @@ import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
 import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
 import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
-import com.farm3.uhgrow.sellcrops.view.SellMainPanel;
 
 public class FarmPanel extends JPanel {
 	private boolean isTrue = false;
@@ -47,7 +46,6 @@ public class FarmPanel extends JPanel {
 	private RetainCropDTO retainCropDTO = new RetainCropDTO();
 	private FarmCropDTO farmCropDTO = new FarmCropDTO();
 	private FarmController farmcontroller = new FarmController();
-	private SellMainPanel sellMainPanel = new SellMainPanel();
 	private JButton[] selectButtons;
 	private int[] fieldArr = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 	private int fieldIndex;
@@ -2228,8 +2226,8 @@ public class FarmPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MainStorePanel storePanel = new MainStorePanel(userNo);
-				FrameManager.changePanel(farmPanel, storePanel);
+				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
+				FrameManager.changePanel(farmPanel, mainStorePanel);
 
 			}
 		});

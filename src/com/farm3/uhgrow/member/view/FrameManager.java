@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 public class FrameManager {
 
 	private static JFrame frame = new MainFrame();
-//	private static JFrame frame = new StoreFrame();
 
 	public static void changePanel(JPanel oldPanel, JPanel newPanel) {
 		frame.remove(oldPanel);

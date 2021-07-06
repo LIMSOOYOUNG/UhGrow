@@ -15,7 +15,7 @@ import javax.swing.JTextArea;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 
-public class SellMainPanel extends JPanel {
+public class MainStorePanel extends JPanel {
 	
 
 	private JPanel sellmainPanel;
@@ -24,7 +24,7 @@ public class SellMainPanel extends JPanel {
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
 
-	public SellMainPanel(int userNo) {
+	public MainStorePanel(int userNo) {
 		
 		this.userNo= userNo;
 		sellmainPanel = this;
