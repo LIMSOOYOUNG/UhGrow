@@ -93,6 +93,27 @@
          SET COIN = COIN - (? * ?)
        WHERE USER_NO = 1
    </entry>
+   
+   <entry key ="buyCornGetCoin">
+      UPDATE
+            USER_INFO 
+         SET COIN = COIN - (? * ?)
+       WHERE USER_NO = 1
+   </entry>
+   
+   <entry key ="buyGarlicGetCoin">
+      UPDATE
+            USER_INFO 
+         SET COIN = COIN - (? * ?)
+       WHERE USER_NO = 1
+   </entry>
+   
+   <entry key ="buyPumpkinGetCoin">
+      UPDATE
+            USER_INFO 
+         SET COIN = COIN - (? * ?)
+       WHERE USER_NO = 1
+   </entry>
 	
 	
 </properties>

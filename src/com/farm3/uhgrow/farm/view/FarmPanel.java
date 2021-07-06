@@ -2150,10 +2150,6 @@ public class FarmPanel extends JPanel {
 
 	}
 
-	public void deleteHarvestCrop(int fieldArrIndex, int cropId) {
-
-
-	}
 
 	public void deleteHarvestCrop(int fieldArrIndex, int cropId) {
 

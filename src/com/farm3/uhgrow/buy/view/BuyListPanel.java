@@ -9,26 +9,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.member.store.MainStorePanel;
-import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.buy.view.FrameManager;
 
 public class BuyListPanel extends JPanel{
 
 	private JPanel buyListPanel;
-	private JButton sellButton;
-	private JButton buyButton;
-	private JButton backButton;
-	private JButton seedListButton;
-	private JButton toolListButton;
+	
 	private int userNo;
+
 	
 	public BuyListPanel(int userNo) {
 
-
-		this.userNo = userNo;
+		buyListPanel = this;	
 		
-
-		buyListPanel = this;
+		this.userNo = userNo;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -82,9 +76,9 @@ public class BuyListPanel extends JPanel{
 		seedListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buyTomatoSeedPanel = new BuyTomatoSeedPanel();
+				BuySeedListPanel buySeedListPanel = new BuySeedListPanel(userNo);
 
-				FrameManager.changePanel(buyListPanel, buyTomatoSeedPanel);
+				FrameManager.changePanel(buyListPanel, buySeedListPanel);
 
 			}
 		});
@@ -92,25 +86,12 @@ public class BuyListPanel extends JPanel{
 		toolListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buyToolListPanel = new BuyToolListPanel();
+				JPanel buyToolListPanel = new BuyToolListPanel(userNo);
 
 				FrameManager.changePanel(buyListPanel, buyToolListPanel);
 
 			}
 		});		
-		btnBack.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
-				
-				FrameManager.changePanel(buyListPanel, mainStorePanel);
-			}
-		});
-
-		
-
 
 	}
 

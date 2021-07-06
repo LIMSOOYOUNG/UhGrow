@@ -12,12 +12,17 @@ import javax.swing.JTextField;
 public class BuyToolListPanel extends JPanel{
 
 	private JPanel buyToolListPanel;
+	
+	private int userNo;
 
-	public BuyToolListPanel() {
+
+	public BuyToolListPanel(int userNo) {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
 		buyToolListPanel = this;
+		
+		this.userNo = userNo;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
