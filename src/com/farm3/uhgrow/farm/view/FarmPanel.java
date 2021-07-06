@@ -97,6 +97,7 @@ public class FarmPanel extends JPanel {
 		this.userNo = userNo;
 		farmPanel = this;
 		farmCropDTO.setUserNo(this.userNo);
+		retainCropDTO.setUserNo(userNo);
 		farmcontroller.resetFarmList(userNo);
 		farmExp = farmcontroller.selectFarmExp(this.userNo);
 		retainAllList = farmcontroller.selectAllCrop(farmCropDTO);

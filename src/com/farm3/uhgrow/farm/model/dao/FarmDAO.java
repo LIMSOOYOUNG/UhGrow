@@ -107,6 +107,8 @@ public class FarmDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, cropDTO.getCropId());
+			pstmt.setInt(2, cropDTO.getUserNo());
+			
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

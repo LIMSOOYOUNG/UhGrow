@@ -7,21 +7,24 @@
 		rc.crop_id
 		, cr.crop_name
 		, rc.crop_amount
-		from crop cr, retain_crop rc
+		from
+		crop cr, retain_crop rc
 		where cr.crop_id = rc.crop_id
 		and rc.user_no = ?
 		and rc.crop_id>4
 		order by cr.crop_id
 	</entry>
-	
+
 	<entry key="selectAllCropAndSeed">
 		select
 		rc.user_no
 		rc.crop_id
 		, cr.crop_name
-		, rc.crop_amount
+		,
+		rc.crop_amount
 		from crop cr, retain_crop rc
-		where cr.crop_id = rc.crop_id
+		where cr.crop_id =
+		rc.crop_id
 		and rc.user_no = ?
 		order by cr.crop_id
 	</entry>
@@ -30,6 +33,7 @@
 		UPDATE RETAIN_CROP
 		SET CROP_AMOUNT = CROP_AMOUNT - 1
 		WHERE CROP_ID = ?
+		  AND USER_NO = ?
 	</entry>
 
 	<entry key="fieldInputSeed">
@@ -38,8 +42,9 @@
 		(FARM_LIST
 		, USER_NO
 		, CROP_ID
-		, ACCUMULATE_EXP)
-		VALUES 
+		,
+		ACCUMULATE_EXP)
+		VALUES
 		(?
 		,?
 		,?
