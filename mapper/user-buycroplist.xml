@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+	<entry key="user-tomatolist">
+       SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 5
+    </entry>
+
+    <entry key = "user-cornList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 6
+	</entry>
+	
+	<entry key = "user-garlicList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 7	
+	</entry>
+	
+	<entry key = "user-pumpkinList">
+	  SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 8	
+	</entry>
+	
+	<entry key= "updateTomatoCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 5
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key= "updateCornCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 6
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key= "updateGarlicCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 7
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key= "updatePumpkinCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 8
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key ="buyTomatoGetCoin">
+      UPDATE
+            USER_INFO 
+         SET COIN = COIN - (? * ?)
+       WHERE USER_NO = 1
+   </entry>
+	
+	
+</properties>
+
+
+
+
+
+
+
