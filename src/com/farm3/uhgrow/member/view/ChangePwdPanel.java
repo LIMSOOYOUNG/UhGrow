@@ -37,6 +37,7 @@ public class ChangePwdPanel extends JPanel{
 	private JPasswordField pwdCheckField;
 	private JButton btnYes;
 	private JButton btnBack;
+	
 	public ChangePwdPanel(Map<String, String> insertUserInfo) {
 		changePwdPanel = this;
 		this.setLayout(null);
@@ -153,7 +154,6 @@ public class ChangePwdPanel extends JPanel{
 		return pwdCheckField;
 	}
 	public JButton btnYes() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/changePwd.png").getImage().getScaledInstance(140, 33, 0);
 		btnYes = new JButton("P W D 변 경");
 		btnYes.setBounds(340,400,140,33);
 		btnYes.setFont(font);
@@ -163,7 +163,6 @@ public class ChangePwdPanel extends JPanel{
 		return btnYes;
 	}
 	public JButton btnBack() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/backButton.png").getImage().getScaledInstance(140, 33, 0);
 		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setBounds(510,400,140,33);
 		btnBack.setFont(font);

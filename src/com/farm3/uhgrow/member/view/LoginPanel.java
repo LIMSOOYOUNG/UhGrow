@@ -33,8 +33,6 @@ public class LoginPanel extends JPanel {
 
 		// loginPanel 필드에 선언 후 this로 패널의 인스턴스를 지정해줌 -> 아래의 changePanel에서 쓰일 예정 (oldPanel부분)
 		loginPanel = this;
-
-
 		this.setLayout(null);
 		this.setSize(960,540);
 
@@ -51,8 +49,6 @@ public class LoginPanel extends JPanel {
 		titleLabel.setBounds(330, 50, 600, 150);
 		titleLabel.setFont(titleFont);
 		titleLabel.setForeground(Color.white);
-		
-
 
 		// id, pwd 입력창
 		JLabel idLabel = new JLabel("I   D   : ");
@@ -61,13 +57,10 @@ public class LoginPanel extends JPanel {
 		idLabel.setFont(font);
 		idLabel.setForeground(Color.white);
 
-
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
 		idField.setBounds(400, 200, 300, 50);
 		idField.setFont(font);
-
-
 
 		JLabel pwdLabel = new JLabel("P  W  D  :  ");
 		pwdLabel.setLayout(null);
@@ -75,20 +68,10 @@ public class LoginPanel extends JPanel {
 		pwdLabel.setFont(font);
 		pwdLabel.setForeground(Color.white);
 
-
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
 		pwdField.setBounds(400, 270, 300, 50);
 		pwdField.setFont(font);
-
-
-
-		// id pwd찾기 창
-		//		Image findIdPwdBackground = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 40, 0);
-		//		JButton findIdPwdButton = new JButton(new ImageIcon(findIdPwdBackground));
-		//		findIdPwdButton.setLayout(null);
-		//		findIdPwdButton.setBounds(505,385,245,35);
-
 
 		this.add(titleLabel);
 		this.add(idLabel);
@@ -98,23 +81,20 @@ public class LoginPanel extends JPanel {
 		this.add(btnLogIn());
 		this.add(btnSignUp());
 		this.add(btnFindIdPwd());
-
-
 		this.add(backGroundLabel);
-
+		
+		// 회원가입 버튼 클릭
 		btnSignUp.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// 패널 변경해주는 부분 signUpPanel 인스턴스 생성 후 아래 changePanel 부분에 newPanel에 인스턴스를 넣어줘서 새로운 패널로 채워줌 changePanel 따라가보면 remove, add, repaint, revalidate 해주는거 확인 가능
-				JPanel signUpPanel = new SignUpPanel();
+				SignUpPanel signUpPanel = new SignUpPanel();
 
 				FrameManager.changePanel(loginPanel, signUpPanel);
 
 			}
 		});
-
-
-
+		// 로그인 버튼 클릭
 		btnLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -122,12 +102,8 @@ public class LoginPanel extends JPanel {
 				String loginPwd = pwdField.getText().toString();
 
 				// field에 작성한 id, pwd를 map에 담아서 Controller로 전달 
-
 				MemberController memberController = new MemberController();
 				LoginDTO loginResult = memberController.loginInfo(loginId);
-
-
-
 
 				// 로그인 결과 리턴 받아서 가입된 정보 확인
 				if(loginId.isEmpty()) {
@@ -140,7 +116,6 @@ public class LoginPanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.", "로그인 오류!", 1);
 				} else if(loginResult.getDeleteYn() == 'Y'){
 					JOptionPane.showMessageDialog(null, "정지된 계정입니다.", "로그인 오류!", 1);
-
 				} else {
 					userNo = loginResult.getUserNo();
 					NewGameOrContinueGamePanel NewGameOrContinueGamePanel = new NewGameOrContinueGamePanel(userNo);
@@ -148,9 +123,9 @@ public class LoginPanel extends JPanel {
 
 					FrameManager.changePanel(loginPanel, NewGameOrContinueGamePanel);
 				}
-
 			}
 		});
+		// 아이디 비밀번호 찾기 버튼 클릭 
 		btnFindIdPwd.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				FindIdPwdPanel FindIdPwdPanel = new FindIdPwdPanel();
@@ -163,7 +138,6 @@ public class LoginPanel extends JPanel {
 
 	/*---------로그인창 버튼 ------------------*/
 	public JButton btnLogIn() {
-		Image loginBackground = new ImageIcon("img/loginInterface/login.png").getImage().getScaledInstance(540, 36, 0);
 		btnLogin = new JButton("로 그 인");
 		btnLogin.setLayout(null);
 		btnLogin.setBounds(210,340,540,36);
@@ -172,10 +146,8 @@ public class LoginPanel extends JPanel {
 		btnLogin.setBackground(Color.ORANGE);
 		return btnLogin;
 	}
-
-
+	/*-------------회원가입 버튼--------------*/
 	public JButton btnSignUp() {
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		btnSignUp = new JButton("회 원 가 입");
 		btnSignUp.setLayout(null);
 		btnSignUp.setBounds(210,385,245,35);
@@ -185,10 +157,8 @@ public class LoginPanel extends JPanel {
 
 		return btnSignUp;
 	}
-
 	/*------------아이디 찾기, 비밀번호 찾기 버튼 ---------------*/
 	public JButton btnFindIdPwd() {
-		Image btnFindIdPwdBackGround = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 35, 0);
 		btnFindIdPwd = new JButton("I D / P W D 찾 기");
 		btnFindIdPwd.setLayout(null);
 		btnFindIdPwd.setBounds(505,385,245,35);

@@ -9,20 +9,25 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.controller.MemberController;
+import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 
-public class BuyHouseAndCookPanel extends JPanel {
+public class CookPanel extends JPanel{
 
-	private JPanel buyHouseAndCookPanel;
+	private static final Font Font = null;
+	private JPanel cookPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFond = new Font("나눔손글씨 펜", Font.BOLD, 30);
+	private JButton btnCooking;
 
 
-	public BuyHouseAndCookPanel(int userNo) {
+
+	public CookPanel(int userNo) {
 		this.userNo = userNo;
-		buyHouseAndCookPanel = this;
+		cookPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -71,47 +76,76 @@ public class BuyHouseAndCookPanel extends JPanel {
 		storeNpc.setBounds(750, 350, 90, 150);
 
 		/* ---------- 할머니와 대화내용  ------------*/
-		JLabel textLabel = new JLabel("무얼 하고 싶은게야... ");
+		JLabel textLabel = new JLabel("뭔 요리를 한다고 그래 !");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
+		
+		JButton btnFirst = new JButton("토마토 피자");
+		btnFirst.setBounds(150, 170, 400, 40);
+		btnFirst.setFont(listFond);
+		btnFirst.setContentAreaFilled(false);
+		
+		JButton btnSecond = new JButton("옥수수 또띠아");
+		btnSecond.setBounds(150, 230, 400, 40);
+		btnSecond.setFont(listFond);
+		btnSecond.setContentAreaFilled(false);
+		
+		JButton btnThird = new JButton("마늘즙");
+		btnThird.setBounds(150, 290, 400, 40);
+		btnThird.setFont(listFond);
+		btnThird.setContentAreaFilled(false);
+		
+		JButton btnFourth  = new JButton("호박죽");
+		btnFourth.setBounds(150, 350, 400, 40);
+		btnFourth.setFont(listFond);
+		btnFourth.setContentAreaFilled(false);
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 
 		this.add(storeNpc);
 		this.add(textLabel);
 		this.add(conversationLabel);
+		
 		this.add(btnBack);
 		this.add(btnCook);
 		this.add(btnBuyHouse);
 		this.add(btnBackGround);
+		
+		this.add(btnFirst);
+		this.add(btnSecond);
+		this.add(btnThird);
+		this.add(btnFourth);
+		
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		btnCook.addMouseListener(new MouseAdapter() {
+		// 집 구매, 요리하기, 그만두기 클릭시 체인지 패널 userNo 전달인자로 넘겨주면서 받아줘야한다.
+
+		btnBack.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CookPanel cookPanel = new CookPanel(userNo);
-				
-				FrameManager.changePanel(buyHouseAndCookPanel, cookPanel);
+				FarmPanel farmPanel = new FarmPanel(userNo);
+				FrameManager.changePanel(cookPanel, farmPanel);
 			}
 		});
 		
+		btnFirst.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			
+			}
+		});
 		btnBuyHouse.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				MemberController memberController = new MemberController();
-				
-//				memberDTO result housePrice = memberController
-				
-				
-				
+
+				// 집구매 패널 인스턴스 생성 후 userNo담아서 집구매 패널로 이동 
+//				FrameManager.changePanel(cookPanel, 집구매패널로 이동);
 			}
 		});
-		
-		
 	}
 }

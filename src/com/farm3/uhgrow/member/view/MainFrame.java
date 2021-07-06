@@ -11,7 +11,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
-import com.farm3.uhgrow.store.cooking.view.CookingPanel;
+import com.farm3.uhgrow.member.store.MainStorePanel;
+
+public class MainFrame extends JFrame {
 
 
 public class MainFrame extends JFrame {
@@ -28,7 +30,6 @@ public class MainFrame extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 
 	public static void playSound(String fn) {
 		try {

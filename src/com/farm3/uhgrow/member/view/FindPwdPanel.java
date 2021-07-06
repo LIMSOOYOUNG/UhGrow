@@ -86,10 +86,6 @@ public class FindPwdPanel extends JPanel{
 				FrameManager.changePanel(findPwdPanel, findIdPwdPanel);
 			}
 		});
-
-
-
-
 	}
 	public JLabel titleLabel() {
 		titleLabel = new JLabel("P W D 찾 기 ");
@@ -158,7 +154,6 @@ public class FindPwdPanel extends JPanel{
 	}
 
 	public JButton btnYes() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/changePwd.png").getImage().getScaledInstance(140, 33, 0);
 		btnYes = new JButton("P W D 찾 기 ");
 		btnYes.setBounds(340,400,140,33);
 		btnYes.setFont(font);
@@ -168,7 +163,6 @@ public class FindPwdPanel extends JPanel{
 		return btnYes;
 	}
 	public JButton btnBack() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/backButton.png").getImage().getScaledInstance(140, 33, 0);
 		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setBounds(510,400,140,33);
 		btnBack.setFont(font);

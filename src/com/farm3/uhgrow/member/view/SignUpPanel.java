@@ -23,16 +23,12 @@ public class SignUpPanel extends JPanel {
 	
 	private JPanel signUpPanel;
 	private JButton btnBack;
+	private JButton btnInsert;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	
 	public SignUpPanel () {
-		JButton btnInsert;
-
 		signUpPanel = this;
-	
-
 		
-
 		this.setLayout(null);
 		this.setSize(960,540);
 		
@@ -43,32 +39,25 @@ public class SignUpPanel extends JPanel {
 		backGroundLabel.setSize(960, 540);
 
 		/* ------------회원가입 창에 회원가입 버튼 --------------*/
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
 		btnInsert = new JButton("회 원 가 입");
 		btnInsert.setLayout(null);
 		btnInsert.setBounds(210,385,245,35);
 		btnInsert.setFont(font);
 		btnInsert.setForeground(Color.white);
 		btnInsert.setBackground(Color.ORANGE);
-		
 
-
-		Image backButtonBackground = new ImageIcon("img/loginInterface/back.png").getImage().getScaledInstance(245, 35, 0);
 		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setLayout(null);
 		btnBack.setBounds(505,385,245,35);
 		btnBack.setFont(font);
 		btnBack.setForeground(Color.white);
 		btnBack.setBackground(Color.ORANGE);
-
-		
 		
 		JLabel idLabel = new JLabel("아 이 디  : ");
 		idLabel.setLayout(null);
 		idLabel.setBounds(350, 60, 200, 25);
 		idLabel.setFont(font);
 		idLabel.setForeground(Color.white);
-
 
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
@@ -81,7 +70,6 @@ public class SignUpPanel extends JPanel {
 		pwdLabel.setFont(font);
 		pwdLabel.setForeground(Color.white);
 
-
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
 		pwdField.setBounds(350, 150, 300, 25);
@@ -92,7 +80,6 @@ public class SignUpPanel extends JPanel {
 		pwdLabel2.setBounds(350, 180, 200, 25);
 		pwdLabel2.setFont(font);
 		pwdLabel2.setForeground(Color.white);
-
 
 		JPasswordField pwdField2 = new JPasswordField();
 		pwdField2.setLayout(null);
@@ -124,9 +111,6 @@ public class SignUpPanel extends JPanel {
 		mailField.setFont(font);
 		mailField.setForeground(Color.white);
 
-		
-
-		
 		// signUpPanel에 위에 생성한 버튼, 텍스트필드, 배경 추가
 		this.add(idLabel);
 		this.add(idField);
@@ -139,11 +123,9 @@ public class SignUpPanel extends JPanel {
 		this.add(mailLabel);
 		this.add(mailField);
 
-
 		this.add(btnBack);
 		this.add(btnInsert);
 		this.add(backGroundLabel);
-
 
 		btnInsert.addMouseListener(new MouseAdapter() {
 
@@ -171,12 +153,10 @@ public class SignUpPanel extends JPanel {
 						System.out.println(nameResult);
 					}
 				}
-				
 
 				/* ---------------------- 가입시 입력한 값 공석일때 ------------------------*/
 				if(id.isEmpty()){
 					JOptionPane.showMessageDialog(null, "ID를 입력하세요!", "회원가입 오류!", 1);
-					System.out.println("id 입력하셈");
 				} else if (pwd.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요!", "회원가입 오류!", 1);
 				} else if (pwd2.isEmpty()) {
@@ -221,7 +201,6 @@ public class SignUpPanel extends JPanel {
 					if(signUpResult == 1) {
 						// 성공 출력 
 						JOptionPane.showMessageDialog(null, "가입 성공!", "회원가입 오류!", 1);
-
 						
 					} else {
 						// 실패 출력

@@ -19,7 +19,6 @@ public class FindIdPwdPanel extends JPanel{
 	private JButton btnFindPwd;
 	private JButton btnBack;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
-
 	
 	public FindIdPwdPanel() {
 		findIdPwdPanel = this;
@@ -31,7 +30,6 @@ public class FindIdPwdPanel extends JPanel{
 		this.add(btnFindPwd());
 		this.add(btnFindId());
 		this.add(backGroundLabel());
-
 		
 		btnBack.addMouseListener(new MouseAdapter() {
 			
@@ -64,8 +62,6 @@ public class FindIdPwdPanel extends JPanel{
 			}
 		});
 	}
-	
-
 	public JLabel backGroundLabel() {
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
@@ -75,7 +71,6 @@ public class FindIdPwdPanel extends JPanel{
 	}
 	public JButton btnFindId() {
 		
-		Image findIdImg = new ImageIcon("img/loginInterface/findId.png").getImage().getScaledInstance(300, 75, 0);
 		btnFindId = new JButton("I D 찾 기");
 		btnFindId.setBounds(350, 100, 300, 75);
 		btnFindId.setFont(font);
@@ -86,7 +81,6 @@ public class FindIdPwdPanel extends JPanel{
 	}
 	public JButton btnFindPwd() {
 		
-		Image findIdImg = new ImageIcon("img/loginInterface/findPwd.png").getImage().getScaledInstance(300, 75, 0);
 		btnFindPwd = new JButton("P W D 찾 기");
 		btnFindPwd.setBounds(350, 200, 300, 75);
 		btnFindPwd.setFont(font);
@@ -97,7 +91,6 @@ public class FindIdPwdPanel extends JPanel{
 	}
 	public JButton btnBack() {
 		
-		Image findIdImg = new ImageIcon("img/loginInterface/BackButton.png").getImage().getScaledInstance(300, 75, 0);
 		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setBounds(350, 300, 300, 75);
 		btnBack.setFont(font);

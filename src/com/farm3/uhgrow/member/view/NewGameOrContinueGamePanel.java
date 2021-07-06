@@ -45,7 +45,6 @@ public class NewGameOrContinueGamePanel extends JPanel {
 
 		
 		/* ---------- 새로하기, 이어하기 버튼   ------------*/
-		Image newGameImg = new ImageIcon("img/loginInterface/newgame.png").getImage().getScaledInstance(300, 75, 0);
 		JButton btnNewGame = new JButton("새 로 하 기");
 		btnNewGame.setBounds(350, 200, 300, 75);
 		btnNewGame.setFont(font);
@@ -55,7 +54,6 @@ public class NewGameOrContinueGamePanel extends JPanel {
 		btnNewGame.setForeground(Color.white);
 		btnNewGame.setBackground(Color.ORANGE);
 		
-		Image continueGameImg = new ImageIcon("img/loginInterface/continue.png").getImage().getScaledInstance(300, 75, 0);
 		JButton btnContinueGame = new JButton("이 어 하 기");
 		btnContinueGame.setBounds(350, 300, 300, 75);
 		btnContinueGame.setFont(font);
@@ -99,12 +97,6 @@ public class NewGameOrContinueGamePanel extends JPanel {
 				FrameManager.changePanel(NewGameOrContinueGamePanel, startNewGameCheckPanel);
 			}
 		});
-
 	}
-	
-	
-	
-
-	
 }
 
