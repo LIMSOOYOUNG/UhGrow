@@ -19,7 +19,7 @@ import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
 public class SellCategoryPanel extends JPanel{
 	
 	private JPanel sellCategoryPanel;
-	private SellController sellController;
+	private SellController sellController; 
 	
 	public SellCategoryPanel(int userNo) {
 		
