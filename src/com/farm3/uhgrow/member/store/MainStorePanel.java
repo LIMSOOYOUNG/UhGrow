@@ -61,7 +61,7 @@ public class MainStorePanel extends JPanel {
 		JLabel textLabel = new JLabel("빨리 빨리 골라 뭐하러 왔는데? 어 ? ");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
-
+		
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 		
@@ -77,6 +77,7 @@ public class MainStorePanel extends JPanel {
 		
 		
 		// 구매한다, 판매한다, 그만두기 버튼 클릭시 체인지 패널 만들어줘야한다.
+		
 		
 	}
 }

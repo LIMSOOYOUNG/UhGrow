@@ -1,6 +1,6 @@
 package com.farm3.uhgrow.member.model.dto;
 
-public class LoginDTO {
+public class LoginDTO implements java.io.Serializable{
 
 	private int userNo;
 	private String userPwd;					// 유저비밀번호
