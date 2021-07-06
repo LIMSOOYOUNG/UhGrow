@@ -95,7 +95,7 @@ public class StartNewGameCheckPanel extends JPanel {
 				MemberController memberController = new MemberController();
 				memberController.startNewGameDataReset(userNo);
 				
-				FarmPanel farmPanel = new FarmPanel();				
+				FarmPanel farmPanel = new FarmPanel(userNo);				
 				FrameManager.changePanel(StartNewGameCheckPanel, farmPanel);
 
 			}

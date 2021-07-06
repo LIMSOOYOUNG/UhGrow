@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 
 public class NewGameOrContinueGamePanel extends JPanel {
@@ -82,9 +83,8 @@ public class NewGameOrContinueGamePanel extends JPanel {
 					JOptionPane.showMessageDialog(null, "저장된 데이터가 없습니다. 새로하기를 이용해주세요.", "오류!", 1);
 
 				} else {
-					// 이어하기 완료 ~ 패널 변경, 패널 변경시마다 userNo 매개변수로 전달해주면서 패널체인지 해줘야할듯
-//					FarmPanel farmPanel = new FarmPanel(userNo);
-//					FrameManager.changePanel(NewGameOrContinueGamePanel, farmPanel);
+					FarmPanel farmPanel = new FarmPanel(userNo);
+					FrameManager.changePanel(NewGameOrContinueGamePanel, farmPanel);
 				}
 			}
 		});
