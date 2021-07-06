@@ -17,7 +17,8 @@ public class MainFrame extends JFrame {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
-//		playSound("sound/배경음악1.wav");
+		//		playSound("sound/배경음악1.wav");
+
 
 		this.add(new BuyMainPanel());
 

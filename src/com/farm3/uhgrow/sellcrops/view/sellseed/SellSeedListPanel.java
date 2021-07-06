@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.farm3.uhgrow.buy.view.BuyListPanel;
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 
@@ -19,12 +21,13 @@ public class SellSeedListPanel extends JPanel {
 
 	private JPanel sellSeedListPanel;
 	private SellController sellController;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
+	private int userNo;
 	
-	public SellSeedListPanel() {
+	public SellSeedListPanel(int userNo) {
 		
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-		
+		this.userNo = userNo;
 		sellSeedListPanel = this;
 		
 		this.setLayout(null);
@@ -38,56 +41,69 @@ public class SellSeedListPanel extends JPanel {
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
-		this.setVisible(true);
 
-		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
-		Image buyImage = new ImageIcon("img/store/mainStore/buybutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(132, 95);
-		buyButton.setSize(232, 60);
-
-		Image sellImage = new ImageIcon("img/store/mainStore/sellbutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(364, 95);
-		sellButton.setSize(232, 60);
-
-		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
-
-		/* ------- 상점 패널 ---------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
+		/* ---------- 상첨창 배경  ------------*/
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
+		 
+		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
+		JButton btnBuy = new JButton("구 매 하 기 ");
+		btnBuy.setBounds(132, 95, 232, 60);
+		btnBuy.setFont(font);
+		btnBuy.setContentAreaFilled(false);
+
+		JButton btnSell = new JButton("판 매 하 기");
+		btnSell.setBounds(364, 95, 232, 60);
+		btnSell.setFont(font);
+		btnSell.setContentAreaFilled(false);
+
+		JButton btnBack = new JButton("그 만 두 기");
+		btnBack.setBounds(596, 95, 232, 60);
+		btnBack.setFont(font);
+		btnBack.setContentAreaFilled(false);
+		
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+		btnBackGround.setBounds(132, 95,  696, 60);
+				
+		/* ---------- 대화창, 대화창에 큰 상인 이미지 ------------*/
+		Image imgConversation = new ImageIcon("img/store/storeconversation1.png").getImage().getScaledInstance(758, 120, 0);
+		JLabel conversationLabel = new JLabel(new ImageIcon(imgConversation));
+		conversationLabel.setBounds(100, 400, 760, 118);		
+		
+		Image imgStoreNpc = new ImageIcon("img/interface/storeNpc.png").getImage().getScaledInstance(90, 150, 0);
+		JLabel storeNpc = new JLabel(new ImageIcon(imgStoreNpc));
+		storeNpc.setBounds(750, 350, 90, 150);
+		
+		/* ---------- 상인 대화내용  ------------*/
+		JLabel textLabel = new JLabel("빨리 빨리 팔아 !");
+		textLabel.setBounds(130, 410, 750, 100);
+		textLabel.setFont(font);
 
 		/* -------- 씨앗 리스트 버튼 ---------- */
-		JButton tomatoSeedButton = new JButton("토마토");
-		tomatoSeedButton.setLocation(70, 200);
-		tomatoSeedButton.setSize(100, 25);
+		JButton tomatoSeedButton = new JButton("토마토 씨앗");
+		tomatoSeedButton.setBounds(150, 170, 400, 40);
+		tomatoSeedButton.setFont(listFont);
+		tomatoSeedButton.setContentAreaFilled(false);
 
-		JButton cornSeedButton = new JButton("옥수수");
-		cornSeedButton.setLocation(70, 250);
-		cornSeedButton.setSize(100, 25);
-
-		JButton garlicSeedButton = new JButton("마늘");
-		garlicSeedButton.setLocation(70, 300);
-		garlicSeedButton.setSize(100, 25);
-
-		JButton pumpkinSeedButton = new JButton("호박");
-		pumpkinSeedButton.setLocation(70, 350);
-		pumpkinSeedButton.setSize(100, 25);
-
-		/*-------------- 씨앗판매 텍스트 ---------------*/
-
-		JLabel sellSeedLabel = new JLabel("<씨앗 판매>");
-		sellSeedLabel.setBounds(410, 180, 200, 25);
+		JButton cornSeedButton = new JButton("옥수수 씨앗");
+		cornSeedButton.setBounds(150, 230, 400, 40);
+		cornSeedButton.setFont(listFont);
+		cornSeedButton.setContentAreaFilled(false);
 		
-		sellSeedLabel.setFont(font);
-		
+		JButton garlicSeedButton = new JButton("마늘 씨앗");
+		garlicSeedButton.setBounds(150, 290, 400, 40);
+		garlicSeedButton.setFont(listFont);
+		garlicSeedButton.setContentAreaFilled(false);
+
+		JButton pumpkinSeedButton = new JButton("호박 씨앗");
+		pumpkinSeedButton.setBounds(150, 350, 400, 40);
+		pumpkinSeedButton.setFont(listFont);
+		pumpkinSeedButton.setContentAreaFilled(false);
 		
 		/* 재화 라벨*/
 		
@@ -101,12 +117,20 @@ public class SellSeedListPanel extends JPanel {
 		userCoin.setEditable(false);		
 		
 	
+		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 
+		this.add(textLabel);
+		this.add(storeNpc);
+		this.add(conversationLabel);
 		this.add(userCoin);
-		this.add(sellSeedLabel);
-		this.add(buyButton);
-		this.add(sellButton);
-		this.add(backButton);
+
+		/* ---------- 구매, 판매, 뒤로 버튼 패널에 추가 --------- */
+		this.add(btnSell);
+		this.add(btnBack);
+		this.add(btnBuy);
+		this.add(btnBackGround);
+		
+		/* 유저 씨앗  판매 버튼*/
 		this.add(tomatoSeedButton);
 		this.add(cornSeedButton);
 		this.add(garlicSeedButton);
@@ -114,12 +138,12 @@ public class SellSeedListPanel extends JPanel {
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-
+		/*토마토 씨앗 버튼*/
 		tomatoSeedButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			
-				JPanel sellTomatoSeedPanel = new SellTomatoSeedPanel();
+				JPanel sellTomatoSeedPanel = new SellTomatoSeedPanel(userNo);
 				
 				FrameManager.changePanel(sellSeedListPanel, sellTomatoSeedPanel);
 				
@@ -127,12 +151,13 @@ public class SellSeedListPanel extends JPanel {
 
 		});
 
+		/*옥수수 씨앗 버튼*/
 		cornSeedButton.addMouseListener(new MouseAdapter() {
 		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellCornSeedPanel = new SellCornSeedPanel();
+				JPanel sellCornSeedPanel = new SellCornSeedPanel(userNo);
 				
 				FrameManager.changePanel(sellSeedListPanel, sellCornSeedPanel);
 				
@@ -140,12 +165,13 @@ public class SellSeedListPanel extends JPanel {
 			
 		});
 
+		/*마늘씨앗 버튼*/
 		garlicSeedButton.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellGarlicSeedPanel = new SellGarlicSeedPanel();
+				JPanel sellGarlicSeedPanel = new SellGarlicSeedPanel(userNo);
 				
 				FrameManager.changePanel(sellSeedListPanel, sellGarlicSeedPanel);
 				
@@ -154,19 +180,44 @@ public class SellSeedListPanel extends JPanel {
 			
 		});
 		
+		/*호박 씨앗버튼*/
 		pumpkinSeedButton.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellPumpkinSeedPanel = new SellPumpkinSeedPanel();
+				JPanel sellPumpkinSeedPanel = new SellPumpkinSeedPanel(userNo);
 				
 				FrameManager.changePanel(sellSeedListPanel, sellPumpkinSeedPanel);
 				
 			}
 			
 		});
-	
+		
+		/* 구매 패널로 가기*/
+		btnBuy.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				BuyListPanel buyListPanel = new BuyListPanel(userNo);
+				
+				FrameManager.changePanel(sellSeedListPanel, buyListPanel);
+			}
+		});
+		
+		/* 메인화면으로 넘어가기*/
+		btnBack.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
+				
+				FrameManager.changePanel(sellSeedListPanel, mainStorePanel);
+			}
+		});
+		
 	}
 	
 }

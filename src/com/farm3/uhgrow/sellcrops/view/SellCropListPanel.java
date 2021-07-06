@@ -18,9 +18,11 @@ public class SellCropListPanel extends JPanel {
 
 	private JPanel sellCropListPanel;
 	private SellController sellController;
+	private int userNo;
 	
-	public SellCropListPanel() {
+	public SellCropListPanel(int userNo) {
 
+		this.userNo = userNo;
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 

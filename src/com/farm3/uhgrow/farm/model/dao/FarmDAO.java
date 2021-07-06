@@ -28,8 +28,40 @@ public class FarmDAO {
 			e.printStackTrace();
 		}
 	}
+	public List<RetainCropDTO> selectAllCrop(Connection con, FarmCropDTO farmCropDTO) {
+		PreparedStatement pstmt = null; // 쿼리 경로를 불러오기위한 statement 선언
+		ResultSet rset = null; // 결과값 저장을위한 ResultSet선언
 
-	public List<RetainCropDTO> selectAllSeed(Connection con) {
+		List<RetainCropDTO> retainAllList = null;
+
+		String query = prop.getProperty("selectAllCropAndSeed");
+		System.out.println(query);
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, farmCropDTO.getUserNo());
+
+			rset = pstmt.executeQuery();
+
+			retainAllList = new ArrayList<>();
+			while (rset.next()) {
+				RetainCropDTO seed = new RetainCropDTO();
+				seed.setCropId(rset.getInt("CROP_ID"));
+				seed.setCropName(rset.getString("CROP_NAME"));
+				seed.setCropAmount(rset.getInt("CROP_AMOUNT"));
+				retainAllList.add(seed);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return retainAllList;
+	}
+
+	public List<RetainCropDTO> selectAllSeed(Connection con, FarmCropDTO farmCropDTO) {
 
 		PreparedStatement pstmt = null; // 쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null; // 결과값 저장을위한 ResultSet선언
@@ -40,6 +72,8 @@ public class FarmDAO {
 		System.out.println(query);
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, farmCropDTO.getUserNo());
+
 			rset = pstmt.executeQuery();
 
 			retainCropList = new ArrayList<>();
@@ -99,7 +133,7 @@ public class FarmDAO {
 			pstmt.setInt(4, farmCropDTO.getAccumulate());
 
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,14 +148,13 @@ public class FarmDAO {
 		PreparedStatement pstmt = null; // 쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null; // 결과값 저장을위한 ResultSet선언
 
-		
 		UserInfoDTO userInfo = null;
 		String query = prop.getProperty("selectFarmExp");
 		System.out.println(query);
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userId);
-			
+
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -139,7 +172,7 @@ public class FarmDAO {
 		return userInfo.getFarmExp();
 	}
 
-	public int deleteFarmList(Connection con, int farmList) {
+	public int deleteFarmList(Connection con, FarmCropDTO farmCropDTO, int farmList) {
 		PreparedStatement pstmt = null;
 
 		int result = 0; // 수정 성공여부 초기화
@@ -148,10 +181,11 @@ public class FarmDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, farmList);
+			pstmt.setInt(1, farmCropDTO.getUserNo());
+			pstmt.setInt(2, farmList);
 
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,7 +196,7 @@ public class FarmDAO {
 		return result;
 	}
 
-	public int harvestCrop(Connection con, int cropId) {
+	public int harvestCrop(Connection con, FarmCropDTO farmCropDTO) {
 		PreparedStatement pstmt = null;
 
 		int result = 0; // 수정 성공여부 초기화
@@ -171,10 +205,11 @@ public class FarmDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, cropId);
+			pstmt.setInt(1, farmCropDTO.getUserNo());
+			pstmt.setInt(2, farmCropDTO.getCropId());
 
 			result = pstmt.executeUpdate();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -189,7 +224,6 @@ public class FarmDAO {
 		PreparedStatement pstmt = null; // 쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null; // 결과값 저장을위한 ResultSet선언
 
-		
 		List<RetainCropDTO> inventoryCropList = null;
 		RetainCropDTO inventoryCropDTO = null;
 		String query = prop.getProperty("inventoryCrop");
@@ -197,7 +231,7 @@ public class FarmDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userId);
-			
+
 			rset = pstmt.executeQuery();
 			inventoryCropList = new ArrayList<>();
 			while (rset.next()) {
@@ -215,19 +249,19 @@ public class FarmDAO {
 		}
 
 		return inventoryCropList;
-		
+
 	}
 
 	public int createCrop(Connection con, int cropId) {
 		PreparedStatement pstmt1 = null;
-		PreparedStatement pstmt2= null;
+		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 		PreparedStatement pstmt4 = null;
 		PreparedStatement pstmt5 = null;
 		PreparedStatement pstmt6 = null;
 		PreparedStatement pstmt7 = null;
 		PreparedStatement pstmt8 = null;
-		int sum =0;
+		int sum = 0;
 		int result1 = 0; // 수정 성공여부 초기화
 		int result2 = 0; // 수정 성공여부 초기화
 		int result3 = 0; // 수정 성공여부 초기화
@@ -272,8 +306,8 @@ public class FarmDAO {
 			result6 = pstmt6.executeUpdate();
 			result7 = pstmt7.executeUpdate();
 			result8 = pstmt8.executeUpdate();
-			
-			sum=result1+result2+result3+result4+result5+result6+result7+result8;
+
+			sum = result1 + result2 + result3 + result4 + result5 + result6 + result7 + result8;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -290,5 +324,28 @@ public class FarmDAO {
 
 		return sum;
 	}
+	public int resetFarmList(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+
+		int result = 0; // 수정 성공여부 초기화
+
+		String query = prop.getProperty("resetFarmList"); // updateMemberPassword 쿼리문 선언
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt); // statement 할당 반납
+		}
+
+		return result;
+	}
+
 
 }

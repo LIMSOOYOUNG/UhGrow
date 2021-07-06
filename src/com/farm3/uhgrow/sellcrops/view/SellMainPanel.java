@@ -20,12 +20,16 @@ public class SellMainPanel extends JPanel {
 
 	private JPanel sellmainPanel;
 	private SellController sellController;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
+	private int userNo;
 
-	public SellMainPanel() {
+	public SellMainPanel(int userNo) {
+		
+		this.userNo= userNo;
+		sellmainPanel = this;
 		
 		this.sellController = new SellController();
-		
-		sellmainPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -99,7 +103,7 @@ public class SellMainPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellCategoryPanel = new SellCategoryPanel();
+				JPanel sellCategoryPanel = new SellCategoryPanel(userNo);
 				
 					FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
 

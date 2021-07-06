@@ -9,8 +9,20 @@
 		, rc.crop_amount
 		from crop cr, retain_crop rc
 		where cr.crop_id = rc.crop_id
-		and rc.user_no = '1'
+		and rc.user_no = ?
 		and rc.crop_id>4
+		order by cr.crop_id
+	</entry>
+	
+	<entry key="selectAllCropAndSeed">
+		select
+		rc.user_no
+		rc.crop_id
+		, cr.crop_name
+		, rc.crop_amount
+		from crop cr, retain_crop rc
+		where cr.crop_id = rc.crop_id
+		and rc.user_no = ?
 		order by cr.crop_id
 	</entry>
 
@@ -44,15 +56,15 @@
 	<entry key="deleteFarmList">
 		DELETE
 		FROM FARM_CROP
-		where USER_NO = 1
+		where USER_NO = ?
 		AND FARM_LIST = ?
 	</entry>
 
 	<entry key="harvestCrop">
 		UPDATE RETAIN_CROP
 		SET CROP_AMOUNT = CROP_AMOUNT +1
-		WHERE CROP_ID = ?
-		AND USER_NO = 1
+		WHERE USER_NO = ?
+		AND CROP_ID = ?
 	</entry>
 
 	<entry key="inventoryCrop">
@@ -109,6 +121,10 @@
 		INSERT INTO
 		RETAIN_CROP
 		VALUES (?, 8 , 0)
+	</entry>
+	<entry key="resetFarmList">
+		DELETE FARM_CROP
+		WHERE USER_NO = ?
 	</entry>
 </properties>
 

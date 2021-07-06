@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment />
+	<entry key="cooking">
+		UPDATE RETAIN_CROP RC
+		 RIGHT JOIN RETAIN_FOOD RF ON (RC.USER_NO = RF.USER_NO),
+		 RIGHT JOIN RECIPE R ON ON (RF.FOOD_ID = R.FOOD_ID)
+		   SET RC.CROP_AMOUNT -= R.CROP_RQ_AMOUNT * ?
+		     , RF.FOOD_AMOUNT += ?
+		 WHERE RF.USER_NO = ?
+		   AND RF.FOOD_ID = ?
+	</entry>
+	<entry key="selectUserCrop">
+		SELECT
+		       USER_NO
+		     , CROP_AMOUNT
+		  FROM RETAIN_CROP
+		 WHERE USER_NO = ?
+	</entry>
+	<entry key="modifyCropAmount">
+		UPDATE RETAIN_CROP RC
+		   SET RC.CROP_AMOUNT = RC.CROP_AMOUNT - (SELECT R.CROP_RQ_AMOUNT * ?
+		                           FROM RECIPE R
+		                          WHERE R.FOOD_ID = ?
+		                            AND R.CROP_ID = ?)
+		 WHERE RC.USER_NO = ?
+		   AND RC.CROP_ID = ?
+	</entry>
+	<entry key="modifyFoodAmount">
+		UPDATE RETAIN_FOOD RF
+		   SET RF.FOOD_AMOUNT = RF.FOOD_AMOUNT + ?
+		 WHERE RF.USER_NO = ?
+		   AND RF.FOOD_ID = ?
+	</entry>
+
+</properties>

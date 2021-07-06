@@ -12,7 +12,6 @@ import com.farm3.uhgrow.farm.model.dao.FarmDAO;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.dto.CropDTO;
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
-import com.farm3.uhgrow.farm.model.dto.InventoryDTO;
 
 public class FarmService {
 
@@ -21,10 +20,17 @@ public class FarmService {
 	public FarmService() {
 		farmDAO = new FarmDAO();
 	}
-
-	public List<RetainCropDTO> selectAllSeed() {
+	public List<RetainCropDTO> selectAllCrop(FarmCropDTO farmCropDTO) {
 		Connection con = getConnection();
-		List<RetainCropDTO> retainCropList = farmDAO.selectAllSeed(con); // 리턴할 리스트 선언후 connection을
+		List<RetainCropDTO> retainAllList = farmDAO.selectAllCrop(con,farmCropDTO); // 리턴할 리스트 선언후 connection을
+		close(con);
+
+		return retainAllList;
+	}
+
+	public List<RetainCropDTO> selectAllSeed(FarmCropDTO farmCropDTO) {
+		Connection con = getConnection();
+		List<RetainCropDTO> retainCropList = farmDAO.selectAllSeed(con,farmCropDTO); // 리턴할 리스트 선언후 connection을
 		close(con);
 
 		return retainCropList;
@@ -76,10 +82,10 @@ public class FarmService {
 		return farmExp;
 	}
 
-	public int deleteFarmList(int farmList) {
+	public int deleteFarmList(FarmCropDTO farmCropDTO, int farmListNo) {
 		Connection con = getConnection();
 
-		int deleteResult = farmDAO.deleteFarmList(con, farmList);
+		int deleteResult = farmDAO.deleteFarmList(con,farmCropDTO, farmListNo);
 
 		if (deleteResult > 0) {
 			commit(con);
@@ -91,10 +97,10 @@ public class FarmService {
 		return deleteResult;
 	}
 
-	public int harvestCrop(int cropId) {
+	public int harvestCrop(FarmCropDTO farmCropDTO) {
 		Connection con = getConnection();
 
-		int harvestCrop = farmDAO.harvestCrop(con, cropId);
+		int harvestCrop = farmDAO.harvestCrop(con, farmCropDTO);
 
 		if (harvestCrop > 0) {
 			commit(con);
@@ -135,5 +141,20 @@ public class FarmService {
 
 		return createCrop;
 	}
+	public int resetFarmList(int userNo) {
+		Connection con = getConnection();
+
+		int resetResult = farmDAO.resetFarmList(con, userNo);
+
+		if (resetResult > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+
+		return resetResult;
+	}
+
 
 }

@@ -20,8 +20,11 @@ public class SellGarlicSeedPanel extends JPanel {
 	
 	private JPanel sellGarlicSeedPanel;
 	private SellController sellController;
+	int userNo;
 	
-	public SellGarlicSeedPanel() {
+	public SellGarlicSeedPanel(int userNo) {
+		
+		this.userNo = userNo;
 		
 		this.sellController = new SellController();
 		
@@ -147,7 +150,7 @@ public class SellGarlicSeedPanel extends JPanel {
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellController.userGarlicSeed();
+				List<CropDTO> userCropList = sellController.userGarlicSeed(userNo);
 				
 				for (CropDTO cropList : userCropList) {
 					garlicSeedAmount = cropList.getCropAmount();
@@ -159,9 +162,9 @@ public class SellGarlicSeedPanel extends JPanel {
 				
 				if (sellAmount> 0 && sellAmount <= garlicSeedAmount && garlicSeedAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserGarlicSeedAmount = sellController.updateUserGarlicSeed(sellAmount);
+					updateUserGarlicSeedAmount = sellController.updateUserGarlicSeed(sellAmount, userNo);
 					
-					getPrice = sellController.sellGarlicSeedGetCoin(sellAmount, garlicSeedPrice);
+					getPrice = sellController.sellGarlicSeedGetCoin(sellAmount, garlicSeedPrice, userNo);
 
 					if(updateUserGarlicSeedAmount > 0 && getPrice > 0) {
 						totalGarlicSeedAmonut = garlicSeedAmount - sellAmount;

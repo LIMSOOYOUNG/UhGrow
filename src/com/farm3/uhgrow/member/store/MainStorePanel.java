@@ -23,9 +23,7 @@ public class MainStorePanel extends JPanel {
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
 
-
 	public MainStorePanel(int userNo) {
-		this.userNo = userNo;
 		MainStorePanel = this;
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
