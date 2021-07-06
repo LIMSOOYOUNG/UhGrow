@@ -54,7 +54,7 @@ public class SellCropsDAO {
 	}
 	
 	/* 유저 토마토 리스트 */
-	public List<CropDTO> userTomatoList(Connection con) {
+	public List<CropDTO> userTomatoList(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -65,6 +65,7 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
 
@@ -92,7 +93,7 @@ public class SellCropsDAO {
 	}
 
 	/* 토마토 갯수 업데이트 */
-	public int updateTomatoCropAmount(Connection con, int sellAmount) {
+	public int updateTomatoCropAmount(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -103,7 +104,8 @@ public class SellCropsDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
-
+			pstmt.setInt(2, userNo);
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -115,7 +117,7 @@ public class SellCropsDAO {
 	}
 
 	/* 토마토 팔고 난 금액 업데이트 */
-	public int sellTomatoGetCoin(Connection con, int sellAmount, int tomatoPrice) {
+	public int sellTomatoGetCoin(Connection con, int sellAmount, int tomatoPrice, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -127,7 +129,8 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, tomatoPrice);
-
+			pstmt.setInt(3, userNo);
+			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -141,7 +144,7 @@ public class SellCropsDAO {
 //////////////////////////////////////////////////////////
 
 	/* 유저 옥수수 리스트 조회 */
-	public List<CropDTO> userCornList(Connection con) {
+	public List<CropDTO> userCornList(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -180,7 +183,7 @@ public class SellCropsDAO {
 
 	/* 옥수수 갯수 업데이트 */
 
-	public int updateCornAmount(Connection con, int sellAmount) {
+	public int updateCornAmount(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -191,7 +194,7 @@ public class SellCropsDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
-
+			pstmt.setInt(2, userNo);
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -204,7 +207,7 @@ public class SellCropsDAO {
 	}
 
 	/* 옥수수 팔고 난 금액 업데이트 */
-	public int sellCornGetCoin(Connection con, int sellAmount, int cornPrice) {
+	public int sellCornGetCoin(Connection con, int sellAmount, int cornPrice, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -230,7 +233,7 @@ public class SellCropsDAO {
 
 ////////////////////////////////////////////////////////
 
-	public List<CropDTO> userGarlicList(Connection con) {
+	public List<CropDTO> userGarlicList(Connection con, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -266,7 +269,7 @@ public class SellCropsDAO {
 		return userGarlicList;
 	}
 
-	public int updateGarlicAmount(Connection con, int sellAmount) {
+	public int updateGarlicAmount(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -277,6 +280,7 @@ public class SellCropsDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -288,7 +292,7 @@ public class SellCropsDAO {
 		return result;
 	}
 
-	public int sellGarlicGetCoin(Connection con, int sellAmount, int garlicPrice) {
+	public int sellGarlicGetCoin(Connection con, int sellAmount, int garlicPrice, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -313,7 +317,7 @@ public class SellCropsDAO {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 
-	public List<CropDTO> userPumpkinList(Connection con) {
+	public List<CropDTO> userPumpkinList(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -351,7 +355,7 @@ public class SellCropsDAO {
 	}
 
 
-	public int updatePumpkinAmount(Connection con, int sellAmount) {
+	public int updatePumpkinAmount(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -362,6 +366,7 @@ public class SellCropsDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -373,7 +378,7 @@ public class SellCropsDAO {
 		return result;
 	}
 
-	public int sellPumpkinCoin(Connection con, int sellAmount, int pumpkinPrice) {
+	public int sellPumpkinCoin(Connection con, int sellAmount, int pumpkinPrice, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -400,7 +405,7 @@ public class SellCropsDAO {
 
 	/////////////////////////////////////////////////////////////////////////////////////
 
-	public List<CropDTO> userTomatoSeed(Connection con) {
+	public List<CropDTO> userTomatoSeed(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -438,7 +443,7 @@ public class SellCropsDAO {
 		return userTomatoSeed;
 	}
 
-	public int updateUserTomatoSeed(Connection con, int sellAmount) {
+	public int updateUserTomatoSeed(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -450,6 +455,7 @@ public class SellCropsDAO {
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -461,7 +467,7 @@ public class SellCropsDAO {
 		return result;
 	}
 
-	public int sellTomatoSeedGetCoin(Connection con, int sellAmount, int tomatoSeedPrice) {
+	public int sellTomatoSeedGetCoin(Connection con, int sellAmount, int tomatoSeedPrice, int userNo) {
 		
 		PreparedStatement pstmt = null;
 		
@@ -486,7 +492,7 @@ public class SellCropsDAO {
 	}
 
 
-	public List<CropDTO> userCornSeed(Connection con) {
+	public List<CropDTO> userCornSeed(Connection con, int userNo) {
 		
 		PreparedStatement pstmt = null;
 
@@ -526,7 +532,7 @@ public class SellCropsDAO {
 	}
 
 
-	public int updateUserCornSeed(Connection con, int sellAmount) {
+	public int updateUserCornSeed(Connection con, int sellAmount, int userNo) {
 		
 		PreparedStatement pstmt = null;
 
@@ -538,6 +544,7 @@ public class SellCropsDAO {
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -551,7 +558,7 @@ public class SellCropsDAO {
 
 	}
 
-	public int sellCornSeedGetCoin(Connection con, int sellAmount, int cornSeedPrice) {
+	public int sellCornSeedGetCoin(Connection con, int sellAmount, int cornSeedPrice, int userNo) {
 		
 		PreparedStatement pstmt = null;
 		
@@ -577,7 +584,7 @@ public class SellCropsDAO {
 
 	/* 마늘 씨앗 리스트*/
 	
-	public List<CropDTO> userGarlicSeed(Connection con) {
+	public List<CropDTO> userGarlicSeed(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -616,7 +623,7 @@ public class SellCropsDAO {
 		
 	}
 
-	public int updateUserGarlicSeed(Connection con, int sellAmount) {
+	public int updateUserGarlicSeed(Connection con, int sellAmount, int userNo) {
 
 		PreparedStatement pstmt = null;
 
@@ -628,6 +635,7 @@ public class SellCropsDAO {
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -641,7 +649,7 @@ public class SellCropsDAO {
 		
 	}
 
-	public int sellGarlicSeedGetCoin(Connection con, int sellAmount, int garlicSeedPrice) {
+	public int sellGarlicSeedGetCoin(Connection con, int sellAmount, int garlicSeedPrice, int userNo) {
 		
 		PreparedStatement pstmt = null;
 		
@@ -665,7 +673,7 @@ public class SellCropsDAO {
 		return result;
 	}
 
-	public List<CropDTO> userPumpkinSeed(Connection con) {
+	public List<CropDTO> userPumpkinSeed(Connection con, int userNo) {
 		
 		PreparedStatement pstmt = null;
 
@@ -703,7 +711,7 @@ public class SellCropsDAO {
 		return userPumpkinSeed;
 	}
 
-	public int updateUserPumpkinSeed(Connection con, int sellAmount) {
+	public int updateUserPumpkinSeed(Connection con, int sellAmount, int userNo) {
 		PreparedStatement pstmt = null;
 
 		int result = 0;
@@ -714,7 +722,7 @@ public class SellCropsDAO {
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
-
+			pstmt.setInt(2, userNo);
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -726,7 +734,7 @@ public class SellCropsDAO {
 		return result;
 	}
 	
-	public int sellPumpkinSeedGetCoin(Connection con, int sellAmount, int pumpkinSeedPrice) {
+	public int sellPumpkinSeedGetCoin(Connection con, int sellAmount, int pumpkinSeedPrice, int userNo) {
 		
 		PreparedStatement pstmt = null;
 		

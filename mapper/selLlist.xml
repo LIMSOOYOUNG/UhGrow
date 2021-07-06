@@ -7,7 +7,7 @@
         SELECT
                U.COIN
           FROM USER_INFO U
-         WHERE USER_NO = 1
+         WHERE USER_NO = ?
     </entry>
 	<entry key="user-toamtolist">
        SELECT
@@ -19,7 +19,7 @@
   FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
-   AND UI.USER_NO = 1
+   AND UI.USER_NO = ?
    AND CR.CROP_ID = 1
     </entry>
 	<entry key= "updateTomatoAmount">
