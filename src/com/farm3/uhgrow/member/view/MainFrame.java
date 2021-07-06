@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 
 import com.farm3.uhgrow.store.cooking.view.CookingPanel;
 
+
 public class MainFrame extends JFrame {
 	
 	public MainFrame() {
@@ -20,9 +21,9 @@ public class MainFrame extends JFrame {
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
 //		playSound("sound/배경음악1.wav");
-
+		
 		this.add(new LoginPanel());
-
+		
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

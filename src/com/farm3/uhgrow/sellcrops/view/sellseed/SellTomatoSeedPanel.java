@@ -18,10 +18,12 @@ import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
 public class SellTomatoSeedPanel extends JPanel {
 
+	private int userNo;
 	private JPanel sellTomatoSeedPanel;
 	private SellController sellController;
-	public SellTomatoSeedPanel() {
-		
+	
+	public SellTomatoSeedPanel(int userNo) {
+		this.userNo = userNo;
 		sellTomatoSeedPanel = this;
 		
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
@@ -144,7 +146,7 @@ public class SellTomatoSeedPanel extends JPanel {
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellController.userTomatoSeed();
+				List<CropDTO> userCropList = sellController.userTomatoSeed(userNo);
 				
 				for (CropDTO cropList : userCropList) {
 					tomatoSeedAmount = cropList.getCropAmount();
@@ -156,9 +158,9 @@ public class SellTomatoSeedPanel extends JPanel {
 				
 				if (sellAmount> 0 && sellAmount <= tomatoSeedAmount && tomatoSeedAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount);
+					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount, userNo);
 					
-					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice);
+					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice, userNo);
 
 					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
 						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
