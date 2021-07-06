@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
@@ -18,9 +19,9 @@ import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
 public class SellCategoryPanel extends JPanel{
 	
 	private JPanel sellCategoryPanel;
-	private SellController sellController;
+	private SellController sellController; 
 	
-	public SellCategoryPanel() {
+	public SellCategoryPanel(int userNo) {
 		
 		sellCategoryPanel = this;
 		
@@ -54,9 +55,9 @@ public class SellCategoryPanel extends JPanel{
 		
 		/*그만두기버튼 이미지 라벨*/
 		Image quitImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton quitButton = new JButton(new ImageIcon(quitImage));
-		quitButton.setLocation(596, 95);
-		quitButton.setSize(232, 60);
+		JButton btnBack = new JButton(new ImageIcon(quitImage));
+		btnBack.setLocation(596, 95);
+		btnBack.setSize(232, 60);
 		
 		/* ------- 상점 패널 ---------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
@@ -95,7 +96,7 @@ public class SellCategoryPanel extends JPanel{
 		this.add(userCoin);
 		this.add(buyButton);
 		this.add(sellButton);
-		this.add(quitButton);
+		this.add(btnBack);
 		this.add(seedListButton);
 		this.add(cropListButton);
 		this.add(toolListButton);
@@ -145,6 +146,16 @@ public class SellCategoryPanel extends JPanel{
 				
 			}
 			
+		});
+		btnBack.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
+				
+				FrameManager.changePanel(sellCategoryPanel, mainStorePanel);
+			}
 		});
 		
 		

@@ -2,28 +2,36 @@ package com.farm3.uhgrow.member.store;
 
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.farm3.uhgrow.buy.view.BuyListPanel;
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
+
 public class MainStorePanel extends JPanel {
 
 	private JPanel MainStorePanel;
+	private int userNo;
 
-	public MainStorePanel() {
-		
+	public MainStorePanel(int userNo) {
+		this.userNo = userNo;
 		MainStorePanel = this;
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
-		
+
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setSize(960, 540);
-		
+
 		/* ---------- 상첨창 배경  ------------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
@@ -45,7 +53,7 @@ public class MainStorePanel extends JPanel {
 		JButton btnBack = new JButton(new ImageIcon(backImage));
 		btnBack.setLocation(596, 95);
 		btnBack.setSize(232, 60);
-		
+
 
 		/* ---------- 대화창, 대화창에 큰 상인 이미지 ------------*/
 		Image imgConversation = new ImageIcon("img/store/storeconversation1.png").getImage().getScaledInstance(758, 120, 0);
@@ -61,10 +69,10 @@ public class MainStorePanel extends JPanel {
 		JLabel textLabel = new JLabel("빨리 빨리 골라 뭐하러 왔는데? 어 ? ");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
-		
+
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
-		
+
 
 		this.add(textLabel);
 		this.add(storeNpc);
@@ -74,10 +82,38 @@ public class MainStorePanel extends JPanel {
 		this.add(btnBuy);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-		
-		
+
+
 		// 구매한다, 판매한다, 그만두기 버튼 클릭시 체인지 패널 만들어줘야한다.
-		
-		
+
+		btnBack.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				FarmPanel farmPanel = new FarmPanel(userNo);
+				FrameManager.changePanel(MainStorePanel, farmPanel);
+			}
+		});
+		btnBuy.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				BuyListPanel buyListPanel = new BuyListPanel(userNo);
+				
+				FrameManager.changePanel(MainStorePanel, buyListPanel);
+			}
+		});
+		btnSell.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				SellCategoryPanel sellCategoryPanel = new SellCategoryPanel(userNo);
+				
+				FrameManager.changePanel(MainStorePanel, sellCategoryPanel);
+			}
+		});
 	}
 }

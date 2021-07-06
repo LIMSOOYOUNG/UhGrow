@@ -11,9 +11,10 @@ import javax.swing.JPanel;
 public class BuyHouseAndCookPanel extends JPanel {
 
 	private JPanel BuyHouseAndCookPanel;
+	private int userNo;
 	
-	public BuyHouseAndCookPanel() {
-		
+	public BuyHouseAndCookPanel(int userNo) {
+		this.userNo = userNo;
 		BuyHouseAndCookPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
