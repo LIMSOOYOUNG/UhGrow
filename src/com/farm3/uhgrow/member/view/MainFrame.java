@@ -11,11 +11,11 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
-import com.farm3.uhgrow.member.store.MainStorePanel;
+import com.farm3.uhgrow.store.cooking.view.CookingPanel;
+
 
 public class MainFrame extends JFrame {
-	private int userNo = 0;
-
+	
 	public MainFrame() {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
