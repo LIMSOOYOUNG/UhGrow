@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment/>
+	 <entry key="selectCoin">
+		/* 유저 재화 라벨*/
+        SELECT
+               U.COIN
+          FROM USER_INFO U
+         WHERE USER_NO = 1
+    </entry>
+	<entry key="user-toamtolist">
+       SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CR.CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 1
+    </entry>
+	<entry key= "updateTomatoAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 1
+		   AND USER_NO = 1
+	</entry>
+	<entry key= "sellTomatoGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1   
+	</entry>
+	
+
+    <entry key ="user-cornList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CR.CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 2
+	</entry>
+	<entry key= "updateCornAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 2
+		   AND USER_NO = 1
+	</entry>
+	<entry key= "sellCornGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1   
+	</entry>
+	
+	
+	<entry key ="user-garlicList">
+           SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CR.CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 3	
+   </entry>
+   <entry key ="updateGarlicAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 3
+		   AND USER_NO = 1
+	</entry>
+	<entry key= "sellGarlicGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1   
+	</entry>   
+   
+	<entry key ="user-pumpkinList">
+	   SELECT
+       UI.USER_NO
+     , CR.CROP_NAME
+     , RC.CROP_AMOUNT
+     , UI.COIN
+     , CR.CROP_PRICE
+  FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+ WHERE UI.USER_NO = RC.USER_NO
+   AND CR.CROP_ID = RC.CROP_ID
+   AND UI.USER_NO = 1
+   AND CR.CROP_ID = 4	
+	</entry>
+	<entry key ="updatePumpkinAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 4
+		   AND USER_NO = 1
+	</entry>
+	<entry key ="sellPumpkinGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1
+	</entry>
+	
+	<entry key="user-tomatoSeedAmount">
+		SELECT
+       		UI.USER_NO
+     	  , CR.CROP_NAME
+       	  , RC.CROP_AMOUNT
+          , UI.COIN
+          , CR.CROP_PRICE
+    FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+   WHERE UI.USER_NO = RC.USER_NO
+     AND CR.CROP_ID = RC.CROP_ID
+     AND UI.USER_NO = 1
+     AND CR.CROP_ID = 5
+	</entry>
+	<entry key ="updateTomatoSeedAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 5
+		   AND USER_NO = 1
+	</entry>
+	<entry key ="sellTomatoSeedGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1
+	</entry>
+
+	<entry key="user-cornSeedAmount">
+		SELECT
+       		UI.USER_NO
+     	  , CR.CROP_NAME
+       	  , RC.CROP_AMOUNT
+          , UI.COIN
+          , CR.CROP_PRICE
+    FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+   WHERE UI.USER_NO = RC.USER_NO
+     AND CR.CROP_ID = RC.CROP_ID
+     AND UI.USER_NO = 1
+     AND CR.CROP_ID = 6
+	</entry>
+	<entry key ="updateCornSeedAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 6
+		   AND USER_NO = 1
+	</entry>
+	<entry key ="sellCornSeedGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1
+	</entry>
+	
+	<entry key="user-garlicSeedAmount">
+		SELECT
+       		UI.USER_NO
+     	  , CR.CROP_NAME
+       	  , RC.CROP_AMOUNT
+          , UI.COIN
+          , CR.CROP_PRICE
+    FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+   WHERE UI.USER_NO = RC.USER_NO
+     AND CR.CROP_ID = RC.CROP_ID
+     AND UI.USER_NO = 1
+     AND CR.CROP_ID = 7
+	</entry>
+	<entry key ="updateGarlicSeedAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 7
+		   AND USER_NO = 1
+	</entry>
+	<entry key ="sellGarlicSeedGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1
+	</entry>
+	
+	<entry key="user-pumpkinSeedAmount">
+		SELECT
+       		UI.USER_NO
+     	  , CR.CROP_NAME
+       	  , RC.CROP_AMOUNT
+          , UI.COIN
+          , CR.CROP_PRICE
+    FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
+   WHERE UI.USER_NO = RC.USER_NO
+     AND CR.CROP_ID = RC.CROP_ID
+     AND UI.USER_NO = 1
+     AND CR.CROP_ID = 8
+	</entry>
+	<entry key ="updatePumpkinSeedAmount">
+	   UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT - ?
+		 WHERE CROP_ID = 8
+		   AND USER_NO = 1
+	</entry>
+	<entry key ="sellPumpkinSeedGetCoin">
+		UPDATE
+			   USER_INFO 
+		   SET COIN = COIN + ((? * ?) / 10)
+		 WHERE USER_NO = 1
+	</entry>
+	
+</properties>
+
+
+
+
+
+

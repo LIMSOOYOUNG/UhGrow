@@ -1,10 +1,7 @@
 package com.farm3.uhgrow.sellcrops.view;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,21 +9,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 
-public class SellMainPanel extends JPanel {
+/* 판매 완료 창*/
+
+public class SellComplete extends JPanel{
 	
-
-	private JPanel sellmainPanel;
+	
+	private JPanel sellComplete;
 	private SellController sellController;
-
-	public SellMainPanel() {
+	
+	public SellComplete() {
 		
 		this.sellController = new SellController();
 		
-		sellmainPanel = this;
-
+		sellComplete = this;
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
 
@@ -67,11 +65,10 @@ public class SellMainPanel extends JPanel {
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
-
-		Image success = new ImageIcon("img/store/sellCategory/successimage.png").getImage().getScaledInstance(300, 300, 0);
-		JLabel successLabel = new JLabel(new ImageIcon(success));
-		successLabel.setLocation(300, 130);
-		successLabel.setSize(300, 300); 
+		
+		/* 판매 완료 창*/
+	
+		
 		
 		/* 재화 라벨*/
 		
@@ -84,37 +81,13 @@ public class SellMainPanel extends JPanel {
 		userCoin.setFont(f1);
 		userCoin.setEditable(false);
 
-		
 		this.add(userCoin);
 		this.add(buyButton);
 		this.add(sellButton);
 		this.add(backButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-//		this.add(textLabel);
-//		this.add(storeNPC);
 		
-	
-		sellButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				JPanel sellCategoryPanel = new SellCategoryPanel();
-				
-					FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
-
-			}
-			
-		});
-
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-			
-		});
-	
 	}
-
+	
 }

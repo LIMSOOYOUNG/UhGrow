@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.sellcrops.view;
+package com.farm3.uhgrow.sellcrops.view.sellseed;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -13,29 +13,27 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
-public class SellTomatoAmountPanel extends JPanel{
+public class SellTomatoSeedPanel extends JPanel {
 
-	private JPanel sellTomatoAmountPanel;
+	private JPanel sellTomatoSeedPanel;
 	private SellController sellController;
-	
-	public SellTomatoAmountPanel() {
+	public SellTomatoSeedPanel() {
+		
+		sellTomatoSeedPanel = this;
 		
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-
-		sellTomatoAmountPanel = this;
-
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
 
 		this.sellController = new SellController();
 		int havingCoin = sellController.selectCoin();
 		String transCoin = "";
-		transCoin = String.valueOf(havingCoin);		
+		transCoin = String.valueOf(havingCoin);
 		
 		/* ---------- 배경화면 라벨 ------------ */
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
@@ -93,6 +91,11 @@ public class SellTomatoAmountPanel extends JPanel{
 		inputAmountText.setLayout(null);
 		inputAmountText.setFont(font);
 		
+		JLabel sellSeedLabel = new JLabel("<씨앗 판매>");
+		sellSeedLabel.setBounds(410, 180, 200, 25);
+		
+		sellSeedLabel.setFont(font);
+		
 		JButton confirmButton = new JButton("판매확정");
 		confirmButton.setLocation(670, 250);
 		confirmButton.setSize(100, 25);
@@ -106,10 +109,10 @@ public class SellTomatoAmountPanel extends JPanel{
 		userCoin.setSize(200, 28);
 		userCoin.setOpaque(false);
 		userCoin.setFont(f1);
-		userCoin.setEditable(false);
+		userCoin.setEditable(false);		
 
-		
-		this.add(userCoin);		
+		this.add(userCoin);
+		this.add(sellSeedLabel);
 		this.add(confirmButton);
 		this.add(inputAmountText);
 		this.add(inputAmountLabel);
@@ -141,12 +144,12 @@ public class SellTomatoAmountPanel extends JPanel{
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userTomatoSeed = sellController.userTomatoList();
+				List<CropDTO> userCropList = sellController.userTomatoSeed();
 				
-				for (CropDTO seedList : userTomatoSeed) {
-					tomatoSeedAmount = seedList.getCropAmount();
-					userCoin = seedList.getCoin();
-					tomatoSeedPrice = seedList.getCropPrice();
+				for (CropDTO cropList : userCropList) {
+					tomatoSeedAmount = cropList.getCropAmount();
+					userCoin = cropList.getCoin();
+					tomatoSeedPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
@@ -159,12 +162,10 @@ public class SellTomatoAmountPanel extends JPanel{
 
 					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
 						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
+						
 						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
 						
-						JPanel sellComplete = new SellComplete();
-						
-							FrameManager.changePanel(sellTomatoAmountPanel, sellComplete);
-					
+						System.out.println(totalGetPrice);
 					}
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
@@ -174,6 +175,8 @@ public class SellTomatoAmountPanel extends JPanel{
 			}
 		
 		
-		});
+		});		
+		
 	}
+	
 }
