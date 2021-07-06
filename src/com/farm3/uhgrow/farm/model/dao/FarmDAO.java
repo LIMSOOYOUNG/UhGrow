@@ -94,8 +94,9 @@ public class FarmDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, farmCropDTO.getFarmList());
-			pstmt.setInt(2, farmCropDTO.getCropId());
-			pstmt.setInt(3, farmCropDTO.getAccumulate());
+			pstmt.setInt(2, farmCropDTO.getUserNo());
+			pstmt.setInt(3, farmCropDTO.getCropId());
+			pstmt.setInt(4, farmCropDTO.getAccumulate());
 
 			result = pstmt.executeUpdate();
 			

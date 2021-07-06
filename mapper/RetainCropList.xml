@@ -23,7 +23,15 @@
 	<entry key="fieldInputSeed">
 		INSERT
 		INTO FARM_CROP
-		VALUES (?,1,?,?)
+		(FARM_LIST
+		, USER_NO
+		, CROP_ID
+		, ACCUMULATE_EXP)
+		VALUES 
+		(?
+		,?
+		,?
+		,?)
 	</entry>
 
 	<entry key="selectFarmExp">
