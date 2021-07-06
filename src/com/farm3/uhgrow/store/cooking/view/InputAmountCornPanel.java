@@ -15,22 +15,19 @@ import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.store.cooking.controller.CookingController;
 
-public class CookingPanel extends JPanel{
-
+public class InputAmountCornPanel extends JPanel {
 	private static final Font Font = null;
-	private JPanel cookingPanel;
+	private JPanel inputAmountCornPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
-	private Font listFond = new Font("나눔손글씨 펜", Font.BOLD, 30);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
 	private JButton btnCooking;
 	private CookingController cookingController;
 
-
-
-	public CookingPanel(int userNo) {
+	public InputAmountCornPanel(int userNo) {
 		this.userNo = userNo;
 		this.cookingController = new CookingController();
-		cookingPanel = this;
+		inputAmountCornPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -85,35 +82,46 @@ public class CookingPanel extends JPanel{
 		
 		JButton btnFirst = new JButton("토마토 피자");
 		btnFirst.setBounds(150, 170, 400, 40);
-		btnFirst.setFont(listFond);
+		btnFirst.setFont(listFont);
 		btnFirst.setContentAreaFilled(false);
 		
 		JButton btnSecond = new JButton("옥수수 또띠아");
 		btnSecond.setBounds(150, 230, 400, 40);
-		btnSecond.setFont(listFond);
+		btnSecond.setFont(listFont);
 		btnSecond.setContentAreaFilled(false);
 		
 		JButton btnThird = new JButton("마늘즙");
 		btnThird.setBounds(150, 290, 400, 40);
-		btnThird.setFont(listFond);
+		btnThird.setFont(listFont);
 		btnThird.setContentAreaFilled(false);
 		
 		JButton btnFourth  = new JButton("호박죽");
 		btnFourth.setBounds(150, 350, 400, 40);
-		btnFourth.setFont(listFond);
+		btnFourth.setFont(listFont);
 		btnFourth.setContentAreaFilled(false);
+		
+		JButton btnAmount = new JButton("입력완료");
+		btnAmount.setBounds(645, 260, 150, 40);
+		btnAmount.setFont(listFont);
+		btnAmount.setContentAreaFilled(false);
+		
+		JTextField inputAmount = new JTextField();
+		inputAmount.setBounds(650, 215, 140, 25);
+		
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
-		
 
 		this.add(storeNpc);
 		this.add(textLabel);
 		this.add(conversationLabel);
+		this.add(inputAmount);
 		
 		this.add(btnBack);
 		this.add(btnCook);
 		this.add(btnBuyHouse);
 		this.add(btnBackGround);
+		
+		this.add(btnAmount);
 		
 		this.add(btnFirst);
 		this.add(btnSecond);
@@ -127,45 +135,16 @@ public class CookingPanel extends JPanel{
 
 		// 집 구매, 요리하기, 그만두기 클릭시 체인지 패널 userNo 전달인자로 넘겨주면서 받아줘야한다.
 
-		btnBack.addMouseListener(new MouseAdapter() {
-
+		btnAmount.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				FarmPanel farmPanel = new FarmPanel(userNo);
-				FrameManager.changePanel(cookingPanel, farmPanel);
+				int intAmount = Integer.parseInt(inputAmount.getText());
+				inputAmount.setText("");
+				int modifyCropAmount = cookingController.modifyCropAmount(userNo, 2, intAmount);
+				int modifyFoodAmount = cookingController.modifyFoodAmount(userNo, 2, intAmount);
+				SuccessCookingPanel successCookingPanel = new SuccessCookingPanel(userNo);
+				FrameManager.changePanel(inputAmountCornPanel, successCookingPanel);
 			}
 		});
-	
-		btnFirst.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountTomatoPanel inputAmountTomatoPanel = new InputAmountTomatoPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountTomatoPanel);
-			}
-		});
-		btnSecond.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountCornPanel inputAmounCornPanel = new InputAmountCornPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmounCornPanel);
-			}
-		});
-		btnThird.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountGarlicPanel inputAmountGarlicPanel = new InputAmountGarlicPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountGarlicPanel);
-			}
-		});
-		btnFourth.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountPumpkinPanel inputAmountPumpkinPanel = new InputAmountPumpkinPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountPumpkinPanel);
-			}
-		});
-		
 	}
 }
-
