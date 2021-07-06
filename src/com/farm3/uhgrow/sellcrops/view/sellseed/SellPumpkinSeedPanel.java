@@ -20,8 +20,11 @@ public class SellPumpkinSeedPanel extends JPanel {
 	
 	private JPanel sellPumpkinSeedPanel;
 	private SellController sellController;
+	private int userNo;
 	
-	public SellPumpkinSeedPanel() {
+	public SellPumpkinSeedPanel(int userNo) {
+		
+		this.userNo = userNo;
 		
 		this.sellController = new SellController();
 		
@@ -147,7 +150,7 @@ public class SellPumpkinSeedPanel extends JPanel {
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellController.userPumpkinSeed();
+				List<CropDTO> userCropList = sellController.userPumpkinSeed(userNo);
 				
 				for (CropDTO cropList : userCropList) {
 					pumpkinSeedAmount = cropList.getCropAmount();
@@ -159,9 +162,9 @@ public class SellPumpkinSeedPanel extends JPanel {
 				
 				if (sellAmount> 0 && sellAmount <= pumpkinSeedAmount && pumpkinSeedAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserPumpkinSeedAmount = sellController.updateUserPumpkinSeed(sellAmount);
+					updateUserPumpkinSeedAmount = sellController.updateUserPumpkinSeed(sellAmount, userNo);
 					
-					getPrice = sellController.sellPumpkinSeedGetCoin(sellAmount, pumpkinSeedPrice);
+					getPrice = sellController.sellPumpkinSeedGetCoin(sellAmount, pumpkinSeedPrice, userNo);
 
 					if(updateUserPumpkinSeedAmount > 0 && getPrice > 0) {
 						totalPumpkinSeedAmonut = pumpkinSeedAmount - sellAmount;
