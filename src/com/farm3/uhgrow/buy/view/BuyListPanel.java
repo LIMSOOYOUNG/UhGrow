@@ -1,6 +1,5 @@
 package com.farm3.uhgrow.buy.view;
 
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.farm3.uhgrow.member.store.MainStorePanel;
+import com.farm3.uhgrow.member.view.FrameManager;
+
 public class BuyListPanel extends JPanel{
 
 	private JPanel buyListPanel;
@@ -18,11 +20,13 @@ public class BuyListPanel extends JPanel{
 	private JButton backButton;
 	private JButton seedListButton;
 	private JButton toolListButton;
+	private int userNo;
+	
+	public BuyListPanel(int userNo) {
 
-	public BuyListPanel() {
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
+		this.userNo = userNo;
+		
 
 		buyListPanel = this;
 
@@ -48,9 +52,9 @@ public class BuyListPanel extends JPanel{
 		sellButton.setSize(232, 60);
 
 		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
+		JButton btnBack = new JButton(new ImageIcon(backImage));
+		btnBack.setLocation(596, 95);
+		btnBack.setSize(232, 60);
 
 		/* ------- 상점 패널 ---------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
@@ -69,7 +73,7 @@ public class BuyListPanel extends JPanel{
 
 		this.add(buyButton);
 		this.add(sellButton);
-		this.add(backButton);
+		this.add(btnBack);
 		this.add(seedListButton);
 		this.add(toolListButton);
 		this.add(storeBackGroundLabel);
@@ -78,13 +82,13 @@ public class BuyListPanel extends JPanel{
 		seedListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buySeedListPanel = new BuySeedListPanel();
+				JPanel buyTomatoSeedPanel = new BuyTomatoSeedPanel();
 
-				FrameManager.changePanel(buyListPanel, buySeedListPanel);
+				FrameManager.changePanel(buyListPanel, buyTomatoSeedPanel);
 
 			}
 		});
-		
+
 		toolListButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -93,8 +97,19 @@ public class BuyListPanel extends JPanel{
 				FrameManager.changePanel(buyListPanel, buyToolListPanel);
 
 			}
+		});		
+		btnBack.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
+				
+				FrameManager.changePanel(buyListPanel, mainStorePanel);
+			}
 		});
 
+		
 
 
 	}

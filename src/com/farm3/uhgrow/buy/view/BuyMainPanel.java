@@ -1,7 +1,5 @@
-package com.farm3.uhgrow.sellcrops.view;
+package com.farm3.uhgrow.buy.view;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,31 +8,19 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
-import com.farm3.uhgrow.member.view.FrameManager;
-import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+public class BuyMainPanel extends JPanel{
 
-public class SellMainPanel extends JPanel {
+	private JPanel buymainPanel;
 	
+	public BuyMainPanel() {
 
-	private JPanel sellmainPanel;
-	private SellController sellController;
 
-	public SellMainPanel() {
-		
-		this.sellController = new SellController();
-		
-		sellmainPanel = this;
+		buymainPanel = this;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
 
-		this.sellController = new SellController();
-		int havingCoin = sellController.selectCoin();
-		String transCoin = "";
-		transCoin = String.valueOf(havingCoin);
-		
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
@@ -57,64 +43,34 @@ public class SellMainPanel extends JPanel {
 		JButton backButton = new JButton(new ImageIcon(backImage));
 		backButton.setLocation(596, 95);
 		backButton.setSize(232, 60);
-		
-		Image imgStoreNPC = new ImageIcon("img/store/storeconversTion1.png").getImage().getScaledInstance(758, 120, 0);
-		JLabel storeNPC = new JLabel(new ImageIcon(imgStoreNPC));
-		storeNPC.setBounds(130, 410, 750, 100);
-		
+
 		/* ------- 상점 패널 ---------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
 
-		Image success = new ImageIcon("img/store/sellCategory/successimage.png").getImage().getScaledInstance(300, 300, 0);
-		JLabel successLabel = new JLabel(new ImageIcon(success));
-		successLabel.setLocation(300, 130);
-		successLabel.setSize(300, 300); 
-		
-		/* 재화 라벨*/
-		
-		/* ---------- 재화 보유 라벨 ------------*/
-		Font f1 = new Font("Ink Free", Font.BOLD, 20);
-		JTextArea userCoin = new JTextArea("COIN : " + transCoin);
-		userCoin.setLocation(600, 400);
-		userCoin.setSize(200, 28);
-		userCoin.setOpaque(false);
-		userCoin.setFont(f1);
-		userCoin.setEditable(false);
 
-		
-		this.add(userCoin);
 		this.add(buyButton);
 		this.add(sellButton);
 		this.add(backButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-//		this.add(textLabel);
-//		this.add(storeNPC);
+
+		buyButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				JPanel buyListPanel = new BuyListPanel();
+
+				FrameManager.changePanel(buymainPanel, buyListPanel);
+
+			}
+		});
+
 		
-	
-		sellButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				JPanel sellCategoryPanel = new SellCategoryPanel();
-				
-					FrameManager.changePanel(sellmainPanel, sellCategoryPanel);
 
-			}
-			
-		});
 
-		backButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			}
-			
-		});
-	
+
 	}
-
+	
 }

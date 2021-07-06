@@ -3,7 +3,6 @@ package com.farm3.uhgrow.farm.controller;
 import java.util.List;
 
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
-import com.farm3.uhgrow.farm.model.dto.InventoryDTO;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.service.FarmService;
 

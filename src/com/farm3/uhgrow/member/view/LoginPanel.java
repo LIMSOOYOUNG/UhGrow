@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.member.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -13,11 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.LoginDTO;
-import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
-import com.farm3.uhgrow.member.store.MainStorePanel;
 
 public class LoginPanel extends JPanel {
 
@@ -27,11 +25,11 @@ public class LoginPanel extends JPanel {
 	private JButton btnInsertUser;
 	private JPanel loginPanel;
 	private int userNo;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 25);
+	private Font titleFont = new Font("나눔손글씨 펜", Font.BOLD, 80);
 
 	// 로그인창 패널 
 	public LoginPanel() {
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
 		// loginPanel 필드에 선언 후 this로 패널의 인스턴스를 지정해줌 -> 아래의 changePanel에서 쓰일 예정 (oldPanel부분)
 		loginPanel = this;
@@ -52,6 +50,8 @@ public class LoginPanel extends JPanel {
 		titleLabel.setLayout(null);
 		titleLabel.setBounds(330, 50, 600, 150);
 		titleLabel.setFont(titleFont);
+		titleLabel.setForeground(Color.white);
+		
 
 
 		// id, pwd 입력창
@@ -59,16 +59,22 @@ public class LoginPanel extends JPanel {
 		idLabel.setLayout(null);
 		idLabel.setBounds(300, 200, 100, 50);
 		idLabel.setFont(font);
+		idLabel.setForeground(Color.white);
+
 
 		JTextField idField = new JTextField();
 		idField.setLayout(null);
 		idField.setBounds(400, 200, 300, 50);
 		idField.setFont(font);
 
+
+
 		JLabel pwdLabel = new JLabel("P  W  D  :  ");
 		pwdLabel.setLayout(null);
 		pwdLabel.setBounds(259, 270, 200, 50);
 		pwdLabel.setFont(font);
+		pwdLabel.setForeground(Color.white);
+
 
 		JPasswordField pwdField = new JPasswordField();
 		pwdField.setLayout(null);
@@ -147,7 +153,7 @@ public class LoginPanel extends JPanel {
 		});
 		btnFindIdPwd.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				FindIdPwdPanel FindIdPwdPanel = new FindIdPwdPanel(userNo);
+				FindIdPwdPanel FindIdPwdPanel = new FindIdPwdPanel();
 
 				FrameManager.changePanel(loginPanel, FindIdPwdPanel);
 			}
@@ -158,18 +164,24 @@ public class LoginPanel extends JPanel {
 	/*---------로그인창 버튼 ------------------*/
 	public JButton btnLogIn() {
 		Image loginBackground = new ImageIcon("img/loginInterface/login.png").getImage().getScaledInstance(540, 36, 0);
-		btnLogin = new JButton(new ImageIcon(loginBackground));
+		btnLogin = new JButton("로 그 인");
 		btnLogin.setLayout(null);
 		btnLogin.setBounds(210,340,540,36);
+		btnLogin.setFont(font);
+		btnLogin.setForeground(Color.white);
+		btnLogin.setBackground(Color.ORANGE);
 		return btnLogin;
 	}
 
 
 	public JButton btnSignUp() {
 		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
-		btnSignUp = new JButton(new ImageIcon(signUpBackground));
+		btnSignUp = new JButton("회 원 가 입");
 		btnSignUp.setLayout(null);
 		btnSignUp.setBounds(210,385,245,35);
+		btnSignUp.setFont(font);
+		btnSignUp.setForeground(Color.white);
+		btnSignUp.setBackground(Color.ORANGE);
 
 		return btnSignUp;
 	}
@@ -177,23 +189,13 @@ public class LoginPanel extends JPanel {
 	/*------------아이디 찾기, 비밀번호 찾기 버튼 ---------------*/
 	public JButton btnFindIdPwd() {
 		Image btnFindIdPwdBackGround = new ImageIcon("img/loginInterface/idpwd.png").getImage().getScaledInstance(245, 35, 0);
-		btnFindIdPwd = new JButton(new ImageIcon(btnFindIdPwdBackGround));
+		btnFindIdPwd = new JButton("I D / P W D 찾 기");
 		btnFindIdPwd.setLayout(null);
 		btnFindIdPwd.setBounds(505,385,245,35);
+		btnFindIdPwd.setFont(font);
+		btnFindIdPwd.setForeground(Color.white);
+		btnFindIdPwd.setBackground(Color.ORANGE);
 
 		return btnFindIdPwd;
 	}
-	/* -------------- 회원가입 버튼 -------------*/
-	public JButton btnInsertUser() {
-
-		Image signUpBackground = new ImageIcon("img/loginInterface/signUp.png").getImage().getScaledInstance(245, 35, 0);
-		btnInsertUser = new JButton(new ImageIcon(signUpBackground));
-		btnInsertUser.setLayout(null);
-		btnInsertUser.setBounds(210,385,245,35);
-		return btnInsertUser;
-	}
-
-
-
-
 }

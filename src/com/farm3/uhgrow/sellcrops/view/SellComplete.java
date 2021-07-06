@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.buy.view;
+package com.farm3.uhgrow.sellcrops.view;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -7,21 +7,32 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
-public class BuySeedListPanel extends JPanel{
+import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 
-	private JPanel buySeedListPanel;
+/* 판매 완료 창*/
 
-	public BuySeedListPanel() {
-
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-
-		buySeedListPanel = this;
-
+public class SellComplete extends JPanel{
+	
+	
+	private JPanel sellComplete;
+	private SellController sellController;
+	
+	public SellComplete() {
+		
+		this.sellController = new SellController();
+		
+		sellComplete = this;
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
 
+		this.sellController = new SellController();
+		int havingCoin = sellController.selectCoin();
+		String transCoin = "";
+		transCoin = String.valueOf(havingCoin);
+		
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
@@ -44,49 +55,39 @@ public class BuySeedListPanel extends JPanel{
 		JButton backButton = new JButton(new ImageIcon(backImage));
 		backButton.setLocation(596, 95);
 		backButton.setSize(232, 60);
-
+		
+		Image imgStoreNPC = new ImageIcon("img/store/storeconversTion1.png").getImage().getScaledInstance(758, 120, 0);
+		JLabel storeNPC = new JLabel(new ImageIcon(imgStoreNPC));
+		storeNPC.setBounds(130, 410, 750, 100);
+		
 		/* ------- 상점 패널 ---------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(0, 0);
 		storeBackGroundLabel.setSize(960, 540);
-
-		/* -------- 씨앗 리스트 버튼 ---------- */
-		JButton tomatoSeedButton = new JButton("토마토");
-		tomatoSeedButton.setLocation(70, 200);
-		tomatoSeedButton.setSize(100, 25);
-
-		JButton cornSeedButton = new JButton("옥수수");
-		cornSeedButton.setLocation(70, 250);
-		cornSeedButton.setSize(100, 25);
-
-		JButton garlicSeedButton = new JButton("마늘");
-		garlicSeedButton.setLocation(70, 300);
-		garlicSeedButton.setSize(100, 25);
-
-		JButton pumpkinSeedButton = new JButton("호박");
-		pumpkinSeedButton.setLocation(70, 350);
-		pumpkinSeedButton.setSize(100, 25);
-
-		/*-------------- 씨앗구매 텍스트 ---------------*/
 		
-		JLabel seedBuyLabel = new JLabel("<씨앗 구매>");
-		seedBuyLabel.setLocation(410, 180);
-		seedBuyLabel.setSize(200, 25);
-		seedBuyLabel.setFont(font);
+		/* 판매 완료 창*/
+	
 		
-		this.add(seedBuyLabel);
+		
+		/* 재화 라벨*/
+		
+		/* ---------- 재화 보유 라벨 ------------*/
+		Font f1 = new Font("Ink Free", Font.BOLD, 20);
+		JTextArea userCoin = new JTextArea("COIN : " + transCoin);
+		userCoin.setLocation(600, 400);
+		userCoin.setSize(200, 28);
+		userCoin.setOpaque(false);
+		userCoin.setFont(f1);
+		userCoin.setEditable(false);
+
+		this.add(userCoin);
 		this.add(buyButton);
 		this.add(sellButton);
 		this.add(backButton);
-		this.add(tomatoSeedButton);
-		this.add(cornSeedButton);
-		this.add(garlicSeedButton);
-		this.add(pumpkinSeedButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-
+		
 	}
-
-
+	
 }

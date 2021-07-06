@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.sellcrops.view;
 
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,20 +9,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
 
 public class SellCategoryPanel extends JPanel{
 	
 	private JPanel sellCategoryPanel;
+	private SellController sellController; 
 	
-	
-	public SellCategoryPanel() {
+	public SellCategoryPanel(int userNo) {
 		
 		sellCategoryPanel = this;
 		
 		this.setLayout(null);
 		this.setSize(960, 540);
+		
+		this.sellController = new SellController();
+		int havingCoin = sellController.selectCoin();
+		String transCoin = "";
+		transCoin = String.valueOf(havingCoin);
 		
 		/*배경화면 이미지 라벨*/
 		Image imageBackGround = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
@@ -45,9 +55,9 @@ public class SellCategoryPanel extends JPanel{
 		
 		/*그만두기버튼 이미지 라벨*/
 		Image quitImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton quitButton = new JButton(new ImageIcon(quitImage));
-		quitButton.setLocation(596, 95);
-		quitButton.setSize(232, 60);
+		JButton btnBack = new JButton(new ImageIcon(quitImage));
+		btnBack.setLocation(596, 95);
+		btnBack.setSize(232, 60);
 		
 		/* ------- 상점 패널 ---------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
@@ -72,9 +82,21 @@ public class SellCategoryPanel extends JPanel{
 		cookListButton.setLocation(70, 350);
 		cookListButton.setSize(100, 25);
 		
+		/* 재화 라벨*/
+		
+		/* ---------- 재화 보유 라벨 ------------*/
+		Font f1 = new Font("Ink Free", Font.BOLD, 20);
+		JTextArea userCoin = new JTextArea("COIN : " + transCoin);
+		userCoin.setLocation(600, 400);
+		userCoin.setSize(200, 28);
+		userCoin.setOpaque(false);
+		userCoin.setFont(f1);
+		userCoin.setEditable(false);
+		
+		this.add(userCoin);
 		this.add(buyButton);
 		this.add(sellButton);
-		this.add(quitButton);
+		this.add(btnBack);
 		this.add(seedListButton);
 		this.add(cropListButton);
 		this.add(toolListButton);
@@ -86,7 +108,9 @@ public class SellCategoryPanel extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				JPanel sellSeedListPanel = new SellSeedListPanel();
 				
+				FrameManager.changePanel(sellCategoryPanel, sellSeedListPanel);
 			}
 			
 		});
@@ -95,6 +119,8 @@ public class SellCategoryPanel extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+					
+				
 				JPanel sellCropListPanel = new SellCropListPanel();
 				
 				FrameManager.changePanel(sellCategoryPanel, sellCropListPanel);
@@ -120,6 +146,16 @@ public class SellCategoryPanel extends JPanel{
 				
 			}
 			
+		});
+		btnBack.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+				MainStorePanel mainStorePanel = new MainStorePanel(userNo);
+				
+				FrameManager.changePanel(sellCategoryPanel, mainStorePanel);
+			}
 		});
 		
 		

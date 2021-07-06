@@ -13,29 +13,28 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
-public class SellTomatoAmountPanel extends JPanel{
-
-	private JPanel sellTomatoAmountPanel;
+public class SellPumpkinAmountPanel extends JPanel {
+	
+	private JPanel sellPumpkinAmountPanel;
 	private SellController sellController;
 	
-	public SellTomatoAmountPanel() {
-		
+	public SellPumpkinAmountPanel() {
+	
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
 
-		sellTomatoAmountPanel = this;
-
+		sellPumpkinAmountPanel = this;
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
-
+		
 		this.sellController = new SellController();
 		int havingCoin = sellController.selectCoin();
 		String transCoin = "";
-		transCoin = String.valueOf(havingCoin);		
+		transCoin = String.valueOf(havingCoin);
 		
 		/* ---------- 배경화면 라벨 ------------ */
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
@@ -96,7 +95,7 @@ public class SellTomatoAmountPanel extends JPanel{
 		JButton confirmButton = new JButton("판매확정");
 		confirmButton.setLocation(670, 250);
 		confirmButton.setSize(100, 25);
-
+		
 		/* 재화 라벨*/
 		
 		/* ---------- 재화 보유 라벨 ------------*/
@@ -109,7 +108,7 @@ public class SellTomatoAmountPanel extends JPanel{
 		userCoin.setEditable(false);
 
 		
-		this.add(userCoin);		
+		this.add(userCoin);
 		this.add(confirmButton);
 		this.add(inputAmountText);
 		this.add(inputAmountLabel);
@@ -130,50 +129,46 @@ public class SellTomatoAmountPanel extends JPanel{
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int tomatoSeedAmount = 0;
+				/* 유저의 호박 수량, 현재 가지고 있는 코인 조회 */
+				int pumpkinAmount = 0;
 				int userCoin = 0;
-				int tomatoSeedPrice = 0;
-				int updateUserTomatoSeedAmount = 0;
+				int pumpkinPrice = 0;
+				int updateUserPumpkinAmount = 0;
 				int getPrice = 0;
-				int totalTomatoSeedAmonut = 0;
+				int totalPumpkinAmonut = 0;
 				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userTomatoSeed = sellController.userTomatoList();
+				List<CropDTO> userCropList = sellController.userPumpkinList();
 				
-				for (CropDTO seedList : userTomatoSeed) {
-					tomatoSeedAmount = seedList.getCropAmount();
-					userCoin = seedList.getCoin();
-					tomatoSeedPrice = seedList.getCropPrice();
+				for (CropDTO cropList : userCropList) {
+					pumpkinAmount = cropList.getCropAmount();
+					userCoin = cropList.getCoin();
+					pumpkinPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 				
-				if (sellAmount> 0 && sellAmount <= tomatoSeedAmount && tomatoSeedAmount != 0) {
+				if (sellAmount> 0 && sellAmount <= pumpkinAmount && pumpkinAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount);
+					updateUserPumpkinAmount = sellController.updateUserPumpkinAmount(sellAmount);
 					
-					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice);
+					getPrice = sellController.sellPumpkinGetCoin(sellAmount, pumpkinPrice);
 
-					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
-						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
-						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
-						
-						JPanel sellComplete = new SellComplete();
-						
-							FrameManager.changePanel(sellTomatoAmountPanel, sellComplete);
-					
+					if(updateUserPumpkinAmount > 0 && getPrice > 0) {
+						totalPumpkinAmonut = pumpkinAmount - sellAmount;
+						totalGetPrice = userCoin + ((pumpkinPrice * sellAmount) / 10);					
+						System.out.println(totalGetPrice);
 					}
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
 				}
-
 				
 			}
 		
-		
 		});
+	
 	}
+	
 }

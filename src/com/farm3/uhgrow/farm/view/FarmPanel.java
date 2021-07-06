@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +28,15 @@ import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.dto.UserInfoDTO;
 import com.farm3.uhgrow.farm.model.dto.CropDTO;
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
+import com.farm3.uhgrow.member.store.BuyHouseAndCookPanel;
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.view.SellMainPanel;
 
 public class FarmPanel extends JPanel {
 	private boolean isTrue = false;
 
-	private int userNO;
+	private int userNo;
 	private int fieldNo;
 	private JLabel seedText;
 	private JLabel conversationLabel;
@@ -52,7 +55,6 @@ public class FarmPanel extends JPanel {
 	private JLabel backGround;
 	private JLabel mainNpc;
 	private JLabel storeNpc;
-	private JLabel storeBackGroundLabel;
 	private JLabel tomato;
 	private JLabel tomatoSeed;
 	private JLabel corn;
@@ -87,9 +89,11 @@ public class FarmPanel extends JPanel {
 	private int[] garlicSumExp = new int[10];
 	private int[] pumpkinSumExp = new int[10];
 	private Font font = new Font("amountfont", Font.BOLD | Font.ITALIC, 10);
+	private JButton btnStoreNpc;
+	private JButton btnMainNpc;
 
-	public FarmPanel() {
-		userNO =1;
+	public FarmPanel(int userNo) {
+		this.userNo = userNo;
 		farmPanel = this;
 		farmExp = farmcontroller.selectFarmExp(1);
 		createCrop = farmcontroller.createCrop(1);
@@ -103,17 +107,14 @@ public class FarmPanel extends JPanel {
 		this.add(SeedList());
 		toolLabel();
 		inventoryLabel();
+		this.add(btnStoreNpc());
 		this.add(storeNpc());
+		this.add(btnMainNpc());
 		this.add(mainNpc());
 		this.setVisible(true);
 
 		this.add(backGroundLabel());
 
-		storeNpc().addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent e) {
-				FrameManager.changePanel(farmPanel, sellMainPanel);
-			}
-		});
 
 	}
 
@@ -145,8 +146,7 @@ public class FarmPanel extends JPanel {
 		shovel.setSize(27, 27);
 		shovel.setVisible(false);
 		farmPanel.add(shovel);
-
-	}
+  }
 
 	public void inventoryLabel() {
 
@@ -427,7 +427,9 @@ public class FarmPanel extends JPanel {
 											farmController.fieldInputSeed(farmCropDTO);
 
 											fieldArr[imgindex] = 6;
+
 											cornSumExp[imgindex] = 0;
+
 
 											break;
 										case 7:
@@ -450,6 +452,7 @@ public class FarmPanel extends JPanel {
 
 											fieldArr[imgindex] = 8;
 											pumpkinSumExp[imgindex] = 0;
+
 
 											break;
 
@@ -474,6 +477,8 @@ public class FarmPanel extends JPanel {
 
 			}
 		});
+
+
 		fieldButton[1].addActionListener(new ActionListener() {
 
 			@Override
@@ -610,6 +615,7 @@ public class FarmPanel extends JPanel {
 											fieldArr[imgindex] = 6;
 											cornSumExp[imgindex] = 0;
 
+
 											break;
 										case 7:
 											JOptionPane.showMessageDialog(farmPanel,
@@ -622,6 +628,7 @@ public class FarmPanel extends JPanel {
 
 											fieldArr[imgindex] = 7;
 											garlicSumExp[imgindex] = 0;
+
 
 											break;
 										case 8:
@@ -2145,6 +2152,12 @@ public class FarmPanel extends JPanel {
 
 	public void deleteHarvestCrop(int fieldArrIndex, int cropId) {
 
+
+	}
+
+	public void deleteHarvestCrop(int fieldArrIndex, int cropId) {
+
+
 		setIcon(fieldArrIndex, "img/field.png");
 		fieldArr[fieldArrIndex] = 0; // 필드arr에 있는값을 0 으로 초기화
 		int delete = 0;
@@ -2155,15 +2168,7 @@ public class FarmPanel extends JPanel {
 		FrameManager.refresh();
 	}
 
-	public JLabel store() {
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(800, 400,
-				0);
-		storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(800, 400);
-		return storeBackGroundLabel;
-	}
-
+	
 	public JList SeedList() {
 		defaultSeedList = new DefaultListModel();
 		jSeedList = new JList(defaultSeedList);
@@ -2185,6 +2190,26 @@ public class FarmPanel extends JPanel {
 		return mainNpc;
 	}
 
+	public JButton btnMainNpc() {
+		Image imgMainNpc = new ImageIcon("img/interface/mainNpc.png").getImage().getScaledInstance(30, 50, 0);
+		btnMainNpc = new JButton(new ImageIcon(imgMainNpc));
+		btnMainNpc.setLocation(570, 190);
+		btnMainNpc.setSize(30, 50);
+		btnMainNpc.setBorderPainted(false);
+		btnMainNpc.setContentAreaFilled(false);
+		btnMainNpc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				BuyHouseAndCookPanel mainNpcPanel = new BuyHouseAndCookPanel(userNo);
+				FrameManager.changePanel(farmPanel, mainNpcPanel);
+
+			}
+		});
+
+		return btnMainNpc;
+	}
+
 	public JLabel backGroundLabel() { // 회원가입
 		Image imgbackground = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGround = new JLabel(new ImageIcon(imgbackground));
@@ -2200,6 +2225,26 @@ public class FarmPanel extends JPanel {
 		storeNpc.setSize(30, 50);
 
 		return storeNpc;
+	}
+
+	public JButton btnStoreNpc() {
+		Image imgStoreNpc = new ImageIcon("img/interface/storeNpc.png").getImage().getScaledInstance(30, 50, 0);
+		btnStoreNpc = new JButton(new ImageIcon(imgStoreNpc));
+		btnStoreNpc.setLocation(750, 150);
+		btnStoreNpc.setSize(30, 50);
+		btnStoreNpc.setBorderPainted(false);
+		btnStoreNpc.setContentAreaFilled(false);
+
+		btnStoreNpc.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MainStorePanel storePanel = new MainStorePanel(userNo);
+				FrameManager.changePanel(farmPanel, storePanel);
+
+			}
+		});
+		return btnStoreNpc;
 	}
 
 	public JLabel askText() {

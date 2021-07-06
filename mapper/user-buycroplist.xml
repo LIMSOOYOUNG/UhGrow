@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment/>
-	<entry key="user-croplist">
+	<entry key="user-tomatolist">
        SELECT
        UI.USER_NO
      , CR.CROP_NAME
@@ -13,7 +13,7 @@
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
    AND UI.USER_NO = 1
-   AND CR.CROP_ID = 1
+   AND CR.CROP_ID = 5
     </entry>
 
     <entry key = "user-cornList">
@@ -26,7 +26,7 @@
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
    AND UI.USER_NO = 1
-   AND CR.CROP_ID = 2
+   AND CR.CROP_ID = 6
 	</entry>
 	
 	<entry key = "user-garlicList">
@@ -39,8 +39,9 @@
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
    AND UI.USER_NO = 1
-   AND CR.CROP_ID = 3	
+   AND CR.CROP_ID = 7	
 	</entry>
+	
 	<entry key = "user-pumpkinList">
 	  SELECT
        UI.USER_NO
@@ -51,21 +52,49 @@
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
    AND UI.USER_NO = 1
-   AND CR.CROP_ID = 4	
+   AND CR.CROP_ID = 8	
 	</entry>
+	
 	<entry key= "updateTomatoCropAmount">
 		UPDATE RETAIN_CROP
-		   SET CROP_AMOUNT = CROP_AMOUNT - ?
-		 WHERE CROP_ID = 1
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 5
 		   AND USER_NO = 1
 	
 	</entry>
-	<entry key= "sellTomatoGetCoin">
-		UPDATE
-			   USER_INFO 
-		   SET COIN = COIN + ((13000 * ?) * 0.1)
-		 WHERE USER_NO = 1   
+	
+	<entry key= "updateCornCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 6
+		   AND USER_NO = 1
+	
 	</entry>
+	
+	<entry key= "updateGarlicCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 7
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key= "updatePumpkinCropAmount">
+		UPDATE RETAIN_CROP
+		   SET CROP_AMOUNT = CROP_AMOUNT + ?
+		 WHERE CROP_ID = 8
+		   AND USER_NO = 1
+	
+	</entry>
+	
+	<entry key ="buyTomatoGetCoin">
+      UPDATE
+            USER_INFO 
+         SET COIN = COIN - (? * ?)
+       WHERE USER_NO = 1
+   </entry>
+	
+	
 </properties>
 
 
