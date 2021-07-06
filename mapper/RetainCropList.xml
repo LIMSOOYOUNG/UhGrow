@@ -126,6 +126,11 @@
 		DELETE FARM_CROP
 		WHERE USER_NO = ?
 	</entry>
+	<entry key="updateContinueYN">
+		UPDATE USER_INFO
+		SET CONTINUE_YN = 'Y'
+		WHERE USER_NO = ?
+	</entry>
 </properties>
 
 

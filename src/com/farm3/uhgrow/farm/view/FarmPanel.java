@@ -121,6 +121,8 @@ public class FarmPanel extends JPanel {
 		this.setVisible(true);
 
 		this.add(backGroundLabel());
+		
+		FrameManager.refresh();
 
 	}
 
