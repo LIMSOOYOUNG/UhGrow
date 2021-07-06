@@ -413,7 +413,7 @@ public class FarmPanel extends JPanel {
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/tomato/Tomato_Stage_1.png");
-											new FarmCropDTO(1,userNO,retainCropList.get(index).getCropId(),200);
+											new FarmCropDTO(1,userNo,retainCropList.get(index).getCropId(),200);
 											farmController.fieldInputSeed(farmCropDTO);
 											fieldArr[imgindex] = 5;
 											tomatoSumExp[imgindex] = 0;
@@ -423,7 +423,7 @@ public class FarmPanel extends JPanel {
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/corn/Corn_Stage.png");
-											new FarmCropDTO(1,userNO,retainCropList.get(index).getCropId(),300);
+											new FarmCropDTO(1,userNo,retainCropList.get(index).getCropId(),300);
 											farmController.fieldInputSeed(farmCropDTO);
 
 											fieldArr[imgindex] = 6;
@@ -436,7 +436,7 @@ public class FarmPanel extends JPanel {
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/garlic/Garlic_Stage_1.png");
-											new FarmCropDTO(1,userNO,retainCropList.get(index).getCropId(),400);
+											new FarmCropDTO(1,userNo,retainCropList.get(index).getCropId(),400);
 											farmController.fieldInputSeed(farmCropDTO);
 
 											fieldArr[imgindex] = 7;
@@ -447,7 +447,7 @@ public class FarmPanel extends JPanel {
 											JOptionPane.showMessageDialog(farmPanel,
 													retainCropList.get(index).getCropName() + "를 심었습니다", "씨앗 심음 알림", 1);
 											setIcon(imgindex, "img/pumpkin/Pumpkin_Stage_1.png");
-											new FarmCropDTO(1,userNO,retainCropList.get(index).getCropId(),500);
+											new FarmCropDTO(1,userNo,retainCropList.get(index).getCropId(),500);
 											farmController.fieldInputSeed(farmCropDTO);
 
 											fieldArr[imgindex] = 8;
