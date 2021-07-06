@@ -18,10 +18,8 @@ import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 public class MainStorePanel extends JPanel {
 
 	private JPanel MainStorePanel;
-	private int userNo;
 
 	public MainStorePanel(int userNo) {
-		this.userNo = userNo;
 		MainStorePanel = this;
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);

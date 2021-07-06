@@ -66,15 +66,15 @@ public class BuyService {
 	}
 	
 	/*토마토씨앗 구매 수량 업데이트*/
-	public int updateUserTomatoAmount(int buyAmount) {
+	public int updateTomatoCropAmount(int buyAmount) {
 		
 		Connection con = getConnection();
 		
-		int updateTomatoAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
+		int updateTomatoCropAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
 		
 		close(con);
 		
-		return updateTomatoAmount;
+		return updateTomatoCropAmount;
 	}
 	
 	/*옥수수씨앗 구매 수량 업데이트*/
@@ -82,11 +82,11 @@ public class BuyService {
 		
 		Connection con = getConnection();
 		
-		int updateTomatoAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
+		int updateCornCropAmount = buyCropsDAO.updateCornCropAmount(con, buyAmount);
 		
 		close(con);
 		
-		return updateTomatoAmount;
+		return updateCornCropAmount;
 	}
 	
 	/*마늘씨앗 구매 수량 업데이트*/
@@ -94,11 +94,11 @@ public class BuyService {
 		
 		Connection con = getConnection();
 		
-		int updateTomatoAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
+		int updateGarlicCropAmount = buyCropsDAO.updateGarlicCropAmount(con, buyAmount);
 		
 		close(con);
 		
-		return updateTomatoAmount;
+		return updateGarlicCropAmount;
 	}
 	
 	/*호박씨앗 구매 수량 업데이트*/
@@ -106,11 +106,11 @@ public class BuyService {
 		
 		Connection con = getConnection();
 		
-		int updateTomatoAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
+		int updatePumpkinCropAmount = buyCropsDAO.updatePumpkinCropAmount(con, buyAmount);
 		
 		close(con);
 		
-		return updateTomatoAmount;
+		return updatePumpkinCropAmount;
 	}
 
 
@@ -125,6 +125,39 @@ public class BuyService {
 		
 		return result;
 	}
+	
+public int buyCornGetCoin(int buyAmount, int cornPrice) {
+		
+		Connection con = getConnection();
+		
+		int result = buyCropsDAO.buyCornGetCoin(con, buyAmount, cornPrice);
+		
+		close(con);
+		
+		return result;
+	}
+
+public int buyGarlicGetCoin(int buyAmount, int GarlicPrice) {
+	
+	Connection con = getConnection();
+	
+	int result = buyCropsDAO.buyGarlicGetCoin(con, buyAmount, GarlicPrice);
+	
+	close(con);
+	
+	return result;
+}
+
+public int buyPumpkinGetCoin(int buyAmount, int pumpkinPrice) {
+	
+	Connection con = getConnection();
+	
+	int result = buyCropsDAO.buyPumpkinGetCoin(con, buyAmount, pumpkinPrice);
+	
+	close(con);
+	
+	return result;
+}
 		
 		
 

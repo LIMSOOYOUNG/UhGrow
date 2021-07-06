@@ -26,6 +26,32 @@ public class BuyDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* 유저 재화 라벨*/
+	public int selectCoin(Connection con) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("selectCoin");
+		try {
+			pstmt = con.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				result = rset.getInt("COIN");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 	public List<BuyDTO> userTomatoList(Connection con) {
 		PreparedStatement pstmt = null;
@@ -285,6 +311,77 @@ public class BuyDAO {
 		}
 		return result;
 	}
+	
+public int buyCornGetCoin(Connection con, int buyAmount, int cornPrice) {
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("buyCornGetCoin");
+			
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, buyAmount);
+			pstmt.setInt(2, cornPrice);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+public int buyGarlicGetCoin(Connection con, int buyAmount, int garlicPrice) {
+	
+	PreparedStatement pstmt = null;
+	
+	int result = 0;
+	
+	String query = prop.getProperty("buyGarlicGetCoin");
+		
+	try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, buyAmount);
+		pstmt.setInt(2, garlicPrice);
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	return result;
+}
+
+public int buyPumpkinGetCoin(Connection con, int buyAmount, int pumpkinPrice) {
+	
+	PreparedStatement pstmt = null;
+	
+	int result = 0;
+	
+	String query = prop.getProperty("buyPumpkinGetCoin");
+		
+	try {
+		pstmt = con.prepareStatement(query);
+		pstmt.setInt(1, buyAmount);
+		pstmt.setInt(2, pumpkinPrice);
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+	}
+	return result;
+}
+
+
 
 
 
