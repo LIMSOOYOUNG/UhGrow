@@ -78,8 +78,6 @@ public class FindIdPanel extends JPanel{
 		resultFindIdTextField.setBounds(400, 340, 220, 35);
 		resultFindIdTextField.setFont(font);
 		resultFindIdTextField.setEditable(false);
-		//		resultFindIdTextField.setText("");
-
 
 		this.add(resultFindIdTextField);
 		this.add(resultFindIdLabel());
@@ -129,11 +127,7 @@ public class FindIdPanel extends JPanel{
 		return backGroundLabel;
 	}
 
-	// 타이틀에 이미지 따와서 넣는게 좋을듯 
-
-
 	public JButton btnYes() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/findId.png").getImage().getScaledInstance(140, 33, 0);
 		btnYes = new JButton("I D 찾 기 ");
 		btnYes.setBounds(340,400,140,33);
 		btnYes.setFont(font);
@@ -143,7 +137,6 @@ public class FindIdPanel extends JPanel{
 		return btnYes;
 	}
 	public JButton btnBack() {
-		Image btnYesImage = new ImageIcon("img/loginInterface/backButton.png").getImage().getScaledInstance(140, 33, 0);
 		btnBack = new JButton("뒤 로 가 기");
 		btnBack.setBounds(510,400,140,33);
 		btnBack.setFont(font);
@@ -157,7 +150,6 @@ public class FindIdPanel extends JPanel{
 		resultFindIdLabel.setBounds(300, 340, 500, 35);
 		resultFindIdLabel.setFont(font);
 		resultFindIdLabel.setForeground(Color.white);
-
 
 		return resultFindIdLabel;
 	}

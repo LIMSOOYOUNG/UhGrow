@@ -10,17 +10,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.view.FrameManager;
 
-public class BuyHouseAndCookPanel extends JPanel {
+public class BuyHouseCheckPanel extends JPanel {
 
 	private JPanel buyHouseAndCookPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 
 
-	public BuyHouseAndCookPanel(int userNo) {
+	public BuyHouseCheckPanel(int userNo) {
 		this.userNo = userNo;
 		buyHouseAndCookPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
@@ -71,7 +70,7 @@ public class BuyHouseAndCookPanel extends JPanel {
 		storeNpc.setBounds(750, 350, 90, 150);
 
 		/* ---------- 할머니와 대화내용  ------------*/
-		JLabel textLabel = new JLabel("무얼 하고 싶은게야... ");
+		JLabel textLabel = new JLabel("정말 집을 구매할건가?!! ");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
 
@@ -86,32 +85,5 @@ public class BuyHouseAndCookPanel extends JPanel {
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-
-		btnCook.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				CookPanel cookPanel = new CookPanel(userNo);
-				
-				FrameManager.changePanel(buyHouseAndCookPanel, cookPanel);
-			}
-		});
-		
-		btnBuyHouse.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				MemberController memberController = new MemberController();
-				
-//				memberDTO result housePrice = memberController
-				
-				
-				
-			}
-		});
-		
-		
 	}
 }

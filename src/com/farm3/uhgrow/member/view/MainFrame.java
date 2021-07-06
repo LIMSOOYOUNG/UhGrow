@@ -11,6 +11,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 
+import com.farm3.uhgrow.member.store.MainStorePanel;
+
 public class MainFrame extends JFrame {
 
 	public MainFrame() {
@@ -20,12 +22,12 @@ public class MainFrame extends JFrame {
 //		playSound("sound/배경음악1.wav");
 
 		this.add(new LoginPanel());
+		
 
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 
 	public static void playSound(String fn) {
 		try {
