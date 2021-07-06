@@ -12,9 +12,7 @@ import java.util.Properties;
 
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
 import com.farm3.uhgrow.farm.model.dto.UserInfoDTO;
-import com.farm3.uhgrow.farm.model.dto.CropDTO;
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
-import com.farm3.uhgrow.farm.model.dto.InventoryDTO;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
@@ -217,6 +215,79 @@ public class FarmDAO {
 
 		return inventoryCropList;
 		
+	}
+
+	public int createCrop(Connection con, int cropId) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2= null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		PreparedStatement pstmt5 = null;
+		PreparedStatement pstmt6 = null;
+		PreparedStatement pstmt7 = null;
+		PreparedStatement pstmt8 = null;
+		int sum =0;
+		int result1 = 0; // 수정 성공여부 초기화
+		int result2 = 0; // 수정 성공여부 초기화
+		int result3 = 0; // 수정 성공여부 초기화
+		int result4 = 0; // 수정 성공여부 초기화
+		int result5 = 0; // 수정 성공여부 초기화
+		int result6 = 0; // 수정 성공여부 초기화
+		int result7 = 0; // 수정 성공여부 초기화
+		int result8 = 0; // 수정 성공여부 초기화
+
+		String query1 = prop.getProperty("createCrop1"); // updateMemberPassword 쿼리문 선언
+		String query2 = prop.getProperty("createCrop2"); // updateMemberPassword 쿼리문 선언
+		String query3 = prop.getProperty("createCrop3"); // updateMemberPassword 쿼리문 선언
+		String query4 = prop.getProperty("createCrop4"); // updateMemberPassword 쿼리문 선언
+		String query5 = prop.getProperty("createCrop5"); // updateMemberPassword 쿼리문 선언
+		String query6 = prop.getProperty("createCrop6"); // updateMemberPassword 쿼리문 선언
+		String query7 = prop.getProperty("createCrop7"); // updateMemberPassword 쿼리문 선언
+		String query8 = prop.getProperty("createCrop8"); // updateMemberPassword 쿼리문 선언
+
+		try {
+			pstmt1 = con.prepareStatement(query1);
+			pstmt2 = con.prepareStatement(query2);
+			pstmt3 = con.prepareStatement(query3);
+			pstmt4 = con.prepareStatement(query4);
+			pstmt5 = con.prepareStatement(query5);
+			pstmt6 = con.prepareStatement(query6);
+			pstmt7 = con.prepareStatement(query7);
+			pstmt8 = con.prepareStatement(query8);
+			pstmt1.setInt(1, cropId);
+			pstmt2.setInt(1, cropId);
+			pstmt3.setInt(1, cropId);
+			pstmt4.setInt(1, cropId);
+			pstmt5.setInt(1, cropId);
+			pstmt6.setInt(1, cropId);
+			pstmt7.setInt(1, cropId);
+			pstmt8.setInt(1, cropId);
+
+			result1 = pstmt1.executeUpdate();
+			result2 = pstmt2.executeUpdate();
+			result3 = pstmt3.executeUpdate();
+			result4 = pstmt4.executeUpdate();
+			result5 = pstmt5.executeUpdate();
+			result6 = pstmt6.executeUpdate();
+			result7 = pstmt7.executeUpdate();
+			result8 = pstmt8.executeUpdate();
+			
+			sum=result1+result2+result3+result4+result5+result6+result7+result8;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt1); // statement 할당 반납
+			close(pstmt2); // statement 할당 반납
+			close(pstmt3); // statement 할당 반납
+			close(pstmt4); // statement 할당 반납
+			close(pstmt5); // statement 할당 반납
+			close(pstmt6); // statement 할당 반납
+			close(pstmt7); // statement 할당 반납
+			close(pstmt8); // statement 할당 반납
+		}
+
+		return sum;
 	}
 
 }
