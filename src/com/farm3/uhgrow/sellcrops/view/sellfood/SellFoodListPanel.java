@@ -13,8 +13,6 @@ import javax.swing.JTextArea;
 
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
-import com.farm3.uhgrow.sellcrops.view.SellGarlicAmountPanel;
-import com.farm3.uhgrow.sellcrops.view.SellTomatoAmountPanel;
 
 public class SellFoodListPanel extends JPanel {
 	
@@ -128,7 +126,7 @@ public class SellFoodListPanel extends JPanel {
 		this.add(btnBuy);
 		this.add(btnBackGround);
 		
-		/* 유저 씨앗  판매 버튼*/
+		/* 유저 음식  판매 버튼*/
 
 		this.add(tomatoPizzaButton);
 		this.add(cornTortillaButton);
@@ -153,9 +151,9 @@ public class SellFoodListPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-//				JPanel sellCornTortillaPanel = new SellCornTortillaPanel(userNo);
+				JPanel sellCornTortillaPanel = new SellCornTortillaPanel(userNo);
 				
-//				FrameManager.changePanel(sellFoodListPanel, sellCornTortillaPanel);
+				FrameManager.changePanel(sellFoodListPanel, sellCornTortillaPanel);
 				
 			}
 			
@@ -166,9 +164,9 @@ public class SellFoodListPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-//				JPanel sellGarlicJuicePanel = new SellGarlicJuicePanel(userNo);
+				JPanel sellGarlicJuicePanel = new SellGarlicJuicePanel(userNo);
 				
-//				FrameManager.changePanel(sellFoodListPanel, sellGarlicJuicePanel);
+				FrameManager.changePanel(sellFoodListPanel, sellGarlicJuicePanel);
 			}
 			
 		});
