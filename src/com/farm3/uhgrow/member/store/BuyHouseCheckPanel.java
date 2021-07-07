@@ -126,8 +126,7 @@ public class BuyHouseCheckPanel extends JPanel {
 				int housePrice = buyHouseDTO.getHousePrice();
 				
 				if(userCoin > housePrice) {
-					EndingPanel endingPanel = new EndingPanel();
-					FrameManager.changePanel(BuyHouseCheckPanel, endingPanel);
+					FrameManager.changePanel(BuyHouseCheckPanel, new EndingPanel());
 
 				} else {
 					FailBuyHouse failBuyHouse = new FailBuyHouse(buyHouseDTO);

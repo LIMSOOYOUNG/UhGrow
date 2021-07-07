@@ -93,9 +93,8 @@ public class BuyHouseAndCookPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CookingPanel cookingPanel = new CookingPanel(userNo);
 				
-				FrameManager.changePanel(buyHouseAndCookPanel, cookingPanel);
+				FrameManager.changePanel(buyHouseAndCookPanel, new CookingPanel(userNo));
 			}
 		});
 		
@@ -103,9 +102,8 @@ public class BuyHouseAndCookPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				FarmPanel farmPanel = new FarmPanel(userNo);
 				
-				FrameManager.changePanel(buyHouseAndCookPanel, farmPanel);
+				FrameManager.changePanel(buyHouseAndCookPanel, new FarmPanel(userNo));
 			}
 		});
 		
@@ -115,8 +113,7 @@ public class BuyHouseAndCookPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				
 			
-				BuyHousePanel buyHousePanel = new BuyHousePanel(userNo);
-				FrameManager.changePanel(buyHouseAndCookPanel, buyHousePanel);
+				FrameManager.changePanel(buyHouseAndCookPanel, new BuyHousePanel(userNo));
 				
 				
 			}

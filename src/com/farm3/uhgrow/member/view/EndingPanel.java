@@ -6,14 +6,14 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class EndingPanel extends JPanel {
 
-	private JPanel endingPanel;
 	public EndingPanel() {
-		endingPanel = this;
-		
+		this.setLayout(null);
+		this.setSize(960,540);
 		/* ---------- 배경화면 라벨  ------------*/
 		Image ending = new ImageIcon("img/ending.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel endingLabel = new JLabel(new ImageIcon(ending));
@@ -27,9 +27,8 @@ public class EndingPanel extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				LoginPanel loginPanel = new LoginPanel();
-				
-				FrameManager.changePanel(endingPanel, loginPanel);
+				JOptionPane.showMessageDialog(null, "게임을 이용해주셔서 감사합니다.","게임 엔딩",1);
+				System.exit(0);
 			}
 		});
 

@@ -16,7 +16,7 @@ import com.farm3.uhgrow.buy.view.buyTool.ShovelResultPanel;
 import com.farm3.uhgrow.buy.view.buyTool.WateringCanResultPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 
-public class BuyToolListPanel extends JPanel{
+public class BuyToolListPanel extends JPanel {
 
 	private JPanel buyToolListPanel;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
@@ -25,27 +25,26 @@ public class BuyToolListPanel extends JPanel{
 
 	public BuyToolListPanel(int userNo) {
 
-
 		buyToolListPanel = this;
 
 		this.userNo = userNo;
-		/* ---------- MainStorePanel 크기 지정 ----------------*/
+		/* ---------- MainStorePanel 크기 지정 ---------------- */
 		this.setLayout(null);
-		this.setSize(960,540);
+		this.setSize(960, 540);
 
-
-		/* ---------- 배경화면 라벨  ------------*/
+		/* ---------- 배경화면 라벨 ------------ */
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setSize(960, 540);
 
-		/* ---------- 상첨창 배경  ------------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
+		/* ---------- 상첨창 배경 ------------ */
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360,
+				0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(127, 90);
 		storeBackGroundLabel.setSize(705, 360);
 
-		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
+		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼 ------------ */
 		JButton btnBuy = new JButton("구 매 하 기 ");
 		btnBuy.setBounds(132, 95, 232, 60);
 		btnBuy.setFont(font);
@@ -61,11 +60,11 @@ public class BuyToolListPanel extends JPanel{
 		btnBack.setFont(font);
 		btnBack.setContentAreaFilled(false);
 
-		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
-		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60,
+				0);
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
-		btnBackGround.setBounds(132, 95,  696, 60);
-
+		btnBackGround.setBounds(132, 95, 696, 60);
 
 		/* -------- 농기구 리스트 버튼 ---------- */
 		JButton pickaxeToolButton = new JButton("곡괭이");
@@ -89,7 +88,6 @@ public class BuyToolListPanel extends JPanel{
 		JLabel toolBuyLabel = new JLabel("<농기구 구매>");
 		toolBuyLabel.setBounds(350, 180, 200, 25);
 		toolBuyLabel.setFont(font);
-
 
 		this.add(toolBuyLabel);
 		/* ---------- 구매, 판매, 뒤로 버튼 패널에 추가 --------- */
@@ -143,5 +141,3 @@ public class BuyToolListPanel extends JPanel{
 	}
 
 }
-
-
