@@ -10,7 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.buy.view.FrameManager;
+import com.farm3.uhgrow.member.view.FrameManager;
+
 
 public class BuyListPanel extends JPanel{
 
