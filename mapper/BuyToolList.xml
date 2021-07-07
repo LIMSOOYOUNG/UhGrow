@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment />
+	<entry key="selectAllCategory">
+		select
+		rc.crop_id
+		, cr.crop_name
+		, rc.crop_amount
+		from
+		crop cr, retain_crop rc
+		where cr.crop_id = rc.crop_id
+		and rc.user_no = ?
+		and rc.crop_id>4
+		order by cr.crop_id
+	</entry>
+
+</properties>
+
+
+
+
+
+
+

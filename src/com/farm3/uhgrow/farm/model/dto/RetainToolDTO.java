@@ -3,27 +3,48 @@ package com.farm3.uhgrow.farm.model.dto;
 import java.io.Serializable;
 
 public class RetainToolDTO implements Serializable {
-	private int tool_id;
-
+	private int userNo;
+	private int toolId;
+	private char retainToolYn;
+	
 	public RetainToolDTO() {}
 
-	public RetainToolDTO(int tool_id) {
+	public RetainToolDTO(int userNo, int toolId, char retainToolYn) {
 		super();
-		this.tool_id = tool_id;
+		this.userNo = userNo;
+		this.toolId = toolId;
+		this.retainToolYn = retainToolYn;
 	}
 
-	public int getTool_id() {
-		return tool_id;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setTool_id(int tool_id) {
-		this.tool_id = tool_id;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+	public int getToolId() {
+		return toolId;
+	}
+
+	public void setToolId(int toolId) {
+		this.toolId = toolId;
+	}
+
+	public char getRetainToolYn() {
+		return retainToolYn;
+	}
+
+	public void setRetainToolYn(char retainToolYn) {
+		this.retainToolYn = retainToolYn;
 	}
 
 	@Override
 	public String toString() {
-		return "RetainToolDTO [tool_id=" + tool_id + "]";
+		return "RetainToolDTO [userNo=" + userNo + ", toolId=" + toolId + ", retainToolYn=" + retainToolYn + "]";
 	}
-
+	
+	
 	
 }

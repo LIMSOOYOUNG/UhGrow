@@ -21,15 +21,15 @@ public class BuyToolListPanel extends JPanel{
 
 	private JPanel buyToolListPanel;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
-	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
 
 	public BuyToolListPanel(int userNo) {
-
-
 		buyToolListPanel = this;
 
 		this.userNo = userNo;
+
+
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -45,6 +45,11 @@ public class BuyToolListPanel extends JPanel{
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(127, 90);
 		storeBackGroundLabel.setSize(705, 360);
+		
+		/* ---------- 상인 대화내용  ------------*/
+		JLabel textLabel = new JLabel("빨리 빨리 팔아 !");
+		textLabel.setBounds(130, 410, 750, 100);
+		textLabel.setFont(font);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
 		JButton btnBuy = new JButton("구 매 하 기 ");
@@ -68,6 +73,7 @@ public class BuyToolListPanel extends JPanel{
 		btnBackGround.setBounds(132, 95,  696, 60);
 
 		/* -------- 농기구 리스트 버튼 ---------- */
+
 
 		JButton btnPickaxe = new JButton("곡괭이");
 		btnPickaxe.setBounds(150, 170, 400, 40);
@@ -97,7 +103,7 @@ public class BuyToolListPanel extends JPanel{
 		toolBuyLabel.setFont(font);
 
 
-		this.add(toolBuyLabel);
+
 		/* ---------- 구매, 판매, 뒤로 버튼 패널에 추가 --------- */
 		this.add(btnCancel);
 		this.add(btnBack);

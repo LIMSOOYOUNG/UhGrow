@@ -50,16 +50,15 @@ public class FailBuyHouse extends JPanel {
 		btnBuyHouse.setFont(font);
 		btnBuyHouse.setContentAreaFilled(false);
 		btnBuyHouse.setFocusPainted(false);
+		btnBuyHouse.setBorderPainted(false);
 
-		JButton btnCook = new JButton("요 리 하 기");
-		btnCook.setBounds(364, 95, 232, 60);
-		btnCook.setFont(font);
-		btnCook.setContentAreaFilled(false);
-
+	
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
 		btnBack.setFont(font);
 		btnBack.setContentAreaFilled(false);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorderPainted(false);
 
 		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
 		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
@@ -91,7 +90,6 @@ public class FailBuyHouse extends JPanel {
 		this.add(npcTextLabel1);
 		this.add(conversationLabel);
 		this.add(btnBack);
-		this.add(btnCook);
 		this.add(btnBuyHouse);
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
@@ -105,8 +103,10 @@ public class FailBuyHouse extends JPanel {
 				
 				BuyHouseAndCookPanel buyHouseAndCookPanel = new BuyHouseAndCookPanel(userNo);
 				
-				
 				FrameManager.changePanel(failBuyHouse, buyHouseAndCookPanel);
+//				
+//				FarmPanel farmPanel = new FarmPanel(userNo);
+//				FrameManager.changePanel(failBuyHouse, farmPanel);
 			}
 		});
 		

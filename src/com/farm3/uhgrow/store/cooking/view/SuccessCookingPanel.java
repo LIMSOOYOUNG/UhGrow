@@ -48,26 +48,27 @@ public class SuccessCookingPanel extends JPanel{
 //		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 집 구매, 요리하기, 그만두기 버튼   ------------*/
-		JButton btnBuyHouse = new JButton("집 구매");
-		btnBuyHouse.setBounds(132, 95, 232, 60);
-		btnBuyHouse.setFont(font);
-		btnBuyHouse.setContentAreaFilled(false);
-		btnBuyHouse.setFocusPainted(false);
+//		JButton btnBuyHouse = new JButton("집 구매");
+//		btnBuyHouse.setBounds(132, 95, 232, 60);
+//		btnBuyHouse.setFont(font);
+//		btnBuyHouse.setContentAreaFilled(false);
+//		btnBuyHouse.setFocusPainted(false);
+//
+//		JButton btnCook = new JButton("요 리 하 기");
+//		btnCook.setBounds(364, 95, 232, 60);
+//		btnCook.setFont(font);
+//		btnCook.setContentAreaFilled(false);
 
-		JButton btnCook = new JButton("요 리 하 기");
-		btnCook.setBounds(364, 95, 232, 60);
-		btnCook.setFont(font);
-		btnCook.setContentAreaFilled(false);
-
-		JButton btnBack = new JButton("그 만 두 기");
-		btnBack.setBounds(596, 95, 232, 60);
+		Image btnBackImage = new ImageIcon("img/대화 화살표.png").getImage().getScaledInstance(40, 40, 0);
+		JButton btnBack = new JButton(new ImageIcon(btnBackImage));
+		btnBack.setBounds(695, 460, 35, 35);
 		btnBack.setFont(font);
 		btnBack.setContentAreaFilled(false);
 
 		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
-		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
-		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
-		btnBackGround.setBounds(132, 95,  696, 60);
+//		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+//		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+//		btnBackGround.setBounds(132, 95,  696, 60);
 
 		/* ---------- 대화창, 대화창에 큰 할머니 이미지 ------------*/
 		Image imgConversation = new ImageIcon("img/store/storeconversation1.png").getImage().getScaledInstance(758, 120, 0);
@@ -106,14 +107,14 @@ public class SuccessCookingPanel extends JPanel{
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 		
 
+		this.add(btnBack);
 		this.add(storeNpc);
 		this.add(textLabel);
 		this.add(conversationLabel);
 		
-		this.add(btnBack);
-		this.add(btnCook);
-		this.add(btnBuyHouse);
-		this.add(btnBackGround);
+//		this.add(btnCook);
+//		this.add(btnBuyHouse);
+//		this.add(btnBackGround);
 		
 //		this.add(btnFirst);
 //		this.add(btnSecond);
@@ -134,13 +135,13 @@ public class SuccessCookingPanel extends JPanel{
 		});
 		
 		
-		btnCook.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CookingPanel cookingPanel = new CookingPanel(userNo);
-				FrameManager.changePanel(successCookingPanel, cookingPanel);
-			}
-		});
+//		btnBack.addMouseListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				CookingPanel cookingPanel = new CookingPanel(userNo);
+//				FrameManager.changePanel(successCookingPanel, cookingPanel);
+//			}
+//		});
 		
 		
 	}

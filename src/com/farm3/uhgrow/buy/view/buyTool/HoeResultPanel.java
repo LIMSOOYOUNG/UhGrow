@@ -117,6 +117,7 @@ public class HoeResultPanel extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				BuyToolListPanel buyToolListPanel = new BuyToolListPanel(userNo);
 
+
 				FrameManager.changePanel(hoeResultPanel, buyToolListPanel);
 
 			}

@@ -23,12 +23,13 @@ public class BuyHousePanel extends JPanel {
 	private JPanel buyHousePanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
- 
+
 	private Font btnFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 
 	private JLabel textLabel;
 
 
+	// 집구매, 요리하기 가능한 상점에서 집 구매 버튼 클릭시 나오는 화면
 	public BuyHousePanel(int userNo) {
 		this.userNo = userNo;
 		buyHousePanel = this;
@@ -54,11 +55,6 @@ public class BuyHousePanel extends JPanel {
 		btnBuyHouse.setFont(font);
 		btnBuyHouse.setContentAreaFilled(false);
 		btnBuyHouse.setFocusPainted(false);
-
-		JButton btnCook = new JButton("요 리 하 기");
-		btnCook.setBounds(364, 95, 232, 60);
-		btnCook.setFont(font);
-		btnCook.setContentAreaFilled(false);
 
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
@@ -89,7 +85,7 @@ public class BuyHousePanel extends JPanel {
 		btnYes.setFont(btnFont);
 		btnYes.setBackground(Color.darkGray);
 		btnYes.setForeground(Color.white);
-		
+
 
 
 
@@ -101,21 +97,9 @@ public class BuyHousePanel extends JPanel {
 		this.add(conversationLabel);
 		this.add(btnBuyHouse);
 		this.add(btnBack);
-		this.add(btnCook);
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-
-		btnCook.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				CookingPanel cookingPanel = new CookingPanel(userNo);
-
-				FrameManager.changePanel(buyHousePanel, cookingPanel);
-			}
-		});
 
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
@@ -133,22 +117,12 @@ public class BuyHousePanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 
 				MemberController memberController = new MemberController();
-
 				// userNo, coin, housePrice
 				BuyHouseDTO buyHouseDTO = memberController.buyHouse(userNo);
 
-				int userCoin = buyHouseDTO.getCoin();
-				int housePrice = buyHouseDTO.getHousePrice();
+				BuyHouseCheckPanel buyHouseCheckPanel = new BuyHouseCheckPanel(buyHouseDTO);
+				FrameManager.changePanel(buyHousePanel, buyHouseCheckPanel);
 
-				if(userCoin > housePrice) {
-					BuyHouseCheckPanel buyHouseCheckPanel = new BuyHouseCheckPanel(buyHouseDTO);
-					FrameManager.changePanel(buyHousePanel, buyHouseCheckPanel);
-
-				} else {
-					FailBuyHouse failBuyHouse = new FailBuyHouse(buyHouseDTO);
-					FrameManager.changePanel(buyHousePanel, failBuyHouse);
-
-				}
 			}
 		});
 

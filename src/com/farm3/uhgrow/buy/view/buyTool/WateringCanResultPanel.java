@@ -118,6 +118,7 @@ public class WateringCanResultPanel extends JPanel{
 				BuyToolListPanel buyToolListPanel = new BuyToolListPanel(userNo);
 
 				FrameManager.changePanel(wateringCanResultPanel, buyToolListPanel);
+				
 
 			}
 		});
