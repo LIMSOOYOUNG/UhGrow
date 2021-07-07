@@ -89,7 +89,7 @@ public class BuyDAO {
 		return userTomatoList;
 	}
 
-	public List<BuyDTO> userCornList(Connection con) {
+	public List<BuyDTO> userCornList(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -100,16 +100,19 @@ public class BuyDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
 
 			userCornList = new ArrayList<>();
 
+			while (rset.next()) {
 				BuyDTO userCrop = new BuyDTO();
 				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
 				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				userCrop.setCoin(rset.getInt("COIN"));
+				userCrop.setCropPrice(rset.getInt("CROP_PRICE"));
 
 				userCornList.add(userCrop);
 			}
