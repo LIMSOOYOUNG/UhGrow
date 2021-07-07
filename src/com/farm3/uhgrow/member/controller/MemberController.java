@@ -2,6 +2,7 @@ package com.farm3.uhgrow.member.controller;
 
 import java.util.Map;
 
+import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.model.dto.FindIdPwdDTO;
 import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
@@ -35,11 +36,6 @@ public class MemberController {
 		return loginResult;
 		
 	}
-	
-	public void selectFindId() {}
-	
-	public void selectFindPwd() {}
-
 	public String StartGameContinueYn(int userNo) {
 		
 		String continueYn = memberService.StartGameContinueYn(userNo);
@@ -91,6 +87,18 @@ public class MemberController {
 		
 		
 		return result;
+	}
+
+	public BuyHouseDTO buyHouse(int userNo) {
+		
+		BuyHouseDTO buyHouseDTO = memberService.buyHouse(userNo);
+
+		return buyHouseDTO;
+	}
+
+	public void ending(int userNo) {
+		memberService.ending(userNo);
+
 	}
 
 

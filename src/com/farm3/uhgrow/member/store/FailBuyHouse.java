@@ -16,16 +16,18 @@ import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.view.FrameManager;
 
-public class BuyHouseAndCookPanel extends JPanel {
+public class FailBuyHouse extends JPanel {
 
-	private JPanel buyHouseAndCookPanel;
+	private JPanel failBuyHouse;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font npcFont = new Font("나눔손글씨 펜", Font.BOLD, 40);
 
 
-	public BuyHouseAndCookPanel(int userNo) {
-		this.userNo = userNo;
-		buyHouseAndCookPanel = this;
+
+	public FailBuyHouse(BuyHouseDTO buyHouseDTO) {
+		this.userNo = buyHouseDTO.getUserNo();
+		failBuyHouse = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -74,14 +76,19 @@ public class BuyHouseAndCookPanel extends JPanel {
 		storeNpc.setBounds(750, 350, 90, 150);
 
 		/* ---------- 할머니와 대화내용  ------------*/
-		JLabel textLabel = new JLabel("무얼 하고 싶은게야... ");
-		textLabel.setBounds(130, 410, 750, 100);
-		textLabel.setFont(font);
+		JLabel npcTextLabel = new JLabel("이런이런.. 그 돈으론 집을 살 수 없어... ");
+		npcTextLabel.setBounds(120, 410, 750, 40);
+		npcTextLabel.setFont(npcFont);
+		
+		JLabel npcTextLabel1 = new JLabel("집 가격은  " + buyHouseDTO.getHousePrice() +"원 이라네..");
+		npcTextLabel1.setBounds(120, 460, 750, 40);
+		npcTextLabel1.setFont(npcFont);
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 
 		this.add(storeNpc);
-		this.add(textLabel);
+		this.add(npcTextLabel);
+		this.add(npcTextLabel1);
 		this.add(conversationLabel);
 		this.add(btnBack);
 		this.add(btnCook);
@@ -90,39 +97,19 @@ public class BuyHouseAndCookPanel extends JPanel {
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		btnCook.addMouseListener(new MouseAdapter() {
-
+		
+		
+		failBuyHouse.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				CookPanel cookPanel = new CookPanel(userNo);
 				
-				FrameManager.changePanel(buyHouseAndCookPanel, cookPanel);
+				BuyHouseAndCookPanel buyHouseAndCookPanel = new BuyHouseAndCookPanel(userNo);
+				
+				
+				FrameManager.changePanel(failBuyHouse, buyHouseAndCookPanel);
 			}
 		});
 		
-		btnBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				FarmPanel farmPanel = new FarmPanel(userNo);
-				
-				FrameManager.changePanel(buyHouseAndCookPanel, farmPanel);
-			}
-		});
-		
-		btnBuyHouse.addMouseListener(new MouseAdapter() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-			
-				BuyHousePanel buyHousePanel = new BuyHousePanel(userNo);
-				FrameManager.changePanel(buyHouseAndCookPanel, buyHousePanel);
-				
-				
-			}
-		});
 		
 		
 	}

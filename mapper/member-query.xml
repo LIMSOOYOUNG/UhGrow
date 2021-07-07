@@ -118,6 +118,20 @@
 		   AND USER_NAME = ?
 		   AND EMAIL = ?
 		</entry>
+		   <!-- 동기 작업 ! 집 구매 ~  -->
+   <entry key="buyHouse">
+   		SELECT
+   			   UI.COIN
+   			 , UI.HOUSE_PRICE
+   		  FROM USER_INFO UI
+   		 WHERE UI.USER_NO = ?
+   </entry>
+   <entry key="ending">
+   		UPDATE
+   			   USER_INFO UI
+   		   SET UI.CONTINUE_YN = 'N'
+   		 WHERE UI.USER_NO = ?
+   </entry>
 
 </properties>
 
