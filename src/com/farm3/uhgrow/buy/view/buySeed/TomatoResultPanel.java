@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -121,7 +122,7 @@ public class TomatoResultPanel extends JPanel{
 				int totalGetPrice = 0;
 				
 
-				List<BuyDTO> userTomatoList = buyController.userTomatoList();
+				List<BuyDTO> userTomatoList = buyController.userTomatoList(userNo);
 
 				for (BuyDTO tomatoList : userTomatoList) {
 					tomatoAmount = tomatoList.getCropAmount();
@@ -133,13 +134,15 @@ public class TomatoResultPanel extends JPanel{
 
 				if (buyAmount> 0 && buyAmount <= tomatoAmount && tomatoAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoAmount = buyController.updateTomatoCropAmount(buyAmount);
-
+					updateUserTomatoAmount = buyController.updateTomatoCropAmount(userNo,buyAmount);
+					
 					getPrice = buyController.buyTomatoGetCoin(buyAmount, tomatoPrice);
-
+					
 					if(updateUserTomatoAmount > 0 && getPrice > 0) {
+						JOptionPane.showMessageDialog(null, "토마토씨앗 구매가 완료되었습니다.","씨앗구매 창" , 1);
 						totalTomatoAmonut = tomatoAmount + buyAmount;
 						totalGetPrice = userCoin - ((tomatoPrice * buyAmount));	
+						FrameManager.changePanel(tomatoResultPanel, new FarmPanel(userNo));
 					}
 				} else {
 					System.out.println("구매할 수 있는 재화가 부족합니다");

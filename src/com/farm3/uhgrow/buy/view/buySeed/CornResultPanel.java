@@ -117,7 +117,7 @@ public class CornResultPanel extends JPanel{
 				int totalGetPrice = 0;
 
 
-				List<BuyDTO> userCornList = buyController.userCornList();
+				List<BuyDTO> userCornList = buyController.userCornList(userNo);
 
 				for (BuyDTO cornList : userCornList) {
 					cornAmount = cornList.getCropAmount();

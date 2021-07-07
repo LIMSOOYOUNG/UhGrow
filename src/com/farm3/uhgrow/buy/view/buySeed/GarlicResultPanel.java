@@ -117,7 +117,7 @@ private JPanel garlicResultPanel;
 				int totalGetPrice = 0;
 
 
-				List<BuyDTO> userGarlicList = buyController.userGarlicList();
+				List<BuyDTO> userGarlicList = buyController.userGarlicList(userNo);
 
 				for (BuyDTO garlicList : userGarlicList) {
 					garlicAmount = garlicList.getCropAmount();

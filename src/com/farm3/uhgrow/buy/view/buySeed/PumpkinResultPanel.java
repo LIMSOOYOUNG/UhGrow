@@ -116,7 +116,7 @@ private JPanel pumpkinResultPanel;
 				int totalGetPrice = 0;
 
 
-				List<BuyDTO> userPumpkinList = buyController.userTomatoList();
+				List<BuyDTO> userPumpkinList = buyController.userTomatoList(userNo);
 
 				for (BuyDTO pumpkinList : userPumpkinList) {
 					pumpkinAmount = pumpkinList.getCropAmount();

@@ -20,54 +20,54 @@ public class BuyService {
 		this.buyCropsDAO = new BuyDAO();
 	}
 
-	public List<BuyDTO> userTomatoList() {
+	public List<BuyDTO> userTomatoList(int userNo) {
 
 		Connection con = getConnection();
 
-		List<BuyDTO> userTomatoList = buyCropsDAO.userTomatoList(con);
+		List<BuyDTO> userTomatoList = buyCropsDAO.userTomatoList(con,userNo);
 
 		close(con);
 
 		return userTomatoList;
 	}
-	public List<BuyDTO> userCornList() {
+	public List<BuyDTO> userCornList(int userNo) {
 
 		Connection con = getConnection();
 
-		List<BuyDTO> userCornList = buyCropsDAO.userCornList(con);
+		List<BuyDTO> userCornList = buyCropsDAO.userCornList(con,userNo);
 
 		close(con);
 
 		return userCornList;
 	}
 
-	public List<BuyDTO> userGarlicList() {
+	public List<BuyDTO> userGarlicList(int userNo) {
 
 		Connection con = getConnection();
 
-		List<BuyDTO> userGarlicList = buyCropsDAO.userGarlicList(con);
+		List<BuyDTO> userGarlicList = buyCropsDAO.userGarlicList(con,userNo);
 
 		close(con);
 
 		return userGarlicList;
 	}
 
-	public List<BuyDTO> userPumpkinList() {
+	public List<BuyDTO> userPumpkinList(int userNo) {
 
 		Connection con = getConnection();
 
-		List<BuyDTO> userPumpkinList = buyCropsDAO.userPumpkinList(con);
+		List<BuyDTO> userPumpkinList = buyCropsDAO.userPumpkinList(con,userNo);
 
 		close(con);
 
 		return userPumpkinList;
 	}
 
-	public int updateTomatoCropAmount(int buyAmount) {
+	public int updateTomatoCropAmount(int userNo,int buyAmount) {
 
 		Connection con = getConnection();
 
-		int updateTomatoCropAmount = buyCropsDAO.updateTomatoCropAmount(con, buyAmount);
+		int updateTomatoCropAmount = buyCropsDAO.updateTomatoCropAmount(con,userNo, buyAmount);
 
 		close(con);
 
@@ -233,13 +233,6 @@ public class BuyService {
 
 
 
-
-  int result = buyCropsDAO.buyGarlicGetCoin(con, buyAmount, GarlicPrice);
-
-		close(con);
-
-		return result;
-	}
 
 	public int buyPumpkinGetCoin(int buyAmount, int pumpkinPrice) {
 

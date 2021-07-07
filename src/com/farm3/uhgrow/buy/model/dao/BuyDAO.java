@@ -53,7 +53,7 @@ public class BuyDAO {
 		return result;
 	}
 
-	public List<BuyDTO> userTomatoList(Connection con) {
+	public List<BuyDTO> userTomatoList(Connection con, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -63,7 +63,7 @@ public class BuyDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
 			rset = pstmt.executeQuery();
 
 			userTomatoList = new ArrayList<>();
@@ -127,7 +127,7 @@ public class BuyDAO {
 		return userCornList;
 	}
 
-	public List<BuyDTO> userGarlicList(Connection con) {
+	public List<BuyDTO> userGarlicList(Connection con, int userNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -137,6 +137,8 @@ public class BuyDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
+
+			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
 
@@ -161,7 +163,7 @@ public class BuyDAO {
 		return userGarlicList;	
 	}
 
-	public List<BuyDTO> userPumpkinList(Connection con) {
+	public List<BuyDTO> userPumpkinList(Connection con, int userNo) {
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -172,6 +174,7 @@ public class BuyDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
 
@@ -196,7 +199,7 @@ public class BuyDAO {
 		return userPumpkinList;	
 	}
 
-	public int updateTomatoCropAmount(Connection con, int buyAmount) {
+	public int updateTomatoCropAmount(Connection con,int userNo, int buyAmount ) {
 
 		PreparedStatement pstmt = null;
 
@@ -207,6 +210,7 @@ public class BuyDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, buyAmount);
+			pstmt.setInt(2, userNo);
 
 			result = pstmt.executeUpdate();
 

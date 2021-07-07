@@ -12,38 +12,38 @@ public class BuyController {
 	private BuyService buyCropsService = new BuyService();
 
 	/* 유저, 유저의 재화, 유저가 가지고 있는 농작물 , 농작물 갯수 */
-	public List<BuyDTO> userTomatoList() {
+	public List<BuyDTO> userTomatoList(int userNo) {
 
-		List<BuyDTO> userTomatoList = buyCropsService.userTomatoList();
+		List<BuyDTO> userTomatoList = buyCropsService.userTomatoList(userNo);
 
 		return userTomatoList;
 	}
 
-	public List<BuyDTO> userCornList() {
+	public List<BuyDTO> userCornList(int userNo) {
 
-		List<BuyDTO> userCornList = buyCropsService.userCornList();
+		List<BuyDTO> userCornList = buyCropsService.userCornList(userNo);
 
 		return userCornList;
 	}
 
-	public List<BuyDTO> userGarlicList() {
+	public List<BuyDTO> userGarlicList(int userNo) {
 
-		List<BuyDTO> userGarlicList = buyCropsService.userGarlicList();
+		List<BuyDTO> userGarlicList = buyCropsService.userGarlicList(userNo);
 
 		return userGarlicList;
 	}
 
-	public List<BuyDTO> userPumpkinList() {
+	public List<BuyDTO> userPumpkinList(int userNo) {
 
-		List<BuyDTO> userPumpkinList = buyCropsService.userPumpkinList();
+		List<BuyDTO> userPumpkinList = buyCropsService.userPumpkinList(userNo);
 
 		return userPumpkinList;
 	}
 
 	/* 토마토씨앗 수량 업데이트 */
-	public int updateTomatoCropAmount(int buyAmount) {
+	public int updateTomatoCropAmount(int userNo,int buyAmount) {
 
-		int result = buyCropsService.updateTomatoCropAmount(buyAmount);
+		int result = buyCropsService.updateTomatoCropAmount(userNo,buyAmount);
 
 		return result;
 	}
