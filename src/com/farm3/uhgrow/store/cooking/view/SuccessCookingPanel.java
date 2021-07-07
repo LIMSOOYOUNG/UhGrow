@@ -15,10 +15,10 @@ import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.store.cooking.controller.CookingController;
 
-public class CookingPanel extends JPanel{
+public class SuccessCookingPanel extends JPanel{
 
 	private static final Font Font = null;
-	private JPanel cookingPanel;
+	private JPanel successCookingPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFond = new Font("나눔손글씨 펜", Font.BOLD, 30);
@@ -27,10 +27,10 @@ public class CookingPanel extends JPanel{
 
 
 
-	public CookingPanel(int userNo) {
+	public SuccessCookingPanel(int userNo) {
 		this.userNo = userNo;
 		this.cookingController = new CookingController();
-		cookingPanel = this;
+		successCookingPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -41,11 +41,11 @@ public class CookingPanel extends JPanel{
 		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
 
-		/* ---------- 상첨창 배경  ------------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(127, 90);
-		storeBackGroundLabel.setSize(705, 360);
+//		/* ---------- 상첨창 배경  ------------*/
+//		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
+//		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+//		storeBackGroundLabel.setLocation(127, 90);
+//		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 집 구매, 요리하기, 그만두기 버튼   ------------*/
 		JButton btnBuyHouse = new JButton("집 구매");
@@ -79,29 +79,29 @@ public class CookingPanel extends JPanel{
 		storeNpc.setBounds(750, 350, 90, 150);
 
 		/* ---------- 할머니와 대화내용  ------------*/
-		JLabel textLabel = new JLabel("뭔 요리를 한다고 그래 !");
+		JLabel textLabel = new JLabel("다 됐으니까 썩 가지고 가 !");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
 		
-		JButton btnFirst = new JButton("토마토 피자");
-		btnFirst.setBounds(150, 170, 400, 40);
-		btnFirst.setFont(listFond);
-		btnFirst.setContentAreaFilled(false);
-		
-		JButton btnSecond = new JButton("옥수수 또띠아");
-		btnSecond.setBounds(150, 230, 400, 40);
-		btnSecond.setFont(listFond);
-		btnSecond.setContentAreaFilled(false);
-		
-		JButton btnThird = new JButton("마늘즙");
-		btnThird.setBounds(150, 290, 400, 40);
-		btnThird.setFont(listFond);
-		btnThird.setContentAreaFilled(false);
-		
-		JButton btnFourth  = new JButton("호박죽");
-		btnFourth.setBounds(150, 350, 400, 40);
-		btnFourth.setFont(listFond);
-		btnFourth.setContentAreaFilled(false);
+//		JButton btnFirst = new JButton("토마토 피자");
+//		btnFirst.setBounds(150, 170, 400, 40);
+//		btnFirst.setFont(listFond);
+//		btnFirst.setContentAreaFilled(false);
+//		
+//		JButton btnSecond = new JButton("옥수수 또띠아");
+//		btnSecond.setBounds(150, 230, 400, 40);
+//		btnSecond.setFont(listFond);
+//		btnSecond.setContentAreaFilled(false);
+//		
+//		JButton btnThird = new JButton("마늘즙");
+//		btnThird.setBounds(150, 290, 400, 40);
+//		btnThird.setFont(listFond);
+//		btnThird.setContentAreaFilled(false);
+//		
+//		JButton btnFourth  = new JButton("호박죽");
+//		btnFourth.setBounds(150, 350, 400, 40);
+//		btnFourth.setFont(listFond);
+//		btnFourth.setContentAreaFilled(false);
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 		
@@ -115,57 +115,34 @@ public class CookingPanel extends JPanel{
 		this.add(btnBuyHouse);
 		this.add(btnBackGround);
 		
-		this.add(btnFirst);
-		this.add(btnSecond);
-		this.add(btnThird);
-		this.add(btnFourth);
-		
-		this.add(storeBackGroundLabel);
+//		this.add(btnFirst);
+//		this.add(btnSecond);
+//		this.add(btnThird);
+//		this.add(btnFourth);
+//		
+//		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 		
-		
-
-		// 집 구매, 요리하기, 그만두기 클릭시 체인지 패널 userNo 전달인자로 넘겨주면서 받아줘야한다.
-
 		btnBack.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				FarmPanel farmPanel = new FarmPanel(userNo);
-				FrameManager.changePanel(cookingPanel, farmPanel);
-			}
-		});
-	
-		btnFirst.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountTomatoPanel inputAmountTomatoPanel = new InputAmountTomatoPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountTomatoPanel);
-			}
-		});
-		btnSecond.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountCornPanel inputAmounCornPanel = new InputAmountCornPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmounCornPanel);
-			}
-		});
-		btnThird.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountGarlicPanel inputAmountGarlicPanel = new InputAmountGarlicPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountGarlicPanel);
-			}
-		});
-		btnFourth.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				InputAmountPumpkinPanel inputAmountPumpkinPanel = new InputAmountPumpkinPanel(userNo);
-				FrameManager.changePanel(cookingPanel, inputAmountPumpkinPanel);
+				FrameManager.changePanel(successCookingPanel, farmPanel);
 			}
 		});
 		
+		
+		btnCook.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CookingPanel cookingPanel = new CookingPanel(userNo);
+				FrameManager.changePanel(successCookingPanel, cookingPanel);
+			}
+		});
+		
+		
 	}
+	
 }
-
