@@ -8,13 +8,11 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.farm3.uhgrow.farm.view.FarmPanel;
-import com.farm3.uhgrow.member.controller.MemberController;
-import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.store.cooking.view.CookingPanel;
 
 public class BuyHouseAndCookPanel extends JPanel {
 
@@ -95,9 +93,9 @@ public class BuyHouseAndCookPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				CookPanel cookPanel = new CookPanel(userNo);
+				CookingPanel cookingPanel = new CookingPanel(userNo);
 				
-				FrameManager.changePanel(buyHouseAndCookPanel, cookPanel);
+				FrameManager.changePanel(buyHouseAndCookPanel, cookingPanel);
 			}
 		});
 		
