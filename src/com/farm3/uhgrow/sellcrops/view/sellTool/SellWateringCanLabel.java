@@ -1,7 +1,5 @@
 package com.farm3.uhgrow.sellcrops.view.sellTool;
 
-public class SellShovelPanel {
-	
-	
-	
+public class SellWateringCanLabel {
+
 }

@@ -7,8 +7,6 @@ import com.farm3.uhgrow.sellcrops.model.dao.SellCropsDAO;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.getConnection;
-//import static com.farm3.uhgrow.common.JDBCTemplate.commit;
-//import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
 public class SellCropsService {
@@ -21,9 +19,9 @@ public class SellCropsService {
 	
 	
 	/* 재화 라벨*/
-	public int selectCoin() {
+	public int selectCoin(int userNo) {
 		Connection con = getConnection();
-		int result = sellCropsDAO.selectCoin(con);
+		int result = sellCropsDAO.selectCoin(con, userNo);
 		close(con);
 		return result;
 	}

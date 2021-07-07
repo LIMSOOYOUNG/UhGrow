@@ -26,13 +26,13 @@
 		UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 1
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key= "sellTomatoGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1   
+		 WHERE USER_NO = ?   
 	</entry>
 	
 
@@ -46,20 +46,20 @@
   FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
-   AND UI.USER_NO = 1
+   AND UI.USER_NO = ?
    AND CR.CROP_ID = 2
 	</entry>
 	<entry key= "updateCornAmount">
 		UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 2
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key= "sellCornGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1   
+		 WHERE USER_NO = ?   
 	</entry>
 	
 	
@@ -73,20 +73,20 @@
   FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
-   AND UI.USER_NO = 1
+   AND UI.USER_NO = ?
    AND CR.CROP_ID = 3	
    </entry>
    <entry key ="updateGarlicAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 3
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key= "sellGarlicGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1   
+		 WHERE USER_NO = ?   
 	</entry>   
    
 	<entry key ="user-pumpkinList">
@@ -99,20 +99,20 @@
   FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
  WHERE UI.USER_NO = RC.USER_NO
    AND CR.CROP_ID = RC.CROP_ID
-   AND UI.USER_NO = 1
+   AND UI.USER_NO = ?
    AND CR.CROP_ID = 4	
 	</entry>
 	<entry key ="updatePumpkinAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 4
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key ="sellPumpkinGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1
+		 WHERE USER_NO = ?
 	</entry>
 	
 	<entry key="user-tomatoSeedAmount">
@@ -125,20 +125,20 @@
     FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
    WHERE UI.USER_NO = RC.USER_NO
      AND CR.CROP_ID = RC.CROP_ID
-     AND UI.USER_NO = 1
+     AND UI.USER_NO = ?
      AND CR.CROP_ID = 5
 	</entry>
 	<entry key ="updateTomatoSeedAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 5
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key ="sellTomatoSeedGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1
+		 WHERE USER_NO = ?
 	</entry>
 
 	<entry key="user-cornSeedAmount">
@@ -151,20 +151,20 @@
     FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
    WHERE UI.USER_NO = RC.USER_NO
      AND CR.CROP_ID = RC.CROP_ID
-     AND UI.USER_NO = 1
+     AND UI.USER_NO = ?
      AND CR.CROP_ID = 6
 	</entry>
 	<entry key ="updateCornSeedAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 6
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key ="sellCornSeedGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1
+		 WHERE USER_NO = ?
 	</entry>
 	
 	<entry key="user-garlicSeedAmount">
@@ -217,6 +217,18 @@
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
 		 WHERE USER_NO = 1
+	</entry>
+	<entry key="userPick">
+	SELECT  
+       TL.TOOL_NAME
+     , RT.TOOL_ID
+     , UI.COIN
+     , TL.TOOL_PRICE
+  FROM USER_INFO UI, TOOL TL, RETAIN_TOOL RT
+ WHERE UI.USER_NO = RT.USER_NO
+   AND RT.TOOL_ID = TL.TOOL_ID
+   AND RT.TOOL_ID = 1
+   AND UI.USER_NO = ?
 	</entry>
 	
 </properties>
