@@ -132,6 +132,7 @@
             RETAIN_TOOL_YN
        FROM RETAIN_TOOL
       WHERE USER_NO = ?
+        and TOOL_ID = ?
    </entry>
    
 	<entry key ="currentCoin">

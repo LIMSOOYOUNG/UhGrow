@@ -41,14 +41,14 @@ public class ShovelResultPanel extends JPanel {
 
 	public ShovelResultPanel(int userNo) {
 		retainToolList = buyController.selectRetainToolList(userNo);
-		if(retainToolList.size() <= 0) {
+		if(retainToolList.size() < 0) {
 			buyController.createRetainToolList(userNo);
 		}
 		
 		this.userNo = userNo;
 		shovelResultPanel = this;
 		shovelPrice = buyController.selectPrice(toolId);
-		retainToolDTO.setRetainToolYn(buyController.isToolYN(userNo).getRetainToolYn());
+		retainToolDTO.setRetainToolYn(buyController.isToolYN(userNo,toolId).getRetainToolYn());
 		plusExp = buyController.plusExp(toolId);
 		System.out.println(plusExp);
 		buyDTO.setUserNo(userNo);

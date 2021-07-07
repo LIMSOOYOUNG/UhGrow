@@ -107,8 +107,8 @@ public class BuyController {
 		return selectPrice;
 	}
 
-	public RetainToolDTO isToolYN(int userNo) {
-		RetainToolDTO isToolYN = buyCropsService.isToolYN(userNo);
+	public RetainToolDTO isToolYN(int userNo, int toolId) {
+		RetainToolDTO isToolYN = buyCropsService.isToolYN(userNo,toolId);
 
 		return isToolYN;
 	}

@@ -407,7 +407,7 @@ public class BuyDAO {
 		return selectPrice;
 	}
 
-	public RetainToolDTO isToolYN(Connection con, int userNo) {
+	public RetainToolDTO isToolYN(Connection con, int userNo, int toolId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -417,6 +417,8 @@ public class BuyDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, userNo); 
+			pstmt.setInt(2, toolId); 
+			
 			
 			rset = pstmt.executeQuery();
 			

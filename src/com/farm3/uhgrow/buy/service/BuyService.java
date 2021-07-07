@@ -173,10 +173,10 @@ public class BuyService {
 		return selectPrice;
 	}
 
-	public RetainToolDTO isToolYN(int userNo) {
+	public RetainToolDTO isToolYN(int userNo, int toolId) {
 		Connection con = getConnection();
 
-		RetainToolDTO isToolYN = buyCropsDAO.isToolYN(con, userNo);
+		RetainToolDTO isToolYN = buyCropsDAO.isToolYN(con, userNo,toolId);
 
 		if (isToolYN !=null) {
 			commit(con);
@@ -248,7 +248,7 @@ public class BuyService {
 		Connection con = getConnection();
 
 		int result = buyCropsDAO.createRetainToolList(con, userNo);
-		if (result >3) {
+		if (result >0) {
 			commit(con);
 		} else {
 			rollback(con);
