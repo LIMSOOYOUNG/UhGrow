@@ -177,20 +177,20 @@
     FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
    WHERE UI.USER_NO = RC.USER_NO
      AND CR.CROP_ID = RC.CROP_ID
-     AND UI.USER_NO = 1
+     AND UI.USER_NO = ?
      AND CR.CROP_ID = 7
 	</entry>
 	<entry key ="updateGarlicSeedAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 7
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key ="sellGarlicSeedGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1
+		 WHERE USER_NO = ?
 	</entry>
 	
 	<entry key="user-pumpkinSeedAmount">
@@ -203,20 +203,20 @@
     FROM USER_INFO UI, RETAIN_CROP RC, CROP CR
    WHERE UI.USER_NO = RC.USER_NO
      AND CR.CROP_ID = RC.CROP_ID
-     AND UI.USER_NO = 1
+     AND UI.USER_NO = ?
      AND CR.CROP_ID = 8
 	</entry>
 	<entry key ="updatePumpkinSeedAmount">
 	   UPDATE RETAIN_CROP
 		   SET CROP_AMOUNT = CROP_AMOUNT - ?
 		 WHERE CROP_ID = 8
-		   AND USER_NO = 1
+		   AND USER_NO = ?
 	</entry>
 	<entry key ="sellPumpkinSeedGetCoin">
 		UPDATE
 			   USER_INFO 
 		   SET COIN = COIN + ((? * ?) / 10)
-		 WHERE USER_NO = 1
+		 WHERE USER_NO = ?
 	</entry>
 	<entry key="userPick">
 	SELECT  
@@ -230,6 +230,78 @@
    AND RT.TOOL_ID = 1
    AND UI.USER_NO = ?
 	</entry>
+	
+	<entry key="userTomatoPizza">
+	/*유저 토마토 피자 조회*/
+	SELECT
+		FD.FOOD_NAME
+	  , RF.FOOD_AMOUNT
+	  , UI.COIN
+	  , FD.FOOD_PRICE
+  FROM FOOD FD, RETAIN_FOOD RF, USER_INFO UI
+ WHERE UI.USER_NO = RF.USER_NO
+   AND FD.FOOD_ID = RF.FOOD_ID
+   AND FD.FOOD_ID = 1
+   AND UI.USER_NO = ?
+	</entry>
+	
+	<entry key="updateUserTomatoPizzaAmount">
+	UPDATE RETAIN_FOOD
+	   SET FOOD_AMOUNT = FOOD_AMOUNT - ?
+	 WHERE USER_NO = ?
+	   AND FOOD_ID = 1
+	</entry>
+	
+	<entry key="sellTomatoPizzaGetCoin">
+	UPDATE RETAIN_FOOD
+	   SET COIN = COIN + ((? * ?) / 10)
+	 WHERE USER_NO = ?
+	</entry>	
+	
+	<entry key="userCornTotilla">
+	SELECT
+		FD.FOOD_NAME
+	  , RF.FOOD_AMOUNT
+	  , UI.COIN
+	  , FD.FOOD_PRICE
+  FROM FOOD FD, RETAIN_FOOD RF, USER_INFO UI
+ WHERE UI.USER_NO = RF.USER_NO
+   AND FD.FOOD_ID = RF.FOOD_ID
+   AND FD.FOOD_ID = 2
+   AND UI.USER_NO = ?
+	
+	</entry>
+	<entry key="updateUserCornTotillaAmount">
+	UPDATE RETAIN_FOOD
+	   SET FOOD_AMOUNT = FOOD_AMOUNT - ?
+	 WHERE USER_NO = ?
+	   AND FOOD_ID = 2
+	</entry>
+	<entry key="sellCornTotillaGetCoin">
+	UPDATE RETAIN_FOOD
+	   SET COIN = COIN + ((? * ?) / 10)
+	 WHERE USER_NO = ?
+	</entry>	
+	
+	<entry key="userGarlicJuice">
+	SELECT
+		FD.FOOD_NAME
+	  , RF.FOOD_AMOUNT
+	  , UI.COIN
+	  , FD.FOOD_PRICE
+  FROM FOOD FD, RETAIN_FOOD RF, USER_INFO UI
+ WHERE UI.USER_NO = RF.USER_NO
+   AND FD.FOOD_ID = RF.FOOD_ID
+   AND FD.FOOD_ID = 3
+   AND UI.USER_NO = ?
+	</entry>
+	<entry key="updateUserGarlicJuiceAmount">
+	UPDATE RETAIN_FOOD
+	   SET FOOD_AMOUNT = FOOD_AMOUNT - ?
+	 WHERE USER_NO = ?
+	   AND FOOD_ID = 3
+	</entry>
+	
 	
 </properties>
 

@@ -30,7 +30,6 @@ public class BuyService {
 
 		return userTomatoList;
 	}
-
 	public List<BuyDTO> userCornList() {
 
 		Connection con = getConnection();
@@ -64,7 +63,6 @@ public class BuyService {
 		return userPumpkinList;
 	}
 
-	/* 토마토씨앗 구매 수량 업데이트 */
 	public int updateTomatoCropAmount(int buyAmount) {
 
 		Connection con = getConnection();
@@ -76,7 +74,6 @@ public class BuyService {
 		return updateTomatoCropAmount;
 	}
 
-	/* 옥수수씨앗 구매 수량 업데이트 */
 	public int updateCornCropAmount(int buyAmount) {
 
 		Connection con = getConnection();
@@ -88,7 +85,6 @@ public class BuyService {
 		return updateCornCropAmount;
 	}
 
-	/* 마늘씨앗 구매 수량 업데이트 */
 	public int updateGarlicCropAmount(int buyAmount) {
 
 		Connection con = getConnection();
@@ -100,7 +96,6 @@ public class BuyService {
 		return updateGarlicCropAmount;
 	}
 
-	/* 호박씨앗 구매 수량 업데이트 */
 	public int updatePumpkinCropAmount(int buyAmount) {
 
 		Connection con = getConnection();
@@ -140,6 +135,106 @@ public class BuyService {
 		Connection con = getConnection();
 
 		int result = buyCropsDAO.buyGarlicGetCoin(con, buyAmount, GarlicPrice);
+
+		close(con);
+
+		return result;
+	}
+
+	public int buyPumpkinGetCoin(int buyAmount, int pumpkinPrice) {
+
+		Connection con = getConnection();
+
+		int result = buyCropsDAO.buyPumpkinGetCoin(con, buyAmount, pumpkinPrice);
+
+		close(con);
+
+		return result;
+	}
+	public int selectPrice(int toolId) {
+		Connection con = getConnection();
+
+		int selectPrice = buyCropsDAO.selectPrice(con, toolId );
+
+		close(con);
+
+		return selectPrice;
+	}
+
+
+
+	public char istoolYN(int userNo) {
+
+		Connection con = getConnection();
+
+		char istoolYN = buyCropsDAO.istoolYN(con, userNo);
+
+		close(con);
+
+		return istoolYN;
+	}
+
+
+
+	public int currentCoin(BuyDTO buyDTO) {
+		Connection con = getConnection();
+
+		int currentCoin = buyCropsDAO.currentCoin(con, buyDTO);
+
+		close(con);
+
+		return currentCoin;
+	}
+
+
+
+	public void updateCoinTool(BuyDTO buyDTO) {
+		Connection con = getConnection();
+
+		buyCropsDAO.updateCoinTool(con, buyDTO);
+
+		close(con);
+	}
+
+
+
+	public int plusExp(int toolId) {
+		Connection con = getConnection();
+
+		int plusExp = buyCropsDAO.plusExp(con, toolId);
+
+		close(con);
+		return plusExp;
+	}
+
+
+
+	public List<RetainToolDTO> selectRetainToolList(int userNo) {
+		Connection con = getConnection();
+
+		List<RetainToolDTO> retainToolList = buyCropsDAO.selectRetainToolList(con, userNo);
+
+		close(con);
+
+		return retainToolList;
+	}
+
+
+
+	public void createRetainToolList(int userNo) {
+		Connection con = getConnection();
+
+		buyCropsDAO.createRetainToolList(con, userNo);
+
+		close(con);
+
+	}
+
+
+
+
+
+  int result = buyCropsDAO.buyGarlicGetCoin(con, buyAmount, GarlicPrice);
 
 		close(con);
 

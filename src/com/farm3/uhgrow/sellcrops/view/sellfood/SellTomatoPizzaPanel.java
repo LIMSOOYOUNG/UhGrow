@@ -13,9 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
-import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
+import com.farm3.uhgrow.sellcrops.model.dto.FoodDTO;
 import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
 public class SellTomatoPizzaPanel extends JPanel {
@@ -124,23 +123,23 @@ public class SellTomatoPizzaPanel extends JPanel {
 				int totalTomatoPizzaAmonut = 0;
 				int totalGetPrice = 0;
 				
-				SellController sellController = new SellController();
+				SellFoodController sellFoodController = new SellFoodController();
 				
-//				List<CropDTO> userCropList = sellFoodController.userToamtoPizza(userNo);
+				List<FoodDTO> userFoodList = sellFoodController.userTomatoPizza(userNo);
 				
-//				for (CropDTO cropList : userCropList) {
-//					tomatoPizzaAmount = cropList.getCropAmount();
-//					userCoin = cropList.getCoin();
-//					getPrice = cropList.getCropPrice();
-//				}
+				for (FoodDTO foodList : userFoodList) {
+					tomatoPizzaAmount = foodList.getFoodAmount();
+					userCoin = foodList.getCoin();
+					tomatoPizzaPrice = foodList.getFoodPrice();
+				}
 				
-				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
+				/* 유저의 요리와 요리 수량, 현재 가지고 있는 코인 조회 */
 				
 				if (sellAmount> 0 && sellAmount <= tomatoPizzaAmount && tomatoPizzaAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoPizzaAmount = sellFoodController.updateUserPumpkinSoupAmount(sellAmount, userNo);
+					updateUserTomatoPizzaAmount = sellFoodController.updateUserTomatoPizzaAmount(sellAmount, userNo);
 					
-					getPrice = sellFoodController.sellPumpkinSoupGetCoin(sellAmount, tomatoPizzaPrice, userNo);
+					getPrice = sellFoodController.sellTomatoPizzaGetCoin(sellAmount, tomatoPizzaPrice, userNo);
 
 					if(updateUserTomatoPizzaAmount > 0 && getPrice > 0) {
 						totalTomatoPizzaAmonut = tomatoPizzaAmount - sellAmount;

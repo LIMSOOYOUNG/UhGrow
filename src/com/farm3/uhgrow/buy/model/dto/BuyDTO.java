@@ -1,7 +1,7 @@
 package com.farm3.uhgrow.buy.model.dto;
 
 public class BuyDTO {
-	
+
 	private int userNo;	  	  // 회원 아이디
 	private int coin;		  // 회원 보유 코인	
 	private int cropId;       // 농작물아이디
@@ -12,7 +12,11 @@ public class BuyDTO {
 	private int plusExp;
 	private int toolPrice;
 	private char isToolYN;
+
+
 	public BuyDTO() {}
+
+
 	public BuyDTO(int userNo, int coin, int cropId, String cropName, int cropPrice, int cropAmount, int toolId,
 			int plusExp, int toolPrice, char isToolYN) {
 		super();
@@ -101,6 +105,6 @@ public class BuyDTO {
 	
 	
 }
-
 	
 
+}

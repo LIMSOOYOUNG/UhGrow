@@ -110,7 +110,6 @@ public class BuyToolListPanel extends JPanel{
 				PickaxeResultPanel pickaxeResultPanel = new PickaxeResultPanel(userNo);
 
 				FrameManager.changePanel(buyToolListPanel, pickaxeResultPanel);
-
 			}
 		});
 
@@ -127,9 +126,7 @@ public class BuyToolListPanel extends JPanel{
 		hoeToolButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				HoeResultPanel hoeResultPanel = new HoeResultPanel(userNo);
-
-				FrameManager.changePanel(buyToolListPanel, hoeResultPanel);
+				FrameManager.changePanel(buyToolListPanel, new HoeResultPanel(userNo));
 
 			}
 		});

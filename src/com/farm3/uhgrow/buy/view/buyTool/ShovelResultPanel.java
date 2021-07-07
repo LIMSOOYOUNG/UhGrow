@@ -122,14 +122,21 @@ public class ShovelResultPanel extends JPanel {
 		buyToolButton.setLocation(670, 250);
 		buyToolButton.setSize(100, 25);
 
+		/*------------------- 구매확정 --------------------*/
+
+		JButton buyToolButton = new JButton("구매확정");
+		buyToolButton.setLocation(380, 250);
+		buyToolButton.setSize(200, 50);
+		
+		JLabel shovelPriceLabel = new JLabel("삽의 가격은 8만원 입니다!");
+		shovelPriceLabel.setBounds(300, 165, 700, 40);
+		shovelPriceLabel.setFont(font);
+		
+		this.add(shovelPriceLabel);
 		this.add(buyToolButton);
 		this.add(btnBuy);
 		this.add(btnCancel);
 		this.add(btnBack);
-		this.add(btnPickaxe);
-		this.add(btnShovel);
-		this.add(btnHoe);
-		this.add(btnWateringCan);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 

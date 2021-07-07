@@ -120,13 +120,8 @@
         FROM TOOL
        WHERE TOOL_ID = ?
    </entry>
-    <entry key ="selectPrice">
-      UPDATE
-            USER_INFO 
-         SET COIN = COIN - (? * ?)
-       WHERE TOOL_ID = ?
-   </entry>
   
+
     <entry key ="isToolYN">
       SELECT
             RETAIN_TOOL_YN
@@ -193,7 +188,6 @@
     	INTO RETAIN_TOOL
     	VALUES (?, 4, 'N')
    </entry>
-   
    
    
 </properties>

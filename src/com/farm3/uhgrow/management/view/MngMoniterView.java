@@ -735,7 +735,10 @@ public class MngMoniterView extends JFrame {
 
 		});
 		
+//		------------------------------------------------------------------------------------------------------
+//		클릭이벤트
 		
+		// 계정 수정을 위한 버튼 이벤트
 		selectAndUpdateButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -755,7 +758,6 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButtons[i].setContentAreaFilled(false);
-					selectButtons[i].setFocusPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					selectAndUpdateMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -767,13 +769,23 @@ public class MngMoniterView extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
-							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
-							int result = userDataController.modifyUserData(list.get(index).getUserId(), inputNewId, inputNewPwd); 
-							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
-							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							if(inputNewId != null) {
+								String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
+								if(inputNewPwd != null) {
+									// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+									int result = userDataController.modifyUserData(list.get(index).getUserId(), inputNewId, inputNewPwd); 
+									if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+										JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "계정 수정 성공!", 1);
+									} else {
+										JOptionPane.showMessageDialog(null, "계정 수정이 실패했습니다.", "계정 수정 실패!", 0);
+									}
+								} else {
+									JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요", "계정 수정 실패!", 0);
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "아이디를 입력해주세요", "계정 수정 실패!", 0);
 							}
+							
 						}
 					});
 				}
@@ -799,11 +811,12 @@ public class MngMoniterView extends JFrame {
 				}
 		});
 		
+		// 계정 삭제를 위한 버튼 이벤트
 		deleteButton.addMouseListener(new MouseAdapter() {
 		
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<SelectUserDTO> list = userDataController.selectDeleteUserData(); // 삭제할 정보 조회 메소드 호출 후 리턴값 리스트에 대입
+				List<SelectUserDTO> list = userDataController.selectDeleteUserData(); // 삭제 계정 조회 메소드 호출 후 리턴값 리스트에 대입
 				JButton[] selectButtons = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
 				int x = 450;
 				int y = 100; // 버튼의 좌표 지정
@@ -816,7 +829,6 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButtons[i].setContentAreaFilled(false); // 영역 채우기 안함
-//					selectButtons[i].setFocusPainted(false); // 선택 테두리 지우기
 					selectButtons[i].setBorderPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					deleteMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
@@ -828,13 +840,13 @@ public class MngMoniterView extends JFrame {
 						}
 						@Override
 						public void actionPerformed(ActionEvent e) {
-//							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
-//							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
 							int result = userDataController.deleteUserData(list.get(index).getUserId()); 
 							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
 							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							if(result > 0) { // 리턴값이 0보다 크면 계정 삭제 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "계정이 삭제되었습니다!", "계정 삭제 성공!", 1);
+							} else {
+								JOptionPane.showMessageDialog(null, "계정 삭제에 실패했습니다.", "계정 삭제 실패!", 0);
 							}
 						}
 					});
@@ -854,10 +866,11 @@ public class MngMoniterView extends JFrame {
 			
 		});
 		
+		// 계정 복구를 위한 버튼 이벤트
 		recoverButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				List<SelectUserDTO> list = userDataController.selectRecoverUserData(); // 삭제할 정보 조회 메소드 호출 후 리턴값 리스트에 대입
+				List<SelectUserDTO> list = userDataController.selectRecoverUserData(); // 복구 계정 정보 조회 메소드 호출 후 리턴값 리스트에 대입
 				JButton[] selectButtons = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
 				int x = 450;
 				int y = 100; // 버튼의 좌표 지정
@@ -870,7 +883,6 @@ public class MngMoniterView extends JFrame {
 					selectButtons[i].setLocation(x, y);
 					selectButtons[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButtons[i].setContentAreaFilled(false);
-//					selectButtons[i].setFocusPainted(false);
 					y += 34; // 버튼 세로 정렬을 위해 y축 값 증가
 					recoverMainPanel.add(selectButtons[i]); // 완성된 버튼 패널 추가
 					
@@ -881,13 +893,13 @@ public class MngMoniterView extends JFrame {
 						}
 						@Override
 						public void actionPerformed(ActionEvent e) {
-//							String inputNewId = JOptionPane.showInputDialog("새로운 아이디를 입력하세요"); 
-//							String inputNewPwd = JOptionPane.showInputDialog("새로운 비밀번호를 입력하세요"); // 새로운 아이디와 비밀번호를 입력받는 팝업창
 							int result = userDataController.recoverUserData(list.get(index).getUserId()); 
 							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
 							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "계정 정보가 수정되었습니다!", "닫기", 1);
+							if(result > 0) { // 리턴값이 0보다 크면 복구 성공 메시지 출력
+								JOptionPane.showMessageDialog(null, "계정이 복구되었습니다!", "계정 복구 성공", 1);
+							} else {
+								JOptionPane.showMessageDialog(null, "계정 복구에 실패했습니다.", "계정 복구 실패!", 0);
 							}
 						}
 					});
@@ -949,6 +961,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 농작물 가격 수정을 위한 버튼 이벤트
 		cropPriceUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -968,7 +981,6 @@ public class MngMoniterView extends JFrame {
 					selectButton[i].setLocation(x, y);
 					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButton[i].setContentAreaFilled(false);
-					selectButton[i].setFocusPainted(false);
 					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
 					cropMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
 					
@@ -980,12 +992,18 @@ public class MngMoniterView extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							int inputNewCropPrice = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
-							int result = gameDataController.modifyCropPrice(index, inputNewCropPrice);
-							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
-							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "가격이 수정되었습니다!", "닫기", 1);
+							if(inputNewCropPrice > 0) {
+								// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+								int result = gameDataController.modifyCropPrice(index, inputNewCropPrice);
+								if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+									JOptionPane.showMessageDialog(null, "농작물 가격이 수정되었습니다!", "농작물 가격 수정 성공!", 1);
+								} else {
+									JOptionPane.showMessageDialog(null, "농작물 가격 수정에 실패했습니다.", "농작물 가격 수정 실패!", 0);
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "가격은 음수이거나 0 일 수 없습니다.", "농작물 가격 수정 실패!", 0);
 							}
+							
 						}
 					});
 				}
@@ -993,6 +1011,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 요리 가격을 수정하는 이벤트
 		foodPriceUdtBtn.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -1000,7 +1019,7 @@ public class MngMoniterView extends JFrame {
 				foodMngMainPanel.setVisible(false);
 				foodPMainPanel.setVisible(true);
 				
-				List<SelectFoodPriceDTO> list = gameDataController.selectFoodPriceData(); // 모든 농작물의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
+				List<SelectFoodPriceDTO> list = gameDataController.selectFoodPriceData(); // 모든 요리의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
 				JButton[] selectButton = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
 				int x = 450;
 				int y = 130; // 버튼의 좌표 지정
@@ -1013,7 +1032,6 @@ public class MngMoniterView extends JFrame {
 					selectButton[i].setLocation(x, y);
 					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButton[i].setContentAreaFilled(false);
-					selectButton[i].setFocusPainted(false);
 					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
 					foodPMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
 					
@@ -1025,11 +1043,18 @@ public class MngMoniterView extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							int inputNewFoodPrice = Integer.parseInt(JOptionPane.showInputDialog("가격을 입력해주세요"));
-							int result = gameDataController.modifyFoodPrice(index, inputNewFoodPrice);
-							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
-							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "가격이 수정되었습니다!", "닫기", 1);
+							if(inputNewFoodPrice > 0) { // 가격이 0보다 클 때 요리 가격 수정 메소드 호출 
+								int result = gameDataController.modifyFoodPrice(index, inputNewFoodPrice);
+								
+								if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+									// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
+									JOptionPane.showMessageDialog(null, "요리 가격이 수정되었습니다!", "요리 가격 수정 성공!", 1);
+								} else {
+									JOptionPane.showMessageDialog(null, "요리 가격 수정에 실패했습니다.", "요리 가격 수정 실패!", 0);
+								}
+							} else {
+								
+								JOptionPane.showMessageDialog(null, "요리 가격은 음수이거나 0 일 수 없습니다.", "요리 가격 수정 실패!", 0);
 							}
 						}
 					});
@@ -1038,6 +1063,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 집 가격 수정 패널을 출력하는 이벤트
 		housePriceUdtBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1046,6 +1072,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 요리 가격 패널 안의 돌아가기 버튼 클릭 시 요리수정 화면 출력
 		backToMainFPButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1054,7 +1081,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
-		// 
+		// 집 가격 수정 패널의 돌아가기 버튼 클릭 시 게임관리 메인 화면 출력 
 		backToMainHButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1063,7 +1090,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
-		// 수정 완료 버튼 클릭 시 입력받은 값으로 집 가격을 변경
+		// 집 가격 수정 패널의 수정 완료 버튼 클릭 시 입력받은 값으로 집 가격을 변경
 		modifyScsHButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1074,13 +1101,13 @@ public class MngMoniterView extends JFrame {
 					houseMainPanel.setVisible(false);
 					gameMngMainPanel.setVisible(true);		
 				} else {
-					JOptionPane.showMessageDialog(null, "집 가격은 음수나 0일수 없습니다.", "집 가격 수정 실패", 1);
+					JOptionPane.showMessageDialog(null, "집 가격은 음수나 0일수 없습니다.", "집 가격 수정 실패", 0);
 				}
 			}
 		
 		});
 		
-		// 돌아가기 버튼을 클릭 시 요리 수정 화면 출력
+		// 요리 레시피 수정 패널의 돌아가기 버튼을 클릭 시 요리 수정 화면 출력
 		backToMainFRButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1110,7 +1137,6 @@ public class MngMoniterView extends JFrame {
 					selectButton[i].setLocation(x, y);
 					selectButton[i].setSize(24, 22); // 좌표와 크기 지정
 					selectButton[i].setContentAreaFilled(false);
-					selectButton[i].setFocusPainted(false);
 					y += 37; // 버튼 세로 정렬을 위해 y축 값 증가
 					foodRMainPanel.add(selectButton[i]); // 완성된 버튼 패널 추가
 					
@@ -1122,12 +1148,19 @@ public class MngMoniterView extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 							int inputNewFoodRecipe = Integer.parseInt(JOptionPane.showInputDialog("갯수를 입력해주세요"));
-							int result = gameDataController.modifyFoodRecipe(index, inputNewFoodRecipe);
-							// 컨트롤러의 정보수정 메소드 호출 후 리턴값 받음
-							
-							if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
-								JOptionPane.showMessageDialog(null, "레시피가 수정되었습니다!", "닫기", 1);
+							if(inputNewFoodRecipe > 0) {
+								int result = gameDataController.modifyFoodRecipe(index, inputNewFoodRecipe);
+								if(result > 0) { // 리턴값이 0보다 크면 수정 성공 메시지 출력
+									JOptionPane.showMessageDialog(null, "레시피가 수정되었습니다!", "레시피 수정 성공!", 1);
+								} else {
+									JOptionPane.showMessageDialog(null, "레시피 수정에 실패했습니다.", "레시피 수정 실패!", 0);
+								}	
+							} else {
+								JOptionPane.showMessageDialog(null, "갯수는 음수이거나 0 일 수 없습니다.", "레시피 수정 실패!", 0);
 							}
+							
+							// 컨트롤러의 레시피의 농작물 갯수 수정 메소드 호출 후 리턴값 받음
+							
 						}
 					});
 				}

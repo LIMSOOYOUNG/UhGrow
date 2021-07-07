@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.view.BuyToolListPanel;
 import com.farm3.uhgrow.farm.view.FarmPanel;
@@ -20,14 +19,14 @@ public class PickaxeResultPanel extends JPanel{
 	private int userNo;
 
 	private JPanel pickaxeResultPanel;
-	
+
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
 
 	public PickaxeResultPanel(int userNo) {
 
 		pickaxeResultPanel = this;
-		
+
 		this.userNo = userNo;
 
 
@@ -68,47 +67,25 @@ public class PickaxeResultPanel extends JPanel{
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 
-		
-		/* -------- 농기구 리스트 버튼 ---------- */
-
-		JButton btnPickaxe = new JButton("곡괭이");
-		btnPickaxe.setBounds(150, 170, 400, 40);
-		btnPickaxe.setFont(listFont);
-		btnPickaxe.setContentAreaFilled(false);
-
-		JButton btnShovel = new JButton("삽");
-		btnShovel.setBounds(150, 230, 400, 40);
-		btnShovel.setFont(listFont);
-		btnShovel.setContentAreaFilled(false);
-
-		JButton btnHoe = new JButton("호미");
-		btnHoe.setBounds(150, 290, 400, 40);
-		btnHoe.setFont(listFont);
-		btnHoe.setContentAreaFilled(false);
-
-		JButton btnWateringCan  = new JButton("물뿌리개");
-		btnWateringCan.setBounds(150, 350, 400, 40);
-		btnWateringCan.setFont(listFont);
-		btnWateringCan.setContentAreaFilled(false);
-
 
 		/*------------------- 구매확정 --------------------*/
 
 		JButton buyToolButton = new JButton("구매확정");
-		buyToolButton.setLocation(670, 250);
-		buyToolButton.setSize(100, 25);
-
+		buyToolButton.setLocation(380, 250);
+		buyToolButton.setSize(200, 50);
+		
+		JLabel pickaxePriceLabel = new JLabel("곡괭이의 가격은 4만원 입니다!");
+		pickaxePriceLabel.setBounds(250, 165, 700, 40);
+		pickaxePriceLabel.setFont(font);
+		
+		this.add(pickaxePriceLabel);
 		this.add(buyToolButton);
 		this.add(btnBuy); 
 		this.add(btnCancel);
 		this.add(btnBack);
-		this.add(btnPickaxe);
-		this.add(btnShovel);
-		this.add(btnHoe);
-		this.add(btnWateringCan);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-		
+
 		/* ---------- 뒤로 가기 버튼 ----------------*/
 
 		btnCancel.addMouseListener(new MouseAdapter() {
@@ -120,17 +97,24 @@ public class PickaxeResultPanel extends JPanel{
 
 			}
 		});
-		
+
 		/* ---------- 그만 두기 버튼 ----------------*/
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				FarmPanel FarmPanel = new FarmPanel(userNo);
-				
+
 				FrameManager.changePanel(pickaxeResultPanel, FarmPanel);
-				
+
 			}
 		});	
+
+		buyToolButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			}
+		});
 
 
 	}
