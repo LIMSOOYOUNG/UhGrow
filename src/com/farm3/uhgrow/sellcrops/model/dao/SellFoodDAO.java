@@ -74,7 +74,7 @@ public class SellFoodDAO {
 			while(rset.next()) {
 				FoodDTO userFood = new FoodDTO();
 				userFood.setFoodName(rset.getString("FOOD_NAME"));
-				userFood.setFoodAmount(rset.getInt("FOOD_AMOUnT"));
+				userFood.setFoodAmount(rset.getInt("FOOD_AMOUNT"));
 				userFood.setCoin(rset.getInt("COIN"));
 				userFood.setFoodPrice(rset.getInt("FOOD_PRICE"));
 				
@@ -159,7 +159,7 @@ public class SellFoodDAO {
 			while(rset.next()) {
 				FoodDTO userFood = new FoodDTO();
 				userFood.setFoodName(rset.getString("FOOD_NAME"));
-				userFood.setFoodAmount(rset.getInt("FOOD_AMOUnT"));
+				userFood.setFoodAmount(rset.getInt("FOOD_AMOUNT"));
 				userFood.setCoin(rset.getInt("COIN"));
 				userFood.setFoodPrice(rset.getInt("FOOD_PRICE"));
 				
@@ -242,7 +242,7 @@ public class SellFoodDAO {
 			while(rset.next()) {
 				FoodDTO userFood = new FoodDTO();
 				userFood.setFoodName(rset.getString("FOOD_NAME"));
-				userFood.setFoodAmount(rset.getInt("FOOD_AMOUnT"));
+				userFood.setFoodAmount(rset.getInt("FOOD_AMOUNT"));
 				userFood.setCoin(rset.getInt("COIN"));
 				userFood.setFoodPrice(rset.getInt("FOOD_PRICE"));
 				
@@ -284,23 +284,111 @@ public class SellFoodDAO {
 
 	public int sellGarlicJuiceGetCoin(Connection con, int sellAmount, int garilcJuicePrice, int userNo) {
 		
+		PreparedStatement pstmt = null;
 		
-		return 0;
+		int result = 0;
+		
+		String query = prop.getProperty("sellGarlicJuiceGetCoin");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, garilcJuicePrice);
+			pstmt.setInt(3, userNo);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+		
+		return result;
 	}
 
 	public List<FoodDTO> userPumpkinSoup(Connection con, int userNo) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		List<FoodDTO> userPumpkinSoup = null;
+		
+		String query = prop.getProperty("userPumpkinSoup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+			
+			rset = pstmt.executeQuery();
+			
+			userPumpkinSoup = new ArrayList<>();
+			
+			while(rset.next()) {
+				FoodDTO userFood = new FoodDTO();
+				userFood.setFoodName(rset.getString("FOOD_NAME"));
+				userFood.setFoodAmount(rset.getInt("FOOD_AMOUNT"));
+				userFood.setCoin(rset.getInt("COIN"));
+				userFood.setFoodPrice(rset.getInt("FOOD_PRICE"));
+				
+				userPumpkinSoup.add(userFood);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userPumpkinSoup;
 	}
 
 	public int updateUserPumpkinSoupAmount(Connection con, int sellAmount, int userNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateUserPumpkinSoupAmount");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, userNo);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public int sellPumpkinSoupGetCoin(Connection con, int sellAmount, int pumpkinSoupPrice, int userNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("sellPumpkinSoupGetCoin");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, sellAmount);
+			pstmt.setInt(2, pumpkinSoupPrice);
+			pstmt.setInt(3, userNo);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		} 
+		
+		return result;
 	}
 
 }
