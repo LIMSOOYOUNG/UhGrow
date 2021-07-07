@@ -38,10 +38,6 @@ public class GameDataController {
 		
 		int result = gameDataService.modifyHousePrice(inputHousePrice);
 		
-		if(result > 0) {
-			MngResultView.mngResult("modifySuccess");
-		}
-		
 	}
 
 	
