@@ -45,7 +45,7 @@ public class MainStorePanel extends JPanel {
 		userCoin.setFont(f1);
 		userCoin.setEditable(false);		
 		
-		this.add(userCoin);
+//		this.add(userCoin);
 
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);

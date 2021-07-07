@@ -119,7 +119,7 @@ public class TomatoResultPanel extends JPanel{
 				int userCoin = 0;
 				int getPrice = 0;
 				int totalGetPrice = 0;
-
+				
 
 				List<BuyDTO> userTomatoList = buyController.userTomatoList();
 

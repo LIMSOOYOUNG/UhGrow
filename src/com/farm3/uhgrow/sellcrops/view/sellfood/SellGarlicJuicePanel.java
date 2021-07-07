@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
 import com.farm3.uhgrow.sellcrops.model.dto.FoodDTO;
@@ -50,15 +52,15 @@ public class SellGarlicJuicePanel extends JPanel {
 		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
-		JButton btnBuy = new JButton("구 매 하 기 ");
-		btnBuy.setBounds(132, 95, 232, 60);
-		btnBuy.setFont(font);
-		btnBuy.setContentAreaFilled(false);
-
 		JButton btnSell = new JButton("판 매 하 기");
-		btnSell.setBounds(364, 95, 232, 60);
+		btnSell.setBounds(132, 95, 232, 60);
 		btnSell.setFont(font);
 		btnSell.setContentAreaFilled(false);
+		
+		JButton btnCancel = new JButton("뒤 로 가 기");
+		btnCancel.setBounds(364, 95, 232, 60);
+		btnCancel.setFont(font);
+		btnCancel.setContentAreaFilled(false);
 
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
@@ -70,20 +72,24 @@ public class SellGarlicJuicePanel extends JPanel {
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 				
-		/* 갯수 입력하는 텍스트필드와 라벨 */
-		JLabel inputAmountLabel = new JLabel("갯수 입력");
-		inputAmountLabel.setBounds(650, 180, 200, 25);
-		inputAmountLabel.setFont(font);
+		/*------------------- 판매 확정 --------------------*/
+
+		JLabel foodInPutLabel = new JLabel("<갯수 입력>");
+		foodInPutLabel.setBounds(390, 250, 200, 40);
+		foodInPutLabel.setFont(font);
+
+		JTextField foodInputField = new JTextField();
+		foodInputField.setBounds(410, 300, 140, 25);
+		foodInputField.setLayout(null);
+		foodInputField.setFont(font);
 		
-		JTextField inputAmountText = new JTextField();
-		inputAmountText.setBounds(650, 215, 140, 25);
-		inputAmountText.setLayout(null);
-		inputAmountText.setFont(font);
+		JButton sellFoodButton = new JButton("판매확정");
+		sellFoodButton.setLocation(430, 335);
+		sellFoodButton.setSize(100, 25);
 		
-		
-		JButton confirmButton = new JButton("판매확정");
-		confirmButton.setLocation(670, 250);
-		confirmButton.setSize(100, 25);
+		JLabel garlicJuicePriceLabel = new JLabel("마늘즙의 판매가격은 13000원 입니다!");
+		garlicJuicePriceLabel.setBounds(190, 165, 700, 40);
+		garlicJuicePriceLabel.setFont(font);
 
 		/* 재화 라벨*/
 		
@@ -96,22 +102,23 @@ public class SellGarlicJuicePanel extends JPanel {
 		userCoin.setFont(f1);
 		userCoin.setEditable(false);		
 
+		this.add(garlicJuicePriceLabel);
 		this.add(userCoin);
-		this.add(confirmButton);
-		this.add(inputAmountText);
-		this.add(inputAmountLabel);
+		this.add(sellFoodButton);
+		this.add(foodInputField);
+		this.add(foodInPutLabel);
 		this.add(btnSell);
 		this.add(btnBack);
-		this.add(btnBuy);
+		this.add(btnCancel);
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 		
-		confirmButton.addMouseListener(new MouseAdapter() {
+		sellFoodButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				String inputAmount = inputAmountText.getText().toString();
+				String inputAmount = foodInputField.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
 				/* 유저의 마늘즙 수량, 현재 가지고 있는 코인 조회 */
@@ -157,7 +164,31 @@ public class SellGarlicJuicePanel extends JPanel {
 			}
 		
 		
-		});		
+		});	
+		
+		/* ---------- 뒤록 가기 버튼 ----------------*/
+
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SellFoodListPanel sellFoodListPanel = new SellFoodListPanel(userNo);
+
+				FrameManager.changePanel(sellGarlicJuicePanel, sellFoodListPanel);
+
+			}
+		});
+		
+		/* ---------- 그만 두기 버튼 ----------------*/
+		
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarmPanel FarmPanel = new FarmPanel(userNo);
+				
+				FrameManager.changePanel(sellGarlicJuicePanel, FarmPanel);
+				
+			}
+		});	
 		
 	
 	}

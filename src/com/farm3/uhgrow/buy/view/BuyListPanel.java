@@ -107,6 +107,8 @@ public class BuyListPanel extends JPanel{
 
 			}
 		});		
+		
+		/* ---------- 뒤로 가기 버튼 ----------------*/
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

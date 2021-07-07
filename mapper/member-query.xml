@@ -36,22 +36,14 @@
 		)
 	</entry>
 	<entry key="tryRogin">
-		SELECT
-	 	 	   A.USER_NO
-			 , A.USER_ID
-			 , A.USER_PWD
-			 , A.USER_NAME
-			 , A.EMAIL
-			 , A.AUTHORITY
-			 , A.COIN
-			 , A.DELETE_YN
-			 , A.HAVING_HOUSE_YN
-			 , A.FARM_EXP
-			 , HOUSE_PRICE
-			 , A.CONTINUE_YN
-		  FROM USER_INFO A
-		 WHERE A.USER_ID = ? 
-	</entry>
+        SELECT
+                 A.USER_NO
+             , A.USER_ID
+             , A.USER_PWD
+             , A.DELETE_YN
+          FROM USER_INFO A
+         WHERE A.USER_ID = ? 
+    </entry>
 	
 	<entry key="continueYn">
 		SELECT
