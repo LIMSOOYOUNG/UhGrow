@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -152,7 +153,8 @@ public class SellTomatoSeedPanel extends JPanel {
 						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
 						
 						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
-						
+						JOptionPane.showMessageDialog(null, "토마토씨앗 판매가 완료되었습니다.","씨앗구매 창" , 1);
+						FrameManager.changePanel(sellTomatoSeedPanel, new FarmPanel(userNo));
 					
 					}
 				} else {

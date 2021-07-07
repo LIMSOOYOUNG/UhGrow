@@ -608,9 +608,9 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
 
 			rset = pstmt.executeQuery();
-			pstmt.setInt(1, userNo);
 
 			userGarlicSeed = new ArrayList<>();
 

@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -153,9 +154,10 @@ public class SellCornTortillaPanel extends JPanel {
 						totalCornTortillaAmonut = cornTortillaAmount - sellAmount;
 						
 						totalGetPrice = userCoin + ((cornTortillaPrice * sellAmount) / 10);					
-						
 					
 					}
+					JOptionPane.showMessageDialog(null, "또띠아 판매가 완료되었습니다.","요리 판매 창" , 1);
+					FrameManager.changePanel(sellCornTortillaPanel, new FarmPanel(userNo));
 				} else {
 					
 					SellCategoryPanel sellCategoryPanel = new SellCategoryPanel(userNo);

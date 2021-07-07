@@ -139,9 +139,9 @@ public class TomatoResultPanel extends JPanel{
 					getPrice = buyController.buyTomatoGetCoin(buyAmount, tomatoPrice);
 					
 					if(updateUserTomatoAmount > 0 && getPrice > 0) {
-						JOptionPane.showMessageDialog(null, "토마토씨앗 구매가 완료되었습니다.","씨앗구매 창" , 1);
 						totalTomatoAmonut = tomatoAmount + buyAmount;
 						totalGetPrice = userCoin - ((tomatoPrice * buyAmount));	
+						JOptionPane.showMessageDialog(null, "토마토씨앗 구매가 완료되었습니다.","씨앗구매 창" , 1);
 						FrameManager.changePanel(tomatoResultPanel, new FarmPanel(userNo));
 					}
 				} else {
