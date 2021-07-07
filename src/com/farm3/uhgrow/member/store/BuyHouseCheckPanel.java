@@ -11,13 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.buy.view.FrameManager;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.view.EndingPanel;
-
+import com.farm3.uhgrow.member.view.FrameManager;
 public class BuyHouseCheckPanel extends JPanel {
-
+	
 	private JPanel BuyHouseCheckPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
