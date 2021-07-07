@@ -18,7 +18,7 @@ import com.farm3.uhgrow.farm.model.dto.RetainToolDTO;
 public class BuyDAO {
 	private Properties prop;
 
-	public BuyDAO() {									
+	public BuyDAO() {
 		this.prop = new Properties();
 
 		try {
@@ -28,7 +28,6 @@ public class BuyDAO {
 		}
 	}
 
-	/* 유저 재화 라벨*/
 	public int selectCoin(Connection con) {
 
 		PreparedStatement pstmt = null;
@@ -40,7 +39,7 @@ public class BuyDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {
+			while (rset.next()) {
 				result = rset.getInt("COIN");
 			}
 		} catch (SQLException e) {
@@ -69,11 +68,11 @@ public class BuyDAO {
 
 			userTomatoList = new ArrayList<>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				BuyDTO userCrop = new BuyDTO();
 				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
-				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				userCrop.setCoin(rset.getInt("COIN"));
 				userCrop.setCropPrice(rset.getInt("CROP_PRICE"));
 
@@ -106,11 +105,10 @@ public class BuyDAO {
 
 			userCornList = new ArrayList<>();
 
-			while(rset.next()) {
 				BuyDTO userCrop = new BuyDTO();
 				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
-				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				userCrop.setCoin(rset.getInt("COIN"));
 
 				userCornList.add(userCrop);
@@ -141,11 +139,11 @@ public class BuyDAO {
 
 			userGarlicList = new ArrayList<>();
 
-			while(rset.next()) {
+			while (rset.next()) {
 				BuyDTO userCrop = new BuyDTO();
 				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
-				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				userCrop.setCoin(rset.getInt("COIN"));
 
 				userGarlicList.add(userCrop);
@@ -157,7 +155,6 @@ public class BuyDAO {
 			close(rset);
 			close(pstmt);
 		}
-
 		return userGarlicList;	
 	}
 
@@ -181,7 +178,7 @@ public class BuyDAO {
 				BuyDTO userCrop = new BuyDTO();
 				userCrop.setUserNo(rset.getInt("USER_NO"));
 				userCrop.setCropName(rset.getString("CROP_NAME"));
-				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));  
+				userCrop.setCropAmount(rset.getInt("CROP_AMOUNT"));
 				userCrop.setCoin(rset.getInt("COIN"));
 
 				userPumpkinList.add(userCrop);
@@ -193,11 +190,9 @@ public class BuyDAO {
 			close(rset);
 			close(pstmt);
 		}
-
 		return userPumpkinList;	
 	}
 
-	/* 토마토씨앗 갯수 업데이트*/
 	public int updateTomatoCropAmount(Connection con, int buyAmount) {
 
 		PreparedStatement pstmt = null;
@@ -219,8 +214,6 @@ public class BuyDAO {
 		}
 		return result;
 	}
-
-	/* 옥수수씨앗 갯수 업데이트*/
 	public int updateCornCropAmount(Connection con, int buyAmount) {
 
 		PreparedStatement pstmt = null;
@@ -243,7 +236,6 @@ public class BuyDAO {
 		return result;
 	}
 
-	/* 마늘씨앗 갯수 업데이트*/
 	public int updateGarlicCropAmount(Connection con, int buyAmount) {
 
 		PreparedStatement pstmt = null;
@@ -266,7 +258,6 @@ public class BuyDAO {
 		return result;
 	}
 
-	/* 호박씨앗 갯수 업데이트*/
 	public int updatePumpkinCropAmount(Connection con, int buyAmount) {
 
 		PreparedStatement pstmt = null;
@@ -288,8 +279,6 @@ public class BuyDAO {
 		}
 		return result;
 	}
-
-	/* 토마토 사고 난 금액 업데이트*/
 	public int buyTomatoGetCoin(Connection con, int buyAmount, int tomatoPrice) {
 
 		PreparedStatement pstmt = null;
@@ -381,23 +370,23 @@ public class BuyDAO {
 		}
 		return result;
 	}
+
 	public int selectPrice(Connection con, int toolId) {
 		PreparedStatement pstmt = null;
+
 		ResultSet rset = null;
+		int selectPrice = 0;
 		
 		String query = prop.getProperty("getToolPrice");
 
-		int selectPrice = 0;
-		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, toolId);
-			rset = pstmt.executeQuery();
-			while(rset.next()){
-				
+
+			rset= pstmt.executeQuery();
+			while(rset.next()) {				
 				selectPrice = rset.getInt("TOOL_PRICE");
 			}
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -407,25 +396,24 @@ public class BuyDAO {
 		return selectPrice;
 	}
 
-	public char istoolYN(Connection con, int userNo) {
+	public RetainToolDTO isToolYN(Connection con, int userNo, int toolId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		char isToolYN = 0;
-
-		String query = prop.getProperty("user-pumpkinList");
+		RetainToolDTO retainToolDTO =null;
+		String query = prop.getProperty("isToolYN");
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, userNo);
-
+			pstmt.setInt(1, userNo); 
+			pstmt.setInt(2, toolId); 
+			
+			
 			rset = pstmt.executeQuery();
-
-			while(rset.next()) {
-
-				isToolYN = rset.getString("RETAIN_TOOL_YN").charAt(0);
-
-			}
+			
+			while (rset.next()) {
+				retainToolDTO = new RetainToolDTO();
+				retainToolDTO.setRetainToolYn(rset.getString("RETAIN_TOOL_YN").charAt(0));
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -433,25 +421,23 @@ public class BuyDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return isToolYN;
+
+		return retainToolDTO;
 	}
 
 	public int currentCoin(Connection con, BuyDTO buyDTO) {
-
 		PreparedStatement pstmt = null;
 
 		ResultSet rset = null;
-		
 		int currentCoin = 0;
-
+	
 		String query = prop.getProperty("currentCoin");
 
 		try {
-			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, buyDTO.getUserNo());
-
-			rset = pstmt.executeQuery();
+			rset= pstmt.executeQuery();
+			
 			while(rset.next()) {
 				currentCoin = rset.getInt("COIN");
 			}
@@ -462,17 +448,19 @@ public class BuyDAO {
 			close(pstmt);
 		}
 		return currentCoin;
-
+		
+		
 	}
 
-	public void updateCoinTool(Connection con, BuyDTO buyDTO) {
+	public int updateCoinTool(Connection con, BuyDTO buyDTO) {
 		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
 
-
+		int result1 = 0; // 수정 성공여부 초기화
+		int result2 = 0; // 수정 성공여부 초기화
+		int sum = result1+result2;
 		String query1 = prop.getProperty("updateCoinExp");
 		String query2 = prop.getProperty("updateToolYN");
-
 
 		try {
 			pstmt1 = con.prepareStatement(query1);
@@ -480,18 +468,125 @@ public class BuyDAO {
 			pstmt1.setInt(2, buyDTO.getToolPrice());
 			pstmt1.setInt(3, buyDTO.getPlusExp());
 			pstmt1.setInt(4, buyDTO.getUserNo());
-
-
+			
 			pstmt2 = con.prepareStatement(query2);
 			pstmt2.setInt(1, buyDTO.getUserNo());
 			pstmt2.setInt(2, buyDTO.getToolId());
+			
+			result1= pstmt1.executeUpdate();
+			result2 = pstmt2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt1);
 			close(pstmt2);
 		}
+		return sum;
+	}
 
+	public int plusExp(Connection con, int toolId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int plusExp = 0;
+
+		String query = prop.getProperty("plusExp");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, toolId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				
+				plusExp = rset.getInt("PLUS_EXP");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return plusExp;
+		
+		
+	}
+
+	public List<RetainToolDTO> selectRetainToolList(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		List<RetainToolDTO> retainToolList = null;
+		RetainToolDTO retainToolDTO = null;
+
+		String query = prop.getProperty("selectRetainToolList");
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
+			rset = pstmt.executeQuery();
+			retainToolList = new ArrayList<>();
+			while (rset.next()) {
+				retainToolDTO = new RetainToolDTO();
+				retainToolDTO.setUserNo(rset.getInt("USER_NO"));
+				retainToolDTO.setToolId(rset.getInt("TOOL_ID"));
+				retainToolDTO.setRetainToolYn(rset.getString("RETAIN_TOOL_YN").charAt(0));
+
+				retainToolList.add(retainToolDTO);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return retainToolList;
+	}
+
+	public int createRetainToolList(Connection con, int userNo) {
+		PreparedStatement pstmt1 = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		PreparedStatement pstmt4 = null;
+		int result1 = 0;
+		int result2 = 0;
+		int result3 = 0;
+		int result4 = 0;
+int	sum =0;
+		String query1 = prop.getProperty("insertRetainTool1");
+		String query2 = prop.getProperty("insertRetainTool2");
+		String query3 = prop.getProperty("insertRetainTool3");
+		String query4 = prop.getProperty("insertRetainTool4");
+
+		try {
+			pstmt1 = con.prepareStatement(query1);
+			pstmt1.setInt(1, userNo);
+			result1 = pstmt1.executeUpdate();
+
+			pstmt2 = con.prepareStatement(query2);
+			pstmt2.setInt(1, userNo);
+			result2 = pstmt2.executeUpdate();
+			
+			pstmt3 = con.prepareStatement(query3);
+			pstmt3.setInt(1, userNo);
+			result3 = pstmt3.executeUpdate();
+			
+			pstmt4 = con.prepareStatement(query4);
+			pstmt4.setInt(1, userNo);
+			result4 = pstmt4.executeUpdate();
+			sum = result1 +result2+result3+result4;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt1);
+			close(pstmt2);
+			close(pstmt3);
+			close(pstmt4);
+		}
+		return sum;
+		
+	}
 
 	}
 

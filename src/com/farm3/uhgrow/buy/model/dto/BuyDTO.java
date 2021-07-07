@@ -31,108 +31,67 @@ public class BuyDTO {
 		this.toolPrice = toolPrice;
 		this.isToolYN = isToolYN;
 	}
-
-
 	public int getUserNo() {
 		return userNo;
 	}
-
-
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
-
 	public int getCoin() {
 		return coin;
 	}
-
-
 	public void setCoin(int coin) {
 		this.coin = coin;
 	}
-
-
 	public int getCropId() {
 		return cropId;
 	}
-
-
 	public void setCropId(int cropId) {
 		this.cropId = cropId;
 	}
-
-
 	public String getCropName() {
 		return cropName;
 	}
-
-
 	public void setCropName(String cropName) {
 		this.cropName = cropName;
 	}
-
-
 	public int getCropPrice() {
 		return cropPrice;
 	}
-
-
 	public void setCropPrice(int cropPrice) {
 		this.cropPrice = cropPrice;
 	}
-
-
 	public int getCropAmount() {
 		return cropAmount;
 	}
-
-
 	public void setCropAmount(int cropAmount) {
 		this.cropAmount = cropAmount;
 	}
-
-
 	public int getToolId() {
 		return toolId;
 	}
-
-
 	public void setToolId(int toolId) {
 		this.toolId = toolId;
 	}
-
-
 	public int getPlusExp() {
 		return plusExp;
 	}
-
-
 	public void setPlusExp(int plusExp) {
 		this.plusExp = plusExp;
 	}
-
-
 	public int getToolPrice() {
 		return toolPrice;
 	}
-
-
 	public void setToolPrice(int toolPrice) {
 		this.toolPrice = toolPrice;
 	}
-
-
 	public char getIsToolYN() {
 		return isToolYN;
 	}
-
-
 	public void setIsToolYN(char isToolYN) {
 		this.isToolYN = isToolYN;
 	}
-
-
+	
 	@Override
 	public String toString() {
 		return "BuyDTO [userNo=" + userNo + ", coin=" + coin + ", cropId=" + cropId + ", cropName=" + cropName
@@ -140,6 +99,12 @@ public class BuyDTO {
 				+ plusExp + ", toolPrice=" + toolPrice + ", isToolYN=" + isToolYN + "]";
 	}
 	
+	
+	
+	
+	
+	
+}
 	
 
 }

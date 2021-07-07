@@ -1,19 +1,17 @@
 package com.farm3.uhgrow.buy.controller;
 
-
 import java.util.List;
 
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 import com.farm3.uhgrow.buy.service.BuyService;
 import com.farm3.uhgrow.farm.model.dto.RetainToolDTO;
 
-
 public class BuyController {
 
 	private BuyDTO buyDTO = new BuyDTO();
 	private BuyService buyCropsService = new BuyService();
 
-	/* 유저, 유저의 재화, 유저가 가지고 있는 농작물 , 농작물 갯수*/
+	/* 유저, 유저의 재화, 유저가 가지고 있는 농작물 , 농작물 갯수 */
 	public List<BuyDTO> userTomatoList() {
 
 		List<BuyDTO> userTomatoList = buyCropsService.userTomatoList();
@@ -23,28 +21,26 @@ public class BuyController {
 
 	public List<BuyDTO> userCornList() {
 
-
 		List<BuyDTO> userCornList = buyCropsService.userCornList();
 
 		return userCornList;
 	}
-
 
 	public List<BuyDTO> userGarlicList() {
 
 		List<BuyDTO> userGarlicList = buyCropsService.userGarlicList();
 
 		return userGarlicList;
-	}	
+	}
 
 	public List<BuyDTO> userPumpkinList() {
 
 		List<BuyDTO> userPumpkinList = buyCropsService.userPumpkinList();
 
 		return userPumpkinList;
-	}	
+	}
 
-	/* 토마토씨앗 수량 업데이트*/
+	/* 토마토씨앗 수량 업데이트 */
 	public int updateTomatoCropAmount(int buyAmount) {
 
 		int result = buyCropsService.updateTomatoCropAmount(buyAmount);
@@ -52,7 +48,7 @@ public class BuyController {
 		return result;
 	}
 
-	/* 옥수수씨앗 수량 업데이트*/
+	/* 옥수수씨앗 수량 업데이트 */
 	public int updateCornCropAmount(int buyAmount) {
 
 		int result = buyCropsService.updateCornCropAmount(buyAmount);
@@ -60,7 +56,7 @@ public class BuyController {
 		return result;
 	}
 
-	/* 마늘씨앗 수량 업데이트*/
+	/* 마늘씨앗 수량 업데이트 */
 	public int updateGarlicCropAmount(int buyAmount) {
 
 		int result = buyCropsService.updateGarlicCropAmount(buyAmount);
@@ -68,7 +64,7 @@ public class BuyController {
 		return result;
 	}
 
-	/* 호박씨앗 수량 업데이트*/
+	/* 호박씨앗 수량 업데이트 */
 	public int updatePumpkinCropAmount(int buyAmount) {
 
 		int result = buyCropsService.updatePumpkinCropAmount(buyAmount);
@@ -76,7 +72,7 @@ public class BuyController {
 		return result;
 	}
 
-	/* 토마토 금액 업데이트*/
+	/* 토마토 금액 업데이트 */
 	public int buyTomatoGetCoin(int buyAmount, int tomatoPrice) {
 
 		int result = buyCropsService.buyTomatoGetCoin(buyAmount, tomatoPrice);
@@ -92,11 +88,12 @@ public class BuyController {
 	}
 
 	public int buyCornGetCoin(int buyAmount, int cornPrice) {
-		
+
 		int result = buyCropsService.buyCornGetCoin(buyAmount, cornPrice);
-		
+
 		return result;
 	}
+
 	public int buyPumpkinGetCoin(int buyAmount, int pumpkinPrice) {
 
 		int result = buyCropsService.buyPumpkinGetCoin(buyAmount, pumpkinPrice);
@@ -105,33 +102,29 @@ public class BuyController {
 	}
 
 	public int selectPrice(int toolId) {
-        int selectPrice = buyCropsService.selectPrice(toolId);
+		int selectPrice = buyCropsService.selectPrice(toolId);
 
-        return selectPrice;
-    }
+		return selectPrice;
+	}
 
-	public char istoolYN(int userNo) {
-		char istoolYN = buyCropsService.istoolYN(userNo);
+	public RetainToolDTO isToolYN(int userNo, int toolId) {
+		RetainToolDTO isToolYN = buyCropsService.isToolYN(userNo,toolId);
 
-        return istoolYN;
+		return isToolYN;
 	}
 
 	public int currentCoin(BuyDTO buyDTO) {
 		int currentCoin = buyCropsService.currentCoin(buyDTO);
-
 		return currentCoin;
 	}
 
-	public void updateCoinTool(BuyDTO buyDTO) {
-		
-		buyCropsService.updateCoinTool(buyDTO);
-		
+	public int updateCoinTool(BuyDTO buyDTO) {
+		int result = buyCropsService.updateCoinTool(buyDTO);
+		return result;
 	}
 
 	public int plusExp(int toolId) {
-
 		int plusExp = buyCropsService.plusExp(toolId);
-		
 		return plusExp;
 	}
 

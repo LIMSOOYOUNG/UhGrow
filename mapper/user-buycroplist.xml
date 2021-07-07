@@ -114,81 +114,82 @@
          SET COIN = COIN - (? * ?)
        WHERE USER_NO = 1
    </entry>
-   <entry key ="selectPrice">
+   <entry key ="getToolPrice">
       SELECT
-    		 TOOL_PRICE
+            TOOL_PRICE
         FROM TOOL
        WHERE TOOL_ID = ?
    </entry>
+  
 
     <entry key ="isToolYN">
       SELECT
             RETAIN_TOOL_YN
        FROM RETAIN_TOOL
       WHERE USER_NO = ?
+        and TOOL_ID = ?
    </entry>
-
-    <entry key ="currentCoin">
+   
+	<entry key ="currentCoin">
       SELECT 
-               COIN
+      		 COIN
         FROM USER_INFO
        WHERE USER_NO = ?
    </entry>
-
+   
    <entry key ="plusExp">
       SELECT 
-               PLUS_EXP
+      		 PLUS_EXP
         FROM TOOL
        WHERE TOOL_ID = ?
    </entry>
-
+   
    <entry key ="updateCoinExp">
       UPDATE
             USER_INFO 
-         SET COIN = ? - ?
-          AND FARM_EXP += ?
+         SET COIN = ? - ?, FARM_EXP = FARM_EXP + ?
        WHERE USER_NO = ?
    </entry>
-
-
+   
+   
    <entry key ="updateToolYN">
       UPDATE RETAIN_TOOL
-           SET RETAIN_TOOL_YN = 'Y'
+      	 SET RETAIN_TOOL_YN = 'Y'
       WHERE USER_NO = ?
-          AND TOOL_ID = ?
+      	AND TOOL_ID = ?
    </entry>
-
+   
     <entry key ="selectRetainToolList">
-        SELECT 
-             USER_NO
-           , TOOL_ID
-           , RETAIN_TOOL_YN
-          FROM RETAIN_TOOL
+    	SELECT 
+		     USER_NO
+		   , TOOL_ID
+		   , RETAIN_TOOL_YN
+      	FROM RETAIN_TOOL
        WHERE USER_NO = ?
    </entry>
-
+   
    <entry key ="insertRetainTool1">
-        INSERT 
-        INTO RETAIN_TOOL
-        VALUES (?, 1, 'N')
+    	INSERT 
+    	INTO RETAIN_TOOL
+    	VALUES (?, 1, 'N')
    </entry>
     <entry key ="insertRetainTool2">
-        INSERT 
-        INTO RETAIN_TOOL
-        VALUES (?, 2, 'N')
+    	INSERT 
+    	INTO RETAIN_TOOL
+    	VALUES (?, 2, 'N')
    </entry>
     <entry key ="insertRetainTool3">
-        INSERT 
-        INTO RETAIN_TOOL
-        VALUES (?, 3, 'N')
+    	INSERT 
+    	INTO RETAIN_TOOL
+    	VALUES (?, 3, 'N')
    </entry>
     <entry key ="insertRetainTool4">
-        INSERT 
-        INTO RETAIN_TOOL
-        VALUES (?, 4, 'N')
+    	INSERT 
+    	INTO RETAIN_TOOL
+    	VALUES (?, 4, 'N')
    </entry>
-	
-	
+   
+   
 </properties>
 
 
