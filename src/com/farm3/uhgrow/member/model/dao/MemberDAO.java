@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.model.dto.FindIdPwdDTO;
 import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
@@ -278,6 +279,50 @@ public class MemberDAO {
 		}
 		return result;
 	}
+
+		public BuyHouseDTO buyHouse(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+
+		ResultSet rset = null;
+
+		String query = prop.getProperty("buyHouse");
+		BuyHouseDTO buyHouseDTO = null;
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, userNo);
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				buyHouseDTO = new BuyHouseDTO();
+				
+				buyHouseDTO.setCoin(rset.getInt("COIN"));
+				buyHouseDTO.setHousePrice(rset.getInt("HOUSE_PRICE"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		return buyHouseDTO;
+	}
+
+		public void ending(Connection con, int userNo) {
+			PreparedStatement pstmt = null;
+			String query = prop.getProperty("ending");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, userNo);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		
+			
+		}
 
 
 

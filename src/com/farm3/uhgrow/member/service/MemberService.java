@@ -7,7 +7,9 @@ import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 
+import com.farm3.uhgrow.buy.model.dao.BuyDAO;
 import com.farm3.uhgrow.member.model.dao.MemberDAO;
+import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.model.dto.FindIdPwdDTO;
 import com.farm3.uhgrow.member.model.dto.LoginDTO;
 import com.farm3.uhgrow.member.model.dto.SignUpDTO;
@@ -104,6 +106,26 @@ public class MemberService {
 		close(con);
 		
 		return result;
+	}
+
+	// 집 구매
+	public BuyHouseDTO buyHouse(int userNo) {
+		Connection con = getConnection();
+		
+		BuyHouseDTO buyHouseDTO = memberDAO.buyHouse(con, userNo);
+		
+		close(con);
+
+		return buyHouseDTO;
+	}
+
+	public void ending(int userNo) {
+		Connection con = getConnection();
+		
+		memberDAO.ending(con, userNo);
+		
+		close(con);
+		
 	}
 
 
