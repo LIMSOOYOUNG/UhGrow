@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.farm.view.TutorialPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 
 public class StartNewGameCheckPanel extends JPanel {
@@ -95,8 +96,8 @@ public class StartNewGameCheckPanel extends JPanel {
 				memberController.startNewGameDataReset(userNo);
 				
 				// 새로하기 Yes클릭시 userNo 보내주고 toolList, farmCrop삭제 및 foodAmount, cropAmount 초기화
-				FarmPanel farmPanel = new FarmPanel(userNo);				
-				FrameManager.changePanel(StartNewGameCheckPanel, farmPanel);
+				TutorialPanel tutorialPanel = new TutorialPanel(userNo);			
+				FrameManager.changePanel(StartNewGameCheckPanel, tutorialPanel);
 			}
 		});
 

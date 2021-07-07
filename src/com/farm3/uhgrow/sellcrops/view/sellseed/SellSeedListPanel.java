@@ -34,7 +34,7 @@ public class SellSeedListPanel extends JPanel {
 		this.setSize(960, 540);
 		
 		this.sellController = new SellController();
-		int havingCoin = sellController.selectCoin();
+		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
 
@@ -110,7 +110,7 @@ public class SellSeedListPanel extends JPanel {
 		/* ---------- 재화 보유 라벨 ------------*/
 		Font f1 = new Font("Ink Free", Font.BOLD, 20);
 		JTextArea userCoin = new JTextArea("COIN : " + transCoin);
-		userCoin.setLocation(600, 400);
+		userCoin.setLocation(600, 200);
 		userCoin.setSize(200, 28);
 		userCoin.setOpaque(false);
 		userCoin.setFont(f1);

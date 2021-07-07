@@ -1,5 +1,6 @@
 package com.farm3.uhgrow.member.store;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -10,18 +11,28 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.buy.view.FrameManager;
+import com.farm3.uhgrow.member.controller.MemberController;
+import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
+import com.farm3.uhgrow.member.view.EndingPanel;
 
 public class BuyHouseCheckPanel extends JPanel {
 
-	private JPanel buyHouseAndCookPanel;
+	private JPanel BuyHouseCheckPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	
+	private Font npcFont = new Font("나눔손글씨 펜", Font.BOLD, 40);
+	private Font btnFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
+
+	// npc 대화내용
+	private JLabel npcTextLabel;
+	private JLabel npcTextLabel1;
 
 
-	public BuyHouseCheckPanel(int userNo) {
-		this.userNo = userNo;
-		buyHouseAndCookPanel = this;
+	public BuyHouseCheckPanel(BuyHouseDTO buyHouseDTO) {
+		this.userNo = buyHouseDTO.getUserNo();
+		BuyHouseCheckPanel = this;
 		/* ---------- 집구매, 요리하기 가능한 상점 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -44,16 +55,23 @@ public class BuyHouseCheckPanel extends JPanel {
 		btnBuyHouse.setFont(font);
 		btnBuyHouse.setContentAreaFilled(false);
 		btnBuyHouse.setFocusPainted(false);
+		btnBuyHouse.setBorderPainted(false);
 
 		JButton btnCook = new JButton("요 리 하 기");
 		btnCook.setBounds(364, 95, 232, 60);
 		btnCook.setFont(font);
 		btnCook.setContentAreaFilled(false);
+		btnCook.setFocusPainted(false);
+		btnCook.setBorderPainted(false);
+
 
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
 		btnBack.setFont(font);
 		btnBack.setContentAreaFilled(false);
+		btnBack.setFocusPainted(false);
+		btnBack.setBorderPainted(false);
+
 
 		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
 		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
@@ -70,14 +88,34 @@ public class BuyHouseCheckPanel extends JPanel {
 		storeNpc.setBounds(750, 350, 90, 150);
 
 		/* ---------- 할머니와 대화내용  ------------*/
-		JLabel textLabel = new JLabel("정말 집을 구매할건가?!! ");
-		textLabel.setBounds(130, 410, 750, 100);
-		textLabel.setFont(font);
+		npcTextLabel = new JLabel("집 가격은 " + buyHouseDTO.getHousePrice() + "원 이라네 정말 구매할텐가?! ");
+		npcTextLabel.setBounds(120, 410, 750, 40);
+		npcTextLabel.setFont(npcFont);
+		
+		npcTextLabel1 = new JLabel("집 구매하면 게임이 끝나 !! ");
+		npcTextLabel1.setBounds(120, 460, 750, 40);
+		npcTextLabel1.setFont(npcFont);
+		
+		/* --------------집 구매 여부 마지막 확인 버튼 ----------------*/
+		JButton btnYes = new JButton("넹!!");
+		btnYes.setBounds(500, 470, 80, 30);
+		btnYes.setFont(btnFont);
+		btnYes.setBackground(Color.darkGray);
+		btnYes.setForeground(Color.white);
+		
+		JButton btnNo = new JButton("아뇽!!");
+		btnNo.setBounds(600, 470, 80, 30);
+		btnNo.setFont(btnFont);
+		btnNo.setBackground(Color.darkGray);
+		btnNo.setForeground(Color.white);
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 
+		this.add(npcTextLabel1);
+		this.add(npcTextLabel);
+		this.add(btnYes);
+		this.add(btnNo);
 		this.add(storeNpc);
-		this.add(textLabel);
 		this.add(conversationLabel);
 		this.add(btnBack);
 		this.add(btnCook);
@@ -85,5 +123,28 @@ public class BuyHouseCheckPanel extends JPanel {
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
+		
+		btnYes.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MemberController memberController = new MemberController();
+				
+				memberController.ending(buyHouseDTO.getUserNo());
+				
+				EndingPanel endingPanel = new EndingPanel();
+				
+				FrameManager.changePanel(BuyHouseCheckPanel, endingPanel);
+				
+			}
+		});
+		btnNo.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BuyHouseAndCookPanel buyHouseAndCookPanel = new BuyHouseAndCookPanel(buyHouseDTO.getUserNo());
+				FrameManager.changePanel(BuyHouseCheckPanel, buyHouseAndCookPanel);
+			}
+		});
 	}
 }

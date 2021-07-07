@@ -28,7 +28,7 @@ public class SellCropsDAO {
 	}
 
 	/* 유저 재화 라벨*/
-	public int selectCoin(Connection con) {
+	public int selectCoin(Connection con, int userNo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -38,6 +38,8 @@ public class SellCropsDAO {
 		String query = prop.getProperty("selectCoin");
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
 			rset = pstmt.executeQuery();
 			while(rset.next()) {
 				result = rset.getInt("COIN");
@@ -155,7 +157,7 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
 			rset = pstmt.executeQuery();
 
 			userCornList = new ArrayList<>();
@@ -219,6 +221,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, cornPrice);
+			pstmt.setInt(3, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -243,7 +246,8 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
+			
 			rset = pstmt.executeQuery();
 
 			userGarlicList = new ArrayList<>();
@@ -304,6 +308,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, garlicPrice);
+			pstmt.setInt(3, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -328,9 +333,10 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
+			
 			rset = pstmt.executeQuery();
-
+			
 			userPumpkinList = new ArrayList<>();
 
 			while (rset.next()) {
@@ -390,6 +396,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, pumpkinPrice);
+			pstmt.setInt(3, userNo);
 
 			result = pstmt.executeUpdate();
 
@@ -417,9 +424,11 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
+			
 			rset = pstmt.executeQuery();
-
+			
+			
 			userTomatoSeed = new ArrayList<>();
 
 			while (rset.next()) {
@@ -479,6 +488,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, tomatoSeedPrice);
+			pstmt.setInt(3, userNo);
 		
 			result = pstmt.executeUpdate();
 			
@@ -504,7 +514,8 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
+			
 			rset = pstmt.executeQuery();
 
 			userTomatoSeed = new ArrayList<>();
@@ -570,7 +581,8 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, cornSeedPrice);
-		
+			pstmt.setInt(3, userNo);
+			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -598,6 +610,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 
 			rset = pstmt.executeQuery();
+			pstmt.setInt(1, userNo);
 
 			userGarlicSeed = new ArrayList<>();
 
@@ -661,6 +674,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, garlicSeedPrice);
+			pstmt.setInt(3, userNo);
 		
 			result = pstmt.executeUpdate();
 			
@@ -685,7 +699,8 @@ public class SellCropsDAO {
 
 		try {
 			pstmt = con.prepareStatement(query);
-
+			pstmt.setInt(1, userNo);
+			
 			rset = pstmt.executeQuery();
 
 			userPumpkinSeed = new ArrayList<>();
@@ -746,6 +761,7 @@ public class SellCropsDAO {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, sellAmount);
 			pstmt.setInt(2, pumpkinSeedPrice);
+			pstmt.setInt(3, userNo);
 		
 			result = pstmt.executeUpdate();
 			

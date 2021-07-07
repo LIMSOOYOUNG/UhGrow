@@ -13,76 +13,64 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.farm3.uhgrow.buy.view.FrameManager;
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
+import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
 public class SellTomatoSeedPanel extends JPanel {
 
-	private int userNo;
 	private JPanel sellTomatoSeedPanel;
 	private SellController sellController;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
+	private int userNo;
 	
 	public SellTomatoSeedPanel(int userNo) {
 		this.userNo = userNo;
 		sellTomatoSeedPanel = this;
 		
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
-		Font titleFont = new Font("맑은 고딕", Font.BOLD, 60);
-		
 		this.setLayout(null);
 		this.setSize(960, 540);
 
 		this.sellController = new SellController();
-		int havingCoin = sellController.selectCoin();
+		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
 		
-		/* ---------- 배경화면 라벨 ------------ */
+		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
-		this.setVisible(true);
 
-		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼 ------------ */
-		Image buyImage = new ImageIcon("img/store/mainStore/buybutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(132, 95);
-		buyButton.setSize(232, 60);
-
-		Image sellImage = new ImageIcon("img/store/mainStore/sellbutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(364, 95);
-		sellButton.setSize(232, 60);
-
-		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
-
-		/* ------- 상점 패널 --------- */
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
+		/* ---------- 상첨창 배경  ------------*/
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
 
-		/* -------- 작물 리스트 버튼 ---------- */
-		JButton tomatoCropButton = new JButton("토마토");
-		tomatoCropButton.setLocation(70, 200);
-		tomatoCropButton.setSize(100, 25);
+		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
+		JButton btnBuy = new JButton("구 매 하 기 ");
+		btnBuy.setBounds(132, 95, 232, 60);
+		btnBuy.setFont(font);
+		btnBuy.setContentAreaFilled(false);
 
-		JButton cornCropButton = new JButton("옥수수");
-		cornCropButton.setLocation(70, 250);
-		cornCropButton.setSize(100, 25);
+		JButton btnSell = new JButton("판 매 하 기");
+		btnSell.setBounds(364, 95, 232, 60);
+		btnSell.setFont(font);
+		btnSell.setContentAreaFilled(false);
 
-		JButton garlicCropButton = new JButton("마늘");
-		garlicCropButton.setLocation(70, 300);
-		garlicCropButton.setSize(100, 25);
+		JButton btnBack = new JButton("그 만 두 기");
+		btnBack.setBounds(596, 95, 232, 60);
+		btnBack.setFont(font);
+		btnBack.setContentAreaFilled(false);
 
-		JButton pumpkinCropButton = new JButton("호박");
-		pumpkinCropButton.setLocation(70, 350);
-		pumpkinCropButton.setSize(100, 25);
-		
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+		btnBackGround.setBounds(132, 95,  696, 60);
+				
 		/* 갯수 입력하는 텍스트필드와 라벨 */
 		JLabel inputAmountLabel = new JLabel("갯수 입력");
 		inputAmountLabel.setBounds(650, 180, 200, 25);
@@ -93,10 +81,6 @@ public class SellTomatoSeedPanel extends JPanel {
 		inputAmountText.setLayout(null);
 		inputAmountText.setFont(font);
 		
-		JLabel sellSeedLabel = new JLabel("<씨앗 판매>");
-		sellSeedLabel.setBounds(410, 180, 200, 25);
-		
-		sellSeedLabel.setFont(font);
 		
 		JButton confirmButton = new JButton("판매확정");
 		confirmButton.setLocation(670, 250);
@@ -114,17 +98,13 @@ public class SellTomatoSeedPanel extends JPanel {
 		userCoin.setEditable(false);		
 
 		this.add(userCoin);
-		this.add(sellSeedLabel);
 		this.add(confirmButton);
 		this.add(inputAmountText);
 		this.add(inputAmountLabel);
-		this.add(buyButton);
-		this.add(sellButton);
-		this.add(backButton);
-		this.add(tomatoCropButton);
-		this.add(cornCropButton);
-		this.add(garlicCropButton);
-		this.add(pumpkinCropButton);
+		this.add(btnSell);
+		this.add(btnBack);
+		this.add(btnBuy);
+		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 		
@@ -167,10 +147,14 @@ public class SellTomatoSeedPanel extends JPanel {
 						
 						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
 						
-						System.out.println(totalGetPrice);
+					
 					}
 				} else {
-					System.out.println("판매할 수량이 부족합니다");
+					
+					SellCategoryPanel sellCategoryPanel = new SellCategoryPanel(userNo);
+					FrameManager.changePanel(sellTomatoSeedPanel, sellCategoryPanel);
+					
+				
 				}
 
 				

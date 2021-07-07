@@ -1,6 +1,5 @@
 package com.farm3.uhgrow.member.store;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -74,29 +73,7 @@ public class MainStorePanel extends JPanel {
 		JLabel textLabel = new JLabel("빨리 빨리 골라 뭐하러 왔는데? 어 ? ");
 		textLabel.setBounds(130, 410, 750, 100);
 		textLabel.setFont(font);
-		
-		/* 선택 버튼 4가지 (지울거임)*/
-		JButton btnFirst = new JButton("씨앗 판매");
-		btnFirst.setBounds(150, 170, 400, 40);
-		btnFirst.setFont(listFont);
-		btnFirst.setContentAreaFilled(false);
-		
-		JButton btnSecond = new JButton("농작물 판매");
-		btnSecond.setBounds(150, 230, 400, 40);
-		btnSecond.setFont(listFont);
-		btnSecond.setContentAreaFilled(false);
-		
-		JButton btnThird = new JButton("농기구 판매");
-		btnThird.setBounds(150, 290, 400, 40);
-		btnThird.setFont(listFont);
-		btnThird.setContentAreaFilled(false);
-		
-		JButton btnFourth  = new JButton("요리 판매");
-		btnFourth.setBounds(150, 350, 400, 40);
-		btnFourth.setFont(listFont);
-		btnFourth.setContentAreaFilled(false);
-		
-		
+ 
 
 		/* ---------- 위에서 만들어준 라벨, 버튼들 패널에 추가  ------------*/
 
@@ -108,12 +85,7 @@ public class MainStorePanel extends JPanel {
 		this.add(btnBack);
 		this.add(btnBuy);
 		this.add(btnBackGround);
-		/* -----------선택 항목들 버튼 패널에 추가 (지울거임)---------------*/
-		this.add(btnFirst);
-		this.add(btnSecond);
-		this.add(btnThird);
-		this.add(btnFourth);
-		
+
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
