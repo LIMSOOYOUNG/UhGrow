@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -45,11 +46,11 @@ public class InputAmountTomatoPanel extends JPanel {
 		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 집 구매, 요리하기, 그만두기 버튼   ------------*/
-		JButton btnBuyHouse = new JButton("집 구매");
-		btnBuyHouse.setBounds(132, 95, 232, 60);
-		btnBuyHouse.setFont(font);
-		btnBuyHouse.setContentAreaFilled(false);
-		btnBuyHouse.setFocusPainted(false);
+//		JButton btnBuyHouse = new JButton("집 구매");
+//		btnBuyHouse.setBounds(132, 95, 232, 60);
+//		btnBuyHouse.setFont(font);
+//		btnBuyHouse.setContentAreaFilled(false);
+//		btnBuyHouse.setFocusPainted(false);
 
 		JButton btnCook = new JButton("요 리 하 기");
 		btnCook.setBounds(364, 95, 232, 60);
@@ -118,7 +119,7 @@ public class InputAmountTomatoPanel extends JPanel {
 		
 		this.add(btnBack);
 		this.add(btnCook);
-		this.add(btnBuyHouse);
+//		this.add(btnBuyHouse);
 		this.add(btnBackGround);
 		
 		this.add(btnAmount);
@@ -140,11 +141,25 @@ public class InputAmountTomatoPanel extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				int intAmount = Integer.parseInt(inputAmount.getText());
 				inputAmount.setText("");
-				cookingController.modifyCropAmount(userNo, 1, intAmount);
-				cookingController.modifyFoodAmount(userNo, 1, intAmount);
+				int result = cookingController.modifyCropAmount(userNo, 1, intAmount);
+				if(result > 0) {
+					cookingController.modifyFoodAmount(userNo, 1, intAmount);
+					SuccessCookingPanel successCookingPanel = new SuccessCookingPanel(userNo);
+					FrameManager.changePanel(inputAmountTomatoPanel, successCookingPanel);
+				} else {
+					JOptionPane.showMessageDialog(null, "농작물 보유 수량이 부족합니다!", "요리 실패", 1);
+					CookingPanel cookingPanel = new CookingPanel(userNo);
+					FrameManager.changePanel(inputAmountTomatoPanel, cookingPanel);
+				}
 				
-				SuccessCookingPanel successCookingPanel = new SuccessCookingPanel(userNo);
-				FrameManager.changePanel(inputAmountTomatoPanel, successCookingPanel);
+			}
+		});
+		
+		btnCook.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CookingPanel cookingPanel = new CookingPanel(userNo);
+				FrameManager.changePanel(inputAmountTomatoPanel, cookingPanel);
 			}
 		});
 	}

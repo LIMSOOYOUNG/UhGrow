@@ -698,6 +698,7 @@ public class MngMoniterView extends JFrame {
 		foodRMainPanel.add(cornTortillaRLabel);
 		foodRMainPanel.add(tomatoPizzaRLabel);
 		foodRMainPanel.add(backToMainFRButton);
+		foodRMainPanel.add(modifyScsFRButton);
 		foodRMainPanel.add(gameMngMainFRButton);
 		foodRMainPanel.add(foodMngRMainLabel);
 		
@@ -1053,6 +1054,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 
 		backToMainHButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1061,18 +1063,24 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 수정 완료 버튼 클릭 시 입력받은 값으로 집 가격을 변경
 		modifyScsHButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int intHPrice = Integer.parseInt(inputHPrice.getText()); // 입력받은  String 값을 Integer 형변환 후 int 타입의 변수에 대입
-				gameDataController.modifyHousePrice(intHPrice); // 집 가격 수정 메소드 호출
-				JOptionPane.showMessageDialog(null, "집 가격이 수정되었습니다!", "닫기", 1); // 수정에 성공해서 팝업창 출력
-				houseMainPanel.setVisible(false);
-				gameMngMainPanel.setVisible(true);
+				int intHPrice = Integer.parseInt(inputHPrice.getText()); // 입력받은 String 값을 Integer 형변환 후 int 타입의 변수에 대입
+				if(intHPrice > 0) { // 집 가격이 0보다 클때 집 가격 수정을 한다.
+					gameDataController.modifyHousePrice(intHPrice); // 집 가격 수정 메소드 호출
+					JOptionPane.showMessageDialog(null, "집 가격이 수정되었습니다!", "집 가격 수정 성공!", 1); // 수정에 성공해서 팝업창 출력
+					houseMainPanel.setVisible(false);
+					gameMngMainPanel.setVisible(true);		
+				} else {
+					JOptionPane.showMessageDialog(null, "집 가격은 음수나 0일수 없습니다.", "집 가격 수정 실패", 1);
+				}
 			}
 		
 		});
 		
+		// 돌아가기 버튼을 클릭 시 요리 수정 화면 출력
 		backToMainFRButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1081,6 +1089,7 @@ public class MngMoniterView extends JFrame {
 			}
 		});
 		
+		// 원하는 요리 레시피의 농작물 필요 갯수를 변경하는 이벤트
 		foodRecipeUdtBtn.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -1088,7 +1097,7 @@ public class MngMoniterView extends JFrame {
 				foodMngMainPanel.setVisible(false);
 				foodRMainPanel.setVisible(true);
 				
-				List<ModifyFoodRecipeDTO> list = gameDataController.selectFoodRecipeData(); // 모든 농작물의 가격 조회 메소드 호출 후 리턴값을 리스트에 대입
+				List<ModifyFoodRecipeDTO> list = gameDataController.selectFoodRecipeData(); // 모든 레시피 필요 농작물 갯수 조회 메소드 호출 후 리턴값을 리스트에 대입
 				JButton[] selectButton = new JButton[list.size()]; // 조회된 정보의 인덱스 갯수마다 각각 하나의 버튼 생성
 				int x = 450;
 				int y = 130; // 버튼의 좌표 지정
@@ -1122,6 +1131,44 @@ public class MngMoniterView extends JFrame {
 						}
 					});
 				}
+				
+				
+			}
+		});
+		
+		// 수정완료 버튼 클릭 시 게임관리 메인 화면 출력
+		modifyScsFRButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodRMainPanel.setVisible(false);
+				gameMngMainPanel.setVisible(true);
+			}
+		});
+
+		// 수정완료 버튼 클릭 시 게임관리 메인 화면 출력
+		modifyScsFPButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				foodPMainPanel.setVisible(false);
+				gameMngMainPanel.setVisible(true);
+			}
+		});
+		
+		// 수정완료 버튼 클릭 시 게임관리 메인 화면 출력
+		modifyScsCButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cropMainPanel.setVisible(false);
+				gameMngMainPanel.setVisible(true);
+			}
+		});
+		
+		// 관리자 모드 종료 버튼 클릭 시 관리자 프로그램 종료
+		exitMngButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
 				
 			}
 		});
