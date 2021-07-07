@@ -10,19 +10,22 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
-
 
 public class BuyListPanel extends JPanel{
 
 	private JPanel buyListPanel;
 	
 	private int userNo;
+	
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 
 	
 	public BuyListPanel(int userNo) {
 		
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
 		buyListPanel = this;	
 		
@@ -50,10 +53,10 @@ public class BuyListPanel extends JPanel{
 		btnBuy.setFont(font);
 		btnBuy.setContentAreaFilled(false);
 
-		JButton btnSell = new JButton("판 매 하 기");
-		btnSell.setBounds(364, 95, 232, 60);
-		btnSell.setFont(font);
-		btnSell.setContentAreaFilled(false);
+		JButton btnCancel = new JButton("뒤 로 가 기");
+		btnCancel.setBounds(364, 95, 232, 60);
+		btnCancel.setFont(font);
+		btnCancel.setContentAreaFilled(false);
 
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
@@ -65,25 +68,27 @@ public class BuyListPanel extends JPanel{
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 
-		/* -------- 판매 목록 버튼 ---------- */
-		JButton seedListButton = new JButton("씨앗 구매");
-		seedListButton.setLocation(170, 200);
-		seedListButton.setSize(100, 25);
+		/* -------- 구매 목록 버튼 ---------- */
+		JButton btnBuySeed = new JButton("씨앗 구매");
+		btnBuySeed.setBounds(150, 170, 400, 40);
+		btnBuySeed.setFont(listFont);
+		btnBuySeed.setContentAreaFilled(false);
+		
+		JButton btnBuyTool = new JButton("농기구 구매");
+		btnBuyTool.setBounds(150, 230, 400, 40);
+		btnBuyTool.setFont(listFont);
+		btnBuyTool.setContentAreaFilled(false);
 
-		JButton toolListButton = new JButton("농기구 구매");
-		toolListButton.setLocation(170, 250);
-		toolListButton.setSize(100, 25);
-
-		this.add(btnSell);
+		this.add(btnCancel);
 		this.add(btnBack);
 		this.add(btnBuy);
 		this.add(btnBackGround);
-		this.add(seedListButton);
-		this.add(toolListButton);
+		this.add(btnBuySeed);
+		this.add(btnBuyTool);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		seedListButton.addMouseListener(new MouseAdapter() {
+		btnBuySeed.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				BuySeedListPanel buySeedListPanel = new BuySeedListPanel(userNo);
@@ -93,13 +98,32 @@ public class BuyListPanel extends JPanel{
 			}
 		});
 
-		toolListButton.addMouseListener(new MouseAdapter() {
+		btnBuyTool.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JPanel buyToolListPanel = new BuyToolListPanel(userNo);
+				BuyToolListPanel buyToolListPanel = new BuyToolListPanel(userNo);
 
 				FrameManager.changePanel(buyListPanel, buyToolListPanel);
 
+			}
+		});		
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainStorePanel MainStorePanel = new MainStorePanel(userNo);
+				
+				FrameManager.changePanel(buyListPanel, MainStorePanel);
+				
+			}
+		});		
+		/* ---------- 그만 두기 버튼 ----------------*/
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarmPanel FarmPanel = new FarmPanel(userNo);
+				
+				FrameManager.changePanel(buyListPanel, FarmPanel);
+				
 			}
 		});		
 

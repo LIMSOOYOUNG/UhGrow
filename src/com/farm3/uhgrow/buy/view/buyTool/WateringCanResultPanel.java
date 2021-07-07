@@ -14,160 +14,127 @@ import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
+import com.farm3.uhgrow.buy.view.BuyToolListPanel;
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
 
 public class WateringCanResultPanel extends JPanel{
-	
-private JPanel wateringCanResultPanel;
-	
+
+	private JPanel wateringCanResultPanel;
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
 	private int userNo;
 
 	public WateringCanResultPanel(int userNo) {
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
 		wateringCanResultPanel = this;
-		
+
 		this.userNo = userNo;
 
+		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
-		this.setSize(960, 540);
+		this.setSize(960,540);
+
 
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
-		this.setVisible(true);
+
+		/* ---------- 상첨창 배경  ------------*/
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
+		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
-		Image buyImage = new ImageIcon("img/store/mainStore/buybutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(132, 95);
-		buyButton.setSize(232, 60);
+		JButton btnBuy = new JButton("구 매 하 기 ");
+		btnBuy.setBounds(132, 95, 232, 60);
+		btnBuy.setFont(font);
+		btnBuy.setContentAreaFilled(false);
 
-		Image sellImage = new ImageIcon("img/store/mainStore/sellbutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(364, 95);
-		sellButton.setSize(232, 60);
+		JButton btnCancel = new JButton("뒤 로 가 기");
+		btnCancel.setBounds(364, 95, 232, 60);
+		btnCancel.setFont(font);
+		btnCancel.setContentAreaFilled(false);
 
-		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
+		JButton btnBack = new JButton("그 만 두 기");
+		btnBack.setBounds(596, 95, 232, 60);
+		btnBack.setFont(font);
+		btnBack.setContentAreaFilled(false);
 
-		/* ------- 상점 패널 ---------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+		btnBackGround.setBounds(132, 95,  696, 60);
 
+		
 		/* -------- 농기구 리스트 버튼 ---------- */
-		JButton pickaxeToolButton = new JButton("곡괭이");
-		pickaxeToolButton.setLocation(70, 200);
-		pickaxeToolButton.setSize(100, 25);
 
-		JButton shovelToolButton = new JButton("삽");
-		shovelToolButton.setLocation(70, 250);
-		shovelToolButton.setSize(100, 25);
+		JButton btnPickaxe = new JButton("곡괭이");
+		btnPickaxe.setBounds(150, 170, 400, 40);
+		btnPickaxe.setFont(listFont);
+		btnPickaxe.setContentAreaFilled(false);
 
-		JButton hoeToolButton = new JButton("호미");
-		hoeToolButton.setLocation(70, 300);
-		hoeToolButton.setSize(100, 25);
+		JButton btnShovel = new JButton("삽");
+		btnShovel.setBounds(150, 230, 400, 40);
+		btnShovel.setFont(listFont);
+		btnShovel.setContentAreaFilled(false);
 
-		JButton wateringCanToolButton = new JButton("물뿌리개");
-		wateringCanToolButton.setLocation(70, 350);
-		wateringCanToolButton.setSize(100, 25);
+		JButton btnHoe = new JButton("호미");
+		btnHoe.setBounds(150, 290, 400, 40);
+		btnHoe.setFont(listFont);
+		btnHoe.setContentAreaFilled(false);
 
-		/*-------------- 농기구 구매 텍스트 ---------------*/
+		JButton btnWateringCan  = new JButton("물뿌리개");
+		btnWateringCan.setBounds(150, 350, 400, 40);
+		btnWateringCan.setFont(listFont);
+		btnWateringCan.setContentAreaFilled(false);
 
-		JLabel toolBuyLabel = new JLabel("<농기구 구매>");
-		toolBuyLabel.setBounds(350, 180, 200, 25);
-		toolBuyLabel.setFont(font);
 
 		/*------------------- 구매확정 --------------------*/
-
-		JLabel toolInPutLabel = new JLabel("<갯수 입력>");
-		toolInPutLabel.setBounds(650, 180, 200, 25);
-		toolInPutLabel.setFont(font);
-
-		JTextField toolInputField = new JTextField();
-		toolInputField.setBounds(650, 215, 140, 25);
-		toolInputField.setLayout(null);
-		toolInputField.setFont(font);
 
 		JButton buyToolButton = new JButton("구매확정");
 		buyToolButton.setLocation(670, 250);
 		buyToolButton.setSize(100, 25);
-
+		
 		this.add(buyToolButton);
-		this.add(toolInputField);
-		this.add(toolInPutLabel);
-		this.add(toolBuyLabel);
-		this.add(buyButton); 
-		this.add(sellButton);
-		this.add(backButton);
-		this.add(pickaxeToolButton);
-		this.add(shovelToolButton);
-		this.add(hoeToolButton);
-		this.add(wateringCanToolButton);
+		this.add(btnBuy); 
+		this.add(btnCancel);
+		this.add(btnBack);
+		this.add(btnPickaxe);
+		this.add(btnShovel);
+		this.add(btnHoe);
+		this.add(btnWateringCan);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		buyToolButton.addMouseListener(new MouseAdapter() {
+		/* ---------- 뒤로 가기 버튼 ----------------*/
+
+		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				BuyToolListPanel buyToolListPanel = new BuyToolListPanel(userNo);
 
+				FrameManager.changePanel(wateringCanResultPanel, buyToolListPanel);
 				
-				
-				
-				
-				
-				
-//				String inputAmount = seedInputField.getText().toString();
-//				int buyAmount = Integer.parseInt(inputAmount);
-//
-//				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-//				BuyController buyController = new BuyController();
-//				int totalCornAmonut = 0;
-//				int cornAmount = 0;
-//				int cornPrice = 0;
-//				int updateUserCornAmount = 0;
-//				int userCoin = 0;
-//				int getPrice = 0;
-//				int totalGetPrice = 0;
-//
-//
-//				List<BuyDTO> userCornList = buyController.userCornList();
-//
-//				for (BuyDTO cornList : userCornList) {
-//					cornAmount = cornList.getCropAmount();
-//					userCoin = cornList.getCoin();
-//					cornPrice = cornList.getCropPrice();
-//				}
-//
-//				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
-//
-//				if (buyAmount> 0 && buyAmount <= cornAmount && cornAmount != 0) {
-//					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-//					updateUserCornAmount = buyController.updateCornCropAmount(buyAmount);
-//
-//					getPrice = buyController.buyCornGetCoin(buyAmount, cornPrice);
-//
-//					if(updateUserCornAmount > 0 && getPrice > 0) {
-//						totalCornAmonut = cornAmount + buyAmount;
-//						totalGetPrice = userCoin - ((cornPrice * buyAmount));					
-//					}
-//				} else {
-//					System.out.println("구매할 수 있는 재화가 부족합니다");
-//
-//				}
-
 
 			}
-
 		});
 		
-		
+		/* ---------- 그만 두기 버튼 ----------------*/
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarmPanel FarmPanel = new FarmPanel(userNo);
+				
+				FrameManager.changePanel(wateringCanResultPanel, FarmPanel);
+				
+			}
+		});	
+
+
 	}
 
 }

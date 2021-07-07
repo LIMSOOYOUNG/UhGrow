@@ -9,25 +9,29 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
+import com.farm3.uhgrow.buy.view.BuySeedListPanel;
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
 
 public class TomatoResultPanel extends JPanel{
-	
+
 	private JPanel tomatoResultPanel;
-	
+
 	private int userNo;
+
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 
 	public TomatoResultPanel(int userNo) {
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
 		tomatoResultPanel = this;
-		
+
 		this.userNo = userNo;
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
@@ -51,10 +55,10 @@ public class TomatoResultPanel extends JPanel{
 		btnBuy.setFont(font);
 		btnBuy.setContentAreaFilled(false);
 
-		JButton btnSell = new JButton("판 매 하 기");
-		btnSell.setBounds(364, 95, 232, 60);
-		btnSell.setFont(font);
-		btnSell.setContentAreaFilled(false);
+		JButton btnCancel = new JButton("뒤 로 가 기");
+		btnCancel.setBounds(364, 95, 232, 60);
+		btnCancel.setFont(font);
+		btnCancel.setContentAreaFilled(false);
 
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
@@ -67,32 +71,31 @@ public class TomatoResultPanel extends JPanel{
 		btnBackGround.setBounds(132, 95,  696, 60);
 
 		/* -------- 씨앗 리스트 버튼 ---------- */
-		JButton tomatoSeedButton = new JButton("토마토");
-		tomatoSeedButton.setLocation(70, 200);
-		tomatoSeedButton.setSize(100, 25);
 
-		JButton cornSeedButton = new JButton("옥수수");
-		cornSeedButton.setLocation(70, 250);
-		cornSeedButton.setSize(100, 25);
+		JButton btnTomato = new JButton("토마토");
+		btnTomato.setBounds(150, 170, 400, 40);
+		btnTomato.setFont(listFont);
+		btnTomato.setContentAreaFilled(false);
 
-		JButton garlicSeedButton = new JButton("마늘");
-		garlicSeedButton.setLocation(70, 300);
-		garlicSeedButton.setSize(100, 25);
+		JButton btnCorn = new JButton("옥수수");
+		btnCorn.setBounds(150, 230, 400, 40);
+		btnCorn.setFont(listFont);
+		btnCorn.setContentAreaFilled(false);
 
-		JButton pumpkinSeedButton = new JButton("호박");
-		pumpkinSeedButton.setLocation(70, 350);
-		pumpkinSeedButton.setSize(100, 25);
+		JButton btnGarlic = new JButton("마늘");
+		btnGarlic.setBounds(150, 290, 400, 40);
+		btnGarlic.setFont(listFont);
+		btnGarlic.setContentAreaFilled(false);
 
-		/*-------------- 씨앗구매 텍스트 ---------------*/
-
-		JLabel seedBuyLabel = new JLabel("<씨앗 구매>");
-		seedBuyLabel.setBounds(350, 180, 200, 25);
-		seedBuyLabel.setFont(font);
+		JButton btnPumpkin  = new JButton("호박");
+		btnPumpkin.setBounds(150, 350, 400, 40);
+		btnPumpkin.setFont(listFont);
+		btnPumpkin.setContentAreaFilled(false);
 
 		/*------------------- 구매확정 --------------------*/
 
 		JLabel seedInPutLabel = new JLabel("<갯수 입력>");
-		seedInPutLabel.setBounds(650, 180, 200, 25);
+		seedInPutLabel.setBounds(630, 165, 200, 40);
 		seedInPutLabel.setFont(font);
 
 		JTextField seedInputField = new JTextField();
@@ -107,18 +110,20 @@ public class TomatoResultPanel extends JPanel{
 		this.add(buySeedButton);
 		this.add(seedInputField);
 		this.add(seedInPutLabel);
-		this.add(seedBuyLabel);
-		this.add(btnSell);
+		this.add(btnCancel);
 		this.add(btnBack);
 		this.add(btnBuy);
 		this.add(btnBackGround);
-		this.add(tomatoSeedButton);
-		this.add(cornSeedButton);
-		this.add(garlicSeedButton);
-		this.add(pumpkinSeedButton);
+		this.add(btnTomato);
+		this.add(btnCorn);
+		this.add(btnGarlic);
+		this.add(btnPumpkin);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
+		/* ---------- 구매 확정 버튼 ----------------*/
+
+		
 		buySeedButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -166,8 +171,30 @@ public class TomatoResultPanel extends JPanel{
 			}
 
 		});
+		/* ---------- 뒤로 가기 버튼 ----------------*/
+
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BuySeedListPanel buySeedListPanel = new BuySeedListPanel(userNo);
+
+				FrameManager.changePanel(tomatoResultPanel, buySeedListPanel);
+
+			}
+		});
 		
-		
+		/* ---------- 그만 두기 버튼 ----------------*/
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarmPanel FarmPanel = new FarmPanel(userNo);
+				
+				FrameManager.changePanel(tomatoResultPanel, FarmPanel);
+				
+			}
+		});		
+
+
 	}
 
 }
