@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.UserInfoDTO;
 import com.farm3.uhgrow.farm.model.service.FarmService;
 
 public class FarmController {
@@ -41,8 +42,8 @@ public class FarmController {
 		return result;
 	}
 
-	public int selectFarmExp(int userId) {
-		int farmExp = farmService.selectFarmExp(userId);
+	public UserInfoDTO selectFarmExp(int userId) {
+		UserInfoDTO farmExp = farmService.selectFarmExp(userId);
 
 		return farmExp;
 	}

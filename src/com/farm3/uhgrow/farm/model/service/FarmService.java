@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.farm3.uhgrow.farm.model.dao.FarmDAO;
 import com.farm3.uhgrow.farm.model.dto.RetainCropDTO;
+import com.farm3.uhgrow.farm.model.dto.UserInfoDTO;
 import com.farm3.uhgrow.farm.model.dto.CropDTO;
 import com.farm3.uhgrow.farm.model.dto.FarmCropDTO;
 
@@ -67,12 +68,12 @@ public class FarmService {
 		return result;
 	}
 
-	public int selectFarmExp(int userId) {
+	public UserInfoDTO selectFarmExp(int userId) {
 		Connection con = getConnection();
 
-		int farmExp = farmDAO.selectFarmExp(con, userId);
+		UserInfoDTO farmExp = farmDAO.selectFarmExp(con, userId);
 
-		if (farmExp > 0) {
+		if (farmExp !=null) {
 			commit(con);
 		} else {
 			rollback(con);

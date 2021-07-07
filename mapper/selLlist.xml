@@ -7,7 +7,7 @@
         SELECT
                U.COIN
           FROM USER_INFO U
-         WHERE USER_NO = ?
+         WHERE U.USER_NO = ?
     </entry>
 	<entry key="user-toamtolist">
        SELECT

@@ -85,7 +85,7 @@ public class FarmPanel extends JPanel {
 	private JButton[] fieldButton = new JButton[10];
 	private int createCrop;
 	private JLabel[] inventoryLabel = new JLabel[13];
-	private int farmExp = 0;
+	private int farmExp;
 	private int[] tomatoSumExp = new int[10];
 	private int[] cornSumExp = new int[10];
 	private int[] garlicSumExp = new int[10];
@@ -99,7 +99,7 @@ public class FarmPanel extends JPanel {
 		farmCropDTO.setUserNo(this.userNo);
 		retainCropDTO.setUserNo(userNo);
 		farmcontroller.resetFarmList(userNo);
-		farmExp = farmcontroller.selectFarmExp(this.userNo);
+		farmExp = farmcontroller.selectFarmExp(this.userNo).getFarmExp();
 		retainAllList = farmcontroller.selectAllCrop(farmCropDTO);
 		
 		if ( retainAllList == null) {

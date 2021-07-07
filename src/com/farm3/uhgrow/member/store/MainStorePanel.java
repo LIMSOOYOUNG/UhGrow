@@ -23,7 +23,7 @@ public class MainStorePanel extends JPanel {
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
-	private SellController sellController;
+	private SellController sellController = new SellController();
 
 
 	public MainStorePanel(int userNo) {
@@ -31,7 +31,7 @@ public class MainStorePanel extends JPanel {
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
-		
+		this.userNo = userNo;
 		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);

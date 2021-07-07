@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.sellcrops.view;
+package com.farm3.uhgrow.sellcrops.view.sellCrop;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -16,26 +16,26 @@ import javax.swing.JTextField;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 
-public class SellGarlicAmountPanel extends JPanel{
-	
-	private JPanel sellGarlicAmountPanel;
+public class SellCornAmountPanel extends JPanel {
+
+	private JPanel sellCornAmountPanel;
 	private SellController sellController;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
-	
-	public SellGarlicAmountPanel(int userNo) {
+
+	public SellCornAmountPanel(int userNo) {
 		this.userNo = userNo;
-		sellGarlicAmountPanel = this;
-		
+		sellCornAmountPanel = this;
+
 		this.setLayout(null);
 		this.setSize(960, 540);
-
+		
 		this.sellController = new SellController();
 		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
-		
+
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
@@ -108,55 +108,48 @@ public class SellGarlicAmountPanel extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
+				int cornAmount = 0;
+				int userCoin = 0;
+				int cornPrice = 0;
+				int updateUserCornAmount = 0;
+				int getPrice = 0;
+				int totalCornAmonut = 0;
+				int totalGetPrice = 0;
+				
+				/* 텍스트 필드에서 입력한 판매 수량*/
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int garlicAmount = 0;
-				int userCoin = 0;
-				int garlicPrice = 0;
-				int updateUserGarlicAmount = 0;
-				int getPrice = 0;
-				int totalGarlicAmonut = 0;
-				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellController.userGarlicList(userNo);
+				List<CropDTO> userCornList = sellController.userCornList(userNo);
 				
-				for (CropDTO cropList : userCropList) {
-					garlicAmount = cropList.getCropAmount();
+				for (CropDTO cropList : userCornList) {
+					cornAmount = cropList.getCropAmount();
 					userCoin = cropList.getCoin();
-					garlicPrice = cropList.getCropPrice();
+					cornPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
-				
-				if (sellAmount> 0 && sellAmount <= garlicAmount && garlicAmount != 0) {
+				if (sellAmount > 0 && sellAmount <= cornAmount && cornAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserGarlicAmount = sellController.updateUserGarlicAmount(sellAmount, userNo);
-					
-					getPrice = sellController.sellGarlicGetCoin(sellAmount, garlicPrice, userNo);
+					updateUserCornAmount = sellController.updateUserCornAmount(sellAmount, userNo);
+					/* 유저가 옥수수를 팔고 난 후의 총 코인 업데이트*/
+					getPrice = sellController.sellCornGetCoin(sellAmount, cornPrice, userNo);
 
-					if(updateUserGarlicAmount > 0 && getPrice > 0) {
-						totalGarlicAmonut = garlicAmount - sellAmount;
-						totalGetPrice = userCoin + ((garlicPrice * sellAmount) / 10);					
+					if(updateUserCornAmount > 0 && getPrice > 0) {
+						totalCornAmonut = cornAmount - sellAmount;
+						totalGetPrice = userCoin + ((cornPrice * sellAmount) / 10);					
+						System.out.println(totalGetPrice);
 					}
 				} else {
 					System.out.println("판매할 수량이 부족합니다");
 				}
 
-				
 			}
 		
-		
 		});
-	
-	
-	
-	
-	
-	
 	}
-	
 }

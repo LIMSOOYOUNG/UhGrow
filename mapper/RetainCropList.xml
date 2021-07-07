@@ -17,14 +17,12 @@
 
 	<entry key="selectAllCropAndSeed">
 		select
-		rc.user_no
-		rc.crop_id
+		  rc.user_no
+		, rc.crop_id
 		, cr.crop_name
-		,
-		rc.crop_amount
+		, rc.crop_amount
 		from crop cr, retain_crop rc
-		where cr.crop_id =
-		rc.crop_id
+		where cr.crop_id = rc.crop_id
 		and rc.user_no = ?
 		order by cr.crop_id
 	</entry>

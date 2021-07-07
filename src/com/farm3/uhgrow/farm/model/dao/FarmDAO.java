@@ -147,11 +147,11 @@ public class FarmDAO {
 		return result;
 	}
 
-	public int selectFarmExp(Connection con, int userId) {
+	public UserInfoDTO selectFarmExp(Connection con, int userId) {
 		PreparedStatement pstmt = null; // 쿼리 경로를 불러오기위한 statement 선언
 		ResultSet rset = null; // 결과값 저장을위한 ResultSet선언
 
-		UserInfoDTO userInfo = null;
+		UserInfoDTO userInfo = new UserInfoDTO();
 		String query = prop.getProperty("selectFarmExp");
 		System.out.println(query);
 		try {
@@ -160,9 +160,10 @@ public class FarmDAO {
 
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				userInfo = new UserInfoDTO();
-				userInfo.setFarmExp(rset.getInt("FARM_EXP"));
+				userInfo.setUserNo(userId);
+				userInfo.setFarmExp(rset.getInt("FARM_EXP"));				
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -170,8 +171,7 @@ public class FarmDAO {
 			close(rset);
 			close(pstmt);
 		}
-		int userExp =userInfo.getFarmExp();
-		return userExp;
+		return userInfo;
 	}
 
 	public int deleteFarmList(Connection con, FarmCropDTO farmCropDTO, int farmList) {
