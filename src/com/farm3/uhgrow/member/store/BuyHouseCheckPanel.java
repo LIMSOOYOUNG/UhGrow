@@ -11,16 +11,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.controller.MemberController;
 import com.farm3.uhgrow.member.model.dto.BuyHouseDTO;
 import com.farm3.uhgrow.member.view.EndingPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 public class BuyHouseCheckPanel extends JPanel {
-	
+
 	private JPanel BuyHouseCheckPanel;
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
-	
+
 	private Font npcFont = new Font("나눔손글씨 펜", Font.BOLD, 40);
 	private Font btnFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 
@@ -56,14 +57,6 @@ public class BuyHouseCheckPanel extends JPanel {
 		btnBuyHouse.setFocusPainted(false);
 		btnBuyHouse.setBorderPainted(false);
 
-		JButton btnCook = new JButton("요 리 하 기");
-		btnCook.setBounds(364, 95, 232, 60);
-		btnCook.setFont(font);
-		btnCook.setContentAreaFilled(false);
-		btnCook.setFocusPainted(false);
-		btnCook.setBorderPainted(false);
-
-
 		JButton btnBack = new JButton("그 만 두 기");
 		btnBack.setBounds(596, 95, 232, 60);
 		btnBack.setFont(font);
@@ -90,18 +83,18 @@ public class BuyHouseCheckPanel extends JPanel {
 		npcTextLabel = new JLabel("집 가격은 " + buyHouseDTO.getHousePrice() + "원 이라네 정말 구매할텐가?! ");
 		npcTextLabel.setBounds(120, 410, 750, 40);
 		npcTextLabel.setFont(npcFont);
-		
+
 		npcTextLabel1 = new JLabel("집 구매하면 게임이 끝나 !! ");
 		npcTextLabel1.setBounds(120, 460, 750, 40);
 		npcTextLabel1.setFont(npcFont);
-		
+
 		/* --------------집 구매 여부 마지막 확인 버튼 ----------------*/
 		JButton btnYes = new JButton("넹!!");
 		btnYes.setBounds(500, 470, 80, 30);
 		btnYes.setFont(btnFont);
 		btnYes.setBackground(Color.darkGray);
 		btnYes.setForeground(Color.white);
-		
+
 		JButton btnNo = new JButton("아뇽!!");
 		btnNo.setBounds(600, 470, 80, 30);
 		btnNo.setFont(btnFont);
@@ -117,24 +110,29 @@ public class BuyHouseCheckPanel extends JPanel {
 		this.add(storeNpc);
 		this.add(conversationLabel);
 		this.add(btnBack);
-		this.add(btnCook);
 		this.add(btnBuyHouse);
 		this.add(btnBackGround);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-		
+
 		btnYes.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				MemberController memberController = new MemberController();
-				
+
 				memberController.ending(buyHouseDTO.getUserNo());
+				int userCoin = buyHouseDTO.getCoin();
+				int housePrice = buyHouseDTO.getHousePrice();
 				
-				EndingPanel endingPanel = new EndingPanel();
-				
-				FrameManager.changePanel(BuyHouseCheckPanel, endingPanel);
-				
+				if(userCoin > housePrice) {
+					EndingPanel endingPanel = new EndingPanel();
+					FrameManager.changePanel(BuyHouseCheckPanel, endingPanel);
+
+				} else {
+					FailBuyHouse failBuyHouse = new FailBuyHouse(buyHouseDTO);
+					FrameManager.changePanel(BuyHouseCheckPanel, failBuyHouse);
+				}
 			}
 		});
 		btnNo.addMouseListener(new MouseAdapter() {

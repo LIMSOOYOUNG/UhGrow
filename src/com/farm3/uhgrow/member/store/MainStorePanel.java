@@ -9,10 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import com.farm3.uhgrow.buy.view.BuyListPanel;
 import com.farm3.uhgrow.farm.view.FarmPanel;
 import com.farm3.uhgrow.member.view.FrameManager;
+import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
 public class MainStorePanel extends JPanel {
@@ -21,12 +23,29 @@ public class MainStorePanel extends JPanel {
 	private int userNo;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
+	private SellController sellController;
+
 
 	public MainStorePanel(int userNo) {
 		MainStorePanel = this;
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
+		
+		int havingCoin = sellController.selectCoin(userNo);
+		String transCoin = "";
+		transCoin = String.valueOf(havingCoin);
+		/* 재화 라벨*/
+		/* ---------- 재화 보유 라벨 ------------*/
+		Font f1 = new Font("Ink Free", Font.BOLD, 20);
+		JTextArea userCoin = new JTextArea("COIN : " + transCoin);
+		userCoin.setLocation(600, 400);
+		userCoin.setSize(200, 28);
+		userCoin.setOpaque(false);
+		userCoin.setFont(f1);
+		userCoin.setEditable(false);		
+		
+		this.add(userCoin);
 
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);

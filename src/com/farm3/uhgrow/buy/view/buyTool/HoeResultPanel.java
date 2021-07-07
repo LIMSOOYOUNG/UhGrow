@@ -116,6 +116,38 @@ private JPanel hoeResultPanel;
 		buyToolButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 //				String inputAmount = seedInputField.getText().toString();
 //				int buyAmount = Integer.parseInt(inputAmount);
