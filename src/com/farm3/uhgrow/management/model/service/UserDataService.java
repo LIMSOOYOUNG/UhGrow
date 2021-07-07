@@ -2,6 +2,8 @@ package com.farm3.uhgrow.management.model.service;
 
 import static com.farm3.uhgrow.common.JDBCTemplate.close;
 import static com.farm3.uhgrow.common.JDBCTemplate.getConnection;
+import static com.farm3.uhgrow.common.JDBCTemplate.commit;
+import static com.farm3.uhgrow.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -28,6 +30,11 @@ public class UserDataService {
 	public static int modifyUserData(ModifyUserDTO modifyUserInfo) {
 		Connection con = getConnection();
 		int result = UserDataDAO.modifyUserData(con, modifyUserInfo);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		close(con);
 		return result;
 	}
@@ -50,6 +57,11 @@ public class UserDataService {
 	public static int deleteUserData(String userId) {
 		Connection con = getConnection();
 		int result = userDataDAO.deleteUserData(con, userId);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		close(con);
 		return result;
 	}
@@ -57,6 +69,11 @@ public class UserDataService {
 	public static int recoverUserData(String userId) {
 		Connection con = getConnection();
 		int result = userDataDAO.recoverUserData(con, userId);
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
 		close(con);
 		return result;
 	}
