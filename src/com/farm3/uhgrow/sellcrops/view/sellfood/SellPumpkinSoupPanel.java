@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.sellcrops.view.sellseed;
+package com.farm3.uhgrow.sellcrops.view.sellfood;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -13,29 +13,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
 import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
 import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
-public class SellTomatoSeedPanel extends JPanel {
-
-	private JPanel sellTomatoSeedPanel;
-	private SellController sellController;
+public class SellPumpkinSoupPanel extends JPanel{
+	
+	private JPanel sellPumpkinSoupPanel;
+	private SellFoodController sellFoodController;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
 	
-	public SellTomatoSeedPanel(int userNo) {
+	public SellPumpkinSoupPanel(int userNo) {
 		this.userNo = userNo;
-		sellTomatoSeedPanel = this;
+		sellPumpkinSoupPanel = this;
 		
 		this.setLayout(null);
 		this.setSize(960, 540);
 
-		this.sellController = new SellController();
-		int havingCoin = sellController.selectCoin(userNo);
+		this.sellFoodController = new SellFoodController();
+		int havingCoin = sellFoodController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
 		
@@ -116,43 +116,42 @@ public class SellTomatoSeedPanel extends JPanel {
 				int sellAmount = Integer.parseInt(inputAmount);
 
 				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int tomatoSeedAmount = 0;
+				int pumpkinSoupAmount = 0;
 				int userCoin = 0;
-				int tomatoSeedPrice = 0;
-				int updateUserTomatoSeedAmount = 0;
+				int pumpkinSoupPrice = 0;
+				int updateUserPumpkinSoupAmount = 0;
 				int getPrice = 0;
-				int totalTomatoSeedAmonut = 0;
+				int totalPumpkinSoupAmonut = 0;
 				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellController.userTomatoSeed(userNo);
+				List<CropDTO> userCropList = sellFoodController.userPumpkinSoup(userNo);
 				
 				for (CropDTO cropList : userCropList) {
-					tomatoSeedAmount = cropList.getCropAmount();
+					pumpkinSoupAmount = cropList.getCropAmount();
 					userCoin = cropList.getCoin();
-					tomatoSeedPrice = cropList.getCropPrice();
+					pumpkinSoupPrice = cropList.getCropPrice();
 				}
 				
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 				
-				if (sellAmount> 0 && sellAmount <= tomatoSeedAmount && tomatoSeedAmount != 0) {
+				if (sellAmount> 0 && sellAmount <= pumpkinSoupAmount && pumpkinSoupAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserTomatoSeedAmount = sellController.updateUserToamtoSeed(sellAmount, userNo);
+					updateUserPumpkinSoupAmount = sellFoodController.updateUserPumpkinSoupAmount(sellAmount, userNo);
 					
-					getPrice = sellController.sellTomatoSeedGetCoin(sellAmount, tomatoSeedPrice, userNo);
+					getPrice = sellFoodController.sellPumpkinSoupGetCoin(sellAmount, pumpkinSoupPrice, userNo);
 
-					if(updateUserTomatoSeedAmount > 0 && getPrice > 0) {
-						totalTomatoSeedAmonut = tomatoSeedAmount - sellAmount;
+					if(updateUserPumpkinSoupAmount > 0 && getPrice > 0) {
+						totalPumpkinSoupAmonut = pumpkinSoupAmount - sellAmount;
 						
-						totalGetPrice = userCoin + ((tomatoSeedPrice * sellAmount) / 10);					
+						totalGetPrice = userCoin + ((pumpkinSoupPrice * sellAmount) / 10);					
 						
 					
 					}
 				} else {
 					
 					SellCategoryPanel sellCategoryPanel = new SellCategoryPanel(userNo);
-					FrameManager.changePanel(sellTomatoSeedPanel, sellCategoryPanel);
 					
 				
 				}
