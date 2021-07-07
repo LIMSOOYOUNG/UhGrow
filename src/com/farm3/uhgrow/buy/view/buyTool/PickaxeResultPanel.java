@@ -9,7 +9,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.view.BuyToolListPanel;
 import com.farm3.uhgrow.farm.view.FarmPanel;
@@ -20,14 +19,14 @@ public class PickaxeResultPanel extends JPanel{
 	private int userNo;
 
 	private JPanel pickaxeResultPanel;
-	
+
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
 
 	public PickaxeResultPanel(int userNo) {
 
 		pickaxeResultPanel = this;
-		
+
 		this.userNo = userNo;
 
 
@@ -68,6 +67,7 @@ public class PickaxeResultPanel extends JPanel{
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 
+
 		/*------------------- 구매확정 --------------------*/
 
 		JButton buyToolButton = new JButton("구매확정");
@@ -85,7 +85,7 @@ public class PickaxeResultPanel extends JPanel{
 		this.add(btnBack);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-		
+
 		/* ---------- 뒤로 가기 버튼 ----------------*/
 
 		btnCancel.addMouseListener(new MouseAdapter() {
@@ -97,17 +97,24 @@ public class PickaxeResultPanel extends JPanel{
 
 			}
 		});
-		
+
 		/* ---------- 그만 두기 버튼 ----------------*/
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				FarmPanel FarmPanel = new FarmPanel(userNo);
-				
+
 				FrameManager.changePanel(pickaxeResultPanel, FarmPanel);
-				
+
 			}
 		});	
+
+		buyToolButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+
+			}
+		});
 
 
 	}

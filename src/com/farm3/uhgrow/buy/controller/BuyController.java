@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 import com.farm3.uhgrow.buy.service.BuyService;
+import com.farm3.uhgrow.farm.model.dto.RetainToolDTO;
 
 
 public class BuyController {
@@ -103,5 +104,46 @@ public class BuyController {
 		return result;
 	}
 
+	public int selectPrice(int toolId) {
+        int selectPrice = buyCropsService.selectPrice(toolId);
+
+        return selectPrice;
+    }
+
+	public char istoolYN(int userNo) {
+		char istoolYN = buyCropsService.istoolYN(userNo);
+
+        return istoolYN;
+	}
+
+	public int currentCoin(BuyDTO buyDTO) {
+		int currentCoin = buyCropsService.currentCoin(buyDTO);
+
+		return currentCoin;
+	}
+
+	public void updateCoinTool(BuyDTO buyDTO) {
+		
+		buyCropsService.updateCoinTool(buyDTO);
+		
+	}
+
+	public int plusExp(int toolId) {
+
+		int plusExp = buyCropsService.plusExp(toolId);
+		
+		return plusExp;
+	}
+
+	public List<RetainToolDTO> selectRetainToolList(int userNo) {
+		List<RetainToolDTO> retainToolList = buyCropsService.selectRetainToolList(userNo);
+		return retainToolList;
+	}
+
+	public void createRetainToolList(int userNo) {
+		
+		buyCropsService.createRetainToolList(userNo);
+		
+	}
 
 }
