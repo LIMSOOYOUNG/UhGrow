@@ -14,20 +14,21 @@ import com.farm3.uhgrow.buy.view.buyTool.HoeResultPanel;
 import com.farm3.uhgrow.buy.view.buyTool.PickaxeResultPanel;
 import com.farm3.uhgrow.buy.view.buyTool.ShovelResultPanel;
 import com.farm3.uhgrow.buy.view.buyTool.WateringCanResultPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
 
 public class BuyToolListPanel extends JPanel{
 
 	private JPanel buyToolListPanel;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
-	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 30);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
 
 	public BuyToolListPanel(int userNo) {
-
-
 		buyToolListPanel = this;
 
 		this.userNo = userNo;
+
+
 		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
 		this.setSize(960,540);
@@ -43,6 +44,11 @@ public class BuyToolListPanel extends JPanel{
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(127, 90);
 		storeBackGroundLabel.setSize(705, 360);
+		
+		/* ---------- 상인 대화내용  ------------*/
+		JLabel textLabel = new JLabel("빨리 빨리 팔아 !");
+		textLabel.setBounds(130, 410, 750, 100);
+		textLabel.setFont(font);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
 		JButton btnBuy = new JButton("구 매 하 기 ");
@@ -67,30 +73,28 @@ public class BuyToolListPanel extends JPanel{
 
 
 		/* -------- 농기구 리스트 버튼 ---------- */
+			
 		JButton pickaxeToolButton = new JButton("곡괭이");
-		pickaxeToolButton.setLocation(170, 200);
-		pickaxeToolButton.setSize(100, 25);
+		pickaxeToolButton.setBounds(150, 170, 400, 40);
+		pickaxeToolButton.setFont(listFont);
+		pickaxeToolButton.setContentAreaFilled(false);
 
 		JButton shovelToolButton = new JButton("삽");
-		shovelToolButton.setLocation(170, 250);
-		shovelToolButton.setSize(100, 25);
+		shovelToolButton.setBounds(150, 230, 400, 40);
+		shovelToolButton.setFont(listFont);
+		shovelToolButton.setContentAreaFilled(false);
 
 		JButton hoeToolButton = new JButton("호미");
-		hoeToolButton.setLocation(170, 300);
-		hoeToolButton.setSize(100, 25);
+		hoeToolButton.setBounds(150, 290, 400, 40);
+		hoeToolButton.setFont(listFont);
+		hoeToolButton.setContentAreaFilled(false);
 
 		JButton wateringCanToolButton = new JButton("물뿌리개");
-		wateringCanToolButton.setLocation(170, 350);
-		wateringCanToolButton.setSize(100, 25);
+		wateringCanToolButton.setBounds(150, 350, 400, 40);
+		wateringCanToolButton.setFont(listFont);
+		wateringCanToolButton.setContentAreaFilled(false);
+		
 
-		/*-------------- 농기구 구매 텍스트 ---------------*/
-
-		JLabel toolBuyLabel = new JLabel("<농기구 구매>");
-		toolBuyLabel.setBounds(350, 180, 200, 25);
-		toolBuyLabel.setFont(font);
-
-
-		this.add(toolBuyLabel);
 		/* ---------- 구매, 판매, 뒤로 버튼 패널에 추가 --------- */
 		this.add(btnSell);
 		this.add(btnBack);

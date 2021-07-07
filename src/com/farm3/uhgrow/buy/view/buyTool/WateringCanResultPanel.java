@@ -117,6 +117,12 @@ private JPanel wateringCanResultPanel;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
+				
+				
+				
+				
+				
+				
 //				String inputAmount = seedInputField.getText().toString();
 //				int buyAmount = Integer.parseInt(inputAmount);
 //
