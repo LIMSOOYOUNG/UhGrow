@@ -69,53 +69,32 @@ private JPanel pumpkinResultPanel;
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 
-		/* -------- 씨앗 리스트 버튼 ---------- */
-
-		JButton btnTomato = new JButton("토마토");
-		btnTomato.setBounds(150, 170, 400, 40);
-		btnTomato.setFont(listFont);
-		btnTomato.setContentAreaFilled(false);
-
-		JButton btnCorn = new JButton("옥수수");
-		btnCorn.setBounds(150, 230, 400, 40);
-		btnCorn.setFont(listFont);
-		btnCorn.setContentAreaFilled(false);
-
-		JButton btnGarlic = new JButton("마늘");
-		btnGarlic.setBounds(150, 290, 400, 40);
-		btnGarlic.setFont(listFont);
-		btnGarlic.setContentAreaFilled(false);
-
-		JButton btnPumpkin  = new JButton("호박");
-		btnPumpkin.setBounds(150, 350, 400, 40);
-		btnPumpkin.setFont(listFont);
-		btnPumpkin.setContentAreaFilled(false);
-
 		/*------------------- 구매확정 --------------------*/
 
 		JLabel seedInPutLabel = new JLabel("<갯수 입력>");
-		seedInPutLabel.setBounds(630, 165, 200, 40);
+		seedInPutLabel.setBounds(390, 250, 200, 40);
 		seedInPutLabel.setFont(font);
 
 		JTextField seedInputField = new JTextField();
-		seedInputField.setBounds(650, 215, 140, 25);
+		seedInputField.setBounds(410, 300, 140, 25);
 		seedInputField.setLayout(null);
 		seedInputField.setFont(font);
-
+		
 		JButton buySeedButton = new JButton("구매확정");
-		buySeedButton.setLocation(670, 250);
+		buySeedButton.setLocation(430, 335);
 		buySeedButton.setSize(100, 25);
+		
+		JLabel pumpkinPriceLabel = new JLabel("호박 씨앗의 가격은 4천원 입니다!");
+		pumpkinPriceLabel.setBounds(230, 165, 700, 40);
+		pumpkinPriceLabel.setFont(font);
 
 		this.add(buySeedButton);
+		this.add(pumpkinPriceLabel);
 		this.add(seedInputField);
 		this.add(seedInPutLabel);
 		this.add(btnBuy);
 		this.add(btnCancel);
 		this.add(btnBack);
-		this.add(btnTomato);
-		this.add(btnCorn);
-		this.add(btnGarlic);
-		this.add(btnPumpkin);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 

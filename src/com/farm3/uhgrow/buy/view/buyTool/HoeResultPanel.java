@@ -69,44 +69,21 @@ public class HoeResultPanel extends JPanel{
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
 
-		
-		/* -------- 농기구 리스트 버튼 ---------- */
-
-		JButton btnPickaxe = new JButton("곡괭이");
-		btnPickaxe.setBounds(150, 170, 400, 40);
-		btnPickaxe.setFont(listFont);
-		btnPickaxe.setContentAreaFilled(false);
-
-		JButton btnShovel = new JButton("삽");
-		btnShovel.setBounds(150, 230, 400, 40);
-		btnShovel.setFont(listFont);
-		btnShovel.setContentAreaFilled(false);
-
-		JButton btnHoe = new JButton("호미");
-		btnHoe.setBounds(150, 290, 400, 40);
-		btnHoe.setFont(listFont);
-		btnHoe.setContentAreaFilled(false);
-
-		JButton btnWateringCan  = new JButton("물뿌리개");
-		btnWateringCan.setBounds(150, 350, 400, 40);
-		btnWateringCan.setFont(listFont);
-		btnWateringCan.setContentAreaFilled(false);
-
-
 		/*------------------- 구매확정 --------------------*/
 
 		JButton buyToolButton = new JButton("구매확정");
-		buyToolButton.setLocation(670, 250);
-		buyToolButton.setSize(100, 25);
+		buyToolButton.setLocation(380, 250);
+		buyToolButton.setSize(200, 50);
 		
+		JLabel hoePriceLabel = new JLabel("호미의 가격은 16만원 입니다!");
+		hoePriceLabel.setBounds(280, 165, 700, 40);
+		hoePriceLabel.setFont(font);
+		
+		this.add(hoePriceLabel);
 		this.add(buyToolButton);
 		this.add(btnBuy); 
 		this.add(btnCancel);
 		this.add(btnBack);
-		this.add(btnPickaxe);
-		this.add(btnShovel);
-		this.add(btnHoe);
-		this.add(btnWateringCan);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
