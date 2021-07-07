@@ -14,80 +14,88 @@ import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
+import com.farm3.uhgrow.buy.view.BuySeedListPanel;
+import com.farm3.uhgrow.farm.view.FarmPanel;
+import com.farm3.uhgrow.member.view.FrameManager;
 
 public class CornResultPanel extends JPanel{
-	
+
 	private JPanel cornResultPanel;
-	
+
 	private int userNo;
+
+	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
+	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 
 	public CornResultPanel(int userNo) {
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
 		cornResultPanel = this;
-		
-		this.userNo = userNo;
 
+		this.userNo = userNo;
+		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
-		this.setSize(960, 540);
+		this.setSize(960,540);
+
 
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
-		this.setVisible(true);
+
+		/* ---------- 상첨창 배경  ------------*/
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
+		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
-		Image buyImage = new ImageIcon("img/store/mainStore/buybutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(132, 95);
-		buyButton.setSize(232, 60);
+		JButton btnBuy = new JButton("구 매 하 기 ");
+		btnBuy.setBounds(132, 95, 232, 60);
+		btnBuy.setFont(font);
+		btnBuy.setContentAreaFilled(false);
 
-		Image sellImage = new ImageIcon("img/store/mainStore/sellbutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(364, 95);
-		sellButton.setSize(232, 60);
+		JButton btnCancel = new JButton("뒤 로 가 기");
+		btnCancel.setBounds(364, 95, 232, 60);
+		btnCancel.setFont(font);
+		btnCancel.setContentAreaFilled(false);
 
-		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
+		JButton btnBack = new JButton("그 만 두 기");
+		btnBack.setBounds(596, 95, 232, 60);
+		btnBack.setFont(font);
+		btnBack.setContentAreaFilled(false);
 
-		/* ------- 상점 패널 ---------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+		btnBackGround.setBounds(132, 95,  696, 60);
 
 		/* -------- 씨앗 리스트 버튼 ---------- */
-		JButton tomatoSeedButton = new JButton("토마토");
-		tomatoSeedButton.setLocation(70, 200);
-		tomatoSeedButton.setSize(100, 25);
 
-		JButton cornSeedButton = new JButton("옥수수");
-		cornSeedButton.setLocation(70, 250);
-		cornSeedButton.setSize(100, 25);
+		JButton btnTomato = new JButton("토마토");
+		btnTomato.setBounds(150, 170, 400, 40);
+		btnTomato.setFont(listFont);
+		btnTomato.setContentAreaFilled(false);
 
-		JButton garlicSeedButton = new JButton("마늘");
-		garlicSeedButton.setLocation(70, 300);
-		garlicSeedButton.setSize(100, 25);
+		JButton btnCorn = new JButton("옥수수");
+		btnCorn.setBounds(150, 230, 400, 40);
+		btnCorn.setFont(listFont);
+		btnCorn.setContentAreaFilled(false);
 
-		JButton pumpkinSeedButton = new JButton("호박");
-		pumpkinSeedButton.setLocation(70, 350);
-		pumpkinSeedButton.setSize(100, 25);
+		JButton btnGarlic = new JButton("마늘");
+		btnGarlic.setBounds(150, 290, 400, 40);
+		btnGarlic.setFont(listFont);
+		btnGarlic.setContentAreaFilled(false);
 
-		/*-------------- 씨앗구매 텍스트 ---------------*/
-
-		JLabel seedBuyLabel = new JLabel("<씨앗 구매>");
-		seedBuyLabel.setBounds(350, 180, 200, 25);
-		seedBuyLabel.setFont(font);
+		JButton btnPumpkin  = new JButton("호박");
+		btnPumpkin.setBounds(150, 350, 400, 40);
+		btnPumpkin.setFont(listFont);
+		btnPumpkin.setContentAreaFilled(false);
 
 		/*------------------- 구매확정 --------------------*/
 
 		JLabel seedInPutLabel = new JLabel("<갯수 입력>");
-		seedInPutLabel.setBounds(650, 180, 200, 25);
+		seedInPutLabel.setBounds(630, 165, 200, 40);
 		seedInPutLabel.setFont(font);
 
 		JTextField seedInputField = new JTextField();
@@ -102,14 +110,13 @@ public class CornResultPanel extends JPanel{
 		this.add(buySeedButton);
 		this.add(seedInputField);
 		this.add(seedInPutLabel);
-		this.add(seedBuyLabel);
-		this.add(buyButton);
-		this.add(sellButton);
-		this.add(backButton);
-		this.add(tomatoSeedButton);
-		this.add(cornSeedButton);
-		this.add(garlicSeedButton);
-		this.add(pumpkinSeedButton);
+		this.add(btnBuy);
+		this.add(btnCancel);
+		this.add(btnBack);
+		this.add(btnTomato);
+		this.add(btnCorn);
+		this.add(btnGarlic);
+		this.add(btnPumpkin);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
@@ -160,8 +167,30 @@ public class CornResultPanel extends JPanel{
 			}
 
 		});
+		/* ---------- 뒤로 가기 버튼 ----------------*/
+
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BuySeedListPanel buySeedListPanel = new BuySeedListPanel(userNo);
+
+				FrameManager.changePanel(cornResultPanel, buySeedListPanel);
+
+			}
+		});
 		
-		
+		/* ---------- 그만 두기 버튼 ----------------*/
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				FarmPanel FarmPanel = new FarmPanel(userNo);
+				
+				FrameManager.changePanel(cornResultPanel, FarmPanel);
+				
+			}
+		});	
+
+
 	}
 
 }
