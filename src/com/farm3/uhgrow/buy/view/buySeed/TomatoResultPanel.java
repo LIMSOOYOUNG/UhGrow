@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.buy.view;
+package com.farm3.uhgrow.buy.view.buySeed;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -9,57 +9,62 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 
-public class PumpkinResultPanel extends JPanel{
+public class TomatoResultPanel extends JPanel{
 	
-private JPanel pumpkinResultPanel;
+	private JPanel tomatoResultPanel;
 	
 	private int userNo;
 
-	public PumpkinResultPanel(int userNo) {
+	public TomatoResultPanel(int userNo) {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
-		pumpkinResultPanel = this;
+		tomatoResultPanel = this;
 		
 		this.userNo = userNo;
-
+		/* ---------- MainStorePanel 크기 지정 ----------------*/
 		this.setLayout(null);
-		this.setSize(960, 540);
+		this.setSize(960,540);
+
 
 		/* ---------- 배경화면 라벨  ------------*/
 		Image background = new ImageIcon("img/interface/backGround1.png").getImage().getScaledInstance(960, 540, 0);
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
-		backGroundLabel.setLocation(0, 0);
 		backGroundLabel.setSize(960, 540);
-		this.setVisible(true);
+
+		/* ---------- 상첨창 배경  ------------*/
+		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
+		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
+		storeBackGroundLabel.setLocation(127, 90);
+		storeBackGroundLabel.setSize(705, 360);
 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
-		Image buyImage = new ImageIcon("img/store/mainStore/buybutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton buyButton = new JButton(new ImageIcon(buyImage));
-		buyButton.setLocation(132, 95);
-		buyButton.setSize(232, 60);
+		JButton btnBuy = new JButton("구 매 하 기 ");
+		btnBuy.setBounds(132, 95, 232, 60);
+		btnBuy.setFont(font);
+		btnBuy.setContentAreaFilled(false);
 
-		Image sellImage = new ImageIcon("img/store/mainStore/sellbutton1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton sellButton = new JButton(new ImageIcon(sellImage));
-		sellButton.setLocation(364, 95);
-		sellButton.setSize(232, 60);
+		JButton btnSell = new JButton("판 매 하 기");
+		btnSell.setBounds(364, 95, 232, 60);
+		btnSell.setFont(font);
+		btnSell.setContentAreaFilled(false);
 
-		Image backImage = new ImageIcon("img/store/storeback1.png").getImage().getScaledInstance(232, 60, 0);
-		JButton backButton = new JButton(new ImageIcon(backImage));
-		backButton.setLocation(596, 95);
-		backButton.setSize(232, 60);
+		JButton btnBack = new JButton("그 만 두 기");
+		btnBack.setBounds(596, 95, 232, 60);
+		btnBack.setFont(font);
+		btnBack.setContentAreaFilled(false);
 
-		/* ------- 상점 패널 ---------*/
-		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(860, 440, 0);
-		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
-		storeBackGroundLabel.setLocation(0, 0);
-		storeBackGroundLabel.setSize(960, 540);
+		// 구매한다, 판매한다, 그만두기 버튼 뒷배경 
+		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
+		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
+		btnBackGround.setBounds(132, 95,  696, 60);
 
 		/* -------- 씨앗 리스트 버튼 ---------- */
 		JButton tomatoSeedButton = new JButton("토마토");
@@ -103,9 +108,10 @@ private JPanel pumpkinResultPanel;
 		this.add(seedInputField);
 		this.add(seedInPutLabel);
 		this.add(seedBuyLabel);
-		this.add(buyButton);
-		this.add(sellButton);
-		this.add(backButton);
+		this.add(btnSell);
+		this.add(btnBack);
+		this.add(btnBuy);
+		this.add(btnBackGround);
 		this.add(tomatoSeedButton);
 		this.add(cornSeedButton);
 		this.add(garlicSeedButton);
@@ -122,34 +128,34 @@ private JPanel pumpkinResultPanel;
 
 				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
 				BuyController buyController = new BuyController();
-				int totalPumpkinAmonut = 0;
-				int pumpkinAmount = 0;
-				int pumpkinPrice = 0;
-				int updateUserPumpkinAmount = 0;
+				int totalTomatoAmonut = 0;
+				int tomatoAmount = 0;
+				int tomatoPrice = 0;
+				int updateUserTomatoAmount = 0;
 				int userCoin = 0;
 				int getPrice = 0;
 				int totalGetPrice = 0;
 
 
-				List<BuyDTO> userPumpkinList = buyController.userTomatoList();
+				List<BuyDTO> userTomatoList = buyController.userTomatoList();
 
-				for (BuyDTO pumpkinList : userPumpkinList) {
-					pumpkinAmount = pumpkinList.getCropAmount();
-					userCoin = pumpkinList.getCoin();
-					pumpkinPrice = pumpkinList.getCropPrice();
+				for (BuyDTO tomatoList : userTomatoList) {
+					tomatoAmount = tomatoList.getCropAmount();
+					userCoin = tomatoList.getCoin();
+					tomatoPrice = tomatoList.getCropPrice();
 				}
 
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 
-				if (buyAmount> 0 && buyAmount <= pumpkinAmount && pumpkinAmount != 0) {
+				if (buyAmount> 0 && buyAmount <= tomatoAmount && tomatoAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserPumpkinAmount = buyController.updatePumpkinCropAmount(buyAmount);
+					updateUserTomatoAmount = buyController.updateTomatoCropAmount(buyAmount);
 
-					getPrice = buyController.buyPumpkinGetCoin(buyAmount, pumpkinPrice);
+					getPrice = buyController.buyTomatoGetCoin(buyAmount, tomatoPrice);
 
-					if(updateUserPumpkinAmount > 0 && getPrice > 0) {
-						totalPumpkinAmonut = pumpkinAmount + buyAmount;
-						totalGetPrice = userCoin - ((pumpkinPrice * buyAmount));					
+					if(updateUserTomatoAmount > 0 && getPrice > 0) {
+						totalTomatoAmonut = tomatoAmount + buyAmount;
+						totalGetPrice = userCoin - ((tomatoPrice * buyAmount));	
 					}
 				} else {
 					System.out.println("구매할 수 있는 재화가 부족합니다");

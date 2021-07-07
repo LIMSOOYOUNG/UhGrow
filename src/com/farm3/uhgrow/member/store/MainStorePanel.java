@@ -1,6 +1,5 @@
 package com.farm3.uhgrow.member.store;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;

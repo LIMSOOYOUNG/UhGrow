@@ -1,9 +1,10 @@
-package com.farm3.uhgrow.buy.view;
+package com.farm3.uhgrow.buy.view.buySeed;
 
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,15 +12,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BuyCornSeedPanel extends JPanel{
-	
-	private JPanel buyCornSeedPanel;
+import com.farm3.uhgrow.buy.controller.BuyController;
+import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 
-	public BuyCornSeedPanel() {
+public class PumpkinResultPanel extends JPanel{
+	
+private JPanel pumpkinResultPanel;
+	
+	private int userNo;
+
+	public PumpkinResultPanel(int userNo) {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
-		buyCornSeedPanel = this;
+		pumpkinResultPanel = this;
+		
+		this.userNo = userNo;
 
 		this.setLayout(null);
 		this.setSize(960, 540);
@@ -91,6 +99,9 @@ public class BuyCornSeedPanel extends JPanel{
 		buySeedButton.setLocation(670, 250);
 		buySeedButton.setSize(100, 25);
 
+		this.add(buySeedButton);
+		this.add(seedInputField);
+		this.add(seedInPutLabel);
 		this.add(seedBuyLabel);
 		this.add(buyButton);
 		this.add(sellButton);
@@ -102,16 +113,55 @@ public class BuyCornSeedPanel extends JPanel{
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
 
-		
-		tomatoSeedButton.addMouseListener(new MouseAdapter() {
+		buySeedButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CornResultPanel cornResultPanel = new CornResultPanel();
 
-				FrameManager.changePanel(buyCornSeedPanel, cornResultPanel);
+				String inputAmount = seedInputField.getText().toString();
+				int buyAmount = Integer.parseInt(inputAmount);
+
+				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
+				BuyController buyController = new BuyController();
+				int totalPumpkinAmonut = 0;
+				int pumpkinAmount = 0;
+				int pumpkinPrice = 0;
+				int updateUserPumpkinAmount = 0;
+				int userCoin = 0;
+				int getPrice = 0;
+				int totalGetPrice = 0;
+
+
+				List<BuyDTO> userPumpkinList = buyController.userTomatoList();
+
+				for (BuyDTO pumpkinList : userPumpkinList) {
+					pumpkinAmount = pumpkinList.getCropAmount();
+					userCoin = pumpkinList.getCoin();
+					pumpkinPrice = pumpkinList.getCropPrice();
+				}
+
+				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
+
+				if (buyAmount> 0 && buyAmount <= pumpkinAmount && pumpkinAmount != 0) {
+					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
+					updateUserPumpkinAmount = buyController.updatePumpkinCropAmount(buyAmount);
+
+					getPrice = buyController.buyPumpkinGetCoin(buyAmount, pumpkinPrice);
+
+					if(updateUserPumpkinAmount > 0 && getPrice > 0) {
+						totalPumpkinAmonut = pumpkinAmount + buyAmount;
+						totalGetPrice = userCoin - ((pumpkinPrice * buyAmount));					
+					}
+				} else {
+					System.out.println("구매할 수 있는 재화가 부족합니다");
+
+				}
+
 
 			}
+
 		});
+		
+		
 	}
 
 }

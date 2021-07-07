@@ -14,15 +14,19 @@ import javax.swing.JFrame;
 import com.farm3.uhgrow.member.store.MainStorePanel;
 
 public class MainFrame extends JFrame {
+	private int userNo = 0;
 
 	
 	public MainFrame() {
 		this.setTitle("UhGrow");
 		this.setLayout(null);
 		this.setBounds(300, 200, 960, 565);
-		playSound("sound/배경음악1.wav");
+//		playSound("sound/배경음악1.wav");
 		
-		this.add(new LoginPanel());
+//		this.add(new LoginPanel());
+//		
+		this.add(new MainStorePanel(userNo));
+
 		
 		this.setResizable(false);
 		this.setVisible(true);

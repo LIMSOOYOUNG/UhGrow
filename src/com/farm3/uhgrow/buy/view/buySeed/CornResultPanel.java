@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.buy.view;
+package com.farm3.uhgrow.buy.view.buySeed;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -15,17 +15,17 @@ import javax.swing.JTextField;
 import com.farm3.uhgrow.buy.controller.BuyController;
 import com.farm3.uhgrow.buy.model.dto.BuyDTO;
 
-public class GarlicResultPanel extends JPanel{
+public class CornResultPanel extends JPanel{
 	
-private JPanel garlicResultPanel;
+	private JPanel cornResultPanel;
 	
 	private int userNo;
 
-	public GarlicResultPanel(int userNo) {
+	public CornResultPanel(int userNo) {
 
 		Font font = new Font("맑은 고딕", Font.BOLD, 25);
 
-		garlicResultPanel = this;
+		cornResultPanel = this;
 		
 		this.userNo = userNo;
 
@@ -122,34 +122,34 @@ private JPanel garlicResultPanel;
 
 				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
 				BuyController buyController = new BuyController();
-				int totalGarlicAmonut = 0;
-				int garlicAmount = 0;
-				int garlicPrice = 0;
-				int updateUserGarlicAmount = 0;
+				int totalCornAmonut = 0;
+				int cornAmount = 0;
+				int cornPrice = 0;
+				int updateUserCornAmount = 0;
 				int userCoin = 0;
 				int getPrice = 0;
 				int totalGetPrice = 0;
 
 
-				List<BuyDTO> userGarlicList = buyController.userGarlicList();
+				List<BuyDTO> userCornList = buyController.userCornList();
 
-				for (BuyDTO garlicList : userGarlicList) {
-					garlicAmount = garlicList.getCropAmount();
-					userCoin = garlicList.getCoin();
-					garlicPrice = garlicList.getCropPrice();
+				for (BuyDTO cornList : userCornList) {
+					cornAmount = cornList.getCropAmount();
+					userCoin = cornList.getCoin();
+					cornPrice = cornList.getCropPrice();
 				}
 
 				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 
-				if (buyAmount> 0 && buyAmount <= garlicAmount && garlicAmount != 0) {
+				if (buyAmount> 0 && buyAmount <= cornAmount && cornAmount != 0) {
 					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserGarlicAmount = buyController.updateGarlicCropAmount(buyAmount);
+					updateUserCornAmount = buyController.updateCornCropAmount(buyAmount);
 
-					getPrice = buyController.buyGarlicGetCoin(buyAmount, garlicPrice);
+					getPrice = buyController.buyCornGetCoin(buyAmount, cornPrice);
 
-					if(updateUserGarlicAmount > 0 && getPrice > 0) {
-						totalGarlicAmonut = garlicAmount + buyAmount;
-						totalGetPrice = userCoin - ((garlicPrice * buyAmount));					
+					if(updateUserCornAmount > 0 && getPrice > 0) {
+						totalCornAmonut = cornAmount + buyAmount;
+						totalGetPrice = userCoin - ((cornPrice * buyAmount));					
 					}
 				} else {
 					System.out.println("구매할 수 있는 재화가 부족합니다");
