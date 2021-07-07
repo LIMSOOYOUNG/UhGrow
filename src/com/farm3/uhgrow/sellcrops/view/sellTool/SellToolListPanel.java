@@ -1,4 +1,4 @@
-package com.farm3.uhgrow.sellcrops.view;
+package com.farm3.uhgrow.sellcrops.view.sellTool;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -13,24 +13,27 @@ import javax.swing.JTextArea;
 
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+import com.farm3.uhgrow.sellcrops.controller.sell.SellToolController;
 
-public class SellCropListPanel extends JPanel {
-
-	private JPanel sellCropListPanel;
-	private SellController sellController;
+public class SellToolListPanel extends JPanel {
+	
+	private JPanel sellToolListPanel;
+	private SellToolController sellToolController;
 	private Font font = new Font("나눔손글씨 펜", Font.BOLD, 50);
 	private Font listFont = new Font("나눔손글씨 펜", Font.BOLD, 25);
 	private int userNo;
 	
-	public SellCropListPanel(int userNo) {
-
+	public SellToolListPanel(int userNo) {
+		
 		this.userNo = userNo;
-		sellCropListPanel = this;
-
+		sellToolListPanel = this;
+		
 		this.setLayout(null);
 		this.setSize(960, 540);
+		this.sellToolController = new SellToolController();
 		
-		this.sellController = new SellController();
+		SellController sellController = new SellController();
+		
 		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
@@ -40,17 +43,11 @@ public class SellCropListPanel extends JPanel {
 		JLabel backGroundLabel = new JLabel(new ImageIcon(background));
 		backGroundLabel.setSize(960, 540);
 
-
 		/* ---------- 상첨창 배경  ------------*/
 		Image storeBackGround = new ImageIcon("img/store/storeBackGround.png").getImage().getScaledInstance(705, 360, 0);
 		JLabel storeBackGroundLabel = new JLabel(new ImageIcon(storeBackGround));
 		storeBackGroundLabel.setLocation(127, 90);
 		storeBackGroundLabel.setSize(705, 360);
-		
-		/* ---------- 상인 대화내용  ------------*/
-		JLabel textLabel = new JLabel("빨리 빨리 팔아 !");
-		textLabel.setBounds(130, 410, 750, 100);
-		textLabel.setFont(font);
 		 
 		/* ---------- 상점창 구매한다, 판매한다, 그만두기 버튼   ------------*/
 		JButton btnBuy = new JButton("구 매 하 기 ");
@@ -72,36 +69,41 @@ public class SellCropListPanel extends JPanel {
 		Image btnBackGroundImage = new ImageIcon("img/store/btnBackGround.png").getImage().getScaledInstance(696, 60, 0);
 		JLabel btnBackGround = new JLabel(new ImageIcon(btnBackGroundImage));
 		btnBackGround.setBounds(132, 95,  696, 60);
-								
+				
 		/* ---------- 대화창, 대화창에 큰 상인 이미지 ------------*/
 		Image imgConversation = new ImageIcon("img/store/storeconversation1.png").getImage().getScaledInstance(758, 120, 0);
 		JLabel conversationLabel = new JLabel(new ImageIcon(imgConversation));
 		conversationLabel.setBounds(100, 400, 760, 118);		
-						
+		
 		Image imgStoreNpc = new ImageIcon("img/interface/storeNpc.png").getImage().getScaledInstance(90, 150, 0);
 		JLabel storeNpc = new JLabel(new ImageIcon(imgStoreNpc));
 		storeNpc.setBounds(750, 350, 90, 150);
+		
+		/* ---------- 상인 대화내용  ------------*/
+		JLabel textLabel = new JLabel("빨리 빨리 팔아 !");
+		textLabel.setBounds(130, 410, 750, 100);
+		textLabel.setFont(font);
 
-		/* -------- 작물 리스트 버튼 ---------- */
-		JButton tomatoCropButton = new JButton("토마토");
-		tomatoCropButton.setBounds(150, 170, 400, 40);
-		tomatoCropButton.setFont(listFont);
-		tomatoCropButton.setContentAreaFilled(false);
+		/* -------- 농기구 리스트 버튼 ---------- */
+		JButton pickButton = new JButton("곡괭이");
+		pickButton.setBounds(150, 170, 400, 40);
+		pickButton.setFont(listFont);
+		pickButton.setContentAreaFilled(false);
 
-		JButton cornCropButton = new JButton("옥수수");
-		cornCropButton.setBounds(150, 230, 400, 40);
-		cornCropButton.setFont(listFont);
-		cornCropButton.setContentAreaFilled(false);
+		JButton shovelButton = new JButton("삽");
+		shovelButton.setBounds(150, 230, 400, 40);
+		shovelButton.setFont(listFont);
+		shovelButton.setContentAreaFilled(false);
+		
+		JButton hoeButton = new JButton("호미");
+		hoeButton.setBounds(150, 290, 400, 40);
+		hoeButton.setFont(listFont);
+		hoeButton.setContentAreaFilled(false);
 
-		JButton garlicCropButton = new JButton("마늘");
-		garlicCropButton.setBounds(150, 290, 400, 40);
-		garlicCropButton.setFont(listFont);
-		garlicCropButton.setContentAreaFilled(false);
-
-		JButton pumpkinCropButton = new JButton("호박");
-		pumpkinCropButton.setBounds(150, 350, 400, 40);
-		pumpkinCropButton.setFont(listFont);
-		pumpkinCropButton.setContentAreaFilled(false);
+		JButton wateringCanButton = new JButton("물뿌리개");
+		wateringCanButton.setBounds(150, 350, 400, 40);
+		wateringCanButton.setFont(listFont);
+		wateringCanButton.setContentAreaFilled(false);
 		
 		/* 재화 라벨*/
 		
@@ -128,63 +130,53 @@ public class SellCropListPanel extends JPanel {
 		this.add(btnBackGround);
 		
 		/* 유저 씨앗  판매 버튼*/
-
-		this.add(tomatoCropButton);
-		this.add(cornCropButton);
-		this.add(garlicCropButton);
-		this.add(pumpkinCropButton);
+		this.add(pickButton);
+		this.add(shovelButton);
+		this.add(hoeButton);
+		this.add(wateringCanButton);
 		this.add(storeBackGroundLabel);
 		this.add(backGroundLabel);
-
-		tomatoCropButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				JPanel sellTomatoAmountPanel = new SellTomatoAmountPanel(userNo);
-				
-				FrameManager.changePanel(sellCropListPanel, sellTomatoAmountPanel);
-			}
-
-		});
-
-		cornCropButton.addMouseListener(new MouseAdapter() {
 		
+		/*곡괭이 버튼*/
+		pickButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellCornAmountPanel = new SellCornAmountPanel(userNo);
+				JPanel sellPickPanel = new SellPickPanel(userNo);
 				
-				FrameManager.changePanel(sellCropListPanel, sellCornAmountPanel);
+				FrameManager.changePanel(sellToolListPanel, sellPickPanel);
+				
+			}
+
+		});
+		/*삽 버튼*/
+		shovelButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				
 			}
 			
 		});
-
-		garlicCropButton.addMouseListener(new MouseAdapter() {
-			
+		/*호미 버튼*/
+		
+		hoeButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				JPanel sellGarlicAmountPanel = new SellGarlicAmountPanel(userNo);
+			}
+			
+		});
+		/*곡괭이 버튼*/
+		pickButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				
-				FrameManager.changePanel(sellCropListPanel, sellGarlicAmountPanel);
 			}
 			
 		});
 		
-		pumpkinCropButton.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				JPanel sellPumpkinAmountPanel = new SellPumpkinAmountPanel(userNo);
-				
-				FrameManager.changePanel(sellCropListPanel, sellPumpkinAmountPanel);
-				
-			}
-			
-		});
-	
+		
 	}
-
+	
+	
 }

@@ -13,8 +13,8 @@ public class SellController {
 	private SellCropsService sellCropsService = new SellCropsService();
 	
 	/* 코인 라벨*/
-	public int selectCoin() {
-		int result = sellCropsService.selectCoin();
+	public int selectCoin(int userNo) {
+		int result = sellCropsService.selectCoin(userNo);
 		return result;
 	}
 

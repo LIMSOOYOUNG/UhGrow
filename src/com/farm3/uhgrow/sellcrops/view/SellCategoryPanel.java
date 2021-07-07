@@ -15,6 +15,7 @@ import com.farm3.uhgrow.buy.view.BuyListPanel;
 import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+import com.farm3.uhgrow.sellcrops.view.sellTool.SellToolListPanel;
 import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
 
 public class SellCategoryPanel extends JPanel{
@@ -34,7 +35,7 @@ public class SellCategoryPanel extends JPanel{
 		this.setSize(960, 540);
 		
 		this.sellController = new SellController();
-		int havingCoin = sellController.selectCoin();
+		int havingCoin = sellController.selectCoin(userNo);
 		String transCoin = "";
 		transCoin = String.valueOf(havingCoin);
 		
@@ -134,6 +135,8 @@ public class SellCategoryPanel extends JPanel{
 		this.add(btnSecond);
 		this.add(btnThird);
 		this.add(btnFourth);
+		this.add(storeBackGroundLabel);
+		this.add(backGroundLabel);
 
 		/*씨앗 판매*/
 		btnFirst.addMouseListener(new MouseAdapter() {
@@ -166,7 +169,12 @@ public class SellCategoryPanel extends JPanel{
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				 
+				
+				JPanel sellToolListPanel = new SellToolListPanel(userNo);
+				
+				FrameManager.changePanel(sellCategoryPanel, sellToolListPanel);
+				
+				
 			}
 			
 		});
