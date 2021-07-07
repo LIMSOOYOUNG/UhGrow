@@ -15,6 +15,7 @@ import com.farm3.uhgrow.buy.view.BuyListPanel;
 import com.farm3.uhgrow.member.store.MainStorePanel;
 import com.farm3.uhgrow.member.view.FrameManager;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
+import com.farm3.uhgrow.sellcrops.view.sellCrop.SellCropListPanel;
 import com.farm3.uhgrow.sellcrops.view.sellTool.SellToolListPanel;
 import com.farm3.uhgrow.sellcrops.view.sellfood.SellFoodListPanel;
 import com.farm3.uhgrow.sellcrops.view.sellseed.SellSeedListPanel;
@@ -188,7 +189,7 @@ public class SellCategoryPanel extends JPanel{
 			
 				JPanel sellFoodListPanel = new SellFoodListPanel(userNo);
 				
-				FrameManager.changePanel(sellFoodListPanel, sellFoodListPanel);
+				FrameManager.changePanel(sellCategoryPanel, sellFoodListPanel);
 			}
 			
 		});

@@ -15,10 +15,10 @@ import javax.swing.JTextField;
 
 import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
-import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
+import com.farm3.uhgrow.sellcrops.model.dto.FoodDTO;
 import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
-public class SellCornTortillaPanel {
+public class SellCornTortillaPanel extends JPanel {
 	
 	private JPanel sellCornTortillaPanel;
 	private SellFoodController sellFoodController;
@@ -28,12 +28,12 @@ public class SellCornTortillaPanel {
 	
 	
 	public SellCornTortillaPanel(int userNo) {
-//		this.userNo = userNo;
-//		sellCornTortillaPanel = this;
-//		
-//		this.setLayout(null);
-//		this.setSize(960, 540);
-
+		this.userNo = userNo;
+		sellCornTortillaPanel = this;
+		
+		this.setLayout(null);
+		this.setSize(960, 540);
+		
 		this.sellFoodController = new SellFoodController();
 		int havingCoin = sellFoodController.selectCoin(userNo);
 		String transCoin = "";
@@ -97,16 +97,16 @@ public class SellCornTortillaPanel {
 		userCoin.setFont(f1);
 		userCoin.setEditable(false);		
 
-//		this.add(userCoin);
-//		this.add(confirmButton);
-//		this.add(inputAmountText);
-//		this.add(inputAmountLabel);
-//		this.add(btnSell);
-//		this.add(btnBack);
-//		this.add(btnBuy);
-//		this.add(btnBackGround);
-//		this.add(storeBackGroundLabel);
-//		this.add(backGroundLabel);
+		this.add(userCoin);
+		this.add(confirmButton);
+		this.add(inputAmountText);
+		this.add(inputAmountLabel);
+		this.add(btnSell);
+		this.add(btnBack);
+		this.add(btnBuy);
+		this.add(btnBackGround);
+		this.add(storeBackGroundLabel);
+		this.add(backGroundLabel);
 		
 		confirmButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -115,37 +115,36 @@ public class SellCornTortillaPanel {
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
-				int pumpkinSoupAmount = 0;
+				/* 유저의 옥수수또띠아 수량, 현재 가지고 있는 코인 조회 */
+				int cornTortillaAmount = 0;
 				int userCoin = 0;
-				int pumpkinSoupPrice = 0;
-				int updateUserPumpkinSoupAmount = 0;
+				int cornTortillaPrice = 0;
+				int updateUserCornTortillaAmount = 0;
 				int getPrice = 0;
-				int totalPumpkinSoupAmonut = 0;
+				int totalCornTortillaAmonut = 0;
 				int totalGetPrice = 0;
 				
 				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellFoodController.userPumpkinSoup(userNo);
+				List<FoodDTO> userFoodList = sellFoodController.userCornTotilla(userNo);
 				
-				for (CropDTO cropList : userCropList) {
-					pumpkinSoupAmount = cropList.getCropAmount();
-					userCoin = cropList.getCoin();
-					pumpkinSoupPrice = cropList.getCropPrice();
+				for (FoodDTO foodList : userFoodList) {
+					cornTortillaAmount = foodList.getFoodAmount();
+					userCoin = foodList.getCoin();
+					cornTortillaPrice = foodList.getFoodPrice();
 				}
 				
-				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 				
-				if (sellAmount> 0 && sellAmount <= pumpkinSoupAmount && pumpkinSoupAmount != 0) {
-					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
-					updateUserPumpkinSoupAmount = sellFoodController.updateUserPumpkinSoupAmount(sellAmount, userNo);
-					
-					getPrice = sellFoodController.sellPumpkinSoupGetCoin(sellAmount, pumpkinSoupPrice, userNo);
+				if (sellAmount> 0 && sellAmount <= cornTortillaAmount && cornTortillaAmount != 0) {
+					/* 음식 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 *//* 음식판매후 코인 받기*/
+					updateUserCornTortillaAmount = sellFoodController.updateUserCornTotillaAmount(sellAmount, userNo);
+					/* 음식판매후 코인 받기*/
+					getPrice = sellFoodController.sellCornTotillaGetCoin(sellAmount, cornTortillaPrice, userNo);
 
-					if(updateUserPumpkinSoupAmount > 0 && getPrice > 0) {
-						totalPumpkinSoupAmonut = pumpkinSoupAmount - sellAmount;
+					if(updateUserCornTortillaAmount > 0 && getPrice > 0) {
+						totalCornTortillaAmonut = cornTortillaAmount - sellAmount;
 						
-						totalGetPrice = userCoin + ((pumpkinSoupPrice * sellAmount) / 10);					
+						totalGetPrice = userCoin + ((cornTortillaPrice * sellAmount) / 10);					
 						
 					
 					}

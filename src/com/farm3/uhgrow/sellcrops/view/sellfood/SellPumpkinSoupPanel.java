@@ -13,10 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.farm3.uhgrow.member.view.FrameManager;
-import com.farm3.uhgrow.sellcrops.controller.sell.SellController;
 import com.farm3.uhgrow.sellcrops.controller.sell.SellFoodController;
-import com.farm3.uhgrow.sellcrops.model.dto.CropDTO;
+import com.farm3.uhgrow.sellcrops.model.dto.FoodDTO;
 import com.farm3.uhgrow.sellcrops.view.SellCategoryPanel;
 
 public class SellPumpkinSoupPanel extends JPanel{
@@ -115,7 +113,7 @@ public class SellPumpkinSoupPanel extends JPanel{
 				String inputAmount = inputAmountText.getText().toString();
 				int sellAmount = Integer.parseInt(inputAmount);
 
-				/* 유저의 토마토 수량, 현재 가지고 있는 코인 조회 */
+				/* 유저의 호박죽 수량, 현재 가지고 있는 코인 조회 */
 				int pumpkinSoupAmount = 0;
 				int userCoin = 0;
 				int pumpkinSoupPrice = 0;
@@ -124,22 +122,20 @@ public class SellPumpkinSoupPanel extends JPanel{
 				int totalPumpkinSoupAmonut = 0;
 				int totalGetPrice = 0;
 				
-				SellController sellController = new SellController();
 				
-				List<CropDTO> userCropList = sellFoodController.userPumpkinSoup(userNo);
+				List<FoodDTO> userFoodList = sellFoodController.userPumpkinSoup(userNo);
 				
-				for (CropDTO cropList : userCropList) {
-					pumpkinSoupAmount = cropList.getCropAmount();
-					userCoin = cropList.getCoin();
-					pumpkinSoupPrice = cropList.getCropPrice();
+				for (FoodDTO foodList : userFoodList) {
+					pumpkinSoupAmount = foodList.getFoodAmount();
+					userCoin = foodList.getCoin();
+					pumpkinSoupPrice = foodList.getFoodPrice();
 				}
 				
-				/* 유저의 농작물과, 농작물 수량, 현재 가지고 있는 코인 조회 */
 				
 				if (sellAmount> 0 && sellAmount <= pumpkinSoupAmount && pumpkinSoupAmount != 0) {
-					/* 농작물 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 */
+					/* 음식 판매 갯수와 현재 유저가 가지고 있는 작물 갯수 업데이트 *//* 음식판매후 코인 받기*/
 					updateUserPumpkinSoupAmount = sellFoodController.updateUserPumpkinSoupAmount(sellAmount, userNo);
-					
+					/* 음식판매후 코인 받기*/
 					getPrice = sellFoodController.sellPumpkinSoupGetCoin(sellAmount, pumpkinSoupPrice, userNo);
 
 					if(updateUserPumpkinSoupAmount > 0 && getPrice > 0) {
