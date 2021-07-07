@@ -18,6 +18,7 @@ import static com.farm3.uhgrow.common.JDBCTemplate.close;
 
 public class FarmDAO {
 	private Properties prop;
+	
 
 	public FarmDAO() {
 		this.prop = new Properties();
@@ -106,6 +107,8 @@ public class FarmDAO {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, cropDTO.getCropId());
+			pstmt.setInt(2, cropDTO.getUserNo());
+			
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -156,7 +159,6 @@ public class FarmDAO {
 			pstmt.setInt(1, userId);
 
 			rset = pstmt.executeQuery();
-
 			while (rset.next()) {
 				userInfo = new UserInfoDTO();
 				userInfo.setFarmExp(rset.getInt("FARM_EXP"));
@@ -168,8 +170,8 @@ public class FarmDAO {
 			close(rset);
 			close(pstmt);
 		}
-
-		return userInfo.getFarmExp();
+		int userExp =userInfo.getFarmExp();
+		return userExp;
 	}
 
 	public int deleteFarmList(Connection con, FarmCropDTO farmCropDTO, int farmList) {
@@ -330,6 +332,28 @@ public class FarmDAO {
 		int result = 0; // 수정 성공여부 초기화
 
 		String query = prop.getProperty("resetFarmList"); // updateMemberPassword 쿼리문 선언
+
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, userNo);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt); // statement 할당 반납
+		}
+
+		return result;
+	}
+	public int updateContinueYN(Connection con, int userNo) {
+		PreparedStatement pstmt = null;
+
+		int result = 0; // 수정 성공여부 초기화
+
+		String query = prop.getProperty("updateContinueYN"); // updateMemberPassword 쿼리문 선언
 
 		try {
 			pstmt = con.prepareStatement(query);

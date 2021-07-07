@@ -78,5 +78,12 @@ public class FarmController {
 		
 	}
 
+	public int updateContinueYN(int userNo) {
+		int updateContinueYN = farmService.updateContinueYN(userNo);
+
+		return updateContinueYN;
+		
+	}
+
 
 }

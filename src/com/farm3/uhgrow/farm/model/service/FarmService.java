@@ -155,6 +155,20 @@ public class FarmService {
 
 		return resetResult;
 	}
+	public int updateContinueYN(int userNo) {
+		Connection con = getConnection();
+
+		int updateContinueYN = farmDAO.updateContinueYN(con, userNo);
+
+		if (updateContinueYN > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		close(con);
+
+		return updateContinueYN;
+	}
 
 
 }
